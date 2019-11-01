@@ -1,0 +1,8 @@
+group:
+  bedroomlights:
+    name: Bedroom Lights
+    view: no
+    entities:
+    - light.bedroom_ceiling_light
+    - light.jennys_bedside_light
+    - light.jos_bedside_light

@@ -1,0 +1,13 @@
+alert:
+  front_door:
+    name: Front door is open
+    message: The front door has been left open
+    done_message: The front door is now closed
+    entity_id: binary_sensor.front_door
+    state: 'on'
+    repeat: 
+      - 5
+      - 15
+    skip_first: true
+    notifiers:
+      - broadcast

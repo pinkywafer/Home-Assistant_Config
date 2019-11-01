@@ -1,0 +1,6 @@
+script:
+  den_lights_st_patty:
+    alias: Emma's Saint Patty Effect
+    sequence:
+      - service: light.turn_on
+        data: { "entity_id": "light.emma_led", "effect": "St Patty" }

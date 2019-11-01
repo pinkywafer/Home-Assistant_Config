@@ -1,0 +1,75 @@
+esphome:
+  name: $devicename
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_psk
+  reboot_timeout: $reboot_time
+  manual_ip:
+    static_ip: $ip_address
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  reboot_timeout: $reboot_time
+
+ota:
+
+sensor:
+  - platform: wifi_signal
+    name: $friendly_name Wifi Signal
+    update_interval: 10s
+
+  - platform: uptime
+    name: $friendly_name Uptime
+
+binary_sensor:
+  - platform: status
+    name: $friendly_name Status
+
+  - platform: gpio
+    pin:
+      number: GPIO13
+      mode: INPUT_PULLUP
+      inverted: true
+    name: $friendly_name Button
+    on_click:
+    - min_length: 50ms
+      max_length: 1s
+      then:
+        - switch.toggle: relay
+    - min_length: 4s
+      max_length: 10s
+      then:
+        - switch.turn_on: reboot
+switch:
+  - platform: restart
+    id: reboot
+
+  - platform: gpio
+    pin: GPIO12
+    id: relay
+    inverted: false
+    name: $friendly_name
+    icon: "mdi:power-socket-uk"
+    on_turn_on:
+      - output.turn_on: red_led
+    on_turn_off:
+      - output.turn_off: red_led
+
+output:
+  - platform: gpio
+    pin: GPIO4
+    inverted: false
+    id: red_led
+
+status_led:
+  pin:
+    number: GPIO5
+    inverted: false

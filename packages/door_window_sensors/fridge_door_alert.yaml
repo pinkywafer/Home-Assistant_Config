@@ -1,0 +1,16 @@
+alert:
+  fridge_door:
+    name: Fridge Door is open
+    message: The fridge Door has been left open
+    done_message: Thank you for closing the fridge door!
+    entity_id: binary_sensor.fridge_door
+    state: 'on'
+    repeat:
+      - 2
+      - 2
+      - 2
+      - 10
+      - 30
+    skip_first: true
+    notifiers:
+      - broadcast

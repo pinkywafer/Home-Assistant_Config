@@ -1,0 +1,7 @@
+substitutions:
+  devicename: 3d_printer_psu
+  friendly_name: 3D Printer PSU
+  ip_address: 192.168.1.41
+  reboot_time: 0s
+
+<<: !include aiiat_313_plug.yaml

@@ -1,0 +1,36 @@
+type: custom:vertical-stack-in-card
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        entity: sensor.recycling
+        show_state: true
+        color: green
+        state:
+          - value: 'Tomorrow'
+            color: orange
+          - value: 'Today'
+            color: red
+        styles:
+          card:
+            - height: 74px
+          name:
+            - font-size: 14px
+          state:
+            - font-size: 12px
+      - type: custom:button-card
+        entity: sensor.general_waste
+        show_state: true
+        color: green
+        state:
+          - value: 'Tomorrow'
+            color: orange
+          - value: 'Today'
+            color: red
+        styles:
+          card:
+            - height: 74px
+          name:
+            - font-size: 14px
+          state:
+            - font-size: 12px

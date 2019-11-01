@@ -1,0 +1,73 @@
+type: custom:vertical-stack-in-card
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        entity: binary_sensor.bedroom_window
+        name: Bedroom
+        show_state: false
+        icon: mdi:window-closed
+        state:
+          - value: 'on'
+            icon: mdi:window-open
+        styles:
+          card:
+            - height: 55px
+          name:
+            - font-size: 14px
+      - type: custom:button-card
+        name: Windows
+      - type: custom:button-card
+        entity: binary_sensor.emma_s_window
+        name: "Emma's"
+        show_state: false
+        icon: mdi:window-closed
+        state:
+          - value: 'on'
+            icon: mdi:window-open
+        styles:
+          card:
+            - height: 55px
+          name:
+            - font-size: 14px
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        entity: binary_sensor.front_window
+        name: Front
+        show_state: false
+        icon: mdi:window-closed
+        state:
+          - value: 'on'
+            icon: mdi:window-open
+        styles:
+          card:
+            - height: 55px
+          name:
+            - font-size: 14px
+      - type: custom:button-card
+        entity: binary_sensor.kitchen_window
+        name: Kitchen
+        show_state: false
+        icon: mdi:window-closed
+        state:
+          - value: 'on'
+            icon: mdi:window-open
+        styles:
+          card:
+            - height: 55px
+          name:
+            - font-size: 14px
+      - type: custom:button-card
+        entity: binary_sensor.door_window
+        show_state: false
+        name: Back Door
+        icon: mdi:window-closed
+        state:
+          - value: 'on'
+            icon: mdi:window-open
+        styles:
+          card:
+            - height: 55px
+          name:
+            - font-size: 14px

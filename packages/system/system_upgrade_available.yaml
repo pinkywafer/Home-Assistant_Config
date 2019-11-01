@@ -1,0 +1,25 @@
+automation:
+  alias: System Upgrade Available
+  trigger:
+    platform: state
+    entity_id: sensor.version_available
+  condition:
+    - condition: template
+      value_template: >-
+        {{
+          states('sensor.version_available')
+          !=
+          states('sensor.version_current')
+        }}
+  action:
+  - service: notify.html
+    data:
+      message: Hass.io version {{ states('sensor.version_available')}}
+      title: Home Assistant upgrade 
+  - service: persistent_notification.create
+    data_template:
+      title: Upgrade time!
+      message: >-
+        There is a Home Assistant upgrade for Hass.io pending!
+        Version {{ states('sensor.version_available') }} has been released!
+      notification_id: hassio_upgrade

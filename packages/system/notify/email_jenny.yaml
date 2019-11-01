@@ -1,0 +1,12 @@
+notify:
+  - name: email_jenny
+    platform: smtp
+    server: smtp.gmail.com
+    port: 587
+    timeout: 15
+    sender: !secret house_email_address
+    encryption: starttls
+    username: !secret house_email_address
+    password: !secret house_email_password
+    recipient: !secret jenny_email_address
+    sender_name: !secret house_name

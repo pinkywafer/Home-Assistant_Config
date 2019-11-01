@@ -1,0 +1,40 @@
+automation:
+- alias: Garbage Reminder
+  trigger:
+    platform: time
+    at: "19:00:00"
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: sensor.general_waste
+        state:  'Tomorrow'
+      - condition: state
+        entity_id: sensor.recycling
+        state:  'Tomorrow'
+  action:
+    - service: notify.html
+      data_template:
+        message: >
+          The {% if is_state("sensor.general_waste", "Tomorrow") and is_state("sensor.recycling", "Tomorrow") %}
+            Rubbish and Recycling
+          {%- elif is_state("sensor.general_waste", "Tomorrow") %} 
+            Rubbish 
+          {%- elif is_state("sensor.recycling", "Tomorrow") %}
+            Recycling
+          {%- endif %} needs to go out
+        data:
+          tag: rubbish
+    - condition: state
+      entity_id: sensor.jenny_tracker
+      state: Home
+    - service: notify.broadcast
+      data_template:
+        message: >
+          The {% if is_state("sensor.general_waste", "Tomorrow") and is_state("sensor.recycling", "Tomorrow") %}
+            Rubbish and Recycling
+          {%- elif is_state("sensor.general_waste", "Tomorrow") %} 
+            Rubbish 
+          {%- elif is_state("sensor.recycling", "Tomorrow") %}
+            Recycling
+          {%- endif %} needs to go out

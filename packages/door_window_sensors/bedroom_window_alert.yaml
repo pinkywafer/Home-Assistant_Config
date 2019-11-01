@@ -1,0 +1,15 @@
+alert:
+  bedroom_window:
+    name: Bedroom window is open
+    message: The bedroom window has been left open
+    done_message: The bedroom window is now closed
+    entity_id: binary_sensor.bedroom_window
+    state: 'on'
+    repeat:
+      - 5
+      - 15
+      - 30
+      - 60
+    skip_first: false
+    notifiers:
+      - broadcast

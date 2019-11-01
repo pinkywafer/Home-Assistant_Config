@@ -1,0 +1,21 @@
+title: Emma
+card:
+  type: custom:vertical-stack-in-card
+  cards:
+    - type: entities
+      entities:
+        - entity: sensor.emma_tracker
+          type: custom:multiple-entity-row
+          name: 'Phone'
+          secondary_info: last-changed
+          primary: 
+            entity: device_tracker.emma_gps
+            attribute: battery_level
+            name: Bat
+            unit: '%'
+    - type: history-graph
+      entities:
+        - sensor.emma_tracker
+    - type: map
+      entities:
+        - device_tracker.emma_gps

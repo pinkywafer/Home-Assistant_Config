@@ -1,0 +1,14 @@
+automation:
+  alias: Emma left house
+  trigger:
+  - entity_id: sensor.emma_tracker
+    platform: state
+    from: Home
+  action:
+  - data:
+      message: Emma has left the house
+      data:
+        tag: emma_location
+        renotify: 1
+        priority: high
+    service: notify.html

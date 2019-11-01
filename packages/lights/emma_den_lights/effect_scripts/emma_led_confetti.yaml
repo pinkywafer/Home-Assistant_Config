@@ -1,0 +1,6 @@
+script:
+  den_lights_confetti:
+    alias: Emma's Confetti Effect
+    sequence:
+      - service: light.turn_on
+        data: { "entity_id": "light.emma_led", "effect": "Confetti" }

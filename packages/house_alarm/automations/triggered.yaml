@@ -1,0 +1,44 @@
+automation:
+  - alias: Alarm triggered actions
+    trigger:
+    - platform: state
+      entity_id: alarm_control_panel.alarm
+      to: triggered
+    action:
+    - service: homeassistant.turn_on
+      entity_id: group.all_lights
+    - service: camera.snapshot
+      data:
+        entity_id: camera.sitting_room_sensor_camera
+        filename: 'www/pics/sitting_room_alarm.jpg'
+    - service: light.turn_on
+      data: { "entity_id": "light.emma_led", "effect": "Police All" }
+    - service: notify.html
+      data:
+        message: "ALARM! The alarm has been triggered: {{ states.input_text.alarm_trigger.state }}"
+        title: Home Alarm
+        data:
+          priority: high
+          image: !secret alarm_picture_1
+    - service: media_player.turn_on
+      entity_id: media_player.living_room_speaker
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.living_room_speaker
+        volume_level: 1
+    - service: tts.google_translate_say
+      data:
+        message: 'The Alarm has been triggered'
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.living_room_speaker
+        media_content_id: !secret alarm_media
+        media_content_type: mp3
+    - service: notify.email_jenny
+      data:
+        title: 'Alarm Triggered'
+        message: "ALARM! The alarm has been triggered: {{ states.input_text.alarm_trigger.state }}"
+        data:
+          images:
+            - www/pics/sitting_room_alarm.jpg
+    - service: script.alarm_notifications

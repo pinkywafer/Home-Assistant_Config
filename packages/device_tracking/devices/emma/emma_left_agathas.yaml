@@ -1,0 +1,13 @@
+automation:
+  alias: Emma left Agatha's house
+  trigger:
+  - entity_id: sensor.emma_tracker
+    platform: state
+    from: Agatha's House
+  action:
+  - data:
+      message: Emma has left agatha's house
+      data:
+        tag: emma_location
+        renotify: 1
+    service: notify.html

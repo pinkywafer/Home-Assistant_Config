@@ -1,0 +1,50 @@
+esphome:
+  name: $devicename
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_psk
+  manual_ip:
+    static_ip: $ip_address
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO5
+    name: $friendly_name Switch
+    on_press:
+      - light.toggle: light_output
+    on_release:
+      - light.toggle: light_output
+  - platform: status
+    name: $friendly_name Shelly1 Status
+
+output:
+  - platform: gpio
+    pin: GPIO4
+    id: relay
+
+light:
+  - platform: binary
+    id: light_output
+    name: $friendly_name
+    output: relay
+
+sensor:
+  - platform: wifi_signal
+    name: $friendly_name Shelly1 Wifi Signal
+    update_interval: 10s
+  - platform: uptime
+    name: $friendly_name Shelly1 Uptime

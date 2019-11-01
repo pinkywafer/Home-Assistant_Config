@@ -1,0 +1,6 @@
+zone:
+  name: Emma's School
+  latitude: !secret emma_school_latitude
+  longitude: !secret emma_school_longitude
+  radius: 40
+  icon: mdi:school

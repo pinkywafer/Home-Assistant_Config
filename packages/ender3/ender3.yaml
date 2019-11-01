@@ -1,0 +1,58 @@
+switch:
+  platform: template
+  switches:
+    ender3:
+      friendly_name: Ender3
+      value_template: "{{ is_state('switch.3d_printer_psu', 'on') }}"
+      turn_on:
+        service: switch.turn_on
+        data:
+          entity_id: switch.3d_printer_psu
+      turn_off:
+        service: script.ender3_safe_power_down
+
+homeassistant:
+  customize: 
+    switch.ender3:
+      icon: mdi:printer-3d
+
+switch ender3_controls:
+  platform: mqtt
+  name: Ender3 Controls
+  optimistic: true
+  command_topic: "ender3_controls"
+
+automation:
+  - alias: ender3 disable controls
+    trigger:
+      - platform: state
+        entity_id: switch.ender3_controls
+        to: 'on'
+    action:
+      - delay: '00:02:00'
+      - service: switch.turn_off
+        entity_id: switch.ender3_controls
+
+octoprint:
+  host: !secret ender3_octoprint_host
+  api_key: !secret ender3_octoprint_api_key
+  name: Ender3
+  number_of_tools: 1
+  bed: true
+  sensors:
+    monitored_conditions:
+      - 'Current State'
+      - 'Temperatures'
+      - 'Job Percentage'
+      - 'Time Elapsed'
+      - 'Time Remaining'
+  binary_sensors:
+    monitored_conditions:
+      - Printing
+      - Printing Error
+
+camera:
+  platform: mjpeg
+  name: Ender3
+  still_image_url: !secret ender3_camera_still
+  mjpeg_url: !secret ender3_camera_mjpeg

@@ -1,0 +1,11 @@
+alert:
+  front_window:
+    name: Front window is open
+    message: The front window has been left open
+    done_message: The front window is now closed
+    entity_id: binary_sensor.front_window
+    state: 'on'
+    repeat: 60
+    skip_first: true
+    notifiers:
+      - broadcast

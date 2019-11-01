@@ -1,0 +1,4 @@
+input_text:
+  alarm_trigger:
+    name: Alarm Trigger
+    initial: ""

@@ -1,0 +1,42 @@
+automation:
+  - alias: override upstairs lights
+    trigger:
+    - platform: state
+      entity_id: light.bedroom_ceiling_light
+      to: 'off'
+    - platform: state
+      entity_id: light.emmas_bedside_light
+      to: 'off'
+    - platform: state
+      entity_id: light.emmas_ceiling_light
+      to: 'off'
+    - platform: state
+      entity_id: light.jos_bedside_light
+      to: 'off'
+    - platform: state
+      entity_id: light.jennys_bedside_light
+      to: 'off'
+    - platform: state
+      entity_id: light.landing_light
+      to: 'off'
+    condition:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: alarm_control_panel.alarm
+          state: 'triggered'
+        - condition: and
+          conditions:
+            - condition: state
+              entity_id: alarm_control_panel.alarm
+              state: 'pending'
+            - condition: template
+              value_template: >
+                {{ states.alarm_control_panel.alarm.attributes.pre_pending_state == 'armed_away' }}
+    - condition: template
+      value_template: >
+        {{ trigger.from_state != 'unavailable' and
+            trigger.to_state != 'unavailable' }}
+    action:
+    - service: homeassistant.turn_on
+      entity_id: group.upstairslights

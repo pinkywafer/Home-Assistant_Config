@@ -1,0 +1,12 @@
+automation:
+  - alias: Alarm Shut Off
+    trigger:
+    - platform: state
+      entity_id: alarm_control_panel.alarm
+      from: 'triggered'
+      to: 'disarmed'
+    action:
+    - service: media_player.turn_off
+      entity_id: all
+    - service: mqtt.publish
+      data: { "topic": "cmnd/PinkyLEDs", "payload": "{\"state\": \"OFF\", \"effect\": \"Solid\"}" }

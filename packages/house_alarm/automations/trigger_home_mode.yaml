@@ -1,0 +1,34 @@
+automation:
+  - alias: Alarm Trigger - Home mode
+    trigger:
+      ##########################################
+      #   Doors only
+      ##########################################
+    - platform: state
+      entity_id: binary_sensor.front_door
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.back_door
+      to: 'on'
+    condition:
+    - condition: state
+      entity_id: alarm_control_panel.alarm
+      state: 'armed_home'
+    - condition: template
+      value_template: >
+        {{ trigger.from_state != 'unavailable' and
+            trigger.to_state != 'unavailable' }}
+    action:
+      - service: alarm_control_panel.alarm_trigger
+        entity_id: alarm_control_panel.alarm
+      - service: input_text.set_value
+        data_template:
+          entity_id: input_text.alarm_trigger
+          value: >
+            {% if states.input_text.alarm_trigger.state|length == 0 %}
+              {{ trigger.from_state.attributes.friendly_name }}
+            {% elif (states.input_text.alarm_trigger.state|length + trigger.from_state.attributes.friendly_name|length) < 100 %}
+              {{ states.input_text.alarm_trigger.state }}, {{ trigger.from_state.attributes.friendly_name }}
+            {% else %}
+              {{ states.input_text.alarm_trigger.state }}
+            {% endif %}

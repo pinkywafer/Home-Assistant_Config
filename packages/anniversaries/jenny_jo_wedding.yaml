@@ -1,0 +1,23 @@
+sensor:
+  - platform: anniversaries
+    name: Jenny & Jo's Wedding Anniversary
+    date: !secret jenny_jo_wedding
+
+automation:
+- alias: Jenny & Jo's Anniversary Greeting
+  trigger:
+    platform: time
+    at: "15:50:00"
+  condition:
+    - condition: state
+      entity_id: sensor.jenny_jo_s_wedding_anniversary
+      state:  '0'
+  action:
+    - service: notify.html
+      data:
+        message: "Happy Wedding Anniversary Jenny and Jo!"
+        data:
+          tag: birthday
+    - service: notify.broadcast
+      data:
+        message: "Happy Wedding anniversary Jenny and Jo!"

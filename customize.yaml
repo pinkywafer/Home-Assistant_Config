@@ -1,0 +1,39 @@
+group.all_automations:
+  hidden: false
+group.all_scripts:
+  hidden: false
+group.all_devices:
+  hidden: false
+sensor.jenny_tracker:
+  entity_picture: '"/local/jenny.jpg"'
+sensor.emma_tracker:
+  entity_picture: /local/emma.jpeg
+switch.PC:
+  icon: mdi:desktop-classic
+device_tracker.pc_mediacenter:
+  icon: mdi:desktop-classic
+device_tracker.sitting_room_speaker:
+  icon: mdi:google-assistant
+device_tracker.youview_box:
+  icon: mdi:television-box
+device_tracker.jenny_bt:
+  entity_picture: '"/local/jenny.jpg"'
+device_tracker.jenny_wifi:
+  entity_picture: /local/jenny.jpg
+device_tracker.jo_wifi:
+  entity_picture: /local/jo.jpg
+  friendly_name: Jo
+sensor.jenny_location:
+  entity_picture: '"/local/jenny.jpg"'
+device_tracker.jenny_gps:
+  entity_picture: /local/jenny.jpg
+device_tracker.emma_gps:
+  entity_picture: /local/emma.jpeg
+device_tracker.emma_s_room_speaker:
+  icon: mdi:google-assistant
+device_tracker.bedroom_speaker:
+  icon: mdi:google-assistant
+device_tracker.vestibule_panel:
+  icon: mdi:cellphone
+device_tracker.emma_led:
+  icon: mdi:led-strip

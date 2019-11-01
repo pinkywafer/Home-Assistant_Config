@@ -1,0 +1,60 @@
+title: Devices
+icon: mdi:lan
+path: devices
+panel: true
+cards:
+  - type: custom:layout-card
+    layout: horizontal
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: sensor.myip
+                name: Public IP Address
+          - type: entity-filter
+            entities:
+              - device_tracker.sitting_room_speaker
+              - device_tracker.emma_s_room_speaker
+              - device_tracker.bedroom_speaker
+              - device_tracker.vestibule_panel
+              - device_tracker.emma_led
+              - device_tracker.pc_mediacenter
+              - device_tracker.tv_wifi
+              - device_tracker.dev_hassio
+              - device_tracker.plex_server
+              - device_tracker.fileserver
+              
+            state_filter:
+              - home
+            card:
+              type: glance
+              show_state: false
+              title: Online Devices
+
+      - type: glance
+        title: Lights Status
+        show_state: false
+        entities:
+          - entity: binary_sensor.vestibule_light_shelly1_status
+            name: Vestibule
+          - entity: binary_sensor.sitting_room_light_shelly1_status
+            name: Sitting Room
+          - entity: binary_sensor.cooker_light_sonoff_status
+            name: Cooker
+          - entity: binary_sensor.sink_light_sonoff_status
+            name: Sink
+          - entity: binary_sensor.bathroom_light_sonoff_status
+            name: Bathroom
+          - entity: binary_sensor.landing_light_sonoff_status
+            name: Landing
+          - entity: binary_sensor.emmas_ceiling_light_sonoff_status
+            name: Emma Ceiling
+          - entity: binary_sensor.emmas_bedside_light_sonoff_status
+            name: Emma Bedside
+          - entity: binary_sensor.bedroom_ceiling_light_sonoff_status
+            name: Bedroom Ceiling
+          - entity: binary_sensor.jennys_bedside_light_sonoff_status
+            name: Jenny Bedside
+          - entity: binary_sensor.jos_bedside_light_sonoff_status
+            name: Jo Bedside

@@ -1,0 +1,5 @@
+cast:
+  media_player:
+    - host: !secret sitting_room_google_home_ip
+    - host: !secret emmas_google_home_ip
+    - host: !secret bedroom_google_home_ip

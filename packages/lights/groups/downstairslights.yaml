@@ -1,0 +1,10 @@
+group:
+  downstairslights:
+    name: Downstairs Lights
+    view: no
+    entities:
+    - light.sitting_room_light
+    - light.sink_light
+    - light.cooker_light
+    - light.vestibule_light
+    - light.bathroom_light

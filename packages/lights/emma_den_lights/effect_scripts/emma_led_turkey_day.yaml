@@ -1,0 +1,6 @@
+script:
+  den_lights_turkey_day:
+    alias: Emma's Turkey Day Effect
+    sequence:
+      - service: light.turn_on
+        data: { "entity_id": "light.emma_led", "effect": "Turkey Day" }

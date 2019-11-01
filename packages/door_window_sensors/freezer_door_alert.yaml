@@ -1,0 +1,16 @@
+alert:
+  freezer_door:
+    name: Freezer Door is open
+    message: The freezer Door has been left open
+    done_message: Thank you for closing the freezer door!
+    entity_id: binary_sensor.freezer_door
+    state: 'on'
+    repeat:
+      - 2
+      - 2
+      - 2
+      - 10
+      - 30
+    skip_first: true
+    notifiers:
+      - broadcast

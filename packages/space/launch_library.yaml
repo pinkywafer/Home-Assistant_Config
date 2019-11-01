@@ -1,0 +1,2 @@
+sensor:
+  platform: launch_library

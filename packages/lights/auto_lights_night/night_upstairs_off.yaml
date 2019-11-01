@@ -1,0 +1,12 @@
+automation:
+  alias: Night - Upstairs lights off at 1:30
+  trigger:
+  - platform: time
+    at: 01:30
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.alarm
+    state: 'armed_away'
+  action:
+  - service: light.turn_off
+    entity_id: group.upstairslights

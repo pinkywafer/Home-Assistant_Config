@@ -1,0 +1,15 @@
+sensor:
+  - platform: template
+    sensors:
+      fridge_freezer_doors:
+        friendly_name: Fridge Freezer Doors
+        value_template: >
+          {% if is_state('binary_sensor.fridge_door','on') and is_state('binary_sensor.freezer_door','on') %}
+            fridge and freezer
+          {% elif is_state('binary_sensor.fridge_door','on') and is_state('binary_sensor.freezer_door','off') %}
+            fridge
+          {% elif is_state('binary_sensor.fridge_door','off') and is_state('binary_sensor.freezer_door','on') %}
+            freezer
+          {% else %}
+            none
+          {% endif %}

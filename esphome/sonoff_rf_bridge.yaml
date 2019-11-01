@@ -1,0 +1,652 @@
+esphome:
+  name: sonoff_rf_bridge
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_psk
+  manual_ip:
+    static_ip: 192.168.1.99
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+sensor:
+  - platform: wifi_signal
+    name: Sonoff RF Bridge Wifi Signal
+    update_interval: 10s
+  - platform: uptime
+    name: Sonoff RF Bridge Uptime
+
+binary_sensor:
+  - platform: status
+    name: Sonoff RF Bridge Status
+
+#***************************************************
+#        MOTION
+#***************************************************
+  - platform: remote_receiver
+    name: Downstairs Motion
+    device_class: motion
+    rc_switch_raw:
+      code: '111010101000010110101100'
+      protocol: 6
+    filters:
+      delayed_off: 5s
+  
+  - platform: remote_receiver
+    name: Upstairs Motion
+    device_class: motion
+    rc_switch_raw:
+      code: '001111000101100110101100'
+      protocol: 6
+    filters:
+      delayed_off: 5s
+
+#*************************************************
+#       DOORS
+#*************************************************
+
+# Front door
+  - platform: remote_receiver
+    id: front_door_open
+    internal: true
+    rc_switch_raw:
+      code: '001100101111000000001010'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: front_door_closed
+    internal: true
+    rc_switch_raw:
+      code: '001100101111000000001110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name: Front Door
+    device_class: door
+    lambda: |-
+      if (id(front_door_open).state) {
+        return true;
+      } else if (id(front_door_closed).state) {
+        return false;
+      } else {
+        return {};
+      }
+
+# Front door BAT
+  - platform: remote_receiver
+    id: front_door_bat
+    internal: true
+    rc_switch_raw:
+      code: '001100101111000000000110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: front_door_tamper
+    name: Front Door Tamper
+    rc_switch_raw:
+      code: '001100101111000000000111'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name: Front Door Battery
+    device_class: battery
+    lambda: |-
+      if (id(front_door_bat).state) {
+        return true;
+      } else if (id(front_door_tamper).state) {
+        return false;
+      } else {
+        return {};
+      }
+
+#################################
+# BACK DOOR
+  - platform: remote_receiver
+    id: back_door_open
+    internal: true
+    rc_switch_raw:
+      code: '010110000101011100001010'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: back_door_closed
+    internal: true
+    rc_switch_raw:
+      code: '010110000101011100001110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name: Back Door
+    device_class: door
+    lambda: |-
+      if (id(back_door_open).state) {
+        return true;
+      } else if (id(back_door_closed).state) {
+        return false;
+      } else {
+        return {};
+      }
+      
+# back door BAT
+  - platform: remote_receiver
+    id: back_door_bat
+    internal: true
+    rc_switch_raw:
+      code: '010110000101011100000110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: back_door_tamper
+    name: Back Door Tamper
+    rc_switch_raw:
+      code: '010110000101011100000111'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name: Back Door Battery
+    device_class: battery
+    lambda: |-
+      if (id(back_door_bat).state) {
+        return true;
+      } else if (id(back_door_tamper).state) {
+        return false;
+      } else {
+        return {};
+      }
+
+
+#***********************************************
+#       WINDOWS
+#***********************************************
+# door window
+  - platform: remote_receiver
+    id: door_window_open
+    internal: true
+    rc_switch_raw:
+      code: '010101000011111000001010'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: door_window_closed
+    internal: true
+    rc_switch_raw:
+      code: '010101000011111000001110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name: Door Window
+    device_class: window
+    lambda: |-
+      if (id(door_window_open).state) {
+        // door window is open
+        return true;
+      } else if (id(door_window_closed).state) {
+        // door window closed
+        return false;
+      } else {
+        return {};
+      }
+      
+# Door Window BAT
+  - platform: remote_receiver
+    id: door_window_bat
+    internal: true
+    rc_switch_raw:
+      code: '010101000011111000000110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: door_window_tamper
+    name: Door Window Tamper
+    rc_switch_raw:
+      code: '010101000011111000000111'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name: Door Window Battery
+    device_class: battery
+    lambda: |-
+      if (id(door_window_bat).state) {
+        return true;
+      } else if (id(door_window_tamper).state) {
+        return false;
+      } else {
+        return {};
+      }
+
+
+################################################
+# Front Window
+  - platform: remote_receiver
+    id: front_window_open
+    internal: true
+    rc_switch_raw:
+      code: '001100100011000000001010'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: front_window_closed
+    internal: true
+    rc_switch_raw:
+      code: '001100100011000000001110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name:  Front Window
+    device_class: window
+    lambda: |-
+      if (id(front_window_open).state) {
+        return true;
+      } else if (id(front_window_closed).state) {
+        return false;
+      } else {
+        return {};
+      }
+
+# Front Window BAT
+  - platform: remote_receiver
+    id: front_window_bat
+    internal: true
+    rc_switch_raw:
+      code: '001100100011000000000110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: front_window_tamper
+    name: Front Window Tamper
+    rc_switch_raw:
+      code: '001100100011000000000111'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name: Front Window Battery
+    device_class: battery
+    lambda: |-
+      if (id(front_window_bat).state) {
+        return true;
+      } else if (id(front_window_tamper).state) {
+        return false;
+      } else {
+        return {};
+      }
+      
+
+# kitchen window
+  - platform: remote_receiver
+    id: kitchen_window_open
+    internal: true
+    rc_switch_raw:
+      code: '010111100001101100001010'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: kitchen_window_closed
+    internal: true
+    rc_switch_raw:
+      code: '010111100001101100001110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name:  Kitchen Window
+    device_class: window
+    lambda: |-
+      if (id(kitchen_window_open).state) {
+        return true;
+      } else if (id(kitchen_window_closed).state) {
+        return false;
+      } else {
+        return {};
+      }
+      
+# Kitchen Window BAT
+  - platform: remote_receiver
+    id: kitchen_window_bat
+    internal: true
+    rc_switch_raw:
+      code: '010111100001101100000110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: kitchen_window_tamper
+    name: Kitchen Window Tamper
+    rc_switch_raw:
+      code: '010111100001101100000111'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name: Kitchen Window Battery
+    device_class: battery
+    lambda: |-
+      if (id(kitchen_window_bat).state) {
+        return true;
+      } else if (id(kitchen_window_tamper).state) {
+        return false;
+      } else {
+        return {};
+      }
+     
+##########################
+# emmas window
+  - platform: remote_receiver
+    id: emmas_window_open
+    internal: true
+    rc_switch_raw:
+      code: '010110111010001100001010'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: emmas_window_closed
+    internal: true
+    rc_switch_raw:
+      code: '010110111010001100001110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name:  Emma's Window
+    device_class: window
+    lambda: |-
+      if (id(emmas_window_open).state) {
+        return true;
+      } else if (id(emmas_window_closed).state) {
+        return false;
+      } else {
+        return {};
+      }
+
+# Emma's Window BAT
+  - platform: remote_receiver
+    id: emmas_window_bat
+    internal: true
+    rc_switch_raw:
+      code: '010110111010001100000110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: emmas_window_tamper
+    name: Emma's Window Tamper
+    rc_switch_raw:
+      code: '010110111010001100000111'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name: Emma's Window Battery
+    device_class: battery
+    lambda: |-
+      if (id(emmas_window_bat).state) {
+        return true;
+      } else if (id(emmas_window_tamper).state) {
+        return false;
+      } else {
+        return {};
+      }
+     
+#####################
+# bedroom window
+  - platform: remote_receiver
+    id: bedroom_window_open
+    internal: true
+    rc_switch_raw:
+      code: '010111100011001100001010'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: bedroom_window_closed
+    internal: true
+    rc_switch_raw:
+      code: '010111100011001100001110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name:  Bedroom Window
+    device_class: window
+    lambda: |-
+      if (id(bedroom_window_open).state) {
+        return true;
+      } else if (id(bedroom_window_closed).state) {
+        return false;
+      } else {
+        return {};
+      }
+
+# Bedroom Window BAT
+  - platform: remote_receiver
+    id: bedroom_window_bat
+    internal: true
+    rc_switch_raw:
+      code: '010111100011001100000110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: bedroom_window_tamper
+    name: Bedroom Window Tamper
+    rc_switch_raw:
+      code: '010111100011001100000111'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name: Bedroom Window Battery
+    device_class: battery
+    lambda: |-
+      if (id(bedroom_window_bat).state) {
+        return true;
+      } else if (id(bedroom_window_tamper).state) {
+        return false;
+      } else {
+        return {};
+      }
+     
+#************************************
+# FRIDGE FREEZER
+#*****************************************
+
+# FRIDGE DOOR
+  - platform: remote_receiver
+    id: fridge_door_open
+    internal: true
+    rc_switch_raw:
+      code: '010110010101111100001010'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: fridge_door_closed
+    internal: true
+    rc_switch_raw:
+      code: '010110010101111100001110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name: Fridge Door
+    device_class: door
+    lambda: |-
+      if (id(fridge_door_open).state) {
+        return true;
+      } else if (id(fridge_door_closed).state) {
+        return false;
+      } else {
+        return {};
+      }
+      
+# Fridge Door BAT
+  - platform: remote_receiver
+    id: fridge_door_bat
+    internal: true
+    rc_switch_raw:
+      code: '010110010101111100000110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: fridge_door_tamper
+    name: Fridge Door Tamper
+    rc_switch_raw:
+      code: '010110010101111100000111'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name: Fridge Door Battery
+    device_class: battery
+    lambda: |-
+      if (id(fridge_door_bat).state) {
+        return true;
+      } else if (id(fridge_door_tamper).state) {
+        return false;
+      } else {
+        return {};
+      }
+
+      
+# FREEZER DOOR
+  - platform: remote_receiver
+    id: freezer_door_open
+    internal: true
+    rc_switch_raw:
+      code: '010110001010010000001010'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: freezer_door_closed
+    internal: true
+    rc_switch_raw:
+      code: '010110001010010000001110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name: Freezer Door
+    device_class: door
+    lambda: |-
+      if (id(freezer_door_open).state) {
+        return true;
+      } else if (id(freezer_door_closed).state) {
+        return false;
+      } else {
+        return {};
+      }
+
+# Freezer Door BAT
+  - platform: remote_receiver
+    id: freezer_door_bat
+    internal: true
+    rc_switch_raw:
+      code: '010110001010010000000110'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: remote_receiver
+    id: freezer_door_tamper
+    name: Freezer Door Tamper
+    rc_switch_raw:
+      code: '010110001010010000000111'
+      protocol: 6
+    filters:
+      delayed_off: 100ms
+      
+  - platform: template
+    name: Freezer Door Battery
+    device_class: battery
+    lambda: |-
+      if (id(freezer_door_bat).state) {
+        return true;
+      } else if (id(freezer_door_tamper).state) {
+        return false;
+      } else {
+        return {};
+      }
+
+
+remote_receiver:
+  pin: 
+    number: 4
+    mode: INPUT_PULLUP
+    inverted: True
+  dump: rc_switch
+  tolerance: 70
+  filter: 3us
+  idle: 3ms
+  
+remote_transmitter:
+  pin: 5
+  carrier_duty_percent: 100%
+
+status_led:
+  pin:
+    number: GPIO13
+    inverted: no
+

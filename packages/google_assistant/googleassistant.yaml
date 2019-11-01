@@ -1,0 +1,80 @@
+google_assistant:
+  project_id: !secret google_project
+  api_key: !secret googleAssistantAPIkey
+  exposed_domains:
+    - switch
+    - light
+    - group
+    - script
+  entity_config:
+    group.upstairslights:
+      room: Upstairs
+    group.downstairslights:
+      room: Downstairs
+    light.bathroom_light:
+      room: Bathroom
+    light.vestibule_light:
+      room: Vestibule
+    light.sink_light:
+      room: Kitchen
+    light.cooker_light:
+      room: Kitchen
+    light.sitting_room_light:
+      room: Living Room
+    light.emmas_bedside_light:
+      name: Emma's Bedside Light
+      room: Emma's Room
+    light.emmas_ceiling_light:
+      name: Emma's Ceiling Light
+      room: Emma's Room
+    light.emma_led:
+      name: Emma's Den Lights
+      room: Emma's Room
+    light.bedroom_ceiling_light:
+      room: Bedroom
+    light.jennys_bedside_light:
+      name: Jenny's Bedside light
+      room: Bedroom
+    light.jos_bedside_light:
+      name: Jo's Bedside Light
+      room: Bedroom
+    light.landing_light:
+      room: Stairs
+    switch.pc:
+      room: Living Room
+    switch.ender3:
+      name: Ender 3
+      room: Printer Shelf
+    switch.ender3_controls:
+      name: Ender 3 Controls
+      room: Printer Shelf
+    switch.3d_printer_psu:
+      expose: false
+    script.ender3_safe_power_down:
+      expose: false
+    media_player.sitting_room_speaker:
+      expose: false
+    media_player.home_group:
+      expose: false
+    group.appliances:
+      expose: false
+    group.automation:
+      expose: false
+    group.kitchenlights:
+      expose: false
+    group.bedroomlights:
+      expose: false
+    group.emmasroomlights:
+      expose: false
+    group.media_players_active:
+      expose: false
+    group.all_automations:
+      expose: false
+    group.all_devices:
+      expose: false
+    group.all_lights:
+      expose: false
+    group.all_switches:
+      expose: false
+    group.all_scripts:
+      expose: false

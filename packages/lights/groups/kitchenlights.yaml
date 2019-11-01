@@ -1,0 +1,7 @@
+group:
+  kitchenlights:
+    name: Kitchen Lights
+    view: no
+    entities:
+    - light.sink_light
+    - light.cooker_light

@@ -1,0 +1,6 @@
+script:
+  den_lights_glitter:
+    alias: Emma's Glitter Effect
+    sequence:
+      - service: light.turn_on
+        data: { "entity_id": "light.emma_led", "effect": "Glitter" }

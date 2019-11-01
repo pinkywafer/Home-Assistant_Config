@@ -1,0 +1,4 @@
+notify:
+  - name: broadcast
+    platform: rest
+    resource: !secret broadcast_url

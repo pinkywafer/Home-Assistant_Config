@@ -1,0 +1,13 @@
+device_tracker:
+  - platform: nmap_tracker
+    hosts:
+      - !secret dhcp_pool
+      - !secret plex_host
+      - !secret fileserver_ip
+      - !secret dev_hassio_ip
+      - !secret pc_ip
+    home_interval: 3
+    interval_seconds: 30
+    new_device_defaults:
+      track_new_devices: True
+      hide_if_away: False

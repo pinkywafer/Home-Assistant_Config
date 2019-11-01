@@ -1,0 +1,30 @@
+rest_command:
+  update_google_domains:
+    url: 'https://{{ddns_username}}:{{ddns_password}}@domains.google.com/nic/update?hostname={{ddns_hostname}}&myip={{states("sensor.myip")}}'
+
+automation:
+  - alias: update DDNS records
+    trigger:
+      platform: state
+      entity_id: sensor.myip
+    condition:
+    - condition: template
+      value_template: >
+        {{ trigger.to_state != 'unavailable' }}
+    action:
+      service: script.update_all_ddns
+
+script:
+  update_all_ddns:
+    alias: Update all DDNS Records
+    sequence:
+      - service: rest_command.update_google_domains
+        data:
+          ddns_username: !secret ha_ddns_username
+          ddns_password: !secret ha_ddns_password
+          ddns_hostname: !secret ha_ddns_hostname
+      - service: rest_command.update_google_domains
+        data:
+          ddns_username: !secret octoprint_ddns_username
+          ddns_password: !secret octoprint_ddns_password
+          ddns_hostname: !secret octoprint_ddns_hostname

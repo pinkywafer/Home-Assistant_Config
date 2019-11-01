@@ -1,0 +1,126 @@
+script:
+  ender3_safe_power_down:
+    alias: Ender3 Safe Power Down
+    sequence:
+      - condition: state
+        entity_id: binary_sensor.ender3_printing
+        state: 'off'
+      - service: rest_command.ender3_octoprint_shutdown
+        data: {}
+      - delay:
+          seconds: 20
+      - service: switch.turn_off
+        data:
+          entity_id: switch.3d_printer_psu
+
+  ender3_cancel_print:
+    alias: Ender3 Cancel
+    sequence:
+      - condition: state
+        entity_id: switch.ender3_controls
+        state: 'on'
+      - service: rest_command.ender3_job_command
+        data:
+          payload: '{"command": "cancel"}'
+
+  ender3_pause_print:
+    alias: Ender3 Pause
+    sequence:
+      - condition: state
+        entity_id: switch.ender3_controls
+        state: 'on'
+      - service: rest_command.ender3_job_command
+        data:
+          payload: '{"command": "pause", "action": "pause"}'
+  
+  ender3_resume_print:
+    alias: Ender3 Resume
+    sequence:
+      - condition: state
+        entity_id: switch.ender3_controls
+        state: 'on'
+      - service: rest_command.ender3_job_command
+        data:
+          payload: '{"command": "pause", "action": "resume"}'
+
+  ender3_home:
+    alias: Ender3 Homing
+    sequence:
+      - condition: state
+        entity_id: switch.ender3_controls
+        state: 'on'
+      - condition: state
+        entity_id: sensor.ender3_current_state
+        state: 'Operational'
+      - service: rest_command.ender3_home
+  
+  ender3_level_bed:
+    alias: Ender3 Bed Levelling
+    sequence:
+      - condition: state
+        entity_id: switch.ender3_controls
+        state: 'on'
+      - condition: state
+        entity_id: sensor.ender3_current_state
+        state: 'Operational'
+      - service: rest_command.ender3_printer_command
+        data:
+          cmd: "G29"
+  
+  ender3_cooldown:
+    alias: Ender3 cooldown
+    sequence:
+      - condition: state
+        entity_id: switch.ender3_controls
+        state: 'on'
+      - condition: state
+        entity_id: sensor.ender3_current_state
+        state: 'Operational'
+      - service: rest_command.ender3_bed_temp
+        data:
+          temp: 0
+      - service: rest_command.ender3_nozzle_temp
+        data:
+          temp: 0
+
+  ender3_preheat_petg:
+    alias: Ender3 PETG Preheat 
+    sequence:
+      - condition: state
+        entity_id: switch.ender3_controls
+        state: 'on'
+      - condition: state
+        entity_id: sensor.ender3_current_state
+        state: 'Operational'
+      - service: rest_command.ender3_bed_temp
+        data:
+          temp: 75
+      - service: rest_command.ender3_nozzle_temp
+        data:
+          temp: 215
+
+  ender3_preheat_pla:
+    alias: Ender3 PLA Preheat
+    sequence:
+      - condition: state
+        entity_id: switch.ender3_controls
+        state: 'on'
+      - condition: state
+        entity_id: sensor.ender3_current_state
+        state: 'Operational'
+      - service: rest_command.ender3_bed_temp
+        data:
+          temp: 55
+      - service: rest_command.ender3_nozzle_temp
+        data:
+          temp: 185
+
+  ender3_change_filament:
+    alias: Ender3 Filament Change
+    sequence:
+      - condition: state
+        entity_id: switch.ender3_controls
+        state: 'on'
+      - service: rest_command.ender3_printer_command
+        data:
+          cmd: "M600"

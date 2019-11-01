@@ -1,0 +1,8 @@
+{
+  "domain": "anniversaries",
+  "name": "Anniversaries",
+  "documentation": "https://github.com/pinkywafer/Anniversaries",
+  "dependencies": [],
+  "codeowners": ["@pinkywafer"],
+  "requirements": []
+}

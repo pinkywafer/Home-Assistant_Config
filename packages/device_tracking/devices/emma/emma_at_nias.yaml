@@ -1,0 +1,13 @@
+automation:
+  alias: Emma at Nia's
+  trigger:
+  - entity_id: sensor.emma_tracker
+    to: Nia's House
+    platform: state
+  action:
+  - data:
+      message: Emma has arrived at Nia's
+      data:
+        tag: emma_location
+        renotify: 1
+    service: notify.html

@@ -1,0 +1,50 @@
+light:
+  platform: mqtt 
+  schema: json
+  name: "Emma-LED"
+  command_topic: "cmnd/emma-led"
+  state_topic: "stat/emma-led"
+  availability_topic: "LWT/emma-led"
+  payload_available:  "Online"
+  payload_not_available: "Offline"
+  white_value: true
+  optimistic: false
+  rgb: true
+  flash_time_short: 1
+  flash_time_long: 5
+  brightness: true
+  effect: true
+  effect_list:
+  - "Confetti"
+  - "Glitter"
+  - "Juggle"
+  - "Sinelon"
+  - "Solid"
+  - "Christmas"
+  - "Candy Cane"
+  - "Holly Jolly"
+  - "Valentine"
+  - "Lovey Day"
+  - "St Patty"
+  - "Easter"
+  - "USA"
+  - "Independence"
+  - "Go Blue"
+  - "Hail"
+  - "Touchdown"
+  - "Halloween"
+  - "Punkin"
+  - "Thanksgiving"
+  - "Turkey Day"
+  - "BPM"
+  - "Cyclon Rainbow"
+  - "Dots"
+  - "Fire"
+  - "Lightning"
+  - "Police All"
+  - "Police One"
+  - "Rainbow"
+  - "Glitter Rainbow"
+  - "Ripple"
+  - "Twinkle"
+  - "E131"

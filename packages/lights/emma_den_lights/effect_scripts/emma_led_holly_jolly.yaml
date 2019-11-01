@@ -1,0 +1,6 @@
+script:
+  den_lights_holly_jolly:
+    alias: Emma's Holly Jolly Effect
+    sequence:
+      - service: light.turn_on
+        data: { "entity_id": "light.emma_led", "effect": "Holly Jolly" }

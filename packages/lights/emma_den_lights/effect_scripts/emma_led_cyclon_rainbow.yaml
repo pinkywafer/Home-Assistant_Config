@@ -1,0 +1,6 @@
+script:
+  den_lights_cyclon_rainbow:
+    alias: Emma's Cyclon Rainbow Effect
+    sequence:
+      - service: light.turn_on
+        data: { "entity_id": "light.emma_led", "effect": "Cyclon Rainbow" }

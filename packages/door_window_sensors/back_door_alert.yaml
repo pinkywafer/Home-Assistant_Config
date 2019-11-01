@@ -1,0 +1,13 @@
+alert:
+  back_door:
+    name: Back door is open
+    message: The back door has been left open
+    done_message: The back door is now closed
+    entity_id: binary_sensor.back_door
+    state: 'on'
+    repeat: 
+      - 30
+      - 60
+    skip_first: true
+    notifiers:
+      - broadcast

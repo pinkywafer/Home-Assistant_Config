@@ -1,0 +1,9 @@
+recorder:
+  purge_keep_days: 2
+  exclude:
+    entities:
+      - sun.sun
+      - sensor.time
+      - sensor.custom_python_script_tracker
+      - sensor.date_time
+      - sensor.next_launch

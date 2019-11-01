@@ -1,0 +1,34 @@
+title: Cameras
+icon: mdi:cctv
+path: cctv
+cards:
+  - type: picture-glance
+    title: Vestibule
+    entities:
+      - entity: light.vestibule_light
+        icon: mdi:glassdoor
+      - binary_sensor.vestibule_motion
+    camera_image: camera.vestibule_screen_camera
+
+  - type: picture-glance
+    title: Sitting Room
+    entities:
+      - entity: light.sitting_room_light
+        icon: mdi:sofa
+      - binary_sensor.downstairs_motion
+      - binary_sensor.sitting_room_sensor_pir
+      - switch.sitting_room_sensor_restart
+    camera_image: camera.sitting_room_sensor_camera
+
+  - type: picture-glance
+    title: Kitchen
+    entities:
+      - entity: light.cooker_light
+        icon: mdi:stove
+      - entity: light.sink_light
+        icon: mdi:bowl
+      - binary_sensor.kitchen_sensor_pir
+      - switch.kitchen_sensor_restart
+      - entity: group.kitchen_sockets
+        icon: mdi:power-socket-uk
+    camera_image: camera.kitchen_sensor_camera

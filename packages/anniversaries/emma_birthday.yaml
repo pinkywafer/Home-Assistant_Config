@@ -1,0 +1,23 @@
+sensor:
+  - platform: anniversaries
+    name: Emma's Birthday
+    date: !secret emma_birthday
+
+automation:
+- alias: Emma's Birthday Greeting
+  trigger:
+    platform: time
+    at: "15:50:00"
+  condition:
+    - condition: state
+      entity_id: sensor.emma_s_birthday
+      state:  '0'
+  action:
+    - service: notify.html
+      data:
+        message: "Happy Birthday To Emma!"
+        data:
+          tag: birthday
+    - service: notify.broadcast
+      data:
+        message: "Happy Birthday Emma!"

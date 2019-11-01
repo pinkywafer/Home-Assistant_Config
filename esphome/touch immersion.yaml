@@ -1,0 +1,92 @@
+esphome:
+  name: immersion_heater
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_psk
+  manual_ip:
+    static_ip: 192.168.1.39
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    name: Immersion Heater Touch Pad
+    on_press:
+      then:
+        - if:
+            condition:
+             or:
+               - switch.is_on: auto_switch
+               - switch.is_on: bath_mode
+            then:
+              - switch.turn_off: auto_switch
+              - switch.turn_off: bath_mode
+            else:
+              - switch.turn_on: auto_switch
+    on_click:
+      min_length: 500ms
+      max_length: 2s
+      then:
+        switch.turn_on: bath_mode
+ 
+    
+  - platform: status
+    name: Immersion Heater Switch Status
+
+switch:
+  - platform: template
+    name: Immersion Heater
+    id: auto_switch
+    optimistic: true
+    on_turn_on:
+      - switch.turn_off: bath_mode
+      - output.turn_on: relay
+      - delay: 30min
+      - switch.turn_off: auto_switch
+    on_turn_off:
+      - output.turn_off: relay
+      
+  - platform: template
+    name: Bath Mode
+    id: bath_mode
+    optimistic: true
+    on_turn_on:
+      - switch.turn_off: auto_switch
+      - output.turn_on: relay
+      - output.turn_on: led
+      - delay: 4h
+      - switch.turn_off: bath_mode
+    on_turn_off:
+      - output.turn_off: relay
+      - output.turn_off: led
+      
+output:
+  - platform: gpio
+    pin: GPIO13
+    id: led
+    inverted: true
+  - platform: gpio
+    pin: GPIO12
+    id: relay
+
+sensor:
+  - platform: wifi_signal
+    name: Immersion Heater Wifi Signal
+    update_interval: 10s
+  - platform: uptime
+    name: Immersion Heater Uptime

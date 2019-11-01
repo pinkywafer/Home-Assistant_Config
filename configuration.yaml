@@ -1,0 +1,38 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Masarn Goch
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: 195
+  unit_system: metric
+  time_zone: Europe/London
+  customize: !include customize.yaml
+  packages: !include_dir_named packages
+    
+# Enables the frontend
+frontend:
+  themes: !include_dir_merge_named themes/
+  javascript_version: auto
+
+# Enables configuration UI
+config:
+
+updater:
+
+discovery:
+
+#conversation:
+
+history:
+
+logbook:
+
+map:
+
+sun:
+
+person:
+
+
+
+#breaking_changes:

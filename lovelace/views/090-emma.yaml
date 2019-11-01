@@ -1,0 +1,84 @@
+title: Emma's Room
+icon: mdi:hotel
+path: emma
+panel: true
+popup_cards:
+  sensor.jenny_tracker: !include ../popup_cards/jenny_location.yaml
+  sensor.emma_tracker: !include ../popup_cards/emma_location.yaml
+cards:
+  - type: custom:layout-card
+    layout: vertical
+    cards:
+    - !include ../custom_views/family_presence.yaml
+    - type: custom:button-card
+      label: Emma's Lights
+      entity: group.emmasroomlights
+      show_icon: false
+      show_name: false
+      show_label: true
+      styles:
+        label:
+          - color: rgb(26, 186, 146)
+      state:
+        - value: 'on'
+          styles:
+            label:
+              - color: yellow
+
+    - type: horizontal-stack
+      cards:
+        - type: entity-button
+          entity: light.emmas_ceiling_light
+          name: Ceiling
+          icon: mdi:ceiling-light
+          tap_action:
+            action: call-service
+            service: light.toggle
+            service_data:
+              entity_id: light.emmas_ceiling_light
+        - type: entity-button
+          entity: light.emmas_bedside_light
+          name: Bedside
+          icon: mdi:wall-sconce
+          tap_action:
+            action: call-service
+            service: light.toggle
+            service_data:
+              entity_id: light.emmas_bedside_light
+    - type: horizontal-stack
+      cards:
+        - type: entity-button
+          entity: light.emma_led
+          icon: mdi:led-strip
+          name: Den
+          tap_action:
+            action: call-service
+            service: light.toggle
+            service_data:
+              entity_id: light.emma_led
+          hold_action:
+            action: more-info
+    
+        - type: entity-button
+          name: Night Light
+          icon: mdi:hotel
+          entity: script.emma_bedtime
+          tap_action:
+            action: call-service
+            service: script.emma_bedtime
+    - break
+    - type: custom:button-card
+      entity_picture: /local/mlp.jpg
+      show_entity_picture: true
+    
+    - type: custom:button-card
+      entity: input_boolean.panic_button
+      icon: mdi:alert 
+      tap_action:
+        action: toggle
+      styles:
+        card:
+          - background-color: red
+          - height: 100px
+        icon:
+          - color: white

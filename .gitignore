@@ -1,0 +1,37 @@
+# Generic ignores
+*.log
+*.db
+*.db-shm
+*.db-wal
+*.pyc
+._*
+__pycache__
+
+# Directory (contents) ignores
+.cloud
+.storage
+deps
+/tts
+
+# Specific file ignores
+.uuid
+plex.conf
+html5_push_registrations.conf
+known_devices.yaml
+secrets.yaml
+
+
+# ESPHome ignores
+esphome/secrets.yaml
+esphome/**/
+
+# www ignores
+www/*.jpeg
+www/*.jpg
+www/pics
+www/custom-lovelace/upcoming-media-card
+
+# Ignore files created by IDE's
+.vscode
+
+# Specific keeps

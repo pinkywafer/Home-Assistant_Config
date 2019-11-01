@@ -1,0 +1,6 @@
+script:
+  den_lights_touchdown:
+    alias: Emma's Touchdown Effect
+    sequence:
+      - service: light.turn_on
+        data: { "entity_id": "light.emma_led", "effect": "Touchdown" }

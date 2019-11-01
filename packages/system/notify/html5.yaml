@@ -1,0 +1,6 @@
+notify:
+  - platform: html5
+    name: html
+    vapid_pub_key: !secret push_vapid_pub_key
+    vapid_prv_key: !secret push_vapid_prv_key
+    vapid_email: !secret jenny_email_address

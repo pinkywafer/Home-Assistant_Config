@@ -1,0 +1,13 @@
+alert:
+  door_window:
+    name: Door window is open
+    message: The back door window has been left open
+    done_message: The back door window is now closed
+    entity_id: binary_sensor.door_window
+    state: 'on'
+    repeat: 
+      - 60
+      - 120
+    skip_first: true
+    notifiers:
+      - broadcast

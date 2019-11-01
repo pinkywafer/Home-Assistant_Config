@@ -1,0 +1,13 @@
+automation:
+  alias: Emma at Agatha's
+  trigger:
+  - entity_id: sensor.emma_tracker
+    to: Agatha's House
+    platform: state
+  action:
+  - data:
+      message: Emma has arrived at Agatha's
+      data:
+        tag: emma_location
+        renotify: 1
+    service: notify.html

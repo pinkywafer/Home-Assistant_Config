@@ -1,0 +1,11 @@
+script:
+  alarm_set_home_mode:
+    alias: Alarm in Home Mode
+    sequence:
+      - condition: state
+        entity_id: alarm_control_panel.alarm
+        state: 'disarmed'
+      - service: alarm_control_panel.alarm_arm_home
+        data: 
+          entity_id: alarm_control_panel.alarm
+          code: !secret alarm_code

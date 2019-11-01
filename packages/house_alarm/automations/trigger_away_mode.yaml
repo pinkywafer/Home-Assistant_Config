@@ -1,0 +1,97 @@
+automation:
+  - alias: Alarm Trigger - Away mode
+    trigger:
+    # Panic Button
+    - platform: state
+      entity_id: input_boolean.panic_button
+      # all light switches
+    #- platform: state
+    #  entity_id: binary_sensor.sitting_room_light_switch
+    #- platform: state
+    #  entity_id: binary_sensor.vestibule_light_switch
+    #- platform: state
+    #  entity_id: binary_sensor.cooker_light_switch
+    #- platform: state
+    #  entity_id: binary_sensor.sink_light_switch
+    #- platform: state
+    #  entity_id: binary_sensor.bathroom_light_switch
+    #- platform: state
+    #  entity_id: binary_sensor.bedroom_ceiling_light_switch 
+    #- platform: state
+    #  entity_id: binary_sensor.emmas_bedside_light_switch 
+    #- platform: state
+    #  entity_id: binary_sensor.emmas_ceiling_light_switch 
+    #- platform: state
+    #  entity_id: binary_sensor.jos_bedside_light_switch
+    #- platform: state
+    #  entity_id: binary_sensor.jennys_bedside_light_switch 
+    #- platform: state
+    #  entity_id: binary_sensor.landing_light_switch 
+    # Motion Sensors
+    - platform: state
+      entity_id: binary_sensor.sitting_room_sensor_pir
+      to: 'on'
+    #- platform: state
+    #  entity_id: binary_sensor.kitchen_sensor_pir
+    #  to: 'on'
+    - platform: state
+      entity_id: binary_sensor.downstairs_motion
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.upstairs_motion
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.vestibule_motion
+      to: 'on'
+    # Doors
+    - platform: state
+      entity_id: binary_sensor.front_door
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.back_door
+      to: 'on'
+    # Windows
+    - platform: state
+      entity_id: binary_sensor.kitchen_window
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.front_window
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.emmas_window
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.door_window
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.bedroom_window
+      to: 'on'
+    condition:
+    - condition: state
+      entity_id: alarm_control_panel.alarm
+      state: 'armed_away'
+    - condition: template
+      value_template: >
+        {{ trigger.from_state != 'unavailable' and
+            trigger.to_state != 'unavailable' }}
+    action:
+    - service: alarm_control_panel.alarm_trigger
+      entity_id: alarm_control_panel.alarm
+    - service: light.turn_on
+      entity_id: light.vestibule_light
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.alarm_trigger
+        value: >
+          {% if states.input_text.alarm_trigger.state|length == 0 %}
+            {{ trigger.from_state.attributes.friendly_name + trigger.from_state.state + trigger.to_state.state }}
+          {% elif (states.input_text.alarm_trigger.state|length + trigger.from_state.attributes.friendly_name|length) < 100 %}
+            {{ states.input_text.alarm_trigger.state }}, {{ trigger.from_state.attributes.friendly_name }}
+          {% else %}
+            {{ states.input_text.alarm_trigger.state }}
+          {% endif %}
+    - service: camera.snapshot
+      data:
+        entity_id: camera.sitting_room_sensor_camera
+        filename: 'www/pics/sitting_room_a.jpg'
+        

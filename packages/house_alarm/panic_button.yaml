@@ -1,0 +1,4 @@
+input_boolean:
+  panic_button:
+    name: Panic button
+    initial: off

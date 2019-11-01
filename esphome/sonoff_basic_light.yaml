@@ -1,0 +1,65 @@
+esphome:
+  name: $devicename
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_psk
+  manual_ip:
+    static_ip: $ip_address
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    name: $friendly_name Sonoff Button
+    on_press:
+      - light.toggle: light_output
+  - platform: gpio
+    pin:
+      number: GPIO14
+      mode: INPUT_PULLUP
+      inverted: True
+    name: $friendly_name Switch
+    on_press:
+      - light.toggle: light_output
+    on_release:
+      - light.toggle: light_output
+  - platform: status
+    name: $friendly_name Sonoff Status
+
+output:
+  - platform: gpio
+    pin: GPIO12
+    id: relay
+
+light:
+  - platform: binary
+    id: light_output
+    name: $friendly_name
+    output: relay
+
+status_led:
+  pin:
+    number: GPIO13
+    inverted: yes
+
+sensor:
+  - platform: wifi_signal
+    name: $friendly_name Sonoff Wifi Signal
+    update_interval: 10s
+  - platform: uptime
+    name: $friendly_name Sonoff Uptime

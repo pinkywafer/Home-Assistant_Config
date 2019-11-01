@@ -1,0 +1,83 @@
+type: custom:vertical-stack-in-card
+cards:  
+  - type: vertical-stack
+    cards:  
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: light.vestibule_light
+            show_state: false
+            icon: mdi:glassdoor
+            name: Vestibule
+            tap_action:
+              action: toggle
+            styles:
+              card:
+                - height: 60px
+              name:
+                - font-size: 14px
+          - type: custom:button-card
+            entity: group.downstairslights
+            label: Downstairs
+            show_icon: false
+            show_name: false
+            show_label: true
+            styles:
+              label:
+                - color: rgb(26, 186, 146)
+            state:
+              - value: 'on'
+                styles:
+                  label:
+                    - color: yellow
+          - type: custom:button-card
+            entity: light.bathroom_light
+            show_state: false
+            icon: mdi:shower
+            name: Bathroom
+            tap_action:
+              action: toggle
+            styles:
+              card:
+                - height: 60px
+              name:
+                - font-size: 14px
+
+      - type: horizontal-stack
+        cards:         
+          - type: custom:button-card
+            entity: light.sitting_room_light
+            show_state: false
+            icon: mdi:sofa
+            name: Lounge
+            tap_action:
+              action: toggle
+            styles:
+              card:
+                - height: 60px
+              name:
+                - font-size: 14px
+          - type: custom:button-card
+            entity: light.sink_light
+            show_state: false
+            icon: mdi:bowl
+            name: Sink
+            tap_action:
+              action: toggle
+            styles:
+              card:
+                - height: 60px
+              name:
+                - font-size: 14px
+          - type: custom:button-card
+            entity: light.cooker_light
+            show_state: false
+            icon: mdi:stove
+            name: Cooker
+            tap_action:
+              action: toggle
+            styles:
+              card:
+                - height: 60px
+              name:
+                - font-size: 14px

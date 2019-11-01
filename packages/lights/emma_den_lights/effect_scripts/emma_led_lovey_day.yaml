@@ -1,0 +1,6 @@
+script:
+  den_lights_lovey_day:
+    alias: Emma's Lovey Day Effect
+    sequence:
+      - service: light.turn_on
+        data: { "entity_id": "light.emma_led", "effect": "Lovey Day" }

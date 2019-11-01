@@ -1,0 +1,14 @@
+title: Wake Up
+icon: mdi:alarm
+path: wake_up
+cards: 
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - entity: automation.jenny_wake_up
+        name: Jenny's Wake Up Alarm
+      - entity: input_datetime.jenny_alarm_time
+        name: Alarm Time
+        type: 'custom:time-input-row'
+      - type: divider
+      - entity: automation.wake_up_for_school

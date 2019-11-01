@@ -1,0 +1,6 @@
+zone:
+  name: Agatha's House
+  latitude: !secret agatha_latitude
+  longitude: !secret agatha_longitude
+  radius: 40
+  icon: mdi:home-map-marker

@@ -1,0 +1,17 @@
+automation:
+  alias: Emma home
+  trigger:
+  - platform: state
+    entity_id: sensor.emma_tracker
+    to: Home
+  action:
+  - service: notify.html
+    data:
+      message: Emma has arrived home
+      data:
+        tag: emma_location
+        renotify: 1
+        priority: high
+  - service: notify.broadcast
+    data:
+      message: 'Emma is home!'

@@ -1,0 +1,14 @@
+automation:
+  - alias: Alarm announce arming in away mode
+    trigger:
+    - platform: state
+      entity_id: alarm_control_panel.alarm
+      from: 'disarmed'
+      to: 'pending'
+    action:
+    - service: media_player.turn_on
+      entity_id: media_player.living_room_speaker
+    - service: tts.google_translate_say
+      entity_id: media_player.living_room_speaker
+      data:
+        message: 'The Alarm is arming.  Please make your way out, and lock the door!'

@@ -1,0 +1,5 @@
+resources: !include lovelace/resources.yaml
+title: Masarn Goch
+cch: !include lovelace/cch.yaml
+theme: dark_theme
+views: !include_dir_list lovelace/views

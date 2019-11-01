@@ -1,0 +1,16 @@
+automation:
+  alias: Jenny Wake up
+  trigger:
+    platform: template
+    value_template: "{{states('sensor.time') == (states.input_datetime.jenny_alarm_time.attributes.timestamp | int | timestamp_custom('%H:%M',False))}}"
+  action:
+  - service: light.turn_on
+    entity_id:
+    - light.sitting_room_light
+    - light.sink_light
+    - light.vestibule_light
+    - light.landing_light
+    - light.cooker_light
+  - service: switch.turn_on
+    entity_id:
+    - switch.immersion_heater

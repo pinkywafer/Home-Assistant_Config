@@ -1,0 +1,10 @@
+browser_mod:
+  prefix: "browser_"
+  devices:
+    !secret pc_device_id:
+      name: PC
+    !secret vestibule_panel_device_id:
+      name: Vestibule Panel
+      camera: true
+    !secret jenny_phone_device_id:
+      name: Jenny Phone

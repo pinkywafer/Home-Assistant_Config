@@ -1,0 +1,45 @@
+automation:
+  - alias: override downstairs lights
+    trigger:
+    - platform: state
+      entity_id: light.sitting_room_light
+      to: 'off'
+    - platform: state
+      entity_id: light.vestibule_light
+      to: 'off'
+    - platform: state
+      entity_id: light.cooker_light
+      to: 'off'
+    - platform: state
+      entity_id: light.sink_light
+      to: 'off'
+    - platform: state
+      entity_id: light.bathroom_light
+      to: 'off'
+    condition:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: alarm_control_panel.alarm
+          state: 'armed_away'
+        - condition: state
+          entity_id: alarm_control_panel.alarm
+          state: 'armed_night'
+        - condition: state
+          entity_id: alarm_control_panel.alarm
+          state: 'triggered'
+        - condition: and
+          conditions:
+            - condition: state
+              entity_id: alarm_control_panel.alarm
+              state: 'pending'
+            - condition: template
+              value_template: >
+                {{ states.alarm_control_panel.alarm.attributes.pre_pending_state == 'armed_away' }}
+    - condition: template
+      value_template: >
+        {{ trigger.from_state != 'unavailable' and
+            trigger.to_state != 'unavailable' }}
+    action:
+    - service: homeassistant.turn_on
+      entity_id: group.downstairslights

@@ -1,0 +1,29 @@
+automation:
+  - alias: Alarm Trigger - Panic Button
+    trigger:
+    - platform: state
+      entity_id: input_boolean.panic_button
+    condition:
+    - condition: state
+      entity_id: alarm_control_panel.alarm
+      state: 'disarmed'
+    - condition: template
+      value_template: >
+        {{ trigger.from_state != 'unavailable' and
+            trigger.to_state != 'unavailable' }}
+    action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.panic_button
+    - service: alarm_control_panel.alarm_trigger
+      entity_id: alarm_control_panel.alarm
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.alarm_trigger
+        value: >
+          {% if states.input_text.alarm_trigger.state|length == 0 %}
+            {{ trigger.from_state.attributes.friendly_name }}
+          {% elif (states.input_text.alarm_trigger.state|length + trigger.from_state.attributes.friendly_name|length) < 100 %}
+            {{ states.input_text.alarm_trigger.state }}, {{ trigger.from_state.attributes.friendly_name }}
+          {% else %}
+            {{ states.input_text.alarm_trigger.state }}
+          {% endif %}

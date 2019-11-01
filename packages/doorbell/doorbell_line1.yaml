@@ -1,0 +1,4 @@
+input_text:
+  doorbell_line_1:
+    name: Doorbell Line 1
+    initial: ""

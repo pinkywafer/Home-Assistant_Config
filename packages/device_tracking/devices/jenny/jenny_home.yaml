@@ -1,0 +1,10 @@
+automation:
+  alias: Jenny home
+  trigger:
+  - entity_id: sensor.jenny_tracker
+    to: Home
+    platform: state
+  action:
+  - service: notify.broadcast
+    data:
+      message: 'Jenny is home!'
