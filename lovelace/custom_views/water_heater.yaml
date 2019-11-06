@@ -20,7 +20,6 @@ cards:
             - height: 60px
       - type: custom:button-card
         entity: switch.bath_mode
-        icon: mdi:hot-tub
         styles:
           card:
             - height: 60px

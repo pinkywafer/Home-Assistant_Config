@@ -53,6 +53,7 @@ switch:
     name: Immersion Heater
     id: auto_switch
     optimistic: true
+    icon: "mdi:water"
     on_turn_on:
       - switch.turn_off: bath_mode
       - output.turn_on: relay
@@ -65,6 +66,7 @@ switch:
     name: Bath Mode
     id: bath_mode
     optimistic: true
+    icon: "mdi:hot-tub"
     on_turn_on:
       - switch.turn_off: auto_switch
       - output.turn_on: relay
