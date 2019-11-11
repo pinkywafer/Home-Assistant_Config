@@ -1,0 +1,6 @@
+script:
+  den_lights_twinkle:
+    alias: Emma's Sound Rainbow Effect
+    sequence:
+      - service: light.turn_on
+        data: { "entity_id": "light.emma_led", "effect": "Audio Level Rainbow" }

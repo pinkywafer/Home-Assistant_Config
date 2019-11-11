@@ -8,7 +8,7 @@ script:
     alias: Emma's Night Light Mode
     sequence:
       - service: light.turn_on
-        data: { "entity_id": "light.emma_led", "effect": "Solid", "brightness": 15, "rgb_color": [255, 108, 145]}
+        data: { "entity_id": "light.emma_led", "effect": "Solid Color", "brightness": 15, "rgb_color": [255, 108, 145]}
       - service: input_boolean.turn_on
         data:
           entity_id: input_boolean.emma_night_mode
@@ -32,7 +32,7 @@ automation:
   - alias: Emma's night light mode of - color or effect change
     trigger:
       - platform: template
-        value_template: "{{ not is_state_attr('light.emma_led','effect','Solid') }}"
+        value_template: "{{ not is_state_attr('light.emma_led','effect','Solid Color') }}"
       - platform: template
         value_template:  "{{ not is_state_attr('light.emma_led','rgb_color',(255, 108, 145))}}"
     condition:
