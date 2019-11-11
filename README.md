@@ -6,8 +6,8 @@ This is my Home Assistant installation.
 
 Description | value
 -- | --
-Number of entities | 331
-Number of sensors | 74
+Number of entities | 338
+Number of sensors | 76
 
 
 
@@ -28,6 +28,8 @@ Number of sensors | 74
 ### [Browser mod]()
 
 ### [Youtube Sensor](https://github.com/custom-components/youtube)
+
+### [Authenticated](https://github.com/custom-components/authenticated)
 
 ### [Generate readme](https://github.com/custom-components/readme)
 
