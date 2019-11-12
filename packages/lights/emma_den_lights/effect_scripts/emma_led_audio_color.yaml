@@ -1,5 +1,5 @@
 script:
-  den_lights_twinkle:
+  den_lights_sound_color:
     alias: Emma's Sound Color Effect
     sequence:
       - service: light.turn_on
