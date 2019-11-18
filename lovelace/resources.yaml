@@ -24,8 +24,6 @@
   type: module
 - url: /community_plugin/unused-card/unused-card.js
   type: js
-- url: /community_plugin/lovelace-popup-card/popup-card.js
-  type: js
 - url: /community_plugin/lovelace-multiple-entity-row/multiple-entity-row.js
   type: js
 - url: /community_plugin/weather-card/weather-card.js
