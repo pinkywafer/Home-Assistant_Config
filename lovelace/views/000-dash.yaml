@@ -2,11 +2,6 @@ title: Dashboard
 icon: mdi:monitor-dashboard
 panel: true
 path: dash
-popup_cards:
-  sensor.jenny_tracker: !include ../popup_cards/jenny_location.yaml
-  sensor.emma_tracker: !include ../popup_cards/emma_location.yaml
-  binary_sensor.downstairs_motion: !include ../popup_cards/sitting_room.yaml
-  binary_sensor.sitting_room_sensor_pir: !include ../popup_cards/sitting_room.yaml
     
 cards:
   - type: custom:layout-card

@@ -19,3 +19,4 @@ card:
     - type: map
       entities:
         - device_tracker.emma_gps
+large: true

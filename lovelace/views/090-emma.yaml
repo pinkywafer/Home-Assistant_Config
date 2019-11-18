@@ -2,9 +2,6 @@ title: Emma's Room
 icon: mdi:hotel
 path: emma
 panel: true
-popup_cards:
-  sensor.jenny_tracker: !include ../popup_cards/jenny_location.yaml
-  sensor.emma_tracker: !include ../popup_cards/emma_location.yaml
 cards:
   - type: custom:layout-card
     layout: vertical

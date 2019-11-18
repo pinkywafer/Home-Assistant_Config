@@ -51,7 +51,9 @@ cards:
         show_state: false
         icon: mdi:walk
         tap_action:
-          action: more-info
+          action: call-service
+          service: browser_mod.popup
+          service_data: !include ../popup_cards/sitting_room.yaml
         state:
           - value: 'on'
             icon: mdi:run
@@ -66,7 +68,9 @@ cards:
         show_state: false
         icon: mdi:walk
         tap_action:
-          action: more-info
+          action: call-service
+          service: browser_mod.popup
+          service_data: !include ../popup_cards/sitting_room.yaml
         state:
           - value: 'on'
             icon: mdi:run
