@@ -1,6 +1,6 @@
-sensor:
-  - platform: anniversaries
-    name: Jenny's Birthday
+anniversaries:
+  sensors:
+  - name: Jenny's Birthday
     date: !secret jenny_birthday
 
 automation:

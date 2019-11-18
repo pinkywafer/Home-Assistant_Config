@@ -1,6 +1,6 @@
-sensor:
-  - platform: anniversaries
-    name: Jenny & Jo's Wedding Anniversary
+anniversaries:
+  sensors:
+  - name: Jenny & Jo's Wedding Anniversary
     date: !secret jenny_jo_wedding
 
 automation:
