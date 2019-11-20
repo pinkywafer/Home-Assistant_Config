@@ -27,3 +27,5 @@ dark_theme:
   paper-slider-pin-color: "#1ABA92"
   paper-slider-active-color: "#1ABA92"
   paper-slider-secondary-color: "#33F2D8"
+  
+  card-background-color: "var(--paper-card-background-color)"
