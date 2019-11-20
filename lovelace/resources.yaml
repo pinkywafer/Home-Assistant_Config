@@ -32,3 +32,5 @@
   type: module
 - url: /community_plugin/lovelace-card-mod/card-mod.js
   type: module
+- url: /community_plugin/github-card/github-card.js
+  type: js

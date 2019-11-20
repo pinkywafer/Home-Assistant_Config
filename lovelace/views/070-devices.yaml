@@ -58,3 +58,9 @@ cards:
             name: Jenny Bedside
           - entity: binary_sensor.jos_bedside_light_sonoff_status
             name: Jo Bedside
+      - type: custom:github-card
+        entities:
+          - sensor.anniversaries
+          - sensor.opentx_soundpack_joanne
+          - sensor.pinkyleds
+          - sensor.home_assistant
