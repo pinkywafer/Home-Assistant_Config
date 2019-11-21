@@ -7,7 +7,7 @@ from homeassistant.const import CONF_NAME, WEEKDAYS, CONF_ENTITIES
 # Base component constants
 DOMAIN = "garbage_collection"
 DOMAIN_DATA = f"{DOMAIN}_data"
-VERSION = "v2.2"
+VERSION = "v2.3"
 PLATFORM = "sensor"
 ISSUE_URL = "https://github.com/bruxy70/Garbage-Collection/issues"
 ATTRIBUTION = "Data from this is provided by garbage_collection."
@@ -29,7 +29,9 @@ CONF_VERBOSE_STATE = "verbose_state"
 CONF_FIRST_MONTH = "first_month"
 CONF_LAST_MONTH = "last_month"
 CONF_COLLECTION_DAYS = "collection_days"
+CONF_FORCE_WEEK_NUMBERS = "force_week_order_numbers"
 CONF_WEEKDAY_ORDER_NUMBER = "weekday_order_number"
+CONF_WEEK_ORDER_NUMBER = "week_order_number"
 CONF_DATE = "date"
 CONF_EXCLUDE_DATES = "exclude_dates"
 CONF_INCLUDE_DATES = "include_dates"
@@ -56,7 +58,7 @@ DEFAULT_ICON_TODAY = "mdi:delete-restore"
 DEFAULT_ICON_TOMORROW = "mdi:delete-circle"
 ICON = DEFAULT_ICON_NORMAL
 
-#States
+# States
 STATE_TODAY = "Today"
 STATE_TOMORROW = "Tomorrow"
 
@@ -116,6 +118,9 @@ SENSOR_SCHEMA = vol.Schema(
             MONTH_OPTIONS
         ),
         vol.Optional(CONF_WEEKDAY_ORDER_NUMBER, default=[1]): vol.All(
+            cv.ensure_list, [vol.All(vol.Coerce(int), vol.Range(min=1, max=5))]
+        ),
+        vol.Optional(CONF_WEEK_ORDER_NUMBER, default=[]): vol.All(
             cv.ensure_list, [vol.All(vol.Coerce(int), vol.Range(min=1, max=5))]
         ),
         vol.Optional(CONF_PERIOD, default=DEFAULT_PERIOD): vol.All(
