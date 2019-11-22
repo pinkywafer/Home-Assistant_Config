@@ -17,6 +17,8 @@ frontend:
 # Enables configuration UI
 config:
 
+scene: !include scenes.yaml
+
 updater:
 
 discovery:
