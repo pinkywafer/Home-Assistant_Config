@@ -1,11 +1,13 @@
 google_assistant:
   project_id: !secret google_project
-  api_key: !secret googleAssistantAPIkey
+  # api_key: !secret googleAssistantAPIkey
+  service_account: !include ../../google_service_account.json
   exposed_domains:
     - switch
     - light
     - group
     - script
+    - scene
   entity_config:
     group.upstairslights:
       room: Upstairs

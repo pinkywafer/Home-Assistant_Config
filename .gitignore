@@ -20,6 +20,7 @@ html5_push_registrations.conf
 known_devices.yaml
 secrets.yaml
 .ip_authenticated.yaml
+google_service_account.json
 
 
 # ESPHome ignores
