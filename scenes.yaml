@@ -1,0 +1,13 @@
+- id: '1574464711769'
+  name: Movie Mode
+  entities:
+    light.cooker_light:
+      state: 'off'
+    light.landing_light:
+      state: 'on'
+    light.sink_light:
+      state: 'on'
+    light.sitting_room_light:
+      state: 'off'
+    light.vestibule_light:
+      state: 'off'
