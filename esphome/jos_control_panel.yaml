@@ -1,0 +1,98 @@
+esphome:
+  name: jos_control_panel
+  platform: ESP8266
+  board: d1_mini
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_psk
+  reboot_timeout: 10min
+  manual_ip:
+    static_ip: 192.168.1.11
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: RX
+      mode: INPUT_PULLUP
+      inverted: true
+    name: "Jo's Red switch"
+    filters:
+      - delayed_on: 10ms
+      - delayed_off: 10ms
+    
+  - platform: gpio
+    pin:
+      number: D1
+      mode: INPUT_PULLUP
+      inverted: true
+    name: "Jo's Blue switch"
+    filters:
+      - delayed_on: 10ms
+      - delayed_off: 10ms
+    
+  - platform: gpio
+    pin:
+      number: D2
+      mode: INPUT_PULLUP
+      inverted: true
+    name: "Jo's Green switch"
+    filters:
+      - delayed_on: 10ms
+      - delayed_off: 10ms
+    
+  - platform: gpio
+    pin:
+      number: D5
+      mode: INPUT_PULLUP
+      inverted: true
+    name: "Jo's Purple switch"
+    filters:
+      - delayed_on: 10ms
+      - delayed_off: 10ms
+    
+  - platform: gpio
+    pin:
+      number: D6
+      mode: INPUT_PULLUP
+      inverted: true
+    name: "Jo's Orange switch"
+    filters:
+      - delayed_on: 10ms
+      - delayed_off: 10ms
+    
+  - platform: gpio
+    pin:
+      number: D7
+      mode: INPUT_PULLUP
+      inverted: true
+    name: "Jo's White switch"
+    filters:
+      - delayed_on: 10ms
+      - delayed_off: 10ms
+      
+  - platform: status
+    name: Jo's Control Panel Status
+    
+sensor:
+  - platform: wifi_signal
+    name: Jo's Control Panel Wifi Signal
+    update_interval: 10s
+
+  - platform: uptime
+    name: Jo's Control Panel Uptime
+
+status_led:
+  pin:
+    number: D4
+    inverted: true
