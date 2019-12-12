@@ -4,8 +4,8 @@ python:
 before_install:
   - sudo apt-get install -y python-dev pkg-config
   - sudo apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev
-  - sudo add-apt-repository ppa:jonathonf/ffmpeg-4
-  - sudo apt update && sudo apt install ffmpeg libav-tools x264 x265
+  - sudo add-apt-repository ppa:jonathonf/ffmpeg-3 -y
+  - sudo apt update && sudo apt install ffmpeg -y
   - sudo apt-get install -y libudev-dev
   - mv travis_secrets.yaml secrets.yaml
   - mv travis_google_service_account.json google_service_account.json
