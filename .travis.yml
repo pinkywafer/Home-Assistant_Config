@@ -6,6 +6,8 @@ before_install:
   - mv travis_google_service_account.json google_service_account.json
   - sudo apt-get install -y libudev-dev
 install:
+  - pip3 install netdisco
+  - pip3 install av
   - pip3 install homeassistant
 script:
   - hass -c . --script check_config
