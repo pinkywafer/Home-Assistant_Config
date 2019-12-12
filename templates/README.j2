@@ -1,7 +1,18 @@
-{%- set custom_component_descriptions = {"readme": "Generates this awesome readme file."} -%}
-# Welcome !
+{%- set custom_component_descriptions = {"readme": "Generates this readme file."} -%}
+# Pinkywafer Home Assistant Config
 
-This is my Home Assistant installation.
+[![Build Status](https://travis-ci.com/pinkywafer/Home-Assistant_Config.svg?branch=master)](https://travis-ci.com/pinkywafer/Home-Assistant_Config)
+
+[![Buy me a coffee](https://img.shields.io/static/v1.svg?label=Buy%20me%20a%20coffee&logo=buy%20me%20a%20coffee&logoColor=white&labelColor=ff69b4&message=donate&color=Black)](https://www.buymeacoffee.com/V3q9id4)
+
+This is my live Home Assistant config. 
+It runs on an [XCY X30 Intel i7 4500U from banggood](https://www.banggood.com/XCY-X30-Mini-PC-Intel-Core-I7-4500U-Barebone-1_8GHz-Intel-HD-Graphics-4200-Windows-10-Dual-Core-Fanless-Mini-Desktop-PC-HDMI-VGA-WiFi-Nettop-HTPC-p-1479424.html)
+Proxmox is installed on bare metal,  then this (production) Home Assistant runs in a VM.
+A separate VM provides my Dev. env
+
+This repo is validated by Travis CI
+
+I also have containers for file sharing (nas), plex server, and a tuna convert container.
 
 ## Some statistics about my installation:
 
@@ -12,9 +23,9 @@ Number of sensors | {{states.sensor | count}}
 
 
 {% if custom_components %}
-## The custom_components that I use
+## custom_components installed
 {% for integration in custom_components %}
-### [{{integration.name}}]({{integration.documentation}})
+* [{{integration.name}}]({{integration.documentation}})
 {% if integration.domain in custom_component_descriptions %}
 _{{custom_component_descriptions[integration.domain]}}_
 {% endif -%}
