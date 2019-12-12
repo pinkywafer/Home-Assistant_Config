@@ -6,8 +6,9 @@ before_install:
   - sudo apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev
   - mv travis_secrets.yaml secrets.yaml
   - mv travis_google_service_account.json google_service_account.json
+  - HA_VERSION=$(<.HA_VERSION)
 install:
   - pip3 install netdisco
-  - pip3 install homeassistant
+  - pip3 install homeassistant==${HA_VERSION}
 script:
-  - hass -c . --script check_config
+  - hass -c . --script check_config --info all
