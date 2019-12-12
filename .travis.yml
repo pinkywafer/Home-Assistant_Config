@@ -3,17 +3,9 @@ language: python
 python:
   - "3.7"
 before_install:
-  - sudo apt update
-  - sudo apt-get install -y python-dev pkg-config
-  - sudo apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev
-  - sudo apt install ffmpeg -y
-  - sudo apt-get install -y libudev-dev
-  - ffmpeg -version
   - mv travis_secrets.yaml secrets.yaml
   - mv travis_google_service_account.json google_service_account.json
 install:
-  - pip3 install netdisco
-  - pip3 install av
   - pip3 install homeassistant
 script:
   - hass -c . --script check_config
