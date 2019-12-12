@@ -1,39 +1,52 @@
-# Welcome !
+# Pinkywafer Home Assistant Config
 
-This is my Home Assistant installation.
+[![Build Status](https://travis-ci.com/pinkywafer/Home-Assistant_Config.svg?branch=master)](https://travis-ci.com/pinkywafer/Home-Assistant_Config)
+
+[![Buy me a coffee](https://img.shields.io/static/v1.svg?label=Buy%20me%20a%20coffee&logo=buy%20me%20a%20coffee&logoColor=white&labelColor=ff69b4&message=donate&color=Black)](https://www.buymeacoffee.com/V3q9id4)
+
+This is my live Home Assistant config. 
+It runs on an [XCY X30 Intel i7 4500U from banggood](https://www.banggood.com/XCY-X30-Mini-PC-Intel-Core-I7-4500U-Barebone-1_8GHz-Intel-HD-Graphics-4200-Windows-10-Dual-Core-Fanless-Mini-Desktop-PC-HDMI-VGA-WiFi-Nettop-HTPC-p-1479424.html)
+Proxmox is installed on bare metal,  then this (production) Home Assistant runs in a VM.
+A separate VM provides my Dev. env
+
+This repo is validated by Travis CI
+
+I also have containers for file sharing (nas), plex server, and a tuna convert container.
 
 ## Some statistics about my installation:
 
 Description | value
 -- | --
-Number of entities | 338
-Number of sensors | 76
+Number of entities | 349
+Number of sensors | 81
 
 
 
-## The custom_components that I use
+## custom_components installed
 
-### [Anniversaries](https://github.com/pinkywafer/Anniversaries)
+* [Anniversaries](https://github.com/pinkywafer/Anniversaries)
 
-### [Garbage Collection](https://github.com/bruxy70/Garbage-Collection/)
+* [Garbage Collection](https://github.com/bruxy70/Garbage-Collection/)
 
-### [Breaking Changes](https://github.com/custom-components/breaking_changes)
+* [Breaking Changes](https://github.com/custom-components/breaking_changes)
 
-### [HACS (Home Assistant Community Store)](https://hacs.xyz)
+* [HACS (Home Assistant Community Store)](https://hacs.xyz)
 
-### [Grocy](https://github.com/custom-components/grocy)
+* [Calendarific](https://github.com/pinkywafer/Calendarific)
 
-### [Google Geocode](https://github.com/michaelmcarthur/GoogleGeocode-HASS)
+* [Grocy](https://github.com/custom-components/grocy)
 
-### [Browser mod]()
+* [Google Geocode](https://github.com/michaelmcarthur/GoogleGeocode-HASS)
 
-### [Youtube Sensor](https://github.com/custom-components/youtube)
+* [Browser mod]()
 
-### [Authenticated](https://github.com/custom-components/authenticated)
+* [Youtube Sensor](https://github.com/custom-components/youtube)
 
-### [Generate readme](https://github.com/custom-components/readme)
+* [Authenticated](https://github.com/custom-components/authenticated)
 
-_Generates this awesome readme file._
+* [Generate readme](https://github.com/custom-components/readme)
+
+_Generates this readme file._
 
 
 ***
