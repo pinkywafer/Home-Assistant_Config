@@ -10,7 +10,7 @@ before_install:
   - sudo apt-get install -y libudev-dev
 install:
   - pip3 install netdisco
-  - pip3 install av
+  - pip3 install -v av
   - pip3 install homeassistant
 script:
   - hass -c . --script check_config
