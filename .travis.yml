@@ -2,9 +2,8 @@ language: python
 python:
   - "3.7"
 before_install:
-  - sudo add-apt-repository ppa:jonathonf/ffmpeg-4
-  - sudo apt-get update
-  - sudo apt-get install ffmpeg
+  - sudo apt-get install -y python-dev pkg-config
+  - sudo apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev `
   - mv travis_secrets.yaml secrets.yaml
   - mv travis_google_service_account.json google_service_account.json
   - sudo apt-get install -y libudev-dev
