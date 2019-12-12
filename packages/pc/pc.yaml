@@ -1,7 +1,7 @@
 switch:
   platform: wake_on_lan
   name: "PC"
-  mac_address: !secret pc_mac
+  mac: !secret pc_mac
   host: !secret pc_ip
   turn_off:
     service: rest_command.shutdown_pc
