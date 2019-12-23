@@ -122,6 +122,7 @@ class CalendarificApiReader:
         self._next_holidays = response['response']['holidays']
         self._lastupdated = datetime.now().date()
         global holiday_list
+        holiday_list = []
         for holiday in self._holidays:
             holiday_list.append(holiday['name'])
         
