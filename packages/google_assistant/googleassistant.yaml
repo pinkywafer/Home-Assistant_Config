@@ -2,6 +2,7 @@ google_assistant:
   project_id: !secret google_project
   # api_key: !secret googleAssistantAPIkey
   service_account: !include ../../google_service_account.json
+  report_state: true
   exposed_domains:
     - switch
     - light
