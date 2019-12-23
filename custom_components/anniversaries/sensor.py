@@ -59,15 +59,6 @@ class anniversaries(Entity):
         return self.config.get("unique_id", None)
 
     @property
-    def device_info(self):
-        return {
-            "identifiers": {(DOMAIN, self.config.get("unique_id", None))},
-            "name": self.config.get("name"),
-            "manufacturer": "Pinkywafer",
-            "model": "Anniversaries",
-        }
-        
-    @property
     def name(self):
         """Return the name of the sensor."""
         return self._name
@@ -89,6 +80,11 @@ class anniversaries(Entity):
     @property
     def icon(self):
         return self._icon
+    
+    @property
+    def unit_of_measurement(self):
+        """Return the unit this state is expressed in."""
+        return "days"
 
     async def async_update(self):
         today = date.today()
