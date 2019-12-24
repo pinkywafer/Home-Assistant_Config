@@ -46,7 +46,9 @@ octoprint:
       - 'Job Percentage'
       - 'Time Elapsed'
       - 'Time Remaining'
-  binary_sensors:
+
+binary_sensor:
+  - platform: octoprint
     monitored_conditions:
       - Printing
       - Printing Error
