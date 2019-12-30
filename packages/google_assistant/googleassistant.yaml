@@ -23,6 +23,8 @@ google_assistant:
       room: Kitchen
     light.sitting_room_light:
       room: Living Room
+    light.emma_night_light:
+      expose: true
     light.emmas_bedside_light:
       name: Emma's Bedside Light
       room: Emma's Room

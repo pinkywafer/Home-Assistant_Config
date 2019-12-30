@@ -29,19 +29,13 @@ cards:
           name: Ceiling
           icon: mdi:ceiling-light
           tap_action:
-            action: call-service
-            service: light.toggle
-            service_data:
-              entity_id: light.emmas_ceiling_light
+            action: toggle
         - type: entity-button
           entity: light.emmas_bedside_light
           name: Bedside
           icon: mdi:wall-sconce
           tap_action:
-            action: call-service
-            service: light.toggle
-            service_data:
-              entity_id: light.emmas_bedside_light
+            action: toggle
     - type: horizontal-stack
       cards:
         - type: entity-button
@@ -49,20 +43,17 @@ cards:
           icon: mdi:led-strip
           name: Den
           tap_action:
-            action: call-service
-            service: light.toggle
-            service_data:
-              entity_id: light.emma_led
+            action: toggle
           hold_action:
             action: more-info
     
         - type: entity-button
           name: Night Light
           icon: mdi:hotel
-          entity: script.emma_bedtime
+          entity: light.emma_night_light
           tap_action:
-            action: call-service
-            service: script.emma_bedtime
+            action: toggle
+
     - break
     - type: custom:button-card
       entity_picture: /local/mlp.jpg

@@ -1,83 +1,36 @@
-input_boolean:
-  emma_night_mode:
-    name: Emma Night Mode
-    initial: off
-
-script:
-  emma_bedtime:
-    alias: Emma's Night Light Mode
-    sequence:
-      - service: light.turn_on
-        data: { "entity_id": "light.emma_led", "effect": "Solid Color", "brightness": 15, "rgb_color": [255, 108, 145]}
-      - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.emma_night_mode
+light:
+  - platform: template
+    lights:
+      emma_night_light:
+        friendly_name: "Emma's Night Light"
+        value_template: "{{ is_state('light.emma_led', 'on') and
+          is_state_attr('light.emma_led','effect','Solid Color') and 
+          is_state_attr('light.emma_led','rgb_color',(255, 108, 145)) and
+          is_state_attr('light.emma_led','brightness',15)}}"
+        turn_on:
+          - service: light.turn_on
+            entity_id: light.emma_led
+            data: 
+              effect: "Solid Color"
+              brightness: 15
+              rgb_color: [255, 108, 145]
+        turn_off:
+          - condition: template
+            value_template: "{{ is_state('light.emma_led', 'on') and
+              is_state_attr('light.emma_led','effect','Solid Color') and 
+              is_state_attr('light.emma_led','rgb_color',(255, 108, 145)) and
+              is_state_attr('light.emma_led','brightness',15)}}"
+          - service: mqtt.publish
+            data: 
+              topic: "cmnd/emma-led"
+              payload: "{\"state\":\"OFF\",\"brightness\":150}"
 
 automation:
-  - alias: Emma's Night light mode off - brightness change
-    trigger:
-      - platform: template
-        value_template: "{{ not is_state_attr('light.emma_led','brightness',15) }}"
-    condition: 
-      - condition: state
-        entity_id: input_boolean.emma_night_mode
-        state: 'on'
-      - condition: state
-        entity_id: light.emma_led
-        state: 'on'
-    action:
-      - service: input_boolean.turn_off
-        entity_id: input_boolean.emma_night_mode
-
-  - alias: Emma's night light mode of - color or effect change
-    trigger:
-      - platform: template
-        value_template: "{{ not is_state_attr('light.emma_led','effect','Solid Color') }}"
-      - platform: template
-        value_template:  "{{ not is_state_attr('light.emma_led','rgb_color',(255, 108, 145))}}"
-    condition:
-      - condition: state
-        entity_id: input_boolean.emma_night_mode
-        state: 'on'
-      - condition: state
-        entity_id: light.emma_led
-        state: 'on'
-    action:
-      - service: input_boolean.turn_off
-        entity_id: input_boolean.emma_night_mode
-      - service: mqtt.publish
-        data: 
-          topic: "cmnd/emma-led"
-          payload: "{\"brightness\":150}"
-
-  - alias: Emma's night mode off - light off
-    trigger:
-      - platform: state
-        entity_id: light.emma_led
-        to: 'off'
-    condition:
-      condition: state
-      entity_id: input_boolean.emma_night_mode
-      state: 'on'
-    action:
-      - service: input_boolean.turn_off
-        entity_id: input_boolean.emma_night_mode
-      - delay:
-          milliseconds: 500
-      - service: mqtt.publish
-        data: 
-          topic: "cmnd/emma-led"
-          payload: "{\"state\":\"OFF\",\"brightness\":150}"
-
   - alias: Emma's night light off 1 hour after sunrise
     trigger:
     - event: sunrise
       offset: '1:00'
       platform: sun
-    condition:
-      condition: state
-      entity_id: input_boolean.emma_night_mode
-      state: 'on'
     action:
-    - entity_id: light.emma_led
-      service: light.turn_off
+    - service: light.turn_off
+      entity_id: light.emma_night_light

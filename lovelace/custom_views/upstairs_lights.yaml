@@ -95,18 +95,11 @@ cards:
             name:
               - font-size: 14px
         - type: custom:button-card
-          entity: input_boolean.emma_night_mode
-          show_state: false
+          entity: light.emma_night_light
           icon: mdi:hotel
           name: Night Light
           tap_action:
-            action: call-service
-            service: script.emma_bedtime
-          hold_action:
-            action: call-service
-            service: light.turn_off
-            service_data:
-              entity_id: light.emma_led
+            action: toggle
           styles:
             card:
               - height: 60px
