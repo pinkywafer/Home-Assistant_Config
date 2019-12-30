@@ -1,0 +1,18 @@
+automation:
+  - alias: Kitchen LEDs on with Sink light
+    trigger:
+    - platform: state
+      entity_id: light.sink_light
+      to: 'on'
+    action:
+    - service: light.turn_on
+      entity_id: light.breakfast_bar_led
+
+  - alias: Kitchen LEDs off with Sink light
+    trigger:
+    - platform: state
+      entity_id: light.sink_light
+      to: 'off'
+    action:
+    - service: light.turn_off
+      entity_id: light.breakfast_bar_led
