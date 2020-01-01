@@ -20,6 +20,10 @@ light:
               is_state_attr('light.emma_led','effect','Solid Color') and 
               is_state_attr('light.emma_led','rgb_color',(255, 108, 145)) and
               is_state_attr('light.emma_led','brightness',15)}}"
+          - service: light.turn_off
+            entity_id: light.emma_led
+          - delay: 
+              milliseconds: 1500
           - service: mqtt.publish
             data: 
               topic: "cmnd/emma-led"
