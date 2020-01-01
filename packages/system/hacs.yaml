@@ -1,5 +1,3 @@
 hacs:
   token: !secret hacs_token
-  python_script: true
-  theme: true
   sidepanel_title: HACS
