@@ -1,0 +1,31 @@
+compact_mode: true
+hide_help: true
+hide_config: true
+button_text:
+  options: >-
+      {{ time }} <ha-icon icon='mdi:weather-{{
+      states.weather.dark_sky.state }}'></ha-icon> {{
+      states.weather.dark_sky.attributes.temperature }}°
+      <br> {{ dayNumLZ }}/{{ monthNumLZ }}/{{ year4d }}
+chevrons: false
+tabs_color:
+  alarm: >-
+    {% if (states["alarm_control_panel.alarm"].state == "armed_home") -%}orange
+    {%- elif (states["alarm_control_panel.alarm"].state == "armed_away") -%}red
+    {%- elif (states["alarm_control_panel.alarm"].state == "armed_night") -%}black
+    {%- else -%}white
+    {%- endif %}
+exceptions:
+  - conditions:
+      user: Emma Gorton
+    config:
+      default_tab: emma
+      show_tabs: alarm, emma
+      menu: hide
+      notifications: hide
+      voice: hide
+      options: hide
+  - conditions:
+      user: Vestibule
+    config:
+      hide_tabs: 0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
