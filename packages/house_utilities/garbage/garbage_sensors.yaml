@@ -4,7 +4,7 @@ garbage_collection:
     frequency: "every-n-weeks"
     collection_days: "tue"
     period: 3
-    first_week: 3
+    first_week: 2
     verbose_state: true
     icon_normal: mdi:trash-can
     icon_today: mdi:trash-can
