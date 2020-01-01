@@ -9,6 +9,6 @@ cards:
         name: Jenny's Wake Up Alarm
       - entity: input_datetime.jenny_alarm_time
         name: Alarm Time
-        type: 'custom:time-input-row'
+        type: time-input-row
       - type: divider
       - entity: automation.wake_up_for_school
