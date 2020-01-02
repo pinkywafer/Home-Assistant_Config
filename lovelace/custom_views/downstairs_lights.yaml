@@ -70,6 +70,23 @@ cards:
               name:
                 - font-size: 14px
           - type: custom:button-card
+            entity: light.breakfast_bar_led
+            show_state: false
+            icon: mdi:led-strip
+            name: Counter
+            color: auto
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+            styles:
+              card:
+                - height: 60px
+              name:
+                - font-size: 14px
+
+
+          - type: custom:button-card
             entity: light.cooker_light
             show_state: false
             icon: mdi:stove
