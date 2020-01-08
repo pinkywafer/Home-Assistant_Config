@@ -10,6 +10,14 @@ cards:
           name:
             - font-size: 14px
       - type: custom:button-card
+        entity: switch.sitting_room_tv
+        icon: mdi:television
+        styles:
+          card:
+            - height: 60px
+          name:
+            - font-size: 14px
+      - type: custom:button-card
         entity: switch.ender3
         styles:
           card:

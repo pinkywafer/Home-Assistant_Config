@@ -1,0 +1,9 @@
+switch:
+  - platform: command_line
+    switches:
+      sitting_room_tv:
+        command_on: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no pi@192.168.1.203 'echo on 0 | cec-client -s -d 1'"
+        command_off: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no pi@192.168.1.203 'echo standby 0 | cec-client -s -d 1'"
+        command_state: "tvstatus() { local RESULTS; RESULTS=$(ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no pi@192.168.1.203 \"echo pow 0 | cec-client -s -d 1 | grep -q 'power status: on'\"); echo $?; }; tvstatus"
+        value_template: '{{ value == "0" }}'
+        friendly_name: TV

@@ -46,6 +46,8 @@ google_assistant:
       room: Stairs
     switch.pc:
       room: Living Room
+    switch.sitting_room_tv:
+      room: Living Room
     switch.ender3:
       name: Ender 3
       room: Printer Shelf
