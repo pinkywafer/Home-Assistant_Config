@@ -1,0 +1,71 @@
+sensor:
+  - platform: template
+    sensors:
+      default_kitchen_effect:
+        entity_id: sensor.time
+        value_template: >-
+          {% if is_state("sensor.jenny_s_birthday", "0") or 
+              is_state("sensor.jo_s_birthday", "0") or
+              is_state("sensor.emma_s_birthday","0") -%}
+            Rainbow
+          {%- elif is_state("sensor.valentine_s_day","0") -%}
+            Lovey Day
+          {%- elif is_state("sensor.halloween", "0") -%}
+            Punkin
+          {%- elif is_state("sensor.guy_fawkes_day", "0") -%}
+            Fire
+          {%- elif is_state("sensor.st_david_s_day", "0") -%}
+            Holly Jolly
+          {%- elif is_state("sensor.feast_of_the_immaculate_conception", "0") -%}
+            Hail
+          {%- elif is_state("sensor.christmas_day","0") or 
+              is_state("sensor.easter_sunday","0") -%}
+            Rainbow
+          {%- elif states("sensor.easter_sunday") |int < 47 -%}
+            Punkin
+          {%- elif states("sensor.christmas_day") |int > 200 and 
+              states("sensor.epiphany") |int <= 12 -%}
+            Holly Jolly
+          {%- elif is_state("sensor.first_sunday_of_advent", "0")  or 
+              (states("sensor.first_sunday_of_advent") |int > 200 and 
+              states("sensor.christmas_day") |int < 28) -%}
+            Punkin
+          {%- else -%}
+            Solid Color
+          {%- endif %}
+        attribute_templates:
+          color: >-
+            {% if now().weekday() == 6 -%}
+              {"r":0,"g":255,"b"0}
+            {%- else -%}
+              {"r":255,"g":255,"b":36}
+            {%- endif %}
+          speed: >-
+            {% if is_state("sensor.default_kitchen_effect", "Rainbow") or
+              is_state("sensor.default_kitchen_effect", "Hail") -%}
+              135
+            {%- elif is_state("sensor.default_kitchen_effect", "Lovey Day") or
+              is_state("sensor.default_kitchen_effect", "Fire") -%}
+              0
+            {%- else -%}
+              180
+            {%- endif %}
+
+automation:
+  - alias: Auto set Kitchen LEDs
+    trigger:
+      - platform: state
+        entity_id: sensor.default_kitchen_effect
+    condition:
+      - condition: state
+        entity_id: light.movie_mode_lights
+        state:  'off'
+    action:
+      - service: mqtt.publish
+        data:
+          topic: "cmnd/KitchenLEDs"
+          payload_template: >-
+            {"brightness":210,
+            "effect":"{{states("sensor.default_kitchen_effect")}}",
+            "white_value":{{state_attr("sensor.default_kitchen_effect","speed")}},
+            "color": {{state_attr("sensor.default_kitchen_effect","color")}}}
