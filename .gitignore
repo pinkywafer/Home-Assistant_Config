@@ -12,6 +12,7 @@ __pycache__
 .storage
 deps
 /tts
+/ssh
 
 # Specific file ignores
 .uuid
