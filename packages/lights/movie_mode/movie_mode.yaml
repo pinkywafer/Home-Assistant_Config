@@ -1,0 +1,63 @@
+scene:
+  - name: Movie Mode
+    entities:
+      light.movie_mode_lights:
+        state: 'on'
+
+
+light:
+  - platform: template
+    lights:
+      movie_mode_lights:
+        friendly_name: "Movie Mode Light"
+        value_template: "{{ is_state('light.cooker_light', 'off') and
+          is_state('light.sink_light', 'off') and
+          is_state('light.sitting_room_light', 'off') and
+          is_state('light.vestibule_light', 'off') and
+          is_state('light.breakfast_bar_led', 'on') and
+          is_state('light.landing_light', 'on') and
+          is_state_attr('light.breakfast_bar_led','effect','Solid Color') and 
+          is_state_attr('light.breakfast_bar_led','rgb_color',(0, 0, 255)) and
+          is_state_attr('light.breakfast_bar_led','brightness',90)}}"
+        turn_on:
+          - service: light.turn_off
+            entity_id: light.sink_light,
+              light.cooker_light,
+              light.sitting_room_light,
+              light.vestibule_light
+          - delay:
+              milliseconds: 100
+          - service: light.turn_on
+            entity_id: light.breakfast_bar_led
+            data: 
+              effect: "Solid Color"
+              brightness: 90
+              rgb_color: [0, 0, 255]
+        turn_off:
+          - service: mqtt.publish
+            data:
+              topic: "cmnd/KitchenLEDs"
+              payload_template: >-
+                {"brightness":210,
+                "effect":"{{states("sensor.default_kitchen_effect")}}",
+                "white_value":{{state_attr("sensor.default_kitchen_effect","speed")}},
+                "color": {{state_attr("sensor.default_kitchen_effect","color")}}}
+          - service: light.turn_on
+            data:
+              entity_id: light.sitting_room_light
+
+automation:
+  - alias: Reset kitchen LEDs after movie mode
+    trigger:
+      - platform: state
+        entity_id: light.movie_mode_lights
+        to: 'off'
+    action:
+      - service: mqtt.publish
+        data:
+          topic: "cmnd/KitchenLEDs"
+          payload_template: >-
+            {"brightness":210,
+            "effect":"{{states("sensor.default_kitchen_effect")}}",
+            "white_value":{{state_attr("sensor.default_kitchen_effect","speed")}},
+            "color": {{state_attr("sensor.default_kitchen_effect","color")}}}

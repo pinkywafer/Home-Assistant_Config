@@ -13,6 +13,8 @@ google_assistant:
       room: Upstairs
     group.downstairslights:
       room: Downstairs
+    light.movie_mode_lights:
+      expose: false
     light.bathroom_light:
       room: Bathroom
     light.vestibule_light:
