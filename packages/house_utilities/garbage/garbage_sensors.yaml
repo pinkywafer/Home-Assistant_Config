@@ -1,10 +1,9 @@
 garbage_collection:
   sensors:
-  - name: General Waste # Every 3 weeks on Tuesday
-    frequency: "every-n-weeks"
-    collection_days: "tue"
-    period: 3
-    first_week: 2
+  - name: General Waste # Every 3 weeks
+    frequency: "every-n-days"
+    first_date: '2020-01-07'
+    period: 21
     verbose_state: true
     icon_normal: mdi:trash-can
     icon_today: mdi:trash-can
