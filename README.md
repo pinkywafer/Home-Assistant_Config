@@ -17,7 +17,7 @@ I also have containers for file sharing (nas), plex server, and a tuna convert c
 
 Description | value
 -- | --
-Number of entities | 359
+Number of entities | 360
 Number of sensors | 93
 
 
