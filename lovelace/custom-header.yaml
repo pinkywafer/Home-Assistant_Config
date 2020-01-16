@@ -3,10 +3,13 @@ hide_help: true
 hide_config: true
 button_text:
   options: >-
-      {{ time }} <ha-icon icon='mdi:weather-{{
-      states.weather.dark_sky.state }}'></ha-icon> {{
-      states.weather.dark_sky.attributes.temperature }}°
-      <br> {{ dayNumLZ }}/{{ monthNumLZ }}/{{ year4d }}
+      {{states.weather.dark_sky.attributes.temperature }}° <ha-icon icon='mdi:weather-{%
+      if is_state("weather.dark_sky", "partlycloudy") -%}partly-cloudy
+      {%- elif is_state("weather.dark_sky", "clear-night") -%}night
+      {%- else -%}{{ states('weather.dark_sky')}}
+      {%- endif %}'></ha-icon> {{ time }} 
+      <br> <ha-icon icon='{{ state_attr("sensor.season", "icon") }}''>
+      </ha-icon>{{ dayNumLZ }}/{{ monthNumLZ }}/{{ year4d }}
 chevrons: false
 tabs_color:
   alarm: >-
