@@ -2,8 +2,6 @@
   type: js
 - url: /community_plugin/vertical-stack-in-card/vertical-stack-in-card.js
   type: js
-- url: /community_plugin/lovelace-time-input-row/time-input-row.js
-  type: js
 - url: /community_plugin/lovelace-card-tools/card-tools.js
   type: js
 - url: /community_plugin/mini-media-player/mini-media-player-bundle.js
