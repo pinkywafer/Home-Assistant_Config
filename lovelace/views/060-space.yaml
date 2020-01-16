@@ -19,44 +19,43 @@ cards:
               entity: sun.sun
               attribute: next_dusk
               name: Next Dusk
-          
           - sensor.moon
-  - type: weather-forecast
-    entity: weather.dark_sky
-  
-  - type: custom:vertical-stack-in-card
-    cards:
-      - type: entities
-        entities:
-          - entity: sensor.next_launch
-            name: Next Space Launch
-      - type: custom:entity-attributes-card
-        heading_name: ' '
-        heading_state: ' '
-        filter:
-          include:
-            - sensor.next_launch.launch_time
-            - sensor.next_launch.agency
-            - sensor.next_launch.agency_country_code
-            - sensor.next_launch.stream
+      - type: weather-forecast
+        entity: weather.dark_sky
+      - break
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: entities
+            entities:
+              - entity: sensor.next_launch
+                name: Next Space Launch
+          - type: custom:entity-attributes-card
+            heading_name: ' '
+            heading_state: ' '
+            filter:
+              include:
+                - sensor.next_launch.launch_time
+                - sensor.next_launch.agency
+                - sensor.next_launch.agency_country_code
+                - sensor.next_launch.stream
 
-  - type: custom:vertical-stack-in-card
-    cards:
-      - type: entities
-        entities:
-          - entity: binary_sensor.iss
-            name: International Space Station Visible
-            icon: mdi:eye
-      - type: custom:entity-attributes-card
-        heading_name: ' '
-        heading_state: ' '
-        filter:
-          include:
-            - key: binary_sensor.iss.next_rise
-              name: Next Rise
-            - key: binary_sensor.iss.number_of_people_in_space
-              name: People in Space
-            - key: binary_sensor.iss.long
-              name: Current Lattitude
-            - key: binary_sensor.iss.lat
-              name: Current Longitude
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: entities
+            entities:
+              - entity: binary_sensor.iss
+                name: International Space Station Visible
+                icon: mdi:eye
+          - type: custom:entity-attributes-card
+            heading_name: ' '
+            heading_state: ' '
+            filter:
+              include:
+                - key: binary_sensor.iss.next_rise
+                  name: Next Rise
+                - key: binary_sensor.iss.number_of_people_in_space
+                  name: People in Space
+                - key: binary_sensor.iss.long
+                  name: Current Lattitude
+                - key: binary_sensor.iss.lat
+                  name: Current Longitude
