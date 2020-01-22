@@ -25,6 +25,8 @@ light:
               light.cooker_light,
               light.sitting_room_light,
               light.vestibule_light
+          - service: light.turn_on
+            entity_id: light.landing_light
           - delay:
               milliseconds: 100
           - service: light.turn_on
@@ -56,8 +58,7 @@ automation:
       - service: mqtt.publish
         data:
           topic: "cmnd/KitchenLEDs"
-          payload_template: >-
-            {"brightness":210,
-            "effect":"{{states("sensor.default_kitchen_effect")}}",
-            "white_value":{{state_attr("sensor.default_kitchen_effect","speed")}},
-            "color": {{state_attr("sensor.default_kitchen_effect","color")}}}
+          payload_template: >- 
+            {"brightness":210,"effect":"{{states("sensor.default_kitchen_effect")}}"
+            ,"white_value":{{state_attr("sensor.default_kitchen_effect","speed")}}
+            ,"color":{{state_attr("sensor.default_kitchen_effect","color")}}}
