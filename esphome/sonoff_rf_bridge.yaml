@@ -2,6 +2,32 @@ esphome:
   name: sonoff_rf_bridge
   platform: ESP8266
   board: esp01_1m
+  on_boot:
+    then:
+      lambda: |-
+        {
+          id(downstairs_motion).publish_state(false);
+          id(upstairs_motion).publish_state(false);
+          id(front_door).publish_state(false);
+          id(front_door_bat).publish_state(false);
+          id(back_door).publish_state(false);
+          id(back_door_bat).publish_state(false);
+          id(fridge_door).publish_state(false);
+          id(fridge_door_bat).publish_state(false);
+          id(freezer_door).publish_state(false);
+          id(freezer_door_bat).publish_state(false);
+          id(door_window).publish_state(false);
+          id(door_window_bat).publish_state(false);
+          id(kitchen_window).publish_state(false);
+          id(kitchen_window_bat).publish_state(false);
+          id(front_window).publish_state(false);
+          id(front_window_bat).publish_state(false);
+          id(bedroom_window).publish_state(false);
+          id(bedroom_window_bat).publish_state(false);
+          id(emmas_window).publish_state(false);
+          id(emmas_window_bat).publish_state(false);
+        }
+
 
 wifi:
   ssid: !secret wifi_ssid
@@ -27,6 +53,8 @@ sensor:
   - platform: uptime
     name: Sonoff RF Bridge Uptime
 
+
+
 binary_sensor:
   - platform: status
     name: Sonoff RF Bridge Status
@@ -36,6 +64,7 @@ binary_sensor:
 #***************************************************
   - platform: remote_receiver
     name: Downstairs Motion
+    id: downstairs_motion
     device_class: motion
     rc_switch_raw:
       code: '111010101000010110101100'
@@ -45,6 +74,7 @@ binary_sensor:
 
   - platform: remote_receiver
     name: Upstairs Motion
+    id: upstairs_motion
     device_class: motion
     rc_switch_raw:
       code: '001111000101100110101100'
