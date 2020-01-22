@@ -76,13 +76,5 @@ google_assistant:
       expose: false
     group.media_players_active:
       expose: false
-    group.all_automations:
-      expose: false
-    group.all_devices:
-      expose: false
     group.all_lights:
-      expose: false
-    group.all_switches:
-      expose: false
-    group.all_scripts:
       expose: false

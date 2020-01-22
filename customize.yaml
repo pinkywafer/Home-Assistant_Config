@@ -1,9 +1,3 @@
-group.all_automations:
-  hidden: false
-group.all_scripts:
-  hidden: false
-group.all_devices:
-  hidden: false
 sensor.jenny_tracker:
   entity_picture: '"/local/jenny.jpg"'
 sensor.emma_tracker:
