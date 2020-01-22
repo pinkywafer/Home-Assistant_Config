@@ -9,15 +9,18 @@ cards:
         show_state: false
         icon: mdi:fridge-outline
         state:
+          - value: 'none'
+            icon: mdi:fridge-outline
+            color: var(--paper-item-icon-color)
           - value: 'fridge'
             icon: mdi:fridge-bottom
-            color: red
+            color: var(--paper-item-icon-active-color)
           - value: 'freezer'
             icon: mdi:fridge-top
-            color: red
+            color: var(--paper-item-icon-active-color)
           - value: 'fridge and freezer'
             icon: mdi:fridge
-            color: red
+            color: var(--paper-item-icon-active-color)
         styles:
           card:
             - height: 60px
