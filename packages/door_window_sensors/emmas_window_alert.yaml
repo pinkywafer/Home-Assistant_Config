@@ -3,7 +3,7 @@ alert:
     name: Emma's window is open
     message: Emma's window is open
     done_message: Emma's window is now closed
-    entity_id: binary_sensor.emmas_window
+    entity_id: binary_sensor.emma_s_window
     state: 'on'
     repeat: 5
     skip_first: false
