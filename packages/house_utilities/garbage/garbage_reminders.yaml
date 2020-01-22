@@ -16,11 +16,11 @@ automation:
     - service: notify.html
       data_template:
         message: >
-          The {% if is_state("sensor.general_waste", "Tomorrow") and is_state("sensor.recycling", "Tomorrow") %}
+          The {% if is_state("sensor.general_waste", "tomorrow") and is_state("sensor.recycling", "Tomorrow") %}
             Rubbish and Recycling
-          {%- elif is_state("sensor.general_waste", "Tomorrow") %} 
+          {%- elif is_state("sensor.general_waste", "tomorrow") %} 
             Rubbish 
-          {%- elif is_state("sensor.recycling", "Tomorrow") %}
+          {%- elif is_state("sensor.recycling", "tomorrow") %}
             Recycling
           {%- endif %} needs to go out
         data:
@@ -31,10 +31,10 @@ automation:
     - service: notify.broadcast
       data_template:
         message: >
-          The {% if is_state("sensor.general_waste", "Tomorrow") and is_state("sensor.recycling", "Tomorrow") %}
+          The {% if is_state("sensor.general_waste", "tomorrow") and is_state("sensor.recycling", "Tomorrow") %}
             Rubbish and Recycling
-          {%- elif is_state("sensor.general_waste", "Tomorrow") %} 
+          {%- elif is_state("sensor.general_waste", "tomorrow") %} 
             Rubbish 
-          {%- elif is_state("sensor.recycling", "Tomorrow") %}
+          {%- elif is_state("sensor.recycling", "tomorrow") %}
             Recycling
           {%- endif %} needs to go out

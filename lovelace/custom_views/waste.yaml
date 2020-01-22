@@ -7,9 +7,9 @@ cards:
         show_state: true
         color: green
         state:
-          - value: 'Tomorrow'
+          - value: 'tomorrow'
             color: orange
-          - value: 'Today'
+          - value: 'today'
             color: red
         styles:
           card:
@@ -23,9 +23,9 @@ cards:
         show_state: true
         color: green
         state:
-          - value: 'Tomorrow'
+          - value: 'tomorrow'
             color: orange
-          - value: 'Today'
+          - value: 'today'
             color: red
         styles:
           card:
