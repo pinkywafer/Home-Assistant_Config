@@ -10,6 +10,8 @@ sensor:
             fridge
           {% elif is_state('binary_sensor.fridge_door','off') and is_state('binary_sensor.freezer_door','on') %}
             freezer
+          {% elif is_state('binary_sensor.fridge_door','unavailable') and is_state('binary_sensor.freezer_door','unavailable') %}
+            unavailable
           {% else %}
             none
           {% endif %}
