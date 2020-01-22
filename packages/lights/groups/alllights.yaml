@@ -1,0 +1,6 @@
+group:
+  all_lights:
+    name: All Lights
+    entities:
+      - group.upstairslights
+      - group.downstairslights
