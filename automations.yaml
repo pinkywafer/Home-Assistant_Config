@@ -1,1 +1,50 @@
-[]
+- id: '1579876677999'
+  alias: Jo's Green Switch
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.jo_s_green_switch
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - entity_id: group.downstairslights, light.landing_light
+    service: homeassistant.turn_off
+- id: '1579877911127'
+  alias: jo's red switch on
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.jo_s_red_switch
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.alarm
+    state: armed_night
+  action:
+  - data: {}
+    service: script.alarm_set_home_mode
+- id: '1579878036214'
+  alias: Jo's red switch off
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.jo_s_red_switch
+    platform: state
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.alarm
+    state: armed_home
+  action:
+  - data: {}
+    service: script.alarm_set_night_mode
+- id: '1579878341447'
+  alias: Jo's Orange Switch
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.jo_s_orange_switch
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - entity_id: light.sitting_room_light, light.sink_light, light.bathroom_light, light.landing_light
+    service: light.turn_on
