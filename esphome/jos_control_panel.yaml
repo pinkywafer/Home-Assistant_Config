@@ -23,7 +23,27 @@ ota:
 binary_sensor:
   - platform: gpio
     pin:
-      number: RX
+      number: D1
+      mode: INPUT_PULLUP
+      inverted: true
+    name: "Jo's Green switch"
+    filters:
+      - delayed_on: 10ms
+      - delayed_off: 10ms
+  
+  - platform: gpio
+    pin:
+      number: D2
+      mode: INPUT_PULLUP
+      inverted: true
+    name: "Jo's Orange switch"
+    filters:
+      - delayed_on: 10ms
+      - delayed_off: 10ms
+      
+  - platform: gpio
+    pin:
+      number: D5
       mode: INPUT_PULLUP
       inverted: true
     name: "Jo's Red switch"
@@ -33,7 +53,7 @@ binary_sensor:
     
   - platform: gpio
     pin:
-      number: D1
+      number: D6
       mode: INPUT_PULLUP
       inverted: true
     name: "Jo's Blue switch"
@@ -43,40 +63,10 @@ binary_sensor:
     
   - platform: gpio
     pin:
-      number: D2
-      mode: INPUT_PULLUP
-      inverted: true
-    name: "Jo's Green switch"
-    filters:
-      - delayed_on: 10ms
-      - delayed_off: 10ms
-    
-  - platform: gpio
-    pin:
-      number: D5
-      mode: INPUT_PULLUP
-      inverted: true
-    name: "Jo's Purple switch"
-    filters:
-      - delayed_on: 10ms
-      - delayed_off: 10ms
-    
-  - platform: gpio
-    pin:
-      number: D6
-      mode: INPUT_PULLUP
-      inverted: true
-    name: "Jo's Orange switch"
-    filters:
-      - delayed_on: 10ms
-      - delayed_off: 10ms
-    
-  - platform: gpio
-    pin:
       number: D7
       mode: INPUT_PULLUP
       inverted: true
-    name: "Jo's White switch"
+    name: "Jo's Purple switch"
     filters:
       - delayed_on: 10ms
       - delayed_off: 10ms
@@ -94,5 +84,5 @@ sensor:
 
 status_led:
   pin:
-    number: D4
+    number: RX
     inverted: true
