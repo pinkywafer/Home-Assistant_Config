@@ -13,28 +13,27 @@ automation:
         entity_id: sensor.recycling
         state:  'Tomorrow'
   action:
-    - service: notify.html
+    - service: notify.mobile_app_jenny_s_blackberry_motion
       data_template:
-        message: >
-          The {% if is_state("sensor.general_waste", "tomorrow") and is_state("sensor.recycling", "Tomorrow") %}
-            Rubbish and Recycling
-          {%- elif is_state("sensor.general_waste", "tomorrow") %} 
-            Rubbish 
-          {%- elif is_state("sensor.recycling", "tomorrow") %}
-            Recycling
+      title: Time to put the rubbish out!
+        message: >-
+          The {% if is_state("sensor.general_waste", "tomorrow") and is_state("sensor.recycling", "tomorrow") -%}
+            Rubbish and Recycling 
+          {%- elif is_state("sensor.general_waste", "tomorrow") -%}
+            Rubbish  
+          {%- elif is_state("sensor.recycling", "tomorrow") -%}
+            Recycling 
           {%- endif %} needs to go out
-        data:
-          tag: rubbish
     - condition: state
       entity_id: sensor.jenny_tracker
       state: Home
     - service: notify.broadcast
       data_template:
-        message: >
-          The {% if is_state("sensor.general_waste", "tomorrow") and is_state("sensor.recycling", "Tomorrow") %}
-            Rubbish and Recycling
-          {%- elif is_state("sensor.general_waste", "tomorrow") %} 
-            Rubbish 
-          {%- elif is_state("sensor.recycling", "tomorrow") %}
-            Recycling
+        message: >-
+          The {% if is_state("sensor.general_waste", "tomorrow") and is_state("sensor.recycling", "tomorrow") -%}
+            Rubbish and Recycling 
+          {%- elif is_state("sensor.general_waste", "tomorrow") -%}
+            Rubbish  
+          {%- elif is_state("sensor.recycling", "tomorrow") -%}
+            Recycling 
           {%- endif %} needs to go out
