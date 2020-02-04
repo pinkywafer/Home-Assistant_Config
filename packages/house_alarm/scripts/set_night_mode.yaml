@@ -2,9 +2,14 @@ script:
   alarm_set_night_mode:
     alias: Alarm in Night Mode
     sequence:
-      - condition: state
-        entity_id: alarm_control_panel.alarm
-        state: 'disarmed'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: alarm_control_panel.alarm
+            state: 'disarmed'
+          - condition: state
+            entity_id: alarm_control_panel.alarm
+            state: 'armed_home'
       - service: alarm_control_panel.alarm_arm_night
         data: 
           entity_id: alarm_control_panel.alarm
