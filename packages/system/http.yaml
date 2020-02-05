@@ -2,7 +2,7 @@ http:
   base_url: !secret base_url
   use_x_forwarded_for: true
   trusted_proxies:
-    - 172.30.33.2
+    - 172.16.0.0/12
   ip_ban_enabled: true
   login_attempts_threshold: 3
   
