@@ -84,5 +84,5 @@ sensor:
 
 status_led:
   pin:
-    number: RX
+    number: D4
     inverted: true
