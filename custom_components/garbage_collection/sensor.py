@@ -41,6 +41,9 @@ from .const import (
     CONF_EXCLUDE_DATES,
     CONF_INCLUDE_DATES,
     CONF_MOVE_COUNTRY_HOLIDAYS,
+    CONF_PROV,
+    CONF_STATE,
+    CONF_OBSERVED,
     CONF_PERIOD,
     CONF_FIRST_WEEK,
     CONF_FIRST_DATE,
@@ -139,19 +142,40 @@ class GarbageCollection(Entity):
         self.__exclude_dates = to_dates(config.get(CONF_EXCLUDE_DATES, []))
         country_holidays = config.get(CONF_MOVE_COUNTRY_HOLIDAYS)
         self.__holidays = []
+        holidays_log = ""
         if country_holidays is not None and country_holidays != "":
             today = dt_util.now().date()
             this_year = today.year
             years = [this_year, this_year + 1]
+            prov = config.get(CONF_PROV)
+            state = config.get(CONF_STATE)
+            observed = config.get(CONF_OBSERVED, True)
+            _LOGGER.debug(
+                "(%s) Country Holidays with parameters: country: %s, prov: %s, state: %s, observed: %s",
+                self.__name,
+                country_holidays,
+                prov,
+                state,
+                observed,
+            )
+            kwargs = {"years": years}
+            if state is not None and state != "":
+                kwargs["state"] = state
+            if prov is not None and prov != "":
+                kwargs["prov"] = prov
+            if observed is not None and type(observed) == bool and observed == False:
+                kwargs["observed"] = observed
+            hol = holidays.CountryHoliday(country_holidays, **kwargs).items()
             try:
-                for date, name in holidays.CountryHoliday(
-                    country_holidays, years=years
-                ).items():
+                for date, name in hol:
                     if date >= today:
                         self.__holidays.append(date)
+                        holidays_log += f"\n  {date}: {name}"
             except KeyError:
-                _LOGGER.error("Invalid country code (%s)", country_holidays)
-            _LOGGER.debug("(%s) Found these holidays %s", self.__name, self.__holidays)
+                _LOGGER.error(
+                    "(%s) Invalid country code (%s)", self.__name, country_holidays
+                )
+            _LOGGER.debug("(%s) Found these holidays: %s", self.__name, holidays_log)
         self.__period = config.get(CONF_PERIOD)
         self.__first_week = config.get(CONF_FIRST_WEEK)
         self.__first_date = to_date(config.get(CONF_FIRST_DATE))
