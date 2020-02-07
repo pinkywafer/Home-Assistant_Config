@@ -10,4 +10,3 @@ device_tracker:
     interval_seconds: 30
     new_device_defaults:
       track_new_devices: True
-      hide_if_away: False
