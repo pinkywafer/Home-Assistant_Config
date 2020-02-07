@@ -1,7 +1,6 @@
 group:
   downstairslights:
     name: Downstairs Lights
-    view: no
     entities:
     - light.sitting_room_light
     - light.sink_light

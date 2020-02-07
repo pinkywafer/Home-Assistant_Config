@@ -1,7 +1,6 @@
 group:
   emmasroomlights:
     name: Emmas room lights
-    view: no
     entities:
     - light.emmas_ceiling_light
     - light.emmas_bedside_light

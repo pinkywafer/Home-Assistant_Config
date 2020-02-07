@@ -1,7 +1,6 @@
 group:
   upstairslights:
     name: Upstairs Lights
-    view: no
     entities:
     - light.landing_light
     - group.bedroomlights
