@@ -18,6 +18,7 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 ## Some statistics about my installation:
 
 Number of entities: 367
+
 Type | Qty
 -- | --
 Alarm Control Panel | 1
