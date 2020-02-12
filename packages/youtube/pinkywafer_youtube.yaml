@@ -1,0 +1,3 @@
+sensor:
+  - platform: socialblade
+    channel_id: UC7G4tLa4Kt6A9e3hJ-HO8ng
