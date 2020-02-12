@@ -5,8 +5,10 @@ rest_command:
 automation:
   - alias: update DDNS records
     trigger:
-      platform: state
-      entity_id: sensor.myip
+      - platform: state
+        entity_id: sensor.myip
+      - platform: homeassistant
+        event: start
     condition:
     - condition: template
       value_template: >
