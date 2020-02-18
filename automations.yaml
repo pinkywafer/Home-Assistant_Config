@@ -17,7 +17,7 @@
   condition: []
   action:
   - entity_id: group.downstairslights, light.landing_light, switch.immersion_heater,
-      switch.bath_mode
+      switch.bath_mode, switch.kitchen_socket_1, switch.kitchen_socket_2
     service: homeassistant.turn_off
 - id: '1579877911127'
   alias: jo's red switch on
