@@ -1,7 +1,0 @@
-substitutions:
-  devicename: socket1
-  friendly_name: Socket 1
-  ip_address: 192.168.1.50
-  reboot_time: 5min
-
-<<: !include bseed_socket.yaml

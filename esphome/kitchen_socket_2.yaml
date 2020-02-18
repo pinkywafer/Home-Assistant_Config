@@ -1,0 +1,7 @@
+substitutions:
+  devicename: kitchen_socket_2
+  friendly_name: Kitchen Socket 2
+  ip_address: 192.168.1.51
+  reboot_time: 0s
+
+<<: !include bseed_socket.yaml
