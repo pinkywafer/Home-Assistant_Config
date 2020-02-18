@@ -1,13 +1,13 @@
 automation:
-  alias: Emma left nias house
-  trigger:
-  - entity_id: sensor.emma_tracker
-    platform: state
-    from: nia's house
-  action:
-  - data:
-      message: Emma has left Nia's House
-      data:
-        tag: emma_location
-        renotify: 1
-    service: notify.html
+  - alias: Emma left nias house
+    trigger:
+    - entity_id: person.emma_gorton
+      platform: state
+      from: nia's house
+    action:
+    - data:
+        message: Emma has left Nia's House
+        data:
+          tag: emma_location
+          renotify: 1
+      service: notify.html

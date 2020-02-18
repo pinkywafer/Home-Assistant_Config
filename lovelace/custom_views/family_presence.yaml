@@ -3,14 +3,14 @@ cards:
   - type: horizontal-stack
     cards:
       - type: custom:button-card
-        entity: sensor.jenny_tracker
+        entity: person.jenny_gorton
         entity_picture: /local/jenny.jpg
         show_state: false
         show_entity_picture: true
         show_name: false
         state:
           - operator: '!='
-            value: Home
+            value: home
             entity_picture: /local/jenny_away.jpg
         tap_action:
           action: call-service
@@ -23,7 +23,7 @@ cards:
             - height: 72px
             - width: 72px
       - type: custom:button-card
-        entity: sensor.emma_tracker
+        entity: person.emma_gorton
         entity_picture: /local/emma.jpeg
         show_state: false
         show_entity_picture: true

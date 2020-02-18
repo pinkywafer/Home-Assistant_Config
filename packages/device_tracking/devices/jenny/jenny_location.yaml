@@ -1,6 +1,6 @@
 sensor:
-  platform: google_geocode
-  name: Jenny_location
-  origin: device_tracker.jenny_gps
-  api_key: !secret google_geocode_api_key
-  options: "formatted_address"
+  - platform: google_geocode
+    name: Jenny_location
+    origin: person.jenny_gorton
+    api_key: !secret google_geocode_api_key
+    options: "formatted_address"

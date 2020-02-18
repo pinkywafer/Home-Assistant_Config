@@ -4,19 +4,21 @@ card:
   cards:
     - type: entities
       entities:
-        - entity: sensor.jenny_tracker
+        - entity: person.jenny_gorton
           type: custom:multiple-entity-row
           name: 'Phone'
           secondary_info: last-changed
           primary: 
-            entity: device_tracker.jenny_gps
-            attribute: battery_level
+            entity: sensor.jenny_s_blackberry_motion_battery
             name: Bat
             unit: '%'
+          secondary:
+            entity: sensor.jenny_s_blackberry_motion_wifi_ssid
+            name: WiFi SSID
     - type: history-graph
       entities:
-        - sensor.jenny_tracker
+        - sensor.jenny_location
     - type: map
       entities:
-        - device_tracker.jenny_gps
+        - person.jenny_gorton
 large: true
