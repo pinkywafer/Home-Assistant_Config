@@ -1,6 +1,7 @@
 substitutions:
   devicename: vestibule_light_shelly1
   friendly_name: Vestibule Light
+  $reboot_time: 0s
   ip_address: 192.168.1.21
 
 <<: !include shelly1_light.yaml

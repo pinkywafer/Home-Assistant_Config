@@ -6,6 +6,7 @@ esphome:
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_psk
+  reboot_timeout: $reboot_time
   manual_ip:
     static_ip: $ip_address
     gateway: 192.168.1.1
@@ -16,6 +17,7 @@ logger:
 
 # Enable Home Assistant API
 api:
+  reboot_timeout: $reboot_time
 
 ota:
 
@@ -28,6 +30,17 @@ binary_sensor:
       - light.toggle: light_output
     on_release:
       - light.toggle: light_output
+    on_multi_click:
+    - timing:
+        - ON for at most 0.5s
+        - OFF for at most 0.5s
+        - ON for at most 0.5s
+        - OFF for at most 0.5s
+        - ON for at most 0.5s
+        - OFF for at least 0.1s
+      then:
+        - switch.turn_on: reboot
+
   - platform: status
     name: $friendly_name Shelly1 Status
 
@@ -48,3 +61,8 @@ sensor:
     update_interval: 10s
   - platform: uptime
     name: $friendly_name Shelly1 Uptime
+
+switch:
+  - platform: restart
+    id: reboot
+    name: $friendly_name Reboot

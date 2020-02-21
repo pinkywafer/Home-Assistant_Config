@@ -1,6 +1,7 @@
 substitutions:
   devicename: sitting_room_light_shelly1
   friendly_name: Sitting Room Light
+  $reboot_time: 0s
   ip_address: 192.168.1.20
   
 <<: !include shelly1_light.yaml
