@@ -51,6 +51,7 @@ binary_sensor:
 switch:
   - platform: restart
     id: reboot
+    name: $friendly_name Reboot
 
   - platform: gpio
     pin: GPIO12
