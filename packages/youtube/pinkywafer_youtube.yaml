@@ -1,3 +1,8 @@
 sensor:
+  - platform: youtube
+    channel_id: UC_oaL6Hg23oUstRGdH0BXag
+
   - platform: socialblade
-    channel_id: UC7G4tLa4Kt6A9e3hJ-HO8ng
+    name: pinkywafer_info
+    channel_id: UC_oaL6Hg23oUstRGdH0BXag
+

@@ -1,0 +1,7 @@
+sensor:
+  - platform: youtube
+    channel_id: UCx2xTsk2RnLHU-a139MOcmA
+  
+  - platform: socialblade
+    name: kevin_oil_painting_info
+    channel_id: UCx2xTsk2RnLHU-a139MOcmA

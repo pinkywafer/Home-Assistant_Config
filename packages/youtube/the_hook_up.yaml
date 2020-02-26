@@ -1,3 +1,7 @@
 sensor:
-  platform: youtube
-  channel_id: UC2gyzKcHbYfqoXA5xbyGXtQ
+  - platform: youtube
+    channel_id: UC2gyzKcHbYfqoXA5xbyGXtQ
+  
+  - platform: socialblade
+    name: the_hook_up_info
+    channel_id: UC2gyzKcHbYfqoXA5xbyGXtQ

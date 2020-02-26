@@ -1,3 +1,7 @@
 sensor:
-  platform: youtube
-  channel_id: UCZ2Ku6wrhdYDHCaBzLaA3bw
+  - platform: youtube
+    channel_id: UCZ2Ku6wrhdYDHCaBzLaA3bw
+  
+  - platform: socialblade
+    name: frenck_info
+    channel_id: UCZ2Ku6wrhdYDHCaBzLaA3bw

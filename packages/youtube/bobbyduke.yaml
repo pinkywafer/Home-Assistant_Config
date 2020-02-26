@@ -1,0 +1,7 @@
+sensor:
+  - platform: youtube
+    channel_id: UCSC1HqVmTaE4Shn32ihbC7w
+  
+  - platform: socialblade
+    name: bobby_duke_arts_info
+    channel_id: UCSC1HqVmTaE4Shn32ihbC7w
