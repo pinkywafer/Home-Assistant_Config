@@ -1,3 +1,0 @@
-sensor:
-  platform: version
-  name: version_current
