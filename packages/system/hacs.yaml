@@ -24,6 +24,7 @@ automation:
         data:
           sticky: 'true'
           tag: update_hacs
+          color: '#ff8c00'
     - service: persistent_notification.create
       data_template:
         title: Update Home Assistant

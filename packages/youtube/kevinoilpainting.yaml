@@ -24,6 +24,7 @@ automation:
         data:
           image: "{{state_attr('sensor.kevinoilpainting','entity_picture')}}"
           tag: kevinoilpainting
+          color: 'green'
           actions:
             - action: "URI"
               title: "Watch Now"

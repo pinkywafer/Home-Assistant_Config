@@ -24,6 +24,7 @@ automation:
         data:
           image: "{{state_attr('sensor.zefrank1','entity_picture')}}"
           tag: zefrank1
+          color: 'green'
           actions:
             - action: "URI"
               title: "Watch Now"

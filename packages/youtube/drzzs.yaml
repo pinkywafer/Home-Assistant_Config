@@ -24,6 +24,7 @@ automation:
         data:
           image: "{{state_attr('sensor.drzzs','entity_picture')}}"
           tag: drzzs
+          color: 'green'
           actions:
             - action: "URI"
               title: "Watch Now"

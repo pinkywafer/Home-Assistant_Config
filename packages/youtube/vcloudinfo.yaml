@@ -24,6 +24,7 @@ automation:
         data:
           image: "{{state_attr('sensor.vcloudinfo','entity_picture')}}"
           tag: vcloudinfo
+          color: 'green'
           actions:
             - action: "URI"
               title: "Watch Now"

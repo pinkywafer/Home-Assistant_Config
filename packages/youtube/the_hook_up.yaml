@@ -24,6 +24,7 @@ automation:
         data:
           image: "{{state_attr('sensor.the_hook_up','entity_picture')}}"
           tag: the_hook_up
+          color: 'green'
           actions:
             - action: "URI"
               title: "Watch Now"

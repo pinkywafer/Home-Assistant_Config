@@ -24,6 +24,7 @@ automation:
         data:
           image: "{{state_attr('sensor.bobby_duke_arts','entity_picture')}}"
           tag: bobby_duke_arts
+          color: 'green'
           actions:
             - action: "URI"
               title: "Watch Now"
