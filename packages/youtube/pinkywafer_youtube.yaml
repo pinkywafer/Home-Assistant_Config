@@ -5,4 +5,3 @@ sensor:
   - platform: socialblade
     name: pinkywafer_info
     channel_id: UC_oaL6Hg23oUstRGdH0BXag
-
