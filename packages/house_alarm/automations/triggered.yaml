@@ -13,13 +13,15 @@ automation:
         filename: 'www/pics/sitting_room_alarm.jpg'
     - service: light.turn_on
       data: { "entity_id": "light.emma_led", "effect": "Police All" }
-    - service: notify.html
+    - service: notify.mobile_app_jenny_s_blackberry_motion
+      data_template:
+        message: 'ALARM! The alarm has been triggered: {{ states.input_text.alarm_trigger.state }}'
+        title: 'Home Alarm'
       data:
-        message: "ALARM! The alarm has been triggered: {{ states.input_text.alarm_trigger.state }}"
-        title: Home Alarm
-        data:
-          priority: high
           image: !secret alarm_picture_1
+          tag: alarm
+          color: 'red'
+          clickAction: 'lovelace/cctv'
     - service: media_player.turn_on
       entity_id: media_player.living_room_speaker
     - service: media_player.volume_set
