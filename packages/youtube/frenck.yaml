@@ -3,7 +3,7 @@ sensor:
     channel_id: UCZ2Ku6wrhdYDHCaBzLaA3bw
   
   - platform: socialblade
-    name: frenck_info
+    name: franck_nijhof_info
     channel_id: UCZ2Ku6wrhdYDHCaBzLaA3bw
 
 automation:
