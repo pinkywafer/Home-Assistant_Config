@@ -3,5 +3,5 @@ sensor:
     channel_id: UCx2xTsk2RnLHU-a139MOcmA
   
   - platform: socialblade
-    name: kevin_oil_painting_info
+    name: kevinoilpainting_info
     channel_id: UCx2xTsk2RnLHU-a139MOcmA
