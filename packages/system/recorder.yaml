@@ -1,4 +1,5 @@
 recorder:
+  db_url: !secret maria_db_url
   purge_keep_days: 2
   exclude:
     entities:
