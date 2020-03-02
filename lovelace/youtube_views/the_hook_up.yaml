@@ -1,0 +1,22 @@
+type: entities
+style: |
+  ha-card {
+    background: url('https://yt3.ggpht.com/a/AATXAJzMB7OQRpbxCaXP2p-jg3l23rEN9-9z8CoVRg=s176-c-k-c0x00ffffff-no-rj-mo');
+    background-repeat: no-repeat;
+    background-position: 50% 15%;
+    background-size: 10%;
+  }
+entities:
+  - entity: sensor.the_hook_up_info
+    type: custom:multiple-entity-row
+    name: The Hook Up
+    entities:
+      - attribute: total_views
+        name: Views
+    state_header: Subscribers
+    icon: mdi:youtube
+
+  - entity: sensor.the_hook_up
+    type: custom:multiple-entity-row
+    name: ''
+    state_header: Recent Video

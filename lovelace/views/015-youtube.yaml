@@ -1,0 +1,22 @@
+title: YouTube
+icon: mdi:youtube
+panel: true
+path: youtube
+    
+cards:
+  - type: custom:layout-card
+    layout: vertical
+    max_columns: 3
+    cards:
+      - !include ../youtube_views/pinkywafer.yaml
+      - !include ../youtube_views/drzzs.yaml
+      - !include ../youtube_views/franck_nijhof.yaml
+      - break
+      - !include ../youtube_views/the_hook_up.yaml
+      - !include ../youtube_views/vcloudinfo.yaml
+      - break
+      - !include ../youtube_views/bobby_duke_arts.yaml
+      - !include ../youtube_views/kevinoilpainting.yaml
+      - !include ../youtube_views/zefrank1.yaml
+
+

@@ -1,0 +1,22 @@
+type: entities
+style: |
+  ha-card {
+    background: url('https://yt3.ggpht.com/a/AGF-l7-HrWWiNPTnr6hPnPctcKeoVufgAxhB8vLmOA=s176-c-k-c0x00ffffff-no-rj-mo');
+    background-repeat: no-repeat;
+    background-position: 50% 15%;
+    background-size: 10%;
+  }
+entities:
+  - entity: sensor.bobby_duke_arts_info
+    type: custom:multiple-entity-row
+    name: Bobby Duke Arts
+    entities:
+      - attribute: total_views
+        name: Views
+    state_header: Subscribers
+    icon: mdi:youtube
+
+  - entity: sensor.bobby_duke_arts
+    type: custom:multiple-entity-row
+    name: ''
+    state_header: Recent Video
