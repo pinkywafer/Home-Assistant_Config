@@ -17,7 +17,7 @@ card:
             name: WiFi SSID
     - type: history-graph
       entities:
-        - sensor.jenny_location
+        - sensor.jenny_s_blackberry_motion_geocoded_location
     - type: map
       entities:
         - person.jenny_gorton

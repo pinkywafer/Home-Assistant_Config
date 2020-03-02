@@ -15,7 +15,7 @@ card:
           #  unit: '%'
     - type: history-graph
       entities:
-        - sensor.emma_location
+        #- sensor.emma_s_blackberry_dtek_geocoded_location
     - type: map
       entities:
         - person.emma_gorton

@@ -1,6 +1,0 @@
-sensor:
-  - platform: google_geocode
-    name: emma_location
-    origin: person.emma_gorton
-    api_key: !secret google_geocode_api_key
-    options: "formatted_address"
