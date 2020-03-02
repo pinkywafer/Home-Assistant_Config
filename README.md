@@ -17,14 +17,14 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Number of entities: 367
+Number of entities: 404
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 9
-Automation | 45
-Binary Sensor | 79
+Automation | 56
+Binary Sensor | 83
 Camera | 3
 Device Tracker | 20
 Group | 6
@@ -33,12 +33,12 @@ Input Datetime | 1
 Input Text | 3
 Light | 16
 Media Player | 14
-Person | 1
+Person | 3
 Scene | 1
 Script | 50
-Sensor | 95
+Sensor | 109
 Sun | 1
-Switch | 16
+Switch | 22
 Weather | 1
 Zone | 4
 
@@ -57,8 +57,6 @@ Zone | 4
 * [Calendarific](https://github.com/pinkywafer/Calendarific)
 
 * [Grocy](https://github.com/custom-components/grocy)
-
-* [Google Geocode](https://github.com/michaelmcarthur/GoogleGeocode-HASS)
 
 * [Browser mod]()
 
