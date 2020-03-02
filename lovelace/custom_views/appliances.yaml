@@ -19,6 +19,9 @@ cards:
             - font-size: 14px
       - type: custom:button-card
         entity: switch.ender3
+        hold_action:
+          action: navigate
+          navigation_path: /lovelace/ender3
         styles:
           card:
             - height: 60px
