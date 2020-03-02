@@ -1,9 +1,9 @@
 automation:
-  alias: Evening - Sitting Room light on 2 hours before sunset
-  trigger:
-  - event: sunset
-    offset: '-2:00'
-    platform: sun
-  action:
-  - service: light.turn_on
-    entity_id: light.sitting_room_light
+  - alias: Evening - Sitting Room light on 2 hours before sunset
+    trigger:
+    - event: sunset
+      offset: '-2:00'
+      platform: sun
+    action:
+    - service: light.turn_on
+      entity_id: light.sitting_room_light

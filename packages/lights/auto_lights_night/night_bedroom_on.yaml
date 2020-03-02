@@ -1,13 +1,13 @@
 automation:
-  alias: Night - Bedroom light on at 00:30
-  trigger:
-  - at: 00:30
-    platform: time
-  condition:
-  - condition: state
-    entity_id: alarm_control_panel.alarm
-    state: 'armed_away'
-  action:
-  - service: light.turn_on
-    entity_id: light.bedroom_ceiling_light
-  - service: script.emma_bedtime
+  - alias: Night - Bedroom light on at 00:30
+    trigger:
+    - at: 00:30
+      platform: time
+    condition:
+    - condition: state
+      entity_id: alarm_control_panel.alarm
+      state: 'armed_away'
+    action:
+    - service: light.turn_on
+      entity_id: light.bedroom_ceiling_light
+    - service: script.emma_bedtime

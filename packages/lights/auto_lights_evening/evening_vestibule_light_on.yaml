@@ -1,9 +1,9 @@
 automation:
-  alias: Evening - vestibule light on 1 hour before sunset
-  trigger:
-  - event: sunset
-    offset: '-1:00'
-    platform: sun
-  action:
-  - entity_id: light.vestibule_light
-    service: light.turn_on
+  - alias: Evening - vestibule light on 1 hour before sunset
+    trigger:
+    - event: sunset
+      offset: '-1:00'
+      platform: sun
+    action:
+    - entity_id: light.vestibule_light
+      service: light.turn_on

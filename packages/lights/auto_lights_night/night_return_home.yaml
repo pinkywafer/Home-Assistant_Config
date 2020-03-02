@@ -1,16 +1,16 @@
 automation:
-  alias: Night - Return home lights
-  trigger:
-  - entity_id: group.all_devices
-    from: not_home
-    platform: state
-  condition:
-  - after: 01:00
-    condition: time
-  - before: sunrise
-    condition: sun
-  action:
-  - service: light.turn_on
-    entity_id:
-    - light.vestibule_light
-    - light.sitting_room_light
+  - alias: Night - Return home lights
+    trigger:
+    - entity_id: group.all_devices
+      from: not_home
+      platform: state
+    condition:
+    - after: 01:00
+      condition: time
+    - before: sunrise
+      condition: sun
+    action:
+    - service: light.turn_on
+      entity_id:
+      - light.vestibule_light
+      - light.sitting_room_light
