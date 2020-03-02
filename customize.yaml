@@ -1,7 +1,3 @@
-sensor.jenny_tracker:
-  entity_picture: '"/local/jenny.jpg"'
-sensor.emma_tracker:
-  entity_picture: /local/emma.jpeg
 switch.PC:
   icon: mdi:desktop-classic
 device_tracker.pc_mediacenter:
@@ -10,19 +6,6 @@ device_tracker.sitting_room_speaker:
   icon: mdi:google-assistant
 device_tracker.youview_box:
   icon: mdi:television-box
-device_tracker.jenny_bt:
-  entity_picture: '"/local/jenny.jpg"'
-device_tracker.jenny_wifi:
-  entity_picture: /local/jenny.jpg
-device_tracker.jo_wifi:
-  entity_picture: /local/jo.jpg
-  friendly_name: Jo
-sensor.jenny_location:
-  entity_picture: '"/local/jenny.jpg"'
-device_tracker.jenny_gps:
-  entity_picture: /local/jenny.jpg
-device_tracker.emma_gps:
-  entity_picture: /local/emma.jpeg
 device_tracker.emma_s_room_speaker:
   icon: mdi:google-assistant
 device_tracker.bedroom_speaker:
