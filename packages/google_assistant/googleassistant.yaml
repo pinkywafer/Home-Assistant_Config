@@ -3,9 +3,6 @@ google_assistant:
   service_account: !include ../../google_service_account.json
   report_state: true
   exposed_domains:
-    - switch
-    - light
-    - group
     - script
     - scene
   entity_config:
@@ -13,39 +10,37 @@ google_assistant:
       room: Upstairs
     group.downstairslights:
       room: Downstairs
-    light.movie_mode_lights:
-      expose: false
     light.bathroom_light:
-      room: Bathroom
+      expose: true
     light.vestibule_light:
-      room: Vestibule
+      expose: true
     light.sink_light:
-      room: Kitchen
+      expose: true
     light.cooker_light:
-      room: Kitchen
+      expose: true
+    light.breakfast_bar_led:
+      expose: true
     light.sitting_room_light:
-      room: Living Room
+      expose: true
     light.emma_night_light:
       expose: true
     light.emmas_bedside_light:
-      name: Emma's Bedside Light
-      room: Emma's Room
+      expose: true
     light.emmas_ceiling_light:
-      name: Emma's Ceiling Light
-      room: Emma's Room
+      expose: true
     light.emma_led:
-      name: Emma's Den Lights
+      expose: true
+    light.emma_night_light:
+      expose: true
       room: Emma's Room
     light.bedroom_ceiling_light:
-      room: Bedroom
+      expose: true
     light.jennys_bedside_light:
-      name: Jenny's Bedside light
-      room: Bedroom
+      expose: true
     light.jos_bedside_light:
-      name: Jo's Bedside Light
-      room: Bedroom
+      expose: true
     light.landing_light:
-      room: Stairs
+      expose: true
     switch.pc:
       room: Living Room
     switch.sitting_room_tv:
@@ -56,25 +51,13 @@ google_assistant:
     switch.ender3_controls:
       name: Ender 3 Controls
       room: Printer Shelf
-    switch.3d_printer_psu:
-      expose: false
-    script.ender3_safe_power_down:
-      expose: false
-    media_player.sitting_room_speaker:
-      expose: false
-    media_player.home_group:
-      expose: false
-    group.appliances:
-      expose: false
-    group.automation:
-      expose: false
-    group.kitchenlights:
-      expose: false
-    group.bedroomlights:
-      expose: false
-    group.emmasroomlights:
-      expose: false
-    group.media_players_active:
-      expose: false
-    group.all_lights:
+    switch.immersion_heater:
+      expose: true
+    switch.bath_mode:
+      expose: true
+    switch.kitchen_socket_1:
+      expose: true
+    switch.kitchen_socket_2:
+      expose: true
+    script.alarm_notifications:
       expose: false
