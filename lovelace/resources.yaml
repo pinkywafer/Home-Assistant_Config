@@ -1,34 +1,34 @@
-- url: /community_plugin/entity-attributes-card/entity-attributes-card.js
+- url: /hacsfiles/entity-attributes-card/entity-attributes-card.js
   type: js
-- url: /community_plugin/vertical-stack-in-card/vertical-stack-in-card.js
+- url: /hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js
   type: js
-- url: /community_plugin/lovelace-card-tools/card-tools.js
+- url: /hacsfiles/lovelace-card-tools/card-tools.js
   type: js
-- url: /community_plugin/mini-media-player/mini-media-player-bundle.js
+- url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
   type: module
-- url: /community_plugin/secondaryinfo-entity-row/secondaryinfo-entity-row.js
+- url: /hacsfiles/secondaryinfo-entity-row/secondaryinfo-entity-row.js
   type: js
-- url: /community_plugin/mini-graph-card/mini-graph-card-bundle.js
+- url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
   type: module
-- url: /community_plugin/lovelace-layout-card/layout-card.js
+- url: /hacsfiles/lovelace-layout-card/layout-card.js
   type: js
-- url: /community_plugin/upcoming-media-card/upcoming-media-card.js
+- url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
   type: js
-- url: /community_plugin/lovelace-grocy-chores-card/grocy-chores-card.js
+- url: /hacsfiles/lovelace-grocy-chores-card/grocy-chores-card.js
   type: js
-- url: /community_plugin/button-card/button-card.js
+- url: /hacsfiles/button-card/button-card.js
   type: module
-- url: /community_plugin/unused-card/unused-card.js
+- url: /hacsfiles/unused-card/unused-card.js
   type: js
-- url: /community_plugin/lovelace-multiple-entity-row/multiple-entity-row.js
+- url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
   type: js
-- url: /community_plugin/weather-card/weather-card.js
+- url: /hacsfiles/weather-card/weather-card.js
   type: module
-- url: /community_plugin/simple-weather-card/simple-weather-card-bundle.js
+- url: /hacsfiles/simple-weather-card/simple-weather-card-bundle.js
   type: module
-- url: /community_plugin/lovelace-card-mod/card-mod.js
+- url: /hacsfiles/lovelace-card-mod/card-mod.js
   type: module
-- url: /community_plugin/github-card/github-card.js
+- url: /hacsfiles/github-card/github-card.js
   type: js
-- url: /community_plugin/custom-header/custom-header.js
+- url: /hacsfiles/custom-header/custom-header.js
   type: module
