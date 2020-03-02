@@ -6,6 +6,9 @@ cards:
         entity: light.stairs_led
         icon: mdi:stairs
         name: Stairs
+        tap_action:
+          action: toggle
+          haptic: light
         styles:
           card:
             - height: 60px
@@ -17,6 +20,9 @@ cards:
         show_icon: false
         show_name: false
         show_label: true
+        tap_action:
+          action: toggle
+          haptic: light
         styles:
           label:
             - color: rgb(26, 186, 146)
@@ -29,6 +35,9 @@ cards:
         entity: light.landing_light
         icon: mdi:airplane-landing
         name: Landing
+        tap_action:
+          action: toggle
+          haptic: light
         styles:
           card:
             - height: 60px
@@ -40,6 +49,9 @@ cards:
     - type: custom:button-card
       entity: group.emmasroomlights
       label: Emma's
+      tap_action:
+          action: toggle
+          haptic: light
       show_icon: false
       show_name: false
       show_label: true
@@ -62,6 +74,7 @@ cards:
           name: Bedside
           tap_action:
             action: toggle
+            haptic: light
           styles:
             card:
               - height: 60px
@@ -74,6 +87,7 @@ cards:
           name: Ceiling
           tap_action:
             action: toggle
+            haptic: light
           styles:
             card:
               - height: 60px
@@ -87,8 +101,10 @@ cards:
           color: auto
           tap_action:
             action: toggle 
+            haptic: light
           hold_action:
             action: more-info
+            haptic: success
           styles:
             card:
               - height: 60px
@@ -100,6 +116,7 @@ cards:
           name: Night Light
           tap_action:
             action: toggle
+            haptic: light
           styles:
             card:
               - height: 60px
@@ -111,6 +128,9 @@ cards:
     - type: custom:button-card
       entity: group.bedroomlights
       label: Bedroom
+      tap_action:
+          action: toggle
+          haptic: light
       show_icon: false
       show_name: false
       show_label: true
@@ -134,6 +154,7 @@ cards:
           name: Jenny
           tap_action:
             action: toggle
+            haptic: light
           styles:
             card:
               - height: 60px
@@ -146,6 +167,7 @@ cards:
           name: Ceiling
           tap_action:
             action: toggle
+            haptic: light
           styles:
             card:
               - height: 60px
@@ -158,6 +180,7 @@ cards:
           name: Jo
           tap_action:
             action: toggle 
+            haptic: light
           styles:
             card:
               - height: 60px

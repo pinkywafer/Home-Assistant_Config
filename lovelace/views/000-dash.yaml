@@ -22,6 +22,9 @@ cards:
       - type: custom:button-card
         entity: group.all_lights
         label: Lights
+        tap_action:
+          action: toggle
+          haptic: light
         show_icon: false
         show_name: false
         show_label: true

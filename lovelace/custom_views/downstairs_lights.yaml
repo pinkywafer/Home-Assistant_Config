@@ -11,6 +11,7 @@ cards:
             name: Vestibule
             tap_action:
               action: toggle
+              haptic: light
             styles:
               card:
                 - height: 60px
@@ -19,6 +20,9 @@ cards:
           - type: custom:button-card
             entity: group.downstairslights
             label: Downstairs
+            tap_action:
+              action: toggle
+              haptic: light
             show_icon: false
             show_name: false
             show_label: true
@@ -37,6 +41,7 @@ cards:
             name: Bathroom
             tap_action:
               action: toggle
+              haptic: light
             styles:
               card:
                 - height: 60px
@@ -52,6 +57,7 @@ cards:
             name: Lounge
             tap_action:
               action: toggle
+              haptic: light
             styles:
               card:
                 - height: 60px
@@ -64,6 +70,7 @@ cards:
             name: Sink
             tap_action:
               action: toggle
+              haptic: light
             styles:
               card:
                 - height: 60px
@@ -77,6 +84,7 @@ cards:
             color: auto
             tap_action:
               action: toggle
+              haptic: light
             hold_action:
               action: more-info
             styles:
@@ -93,6 +101,7 @@ cards:
             name: Cooker
             tap_action:
               action: toggle
+              haptic: light
             styles:
               card:
                 - height: 60px

@@ -5,6 +5,9 @@ cards:
       - type: custom:button-card
         entity: switch.immersion_heater
         name: Normal
+        tap_action:
+          action: toggle
+          haptic: light
         styles:
           card:
             - height: 60px
@@ -20,6 +23,9 @@ cards:
             - height: 60px
       - type: custom:button-card
         entity: switch.bath_mode
+        tap_action:
+          action: toggle
+          haptic: light
         styles:
           card:
             - height: 60px

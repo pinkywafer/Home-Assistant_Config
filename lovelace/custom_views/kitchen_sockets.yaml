@@ -3,6 +3,9 @@ cards:
   - type: custom:button-card
     entity: group.kitchen_sockets
     label: Kitchen Sockets
+    tap_action:
+      action: toggle
+      haptic: light
     show_icon: false
     show_name: false
     show_label: true
@@ -16,6 +19,7 @@ cards:
         styles:
           label:
             - color: yellow
+
   - type: horizontal-stack
     cards:
       - type: custom:button-card
@@ -25,6 +29,7 @@ cards:
         name: Cooker
         tap_action:
           action: toggle
+          haptic: light
         styles:
           name:
             - font-size: 14px
@@ -37,6 +42,7 @@ cards:
         name: 1
         tap_action:
           action: toggle
+          haptic: light
         styles:
           name:
             - font-size: 14px
@@ -47,6 +53,7 @@ cards:
         name: 2
         tap_action:
           action: toggle
+          haptic: light
         styles:
           name:
             - font-size: 14px
@@ -57,6 +64,7 @@ cards:
         name: 3
         tap_action:
           action: toggle
+          haptic: light
         styles:
           name:
             - font-size: 14px
@@ -69,6 +77,7 @@ cards:
         name: Microwave
         tap_action:
           action: toggle
+          haptic: light
         styles:
           name:
             - font-size: 14px
@@ -79,6 +88,7 @@ cards:
         name: Coffee
         tap_action:
           action: toggle
+          haptic: light
         styles:
           name:
             - font-size: 14px
@@ -90,6 +100,7 @@ cards:
         name: 4
         tap_action:
           action: toggle
+          haptic: light
         styles:
           name:
             - font-size: 14px
@@ -100,6 +111,7 @@ cards:
         name: 5
         tap_action:
           action: toggle
+          haptic: light
         styles:
           name:
             - font-size: 14px
@@ -110,6 +122,7 @@ cards:
         name: 6
         tap_action:
           action: toggle
+          haptic: light
         styles:
           name:
             - font-size: 14px
