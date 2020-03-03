@@ -24,9 +24,9 @@ automation:
           {%- elif is_state("sensor.recycling", "tomorrow") -%}
             Recycling 
           {%- endif %} needs to go out
-    - condition: state
-      entity_id: sensor.jenny_tracker
-      state: Home
+    - condition: zone
+      entity_id: person.jenny_gorton
+      zone: zone.home
     - service: notify.broadcast
       data_template:
         message: >-
