@@ -1,0 +1,34 @@
+automation:
+  - alias: Jenny phone battery warning
+    trigger:
+    - entity_id: sensor.jenny_s_blackberry_motion_battery
+      below: 15
+      platform: numeric_state
+    condition:
+      - condition: zone
+        entity_id: person.jenny_gorton
+        zone: zone.home
+      - condition: time
+        after: '10:00:00'
+        before: '23:55:00'
+    action:
+    - service: notify.broadcast
+      data:
+        message: "Remember to charge your phone Jenny, It's down to {{ states('sensor.jenny_s_blackberry_motion_battery')}} percent!"
+
+  - alias: Jenny phone battery critical
+    trigger:
+    - entity_id: sensor.jenny_s_blackberry_motion_battery
+      below: 5
+      platform: numeric_state
+    condition:
+      - condition: zone
+        entity_id: person.jenny_gorton
+        zone: zone.home
+      - condition: time
+        after: '10:00:00'
+        before: '23:55:00'
+    action:
+    - service: notify.broadcast
+      data:
+        message: "Jenny, Your phone battery is down to {{ states('sensor.jenny_s_blackberry_motion_battery')}} percent!"
