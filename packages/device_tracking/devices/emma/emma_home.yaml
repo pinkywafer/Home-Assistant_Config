@@ -1,17 +1,34 @@
 automation:
   - alias: Emma home
     trigger:
-    - platform: state
+    - platform: zone
       entity_id: person.emma_gorton
-      to: Home
+      zone: zone.home
+      event: enter
     action:
-    - service: notify.html
+    - service: notify.mobile_app_jenny_s_blackberry_motion
       data:
+        title: Emma Location
         message: Emma has arrived home
         data:
           tag: emma_location
-          renotify: 1
-          priority: high
+    - service: notify.broadcast
+      data:
+        message: 'Emma is home!'
+
+  - alias: Emma left home
+    trigger:
+    - platform: zone
+      entity_id: person.emma_gorton
+      zone: zone.home
+      event: leave
+    action:
+    - service: notify.mobile_app_jenny_s_blackberry_motion
+      data:
+        title: Emma Location
+        message: Emma has left home
+        data:
+          tag: emma_location
     - service: notify.broadcast
       data:
         message: 'Emma is home!'

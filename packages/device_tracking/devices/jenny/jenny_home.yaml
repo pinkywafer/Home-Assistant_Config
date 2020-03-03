@@ -1,9 +1,10 @@
 automation:
   - alias: Jenny home
     trigger:
-    - entity_id: person.jenny_gorton
-      to: home
-      platform: state
+    - platform: zone
+      entity_id: person.jenny_gorton
+      zone: zone.home
+      event: enter
     action:
     - service: notify.broadcast
       data:
