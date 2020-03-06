@@ -8,8 +8,10 @@ google_assistant:
   entity_config:
     group.upstairslights:
       room: Upstairs
+      expose: true
     group.downstairslights:
       room: Downstairs
+      expose: true
     light.bathroom_light:
       expose: true
     light.vestibule_light:
