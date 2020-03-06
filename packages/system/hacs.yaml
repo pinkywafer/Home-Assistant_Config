@@ -18,7 +18,7 @@ automation:
         message: >
           There are updates to {{ states("sensor.hacs") }} HACS components:
           {% for repo in state_attr("sensor.hacs","repositories") %}
-          {{repo['display_name'] }}
+            * {{repo['display_name'] }}
           {%- endfor %}
         title: HACS Components Updates Available
         data:
@@ -31,7 +31,7 @@ automation:
         message: >-
           There are updates to {{ states("sensor.hacs") }} HACS components:
           {% for repo in state_attr("sensor.hacs","repositories") %}
-          {{repo['display_name'] }}
+            * {{repo['display_name'] }}
           {%- endfor %}
         notification_id: update_hacs
 
