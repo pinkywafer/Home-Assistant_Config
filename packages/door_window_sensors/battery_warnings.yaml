@@ -16,7 +16,7 @@ automation:
       - service: persistent_notification.create
         data_template:
           title: Low Battery Warning
-          notification_id: replace_batteries
+          notification_id: battery_warning
           message: >
             Replace batteries:
             {% if is_state("binary_sensor.bedroom_window_battery", "on") %}
@@ -72,3 +72,5 @@ automation:
             {% if is_state("binary_sensor.kitchen_window_battery", "on") %}
               * Kitchen Window
             {% endif %}
+          data:
+            tag: battery_warning
