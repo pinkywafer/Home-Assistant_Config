@@ -41,12 +41,16 @@ google_assistant:
       expose: true
     switch.pc:
       room: Living Room
+      expose: true
     switch.sitting_room_tv:
       room: Living Room
+      expose: true
     switch.ender3:
+      expose: true
       name: Ender 3
       room: Printer Shelf
     switch.ender3_controls:
+      expose: true
       name: Ender 3 Controls
       room: Printer Shelf
     switch.immersion_heater:
