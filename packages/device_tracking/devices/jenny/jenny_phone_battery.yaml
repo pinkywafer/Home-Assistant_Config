@@ -8,9 +8,6 @@ automation:
       - condition: zone
         entity_id: person.jenny_gorton
         zone: zone.home
-      - condition: time
-        after: '10:00:00'
-        before: '23:55:00'
     action:
     - service: notify.broadcast
       data:
@@ -25,9 +22,6 @@ automation:
       - condition: zone
         entity_id: person.jenny_gorton
         zone: zone.home
-      - condition: time
-        after: '10:00:00'
-        before: '23:55:00'
     action:
     - service: notify.broadcast
       data:
