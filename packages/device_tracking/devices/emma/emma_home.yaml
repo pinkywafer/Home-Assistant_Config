@@ -26,9 +26,9 @@ automation:
     - service: notify.mobile_app_jenny_s_blackberry_motion
       data:
         title: Emma Location
-        message: Emma has left home
+        message: Emma has Left The House
         data:
           tag: emma_location
     - service: notify.broadcast
       data:
-        message: 'Emma is home!'
+        message: 'Emma has Left The House!'
