@@ -1,20 +1,20 @@
 automation:
-  alias: Wake Up For School
-  trigger:
-  - at: '8:00'
-    platform: time
-  condition:
-    condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
-  action:
-  - service: light.turn_on
-    entity_id:
-    - light.sitting_room_light
-    - light.sink_light
-    - light.landing_light
-    - light.emmas_ceiling_light
+  - alias: Wake Up For School
+    trigger:
+      - at: '8:00'
+        platform: time
+    condition:
+      condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+    action:
+      - service: light.turn_on
+        entity_id:
+        - light.sitting_room_light
+        - light.sink_light
+        - light.landing_light
+        - light.emmas_ceiling_light
