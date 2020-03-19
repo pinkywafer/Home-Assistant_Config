@@ -1,2 +1,12 @@
 lovelace:
   mode: yaml
+  resources: !include ../../lovelace/resources.yaml
+  
+  dashboards:
+    lovelace-generated: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: notexist.yaml
+      title: Generated
+      icon: mdi:tools
+      show_in_sidebar: true
+      require_admin: true

@@ -1,0 +1,187 @@
+type: custom:vertical-stack-in-card
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        entity: light.stairs_led
+        icon: mdi:stairs
+        name: Stairs
+        tap_action:
+          action: toggle
+          haptic: light
+        styles:
+          card:
+            - height: 60px
+          name:
+            - font-size: 14px
+      - type: custom:button-card
+        entity: group.upstairslights
+        label: Upstairs
+        show_icon: false
+        show_name: false
+        show_label: true
+        tap_action:
+          action: toggle
+          haptic: light
+        styles:
+          label:
+            - color: rgb(26, 186, 146)
+        state:
+          - value: 'on'
+            styles:
+              label:
+                - color: yellow
+      - type: custom:button-card
+        entity: light.landing_light
+        icon: mdi:airplane-landing
+        name: Landing
+        tap_action:
+          action: toggle
+          haptic: light
+        styles:
+          card:
+            - height: 60px
+          name:
+            - font-size: 14px
+  - type: vertical-stack
+    cards:
+      #- type: divider
+      - type: custom:button-card
+        entity: group.emmasroomlights
+        label: Emma's
+        tap_action:
+          action: toggle
+          haptic: light
+        show_icon: false
+        show_name: false
+        show_label: true
+        styles:
+          label:
+            - color: rgb(26, 186, 146)
+          card:
+            - height: 30px
+        state:
+          - value: 'on'
+            styles:
+              label:
+                - color: yellow
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: light.emmas_bedside_light
+            show_state: false
+            icon: mdi:wall-sconce
+            name: Bedside
+            tap_action:
+              action: toggle
+              haptic: light
+            styles:
+              card:
+                - height: 60px
+              name:
+                - font-size: 14px
+          - type: custom:button-card
+            entity: light.emmas_ceiling_light
+            show_state: false
+            icon: mdi:ceiling-light
+            name: Ceiling
+            tap_action:
+              action: toggle
+              haptic: light
+            styles:
+              card:
+                - height: 60px
+              name:
+                - font-size: 14px
+          - type: custom:button-card
+            entity: light.emma_led
+            show_state: false
+            icon: mdi:led-strip
+            name: Den
+            color: auto
+            tap_action:
+              action: toggle 
+              haptic: light
+            hold_action:
+              action: more-info
+              haptic: success
+            styles:
+              card:
+                - height: 60px
+              name:
+                - font-size: 14px
+          - type: custom:button-card
+            entity: light.emma_night_light
+            icon: mdi:hotel
+            name: Night Light
+            tap_action:
+              action: toggle
+              haptic: light
+            styles:
+              card:
+                - height: 60px
+              name:
+                - font-size: 14px
+  - type: vertical-stack
+    cards:
+    #- type: divider
+      - type: custom:button-card
+        entity: group.bedroomlights
+        label: Bedroom
+        tap_action:
+            action: toggle
+            haptic: light
+        show_icon: false
+        show_name: false
+        show_label: true
+        styles:
+          label:
+            - color: rgb(26, 186, 146)
+          card:
+            - height: 30px
+        state:
+          - value: 'on'
+            styles:
+              label:
+                - color: yellow
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            entity: light.jennys_bedside_light
+            show_state: false
+            icon: mdi:wall-sconce
+            name: Jenny
+            tap_action:
+              action: toggle
+              haptic: light
+            styles:
+              card:
+                - height: 60px
+              name:
+                - font-size: 14px
+          - type: custom:button-card
+            entity: light.bedroom_ceiling_light
+            show_state: false
+            icon: mdi:ceiling-light
+            name: Ceiling
+            tap_action:
+              action: toggle
+              haptic: light
+            styles:
+              card:
+                - height: 60px
+              name:
+                - font-size: 14px
+          - type: custom:button-card
+            entity: light.jos_bedside_light
+            show_state: false
+            icon: mdi:wall-sconce
+            name: Jo
+            tap_action:
+              action: toggle 
+              haptic: light
+            styles:
+              card:
+                - height: 60px
+              name:
+                - font-size: 14px

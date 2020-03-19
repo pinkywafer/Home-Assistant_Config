@@ -1,4 +1,3 @@
-resources: !include lovelace/resources.yaml
 title: Masarn Goch
-custom_header: !include lovelace/custom-header.yaml
-views: !include_dir_list lovelace/views
+custom_header: !include lovelace/main/custom-header.yaml
+views: !include_dir_list lovelace/main/views

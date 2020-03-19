@@ -1,0 +1,24 @@
+title: Emma
+large: true
+card:
+  type: custom:vertical-stack-in-card
+  cards:
+    - type: entities
+      entities:
+        - entity: person.emma_gorton
+          type: custom:multiple-entity-row
+          name: 'Phone'
+          secondary_info: last-changed
+          entities: 
+            - entity: sensor.emma_s_blackberry_dtek50_battery_level
+              name: Bat
+              unit: '%'
+            - entity: sensor.emma_s_blackberry_dtek50_wifi_connection
+              name: WiFi SSID
+            - entity: sensor.emma_s_blackberry_dtek50_geocoded_location
+    - type: history-graph
+      entities:
+        - sensor.emma_s_blackberry_dtek50_geocoded_location
+    - type: map
+      entities:
+        - person.emma_gorton

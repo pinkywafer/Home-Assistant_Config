@@ -1,4 +1,5 @@
 title: Jenny
+large: true
 card:
   type: custom:vertical-stack-in-card
   cards:
@@ -8,17 +9,16 @@ card:
           type: custom:multiple-entity-row
           name: 'Phone'
           secondary_info: last-changed
-          primary: 
-            entity: sensor.jenny_s_blackberry_motion_battery
-            name: Bat
-            unit: '%'
-          secondary:
-            entity: sensor.jenny_s_blackberry_motion_wifi_ssid
-            name: WiFi SSID
+          entities: 
+            - entity: sensor.jenny_s_blackberry_motion_battery
+              name: Bat
+              unit: '%'
+            - entity: sensor.jenny_s_blackberry_motion_wifi_ssid
+              name: WiFi SSID
+            - entity: sensor.jenny_s_blackberry_motion_geocoded_location
     - type: history-graph
       entities:
         - sensor.jenny_s_blackberry_motion_geocoded_location
     - type: map
       entities:
         - person.jenny_gorton
-large: true

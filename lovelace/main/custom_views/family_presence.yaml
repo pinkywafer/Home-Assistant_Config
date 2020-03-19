@@ -30,7 +30,7 @@ cards:
         show_name: false
         state:
           - operator: '!='
-            value: Home
+            value: home
             entity_picture: /local/emma_away.jpeg
         tap_action:
           action: call-service
