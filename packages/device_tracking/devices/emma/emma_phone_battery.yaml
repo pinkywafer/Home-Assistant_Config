@@ -1,0 +1,11 @@
+automation:
+  - alias: Emma phone battery warning
+    trigger:
+    - entity_id: sensor.emma_s_blackberry_dtek50_battery_level
+      below: 15
+      platform: numeric_state
+    action:
+      - service: notify.mobile_app_emma_s_blackberry_dtek_50
+        data:
+          message: Charge your phone! you only have {{states('sensor.emma_s_blackberry_dtek50_battery_level')}}% left
+          title: Charge Battery
