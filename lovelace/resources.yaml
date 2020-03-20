@@ -1,27 +1,27 @@
 - url: /hacsfiles/entity-attributes-card/entity-attributes-card.js
-  type: js
+  type: module
 - url: /hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js
-  type: js
+  type: module
 - url: /hacsfiles/lovelace-card-tools/card-tools.js
-  type: js
+  type: module
 - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
   type: module
 - url: /hacsfiles/secondaryinfo-entity-row/secondaryinfo-entity-row.js
-  type: js
+  type: module
 - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
   type: module
 - url: /hacsfiles/lovelace-layout-card/layout-card.js
-  type: js
+  type: module
 - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
-  type: js
+  type: module
 - url: /hacsfiles/lovelace-grocy-chores-card/grocy-chores-card.js
-  type: js
+  type: module
 - url: /hacsfiles/button-card/button-card.js
   type: module
 - url: /hacsfiles/unused-card/unused-card.js
-  type: js
+  type: module
 - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
-  type: js
+  type: module
 - url: /hacsfiles/weather-card/weather-card.js
   type: module
 - url: /hacsfiles/simple-weather-card/simple-weather-card-bundle.js
@@ -29,6 +29,6 @@
 - url: /hacsfiles/lovelace-card-mod/card-mod.js
   type: module
 - url: /hacsfiles/github-card/github-card.js
-  type: js
+  type: module
 - url: /hacsfiles/custom-header/custom-header.js
   type: module
