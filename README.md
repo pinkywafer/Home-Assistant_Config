@@ -17,16 +17,16 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Number of entities: 404
+Number of entities: 403
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
-Alert | 9
-Automation | 56
+Alert | 0
+Automation | 58
 Binary Sensor | 83
 Camera | 3
-Device Tracker | 20
+Device Tracker | 22
 Group | 6
 Input Boolean | 1
 Input Datetime | 1
@@ -36,7 +36,7 @@ Media Player | 14
 Person | 3
 Scene | 1
 Script | 50
-Sensor | 109
+Sensor | 112
 Sun | 1
 Switch | 22
 Weather | 1
@@ -52,11 +52,9 @@ Zone | 4
 
 * [Breaking Changes](https://github.com/custom-components/breaking_changes)
 
-* [HACS (Home Assistant Community Store)](https://hacs.xyz)
+* [HACS (Home Assistant Community Store)](https://hacs.xyz/docs/configuration/start)
 
 * [Calendarific](https://github.com/pinkywafer/Calendarific)
-
-* [Grocy](https://github.com/custom-components/grocy)
 
 * [Browser mod]()
 
