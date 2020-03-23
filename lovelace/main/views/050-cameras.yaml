@@ -3,14 +3,6 @@ icon: mdi:cctv
 path: cctv
 cards:
   - type: picture-glance
-    title: Vestibule
-    entities:
-      - entity: light.vestibule_light
-        icon: mdi:glassdoor
-      - binary_sensor.vestibule_motion
-    camera_image: camera.vestibule_screen_camera
-
-  - type: picture-glance
     title: Sitting Room
     entities:
       - entity: light.sitting_room_light

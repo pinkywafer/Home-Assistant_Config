@@ -17,7 +17,6 @@ cards:
               - device_tracker.sitting_room_speaker
               - device_tracker.emma_s_room_speaker
               - device_tracker.bedroom_speaker
-              - device_tracker.vestibule_panel
               - device_tracker.emma_led
               - device_tracker.pc_mediacenter
               - device_tracker.tv_wifi

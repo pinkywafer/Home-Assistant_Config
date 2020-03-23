@@ -10,7 +10,5 @@ device_tracker.emma_s_room_speaker:
   icon: mdi:google-assistant
 device_tracker.bedroom_speaker:
   icon: mdi:google-assistant
-device_tracker.vestibule_panel:
-  icon: mdi:cellphone
 device_tracker.emma_led:
   icon: mdi:led-strip

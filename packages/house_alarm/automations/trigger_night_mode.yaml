@@ -52,9 +52,9 @@ automation:
     - platform: state
       entity_id: binary_sensor.downstairs_motion
       to: 'on'
-    - platform: state
-      entity_id: binary_sensor.vestibule_motion
-      to: 'on'
+    #- platform: state
+    #  entity_id: binary_sensor.vestibule_motion
+    #  to: 'on'
     condition:
     - condition: state
       entity_id: alarm_control_panel.alarm
