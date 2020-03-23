@@ -14,8 +14,6 @@
   type: module
 - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
   type: module
-- url: /hacsfiles/lovelace-grocy-chores-card/grocy-chores-card.js
-  type: module
 - url: /hacsfiles/button-card/button-card.js
   type: module
 - url: /hacsfiles/unused-card/unused-card.js

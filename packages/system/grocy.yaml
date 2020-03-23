@@ -1,5 +1,0 @@
-grocy:
-  url: !secret grocy_url
-  api_key: !secret grocy_api_key
-  sensor:
-    - enabled: true
