@@ -7,6 +7,6 @@ device_tracker:
       - !secret dev_hassio_ip
       - !secret pc_ip
     home_interval: 3
-    interval_seconds: 30
+    interval_seconds: 60
     new_device_defaults:
       track_new_devices: True
