@@ -17,16 +17,16 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Number of entities: 403
+Number of entities: 406
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 0
-Automation | 58
+Automation | 59
 Binary Sensor | 83
 Camera | 3
-Device Tracker | 22
+Device Tracker | 23
 Group | 6
 Input Boolean | 1
 Input Datetime | 1
@@ -36,7 +36,7 @@ Media Player | 14
 Person | 3
 Scene | 1
 Script | 50
-Sensor | 112
+Sensor | 114
 Sun | 1
 Switch | 22
 Weather | 1
