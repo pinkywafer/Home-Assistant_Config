@@ -43,9 +43,9 @@ cards:
             - height: 60px
           name:
             - font-size: 14px
+  - type: divider
   - type: vertical-stack
     cards:
-      #- type: divider
       - type: custom:button-card
         entity: group.emmasroomlights
         label: Emma's
@@ -122,9 +122,9 @@ cards:
                 - height: 60px
               name:
                 - font-size: 14px
+  - type: divider
   - type: vertical-stack
     cards:
-    #- type: divider
       - type: custom:button-card
         entity: group.bedroomlights
         label: Bedroom
