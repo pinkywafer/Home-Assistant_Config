@@ -2,7 +2,6 @@ title: 3D Printer
 icon: mdi:printer-3d
 panel: true
 path: ender3
-
 cards:
   - type: custom:layout-card
     layout: vertical
