@@ -18,20 +18,21 @@ automation:
         message: >
           There are updates to {{ states("sensor.hacs") }} HACS components:
           {% for repo in state_attr("sensor.hacs","repositories") %}
-            * {{repo['display_name'] }}
+            * {{repo['display_name'] }} {{ repo['installed version'] }} -> {{ repo['available version'] }}
           {%- endfor %}
         title: HACS Components Updates Available
         data:
           sticky: 'true'
           tag: update_hacs
           color: '#ff8c00'
+          clickAction: /hacs/installed
     - service: persistent_notification.create
       data_template:
         title: Update Home Assistant
         message: >-
           There are updates to {{ states("sensor.hacs") }} HACS components:
           {% for repo in state_attr("sensor.hacs","repositories") %}
-            * {{repo['display_name'] }}
+            * **{{repo['display_name'] }}** _{{ repo['installed version'] }}_ -> _{{ repo['available version'] }}_
           {%- endfor %}
         notification_id: update_hacs
 
