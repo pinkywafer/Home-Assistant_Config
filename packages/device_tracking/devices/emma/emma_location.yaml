@@ -1,0 +1,10 @@
+sensor:
+  - platform: template
+    sensors:
+      emma_location:
+        value_template: >-
+          {% if is_state("device_tracker.emma_s_blackberry_dtek50", "not_home") -%}
+            {{ states("sensor.emma_s_blackberry_dtek50_geocoded_location") }}
+          {%- else -%}
+            {{ states("device_tracker.emma_s_blackberry_dtek50") }}
+          {%- endif %}
