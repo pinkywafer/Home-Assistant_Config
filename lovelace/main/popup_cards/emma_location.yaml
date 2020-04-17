@@ -1,24 +1,54 @@
+deviceID:
+  - this
 title: Emma
 large: true
 card:
-  type: custom:vertical-stack-in-card
+  type: 'custom:layout-card'
+  layout: vertical
+  max_columns: 2
   cards:
-    - type: entities
-      entities:
-        - entity: person.emma_gorton
-          type: custom:multiple-entity-row
-          name: 'Phone'
-          secondary_info: last-changed
-          entities: 
-            - entity: sensor.emma_s_blackberry_dtek50_battery_level
-              name: Bat
-              unit: '%'
-            - entity: sensor.emma_s_blackberry_dtek50_wifi_connection
-              name: WiFi SSID
-            - entity: sensor.emma_s_blackberry_dtek50_geocoded_location
-    - type: history-graph
-      entities:
-        - sensor.emma_s_blackberry_dtek50_geocoded_location
+    - type: custom:vertical-stack-in-card
+      cards:
+        - type: entities
+          entities:
+            - entity: sensor.emma_location
+              name: Location
+            - type: 'custom:multiple-entity-row'
+              entity: person.emma_gorton
+              icon: 'mdi:cellphone'
+              name: Phone
+              secondary_info: last-changed
+              show_state: false
+              entities:
+                - entity: sensor.emma_s_blackberry_dtek50_battery_level
+                  name: Bat
+                  unit: '%'
+                - attribute: is_charging
+                  entity: sensor.emma_s_blackberry_dtek50_battery_level
+                  name: On Charge
+                - entity: sensor.emma_s_blackberry_dtek50_wifi_connection
+                  name: WiFi SSID
+        - type: history-graph
+          hours_to_show: 10
+          refresh_interval: 0
+          entities:
+            - entity: sensor.emma_location
+    - break
     - type: map
+      hours_to_show: 4
+      dark_mode: false
+      default_zoom: 14
       entities:
-        - person.emma_gorton
+        - entity: device_tracker.emma_s_blackberry_dtek50
+    - break
+    - type: 'custom:button-card'
+      name: Update Location
+      show_icon: false
+      tap_action:
+        action: call-service
+        service: notify.mobile_app_jenny_s_blackberry_motion
+        service_data:
+          message: request_location_update
+        styles:
+          card:
+            - height: 40px
