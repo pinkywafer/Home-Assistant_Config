@@ -113,8 +113,22 @@ cards:
                       - height: 80px
                 - type: custom:button-card
                   entity: sensor.ender3_time_elapsed
+                  label: >
+                    [[[
+                      var totalSeconds = entity.state;
+                      if (!isNaN(totalSeconds)) {
+                        var hours = Math.floor(totalSeconds / 3600);
+                        totalSeconds %= 3600;
+                        var minutes = (Math.floor(totalSeconds / 60)).toLocaleString(undefined, {minimumIntegerDigits: 2});
+                        var seconds = (totalSeconds % 60).toLocaleString(undefined, {minimumIntegerDigits: 2});
+                        return hours + ":" + minutes + ":" + seconds;
+                      } else {
+                        return "Unknown";
+                      }
+                    ]]]
+                  show_label: true
                   show_name: false
-                  show_state: true
+                  show_state: false
                   state:
                     - value: 'unknown'
                       color: grey
@@ -123,8 +137,22 @@ cards:
                       - height: 80px
                 - type: custom:button-card
                   entity: sensor.ender3_time_remaining
+                  label:  >
+                    [[[
+                      var totalSeconds = entity.state;
+                      if (!isNaN(totalSeconds)) {
+                        var hours = Math.floor(totalSeconds / 3600);
+                        totalSeconds %= 3600;
+                        var minutes = (Math.floor(totalSeconds / 60)).toLocaleString(undefined, {minimumIntegerDigits: 2});
+                        var seconds = (totalSeconds % 60).toLocaleString(undefined, {minimumIntegerDigits: 2});
+                        return hours + ":" + minutes + ":" + seconds;
+                      } else {
+                        return "Unknown";
+                      }
+                    ]]]
+                  show_label: true
                   show_name: false
-                  show_state: true
+                  show_state: false
                   state:
                     - value: 'unknown'
                       color: grey
