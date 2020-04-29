@@ -1,6 +1,6 @@
 sensor:
   - platform: github
-    access_token: !secret hacs_token
+    access_token: !secret github_token
     repositories:
       - path: 'pinkywafer/PinkyLEDs'
       - path: 'pinkywafer/Anniversaries'
