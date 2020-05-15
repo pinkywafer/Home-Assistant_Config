@@ -1,5 +1,5 @@
 hacs:
-  token: !secret github_token
+  token: !secret hacs_github_token
   sidepanel_title: HACS
   sidepanel_icon: hacs:hacs
 
