@@ -10,7 +10,7 @@ automation:
     at: "15:50:00"
   condition:
     - condition: state
-      entity_id: sensor.jenny_jo_s_wedding_anniversary
+      entity_id: sensor.anniversary_jenny_jo_s_wedding_anniversary
       state:  '0'
   action:
     - service: notify.html
