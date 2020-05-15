@@ -1,0 +1,23 @@
+{
+    "config": {
+        "abort": {
+            "no_holidays_found": "Geen feestdagen gevonden.  Zorg ervoor dat u Calendarific heeft geconfigureerd met een geldige land en api-sleutel. [Lees de instructies](https://github.com/pinkywafer/Calendarific)."
+        },
+        "title": "Calendarific",
+        "step": {
+            "user": {
+                "title": "Calendarific",
+                "description": "Voer de sensornaam in en configureer sensorparameters. Meer info op https://github.com/pinkywafer/Calendarific",
+                "data": {
+                    "name": "Vriendelijke naam (Laat leeg om de naam van de feestdag te gebruiken)",
+                    "holiday": "Feestdag",
+                    "icon_normal": "Icoon",
+                    "icon_today": "Icoon als de feestdag vandaag is",
+                    "days_as_soon": "Aantal dagen vanaf iets binnenkort is",
+                    "icon_soon": "Icoon als een verjaardag binnenkort is",
+                    "date_format": "Datum formaat (see http://strftime.org/)"
+                }
+            }
+        }
+    }
+}
