@@ -1,0 +1,9 @@
+readme:
+
+automation:
+  - alias: Generate readme
+    trigger:
+      - platform: homeassistant
+        event: start
+    action:
+      service: readme.generate
