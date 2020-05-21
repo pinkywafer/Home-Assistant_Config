@@ -8,6 +8,8 @@ homeassistant:
   time_zone: Europe/London
   customize: !include customize.yaml
   packages: !include_dir_named packages
+  external_url: !secret external_url
+  internal_url: !secret internal_url
     
 # Enables the frontend
 frontend:
