@@ -14,18 +14,24 @@ from homeassistant.const import CONF_NAME, WEEKDAYS, CONF_ENTITIES
 _LOGGER = logging.getLogger(__name__)
 
 
-def clean_optional(dict, key):
-    """Remove optional keys before update"""
-    if key in dict:
-        del dict[key]
-
-
 class garbage_collection_options:
     def __init__(self, unique_id):
         self._data = {}
         self._data["unique_id"] = unique_id
         self.errors = {}
         self.data_schema = {}
+        
+    def update_data(self, user_input, step):
+        self._data.update(user_input)
+        # Remove empty fields
+        items = {
+            key: value
+            for (key, value) in CONFIGURATION.options.items()
+            if ("step" in value and value["step"] == step)
+        }
+        for key, value in items.items():
+            if key in self._data and (key not in user_input or user_input[key] == ""):
+                del self._data[key]
 
     def step1_user_init(self, user_input, defaults=None):
         """
@@ -39,7 +45,6 @@ class garbage_collection_options:
             try:
                 config = validation(user_input)  # pylint: disable=W0612
             except vol.Invalid as exception:
-                # _LOGGER.debug(exception)
                 e = str(exception)
                 if (
                     CONF_ICON_NORMAL in e
@@ -50,13 +55,15 @@ class garbage_collection_options:
                 elif CONF_EXPIRE_AFTER in e:
                     self.errors["base"] = "time"
                 else:
+                    _LOGGER.error(f"Unknown exception: {exception}")
                     self.errors["base"] = "value"
                 CONFIGURATION.set_defaults(1, user_input)
             if self.errors == {}:
                 # Valid input - go to the next step!
-                self._data.update(user_input)
+                self.update_data(user_input, 1)
                 return True
         elif defaults is not None:
+            CONFIGURATION.reset_defaults()
             CONFIGURATION.set_defaults(1, defaults)
         self.data_schema = CONFIGURATION.compile_config_flow(step=1)
         return False
@@ -79,8 +86,8 @@ class garbage_collection_options:
             )
             try:
                 updates = validation(user_input)
-            except vol.Invalid as e:  # pylint: disable=W0612
-                # _LOGGER.debug(e)
+            except vol.Invalid as exception:  # pylint: disable=W0612
+                # _LOGGER.debug(exception)
                 if self._data[CONF_FREQUENCY] in ANNUAL_FREQUENCY:
                     self.errors["base"] = "month_day"
                 else:
@@ -90,7 +97,7 @@ class garbage_collection_options:
                 # Remember step2 values
                 if self._data[CONF_FREQUENCY] in GROUP_FREQUENCY:
                     updates[CONF_ENTITIES] = string_to_list(user_input[CONF_ENTITIES])
-                self._data.update(updates)
+                self.update_data(updates, 2)
                 return True
         elif defaults is not None:
             CONFIGURATION.set_defaults(2, defaults)
@@ -127,14 +134,15 @@ class garbage_collection_options:
             validation = vol.Schema(validation_schema)
             try:
                 updates = validation(updates)
-            except vol.Invalid as e:  # pylint: disable=W0612
-                # _LOGGER.debug(e)
+            except vol.Invalid as exception:  # pylint: disable=W0612
+                _LOGGER.error(f"Unknown exception: {exception}")
                 self.errors["base"] = "value"
+
             if len(updates[CONF_COLLECTION_DAYS]) == 0:
                 self.errors["base"] = "days"
             if self.errors == {}:
                 # Remember values
-                self._data.update(updates)
+                self.update_data(updates, 3)
                 return True
         elif defaults is not None:
             CONFIGURATION.set_defaults(3, defaults)
@@ -186,15 +194,16 @@ class garbage_collection_options:
             try:
                 updates = validation(updates)
             except vol.Invalid as exception:  # pylint: disable=W0612
-                # _LOGGER.debug(exception)
                 e = str(exception)
-                self.errors["base"] = "value"
                 if (
                     CONF_INCLUDE_DATES in e
                     or CONF_EXCLUDE_DATES in e
                     or CONF_FIRST_DATE in e
                 ):
                     self.errors["base"] = "date"
+                else:
+                    self.errors["base"] = "value"
+                    _LOGGER.error(f"Unknown exception: {exception}")
             if self._data[CONF_FREQUENCY] in MONTHLY_FREQUENCY:
                 if self._data[CONF_FORCE_WEEK_NUMBERS]:
                     if len(updates[CONF_WEEK_ORDER_NUMBER]) == 0:
@@ -203,7 +212,7 @@ class garbage_collection_options:
                     if len(updates[CONF_WEEKDAY_ORDER_NUMBER]) == 0:
                         self.errors["base"] = CONF_WEEKDAY_ORDER_NUMBER
             if self.errors == {}:
-                self._data.update(updates)
+                self.update_data(updates, 4)
                 if CONF_FORCE_WEEK_NUMBERS in self._data:
                     if self._data[CONF_FORCE_WEEK_NUMBERS]:
                         if CONF_WEEKDAY_ORDER_NUMBER in self._data:
@@ -367,6 +376,7 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
         """
         O P T I O N S   S T E P   1
         """
+        CONFIGURATION.clean(self.config_entry.options)
         next_step = self.options.step1_user_init(user_input, self.config_entry.options)
         if next_step:
             if self.options.frequency in ANNUAL_GROUP_FREQUENCY:
