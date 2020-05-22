@@ -1,0 +1,74 @@
+substitutions:
+  devicename: front_sensor
+  friendly_name: Front Sensor
+  ip_address: 192.168.1.230
+
+esphome:
+  name: $devicename
+  platform: ESP32
+  board: esp-wrover-kit
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_psk
+  manual_ip:
+    static_ip: $ip_address
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+ 
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+binary_sensor:
+  - platform: gpio
+    pin: GPIO33
+    name: $friendly_name PIR
+    device_class: motion
+    id: motion
+    filters:
+      delayed_off: 4s
+#    on_press:
+#      - display.page.show: icon
+#      - component.update: lcd
+#    on_release:
+#      - display.page.show: blank
+#      - component.update: lcd
+    
+  - platform: status
+    name: $friendly_name Status
+  
+sensor:
+  - platform: wifi_signal
+    name: $friendly_name WiFi Signal
+    update_interval: 10s
+  
+  - platform: uptime
+    name: $friendly_name Uptime
+
+esp32_camera:
+  name: $friendly_name Camera
+  external_clock:
+    pin: GPIO32
+    frequency: 20MHz
+  i2c_pins:
+    sda: GPIO13
+    scl: GPIO12
+  data_pins: [GPIO5, GPIO14, GPIO4, GPIO15, GPIO18, GPIO23, GPIO36, GPIO39]
+  vsync_pin: GPIO27
+  href_pin: GPIO25
+  pixel_clock_pin: GPIO19
+  power_down_pin: GPIO26
+  resolution: 800x600
+  jpeg_quality: 10
+  vertical_flip: false
+  horizontal_mirror: false
+
+switch:
+  - platform: restart
+    name: $friendly_name Restart
+    
