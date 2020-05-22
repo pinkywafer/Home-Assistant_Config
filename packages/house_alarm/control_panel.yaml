@@ -4,13 +4,11 @@ alarm_control_panel:
     code: !secret alarm_code
     trigger_time: 300
     armed_home:
-      pending_time: 0
+      arming_time: 0
       delay_time: 0
     armed_away:
-      pending_time: 30
+      arming_time: 30
       delay_time: 30
     armed_night:
-      pending_time: 0
+      arming_time: 0
       delay_time: 0
-    triggered:
-      pending_time: 0
