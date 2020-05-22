@@ -28,7 +28,7 @@
   type: module
 - url: /hacsfiles/github-card/github-card.js
   type: module
-- url: /hacsfiles/custom-header/custom-header.js
-  type: module
+#- url: /hacsfiles/custom-header/custom-header.js
+#  type: module
 - url: /hacsfiles/lovelace-card-preloader/lovelace-card-preloader.js
   type: module
