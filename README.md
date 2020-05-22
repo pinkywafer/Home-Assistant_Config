@@ -17,7 +17,7 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Number of entities: 407
+Number of entities: 410
 
 Type | Qty
 -- | --
@@ -25,18 +25,18 @@ Alarm Control Panel | 1
 Alert | 0
 Automation | 60
 Binary Sensor | 82
-Camera | 3
-Device Tracker | 23
+Camera | 4
+Device Tracker | 24
 Group | 6
 Input Boolean | 1
 Input Datetime | 1
 Input Text | 3
 Light | 15
-Media Player | 13
+Media Player | 14
 Person | 3
 Scene | 1
 Script | 50
-Sensor | 112
+Sensor | 113
 Sun | 1
 Switch | 22
 Weather | 1
@@ -52,7 +52,7 @@ Zone | 4
 
 * [Breaking Changes](https://github.com/custom-components/breaking_changes)
 
-* [HACS (Home Assistant Community Store)](https://hacs.xyz/docs/configuration/start)
+* [HACS](https://hacs.xyz/docs/configuration/start)
 
 * [Calendarific](https://github.com/pinkywafer/Calendarific)
 
