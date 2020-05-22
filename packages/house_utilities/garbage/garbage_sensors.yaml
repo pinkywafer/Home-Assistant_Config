@@ -8,6 +8,7 @@ garbage_collection:
     icon_normal: mdi:trash-can
     icon_today: mdi:trash-can
     icon_tomorrow: mdi:trash-can
+    expire_after : '14:00'
 
   - name: Recycling # Each week on Tuesday
     frequency: "weekly"
@@ -17,3 +18,4 @@ garbage_collection:
     icon_normal: mdi:recycle
     icon_today: mdi:recycle
     icon_tomorrow: mdi:recycle
+    expire_after : '14:00'
