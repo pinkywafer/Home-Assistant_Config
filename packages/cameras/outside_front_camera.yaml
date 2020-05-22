@@ -1,0 +1,8 @@
+camera:
+  - platform: generic
+    name: Outside Front
+    still_image_url: !secret outside_front_cam_still_url
+    stream_source: !secret outside_front_cam_stream_url
+    verify_ssl: false
+    username: !secret outside_front_cam_user
+    password: !secret outside_front_cam_password
