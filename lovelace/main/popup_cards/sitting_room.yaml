@@ -11,6 +11,7 @@ card:
       entities:
         - light.sitting_room_light
         - binary_sensor.downstairs_motion
+        - binary_sensor.front_sensor_pir
         - binary_sensor.sitting_room_sensor_pir
         - switch.sitting_room_sensor_restart
       camera_image: camera.sitting_room_sensor_camera
