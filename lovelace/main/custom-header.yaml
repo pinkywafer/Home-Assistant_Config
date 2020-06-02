@@ -1,16 +1,21 @@
 compact_mode: true
-#hide_help: true
-#hide_config: true
-#button_text:
-#  options: >-
-#      {{states.weather.dark_sky.attributes.temperature }}° <ha-icon icon='mdi:weather-{%
-#      if is_state("weather.dark_sky", "partlycloudy") -%}partly-cloudy
-#      {%- elif is_state("weather.dark_sky", "clear-night") -%}night
-#      {%- else -%}{{ states('weather.dark_sky')}}
-#      {%- endif %}'></ha-icon> {{ time }} 
-#      <br> <ha-icon icon='{{ state_attr("sensor.season", "icon") }}''>
-#      </ha-icon>{{ dayNumLZ }}/{{ monthNumLZ }}/{{ year4d }}
-#chevrons: false
+hide_help: true
+hide_config: true
+button_text:
+  options: >-
+      {{states.weather.dark_sky.attributes.temperature }}° <div
+      style='display: inline-block; height:20px; width:20px;
+      vertical-align:middle;'><ha-icon icon='mdi:weather-{%
+      if is_state("weather.dark_sky", "partlycloudy") -%}partly-cloudy
+      {%- elif is_state("weather.dark_sky", "clear-night") -%}night
+      {%- else -%}{{ states('weather.dark_sky')}}
+      {%- endif %}'></ha-icon></div> {{ time }} 
+      <br> <div
+      style='display: inline-block; height:20px; width:20px;
+      vertical-align:middle;'><ha-icon icon='{{ state_attr(
+      "sensor.season", "icon") }}''></ha-icon></div> {{ dayNumLZ
+      }}/{{ monthNumLZ }}/{{ year4d }}
+chevrons: false
 #tabs_color:
 #  alarm: >-
 #    {% if (states["alarm_control_panel.alarm"].state == "armed_home") -%}orange
