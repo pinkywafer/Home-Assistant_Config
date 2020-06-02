@@ -17,7 +17,7 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Number of entities: 410
+Number of entities: 415
 
 Type | Qty
 -- | --
@@ -26,17 +26,17 @@ Alert | 0
 Automation | 60
 Binary Sensor | 82
 Camera | 4
-Device Tracker | 24
+Device Tracker | 27
 Group | 6
 Input Boolean | 1
 Input Datetime | 1
 Input Text | 3
 Light | 15
-Media Player | 14
+Media Player | 12
 Person | 3
 Scene | 1
 Script | 50
-Sensor | 113
+Sensor | 121
 Sun | 1
 Switch | 22
 Weather | 1
