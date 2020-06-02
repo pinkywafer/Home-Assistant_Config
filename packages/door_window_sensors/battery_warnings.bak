@@ -43,7 +43,7 @@ automation:
             {% if is_state("binary_sensor.kitchen_window_battery", "on") %}
               * Kitchen Window
             {% endif %}
-      - service: notify.mobile_app_jenny_s_blackberry_motion
+      - service: notify.mobile_app_jenny_s_oppo_reno
         data_template:
           title: Low Battery Warning
           message: >
