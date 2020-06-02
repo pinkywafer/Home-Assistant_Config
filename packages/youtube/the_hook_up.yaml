@@ -12,7 +12,7 @@ automation:
       - platform: state
         entity_id: sensor.the_hook_up
     action:
-    - service: notify.mobile_app_jenny_s_blackberry_motion
+    - service: notify.mobile_app_jenny_s_oppo_reno
       data_template:
         message: '{{ states("sensor.the_hook_up")}}'
         title: >

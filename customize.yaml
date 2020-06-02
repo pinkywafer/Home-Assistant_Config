@@ -14,5 +14,5 @@ device_tracker.emma_led:
   icon: mdi:led-strip
 device_tracker.emma_s_blackberry_dtek50:
   entity_picture: /local/emma.jpeg
-device_tracker.jenny_s_blackberry_motion:
+device_tracker.jenny_s_oppo_reno:
   entity_picture: /local/jenny.jpg

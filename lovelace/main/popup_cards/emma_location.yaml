@@ -46,7 +46,7 @@ card:
       show_icon: false
       tap_action:
         action: call-service
-        service: notify.mobile_app_jenny_s_blackberry_motion
+        service: notify.mobile_app_jenny_s_oppo_reno
         service_data:
           message: request_location_update
         styles:

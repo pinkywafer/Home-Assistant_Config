@@ -3,8 +3,8 @@ sensor:
     sensors:
       jenny_location:
         value_template: >-
-          {% if is_state("device_tracker.jenny_s_blackberry_motion", "not_home") -%}
-            {{ states("sensor.jenny_s_blackberry_motion_geocoded_location") }}
+          {% if is_state("device_tracker.jenny_s_oppo_reno", "not_home") -%}
+            {{ states("sensor.jenny_s_oppo_reno_geocoded_location") }}
           {%- else -%}
-            {{ states("device_tracker.jenny_s_blackberry_motion") }}
+            {{ states("device_tracker.jenny_s_oppo_reno") }}
           {%- endif %}

@@ -13,7 +13,7 @@ automation:
         entity_id: sensor.recycling
         state:  'Tomorrow'
   action:
-    - service: notify.mobile_app_jenny_s_blackberry_motion
+    - service: notify.mobile_app_jenny_s_oppo_reno
       data_template:
         title: Time to put the rubbish out!
         message: >-

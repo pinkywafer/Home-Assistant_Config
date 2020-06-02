@@ -13,7 +13,7 @@ automation:
         entity_id: sensor.hacs
         above: 0
     action:
-    - service: notify.mobile_app_jenny_s_blackberry_motion
+    - service: notify.mobile_app_jenny_s_oppo_reno
       data:
         message: >
           There are updates to {{ states("sensor.hacs") }} HACS components:

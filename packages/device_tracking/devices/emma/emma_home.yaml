@@ -6,7 +6,7 @@ automation:
       zone: zone.home
       event: enter
     action:
-    - service: notify.mobile_app_jenny_s_blackberry_motion
+    - service: notify.mobile_app_jenny_s_oppo_reno
       data:
         title: Emma Location
         message: Emma has arrived home
@@ -23,7 +23,7 @@ automation:
       zone: zone.home
       event: leave
     action:
-    - service: notify.mobile_app_jenny_s_blackberry_motion
+    - service: notify.mobile_app_jenny_s_oppo_reno
       data:
         title: Emma Location
         message: Emma has Left The House

@@ -15,7 +15,7 @@ automation:
       data: { "entity_id": "light.emma_led", "effect": "Police All" }
     - service: light.turn_on
       data: { "entity_id": "light.breakfast_bar_led", "effect": "Police All" }
-    - service: notify.mobile_app_jenny_s_blackberry_motion
+    - service: notify.mobile_app_jenny_s_oppo_reno
       data_template:
         message: 'ALARM! The alarm has been triggered: {{ states.input_text.alarm_trigger.state }}'
         title: 'Home Alarm'

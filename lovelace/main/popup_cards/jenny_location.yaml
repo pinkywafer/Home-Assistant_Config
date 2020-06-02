@@ -20,13 +20,13 @@ card:
               secondary_info: last-changed
               show_state: false
               entities:
-                - entity: sensor.jenny_s_blackberry_motion_battery
+                - entity: sensor.jenny_s_oppo_reno_battery_level
                   name: Bat
                   unit: '%'
                 - attribute: is_charging
-                  entity: sensor.jenny_s_blackberry_motion_battery
+                  entity: sensor.jenny_s_oppo_reno_battery_state
                   name: On Charge
-                - entity: sensor.jenny_s_blackberry_motion_wifi_ssid
+                - entity: sensor.jenny_s_oppo_reno_wifi_connection
                   name: WiFi SSID
         - type: history-graph
           hours_to_show: 10
@@ -39,14 +39,14 @@ card:
       dark_mode: false
       default_zoom: 14
       entities:
-        - entity: device_tracker.jenny_s_blackberry_motion
+        - entity: device_tracker.jenny_oppo_reno_wifi
     - break
     - type: 'custom:button-card'
       name: Update Location
       show_icon: false
       tap_action:
         action: call-service
-        service: notify.mobile_app_jenny_s_blackberry_motion
+        service: notify.mobile_app_jenny_s_oppo_reno
         service_data:
           message: request_location_update
         styles:

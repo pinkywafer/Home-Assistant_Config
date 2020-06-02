@@ -6,7 +6,7 @@ automation:
       zone: zone.nia_s_house
       event: enter
     action:
-    - service: notify.mobile_app_jenny_s_blackberry_motion
+    - service: notify.mobile_app_jenny_s_oppo_reno
       data:
         message: Emma has arrived at Nia's
         title: Emma Location
@@ -20,7 +20,7 @@ automation:
       zone: zone.nia_s_house
       event: leave
     action:
-    - service: notify.mobile_app_jenny_s_blackberry_motion
+    - service: notify.mobile_app_jenny_s_oppo_reno
       data:
         message: Emma has Left Nia's
         title: Emma Location
