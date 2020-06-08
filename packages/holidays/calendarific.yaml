@@ -1,4 +1,4 @@
 calendarific:
-  api_key: f91639bde94db8730b40a8c7f202eda1fc428d2c
+  api_key: !secret calendarific_api_key
   country: gb
   state: GB-WLS
