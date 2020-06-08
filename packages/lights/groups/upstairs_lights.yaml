@@ -1,0 +1,7 @@
+light:
+  - platform: group
+    name: Upstairs Lights
+    entities:
+      - light.landing_light
+      - light.bedroom_lights
+      - light.emmas_room_lights

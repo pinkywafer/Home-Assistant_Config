@@ -1,7 +1,10 @@
 automation:
   - alias: Night - Return home lights
     trigger:
-    - entity_id: group.all_devices
+    - entity_id: person.jenny_gorton
+      from: not_home
+      platform: state
+    - entity_id: person.emma_gorton
       from: not_home
       platform: state
     condition:

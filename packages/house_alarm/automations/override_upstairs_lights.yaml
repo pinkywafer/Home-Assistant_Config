@@ -39,4 +39,4 @@ automation:
             trigger.to_state != 'unavailable' }}
     action:
     - service: homeassistant.turn_on
-      entity_id: group.upstairslights
+      entity_id: light.upstairs_lights

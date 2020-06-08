@@ -9,7 +9,7 @@ cards:
     - !include ../custom_views/family_presence.yaml
     - type: custom:button-card
       label: Emma's Lights
-      entity: group.emmasroomlights
+      entity: light.emmas_room_lights
       show_icon: false
       show_name: false
       show_label: true

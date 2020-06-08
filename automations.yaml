@@ -16,7 +16,7 @@
     to: 'on'
   condition: []
   action:
-  - entity_id: group.downstairslights, light.landing_light, switch.immersion_heater,
+  - entity_id: light.downstairs_lights, light.landing_light, switch.immersion_heater,
       switch.bath_mode, switch.kitchen_socket_1, switch.kitchen_socket_2
     service: homeassistant.turn_off
 - id: '1579877911127'

@@ -18,7 +18,7 @@ cards:
               name:
                 - font-size: 14px
           - type: custom:button-card
-            entity: group.downstairslights
+            entity: light.downstairs_lights
             label: Downstairs
             tap_action:
               action: toggle

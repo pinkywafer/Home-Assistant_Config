@@ -1,0 +1,7 @@
+light:
+  - platform: group
+    name: Kitchen Lights
+    entities:
+      - light.sink_light
+      - light.cooker_light
+      - light.breakfast_bar_led

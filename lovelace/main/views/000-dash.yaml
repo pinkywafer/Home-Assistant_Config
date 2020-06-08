@@ -19,7 +19,7 @@ cards:
       - !include ../custom_views/waste.yaml
       - break
       - type: custom:button-card
-        entity: group.all_lights
+        entity: light.all_lights
         label: Lights
         tap_action:
           action: toggle

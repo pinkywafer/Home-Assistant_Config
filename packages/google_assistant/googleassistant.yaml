@@ -6,10 +6,10 @@ google_assistant:
     - script
     - scene
   entity_config:
-    group.upstairslights:
+    light.upstairs_lights:
       room: Upstairs
       expose: true
-    group.downstairslights:
+    light.downstairs_lights:
       room: Downstairs
       expose: true
     light.bathroom_light:

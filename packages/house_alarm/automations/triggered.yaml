@@ -6,7 +6,7 @@ automation:
       to: triggered
     action:
     - service: homeassistant.turn_on
-      entity_id: group.all_lights
+      entity_id: light.all_lights
     - service: camera.snapshot
       data:
         entity_id: camera.sitting_room_sensor_camera

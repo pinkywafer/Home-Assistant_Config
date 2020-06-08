@@ -1,0 +1,6 @@
+light:
+  platform: group
+  name: All Lights
+  entities:
+    - light.upstairs_lights
+    - light.downstairs_lights

@@ -1,0 +1,10 @@
+light:
+  - platform: group
+    name: Downstairs Lights
+    entities:
+      - light.sitting_room_light
+      - light.sink_light
+      - light.cooker_light
+      - light.vestibule_light
+      - light.bathroom_light
+      - light.breakfast_bar_led

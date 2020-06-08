@@ -1,7 +1,0 @@
-group:
-  emmasroomlights:
-    name: Emmas room lights
-    entities:
-    - light.emmas_ceiling_light
-    - light.emmas_bedside_light
-    - light.emma_led

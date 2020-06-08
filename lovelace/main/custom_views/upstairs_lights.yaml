@@ -15,7 +15,7 @@ cards:
           name:
             - font-size: 14px
       - type: custom:button-card
-        entity: group.upstairslights
+        entity: light.upstairs_lights
         label: Upstairs
         show_icon: false
         show_name: false
@@ -47,7 +47,7 @@ cards:
   - type: vertical-stack
     cards:
       - type: custom:button-card
-        entity: group.emmasroomlights
+        entity: light.emmas_room_lights
         label: Emma's
         tap_action:
           action: toggle
@@ -126,7 +126,7 @@ cards:
   - type: vertical-stack
     cards:
       - type: custom:button-card
-        entity: group.bedroomlights
+        entity: light.bedroom_lights
         label: Bedroom
         tap_action:
             action: toggle

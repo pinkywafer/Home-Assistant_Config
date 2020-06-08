@@ -1,0 +1,7 @@
+light:
+  - platform: group
+    name: Bedroom Lights
+    entities:
+      - light.bedroom_ceiling_light
+      - light.jennys_bedside_light
+      - light.jos_bedside_light

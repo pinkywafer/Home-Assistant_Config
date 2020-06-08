@@ -1,7 +1,0 @@
-group:
-  upstairslights:
-    name: Upstairs Lights
-    entities:
-    - light.landing_light
-    - group.bedroomlights
-    - group.emmasroomlights

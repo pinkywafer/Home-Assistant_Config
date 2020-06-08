@@ -1,0 +1,7 @@
+light:
+  - platform: group
+    name: Emmas Room Lights
+    entities:
+      - light.emmas_ceiling_light
+      - light.emmas_bedside_light
+      - light.emma_led
