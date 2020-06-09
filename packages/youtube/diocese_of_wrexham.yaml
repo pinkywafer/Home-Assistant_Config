@@ -15,13 +15,12 @@ automation:
       - condition: template
         value_template: '{{ is_state_attr("sensor.diocese_of_wrexham", "live", True) }}'
       - condition: template
-        value_template: >
-          {{as_timestamp(utcnow()) -
-          as_timestamp(state_attr("automation.youtube_notification_diocese_of_wrexham_tts","last_triggered")) > 600}}
-
+        value_template: >-
+          {{ as_timestamp(utcnow()) -
+              as_timestamp(state_attr("automation.youtube_notification_diocese_of_wrexham_tts","last_triggered")) > 300 }}
     action:
-    - service: notify.broadcast
-      data_template:
-        message:  >
-          The diocese of Wrexham is live on youtube with 
-          {{ states("sensor.diocese_of_wrexham")}}
+      - service: notify.broadcast
+        data_template:
+          message:  >
+            The diocese of Wrexham is live on youtube with 
+            {{ states("sensor.diocese_of_wrexham")}}
