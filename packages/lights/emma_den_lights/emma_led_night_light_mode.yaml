@@ -1,40 +1,64 @@
-light:
-  - platform: template
-    lights:
-      emma_night_light:
-        friendly_name: "Emma's Night Light"
-        value_template: "{{ is_state('light.emma_led', 'on') and
-          is_state_attr('light.emma_led','effect','Solid Color') and 
-          is_state_attr('light.emma_led','rgb_color',(255, 108, 145)) and
-          is_state_attr('light.emma_led','brightness',15)}}"
-        turn_on:
-          - service: light.turn_on
-            entity_id: light.emma_led
-            data: 
-              effect: "Solid Color"
-              brightness: 15
-              rgb_color: [255, 108, 145]
-        turn_off:
-          - condition: template
-            value_template: "{{ is_state('light.emma_led', 'on') and
-              is_state_attr('light.emma_led','effect','Solid Color') and 
-              is_state_attr('light.emma_led','rgb_color',(255, 108, 145)) and
-              is_state_attr('light.emma_led','brightness',15)}}"
-          - service: light.turn_off
-            entity_id: light.emma_led
-          - delay: 
-              milliseconds: 1500
-          - service: mqtt.publish
-            data: 
-              topic: "cmnd/emma-led"
-              payload: "{\"state\":\"OFF\",\"brightness\":150}"
+input_boolean:
+  sunrise_for_emma_led:
+    name: Sunrise for Emma's Den Lights
 
 automation:
-  - alias: Emma's night light off 1 hour after sunrise
+  - alias: Sunrise in emma's room for 8am
     trigger:
-    - event: sunrise
-      offset: '1:00'
-      platform: sun
+      platform: time
+      at: "07:40:00"
     action:
-    - service: light.turn_off
-      entity_id: light.emma_night_light
+      - service: light.turn_on
+        entity_id: light.emma_led
+        data:
+          effect: "Sunrise"
+
+  - alias: turn on sunrise input boolean for Emma_led
+    trigger:
+      platform: sun
+      event: sunrise
+      offset: "01:00:00"
+    condition:
+      - condition: template
+        value_template: >
+          {{ is_state_attr("light.emma_led","effect","Sunrise") or
+          is_state_attr('light.emma_led','effect','Daylight') or
+          is_state_attr('light.emma_led','effect','Night Light')}}
+    action:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.sunrise_for_emma_led
+
+  - alias: Emma's Daylight mode off after sunrise
+    trigger:
+      - platform: state
+        entity_id: input_boolean.sunrise_for_emma_led
+      - platform: template
+        value_template: >-
+          {{ is_state_attr('light.emma_led','effect', 'Daylight') }}
+    condition:
+      - condition: template
+        value_template: >-
+          {{ is_state_attr("light.emma_led","effect","Daylight") and
+          is_state('input_boolean.sunrise_for_emma_led') }}
+    action:
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.sunrise_for_emma_led
+      - service: light.turn_off
+        entity_id: light.emma_led
+
+  - alias: sunset in emma's room at sunset
+    trigger:
+      platform: sun
+      event: sunset
+      offset: "-00:20:00"
+    condition:
+      - condition: template
+        value_template: >-
+          {{ is_state('light.emma_led','off') or
+          is_state_attr('light.emma_led', 'effect', 'Daylight')}}
+    action:
+      service: light.turn_on
+      entity_id: light.emma_led
+      data:
+        effect: "Sunset"
+

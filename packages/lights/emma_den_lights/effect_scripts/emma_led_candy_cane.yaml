@@ -1,6 +1,0 @@
-script:
-  den_lights_candy_cane:
-    alias: Emma's Candy Cane Effect
-    sequence:
-      - service: light.turn_on
-        data: { "entity_id": "light.emma_led", "effect": "Candy Cane" }

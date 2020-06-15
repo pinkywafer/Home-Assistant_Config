@@ -1,6 +1,0 @@
-script:
-  den_lights_twinkle:
-    alias: Emma's Twinkle Effect
-    sequence:
-      - service: light.turn_on
-        data: { "entity_id": "light.emma_led", "effect": "Twinkle" }

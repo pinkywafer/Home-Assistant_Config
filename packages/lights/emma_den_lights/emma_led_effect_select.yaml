@@ -1,0 +1,64 @@
+input_select:
+  den_lights_effect:
+    name: Den
+    options:
+      - Confetti Colour
+      - Glitter Colour
+      - Juggle Colour
+      - Sinelon Colour
+      - Christmas
+      - Candy Cane
+      - Holly Jolly
+      - Valentine
+      - Lovey Day
+      - Saint Patrick
+      - Easter
+      - USA
+      - Independence
+      - Go Blue
+      - Hail
+      - Touchdown
+      - Halloween
+      - Punkin
+      - Thanksgiving
+      - Turkey Day
+      - BPM
+      - Cyclon Rainbow
+      - Dots
+      - Fire
+      - Lightning
+      - Police All
+      - Police One
+      - Rainbow
+      - Glitter Rainbow
+      - Ripple
+      - Twinkle
+      - Audio Colour
+      - Audio Level Rainbow
+      - Audio Random Flash
+      - Sunrise
+      - Sunset
+      - Night Light
+      - Daylight
+      - Solid Colour
+
+automation:
+  - alias: set den effect from input_select
+    trigger:
+      platform: state
+      entity_id: input_select.den_lights_effect
+    action:
+      service: light.turn_on
+      entity_id: light.emma_led
+      data_template:
+        effect: "{{states('input_select.den_lights_effect')}}"
+
+  - alias: set den effect input_select from light
+    trigger:
+      platform: state
+      entity_id: light.emma_led
+    action:
+      service: input_select.select_option
+      entity_id: input_select.den_lights_effect
+      data_template:
+        option: "{{state_attr('light.emma_led','effect')}}"

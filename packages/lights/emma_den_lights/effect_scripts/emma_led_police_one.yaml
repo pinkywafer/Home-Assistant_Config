@@ -1,6 +1,0 @@
-script:
-  den_lights_police_one:
-    alias: Emma's Police One Effect
-    sequence:
-      - service: light.turn_on
-        data: { "entity_id": "light.emma_led", "effect": "Police One" }

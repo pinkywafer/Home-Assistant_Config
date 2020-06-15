@@ -1,6 +1,0 @@
-script:
-  den_lights_thanksgiving:
-    alias: Emma's Thanksgiving Effect
-    sequence:
-      - service: light.turn_on
-        data: { "entity_id": "light.emma_led", "effect": "Thanksgiving" }

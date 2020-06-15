@@ -55,6 +55,9 @@ google_assistant:
       expose: true
       name: Ender 3 Controls
       room: Printer Shelf
+    input_select.den_lights_effect:
+      expose: true
+      room: Emma's Room
     switch.immersion_heater:
       expose: true
     switch.bath_mode:
