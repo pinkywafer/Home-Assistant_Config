@@ -19,7 +19,7 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Number of entities: 390
+Number of entities: 392
 
 Type | Qty
 -- | --
@@ -33,12 +33,12 @@ Group | 0
 Input Boolean | 2
 Input Datetime | 1
 Input Text | 3
-Light | 20
-Media Player | 13
+Light | 21
+Media Player | 14
 Person | 3
 Scene | 1
 Script | 15
-Sensor | 121
+Sensor | 122
 Sun | 1
 Switch | 22
 Weather | 1
