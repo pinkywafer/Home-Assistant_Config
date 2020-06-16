@@ -13,17 +13,16 @@ from .sensor import GarbageCollection
 
 from integrationhelper.const import CC_STARTUP_VERSION
 
-from homeassistant.const import CONF_NAME
+from homeassistant.const import CONF_NAME, ATTR_HIDDEN
 
 from .const import (
     CONF_SENSORS,
     CONF_ENABLED,
     CONF_FREQUENCY,
-    DEFAULT_NAME,
-    DOMAIN_DATA,
     DOMAIN,
     ISSUE_URL,
-    PLATFORM,
+    SENSOR_PLATFORM,
+    CALENDAR_PLATFORM,
     VERSION,
     CONFIG_SCHEMA,
 )
@@ -38,7 +37,6 @@ async def async_setup(hass, config):
     if config.get(DOMAIN) is None:
         # We get here if the integration is set up using config flow
         return True
-
     # Print startup message
     _LOGGER.info(
         CC_STARTUP_VERSION.format(name=DOMAIN, version=VERSION, issue_link=ISSUE_URL)
@@ -57,7 +55,7 @@ async def async_setup(hass, config):
         # if not entry[CONF_ENABLED]:
         #     continue
         hass.async_create_task(
-            discovery.async_load_platform(hass, PLATFORM, DOMAIN, entry, config)
+            discovery.async_load_platform(hass, SENSOR_PLATFORM, DOMAIN, entry, config)
         )
     hass.async_create_task(
         hass.config_entries.flow.async_init(
@@ -77,13 +75,15 @@ async def async_setup_entry(hass, config_entry):
     _LOGGER.info(
         CC_STARTUP_VERSION.format(name=DOMAIN, version=VERSION, issue_link=ISSUE_URL)
     )
-    _LOGGER.info(f"Setting {config_entry.title}({config_entry.data[CONF_FREQUENCY]}) from ConfigFlow")
+    _LOGGER.info(
+        f"Setting {config_entry.title}({config_entry.data[CONF_FREQUENCY]}) from ConfigFlow"
+    )
     # Backward compatibility - clean-up (can be removed later?)
     config_entry.options = {}
     config_entry.add_update_listener(update_listener)
     # Add sensor
     hass.async_add_job(
-        hass.config_entries.async_forward_entry_setup(config_entry, PLATFORM)
+        hass.config_entries.async_forward_entry_setup(config_entry, SENSOR_PLATFORM)
     )
     return True
 
@@ -91,7 +91,9 @@ async def async_setup_entry(hass, config_entry):
 async def async_remove_entry(hass, config_entry):
     """Handle removal of an entry."""
     try:
-        await hass.config_entries.async_forward_entry_unload(config_entry, PLATFORM)
+        await hass.config_entries.async_forward_entry_unload(
+            config_entry, SENSOR_PLATFORM
+        )
         _LOGGER.info(
             "Successfully removed sensor from the garbage_collection integration"
         )
@@ -105,5 +107,7 @@ async def update_listener(hass, entry):
     if entry.options != {}:
         entry.data = entry.options
         entry.options = {}
-    await hass.config_entries.async_forward_entry_unload(entry, PLATFORM)
-    hass.async_add_job(hass.config_entries.async_forward_entry_setup(entry, PLATFORM))
+    await hass.config_entries.async_forward_entry_unload(entry, SENSOR_PLATFORM)
+    hass.async_add_job(
+        hass.config_entries.async_forward_entry_setup(entry, SENSOR_PLATFORM)
+    )
