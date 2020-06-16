@@ -20,7 +20,7 @@ cards:
         camera_image: camera.sitting_room_sensor_camera
 
       - type: picture-glance
-        title: Sitting Room
+        title: Front
         entities:
           - entity: light.sitting_room_light
             icon: mdi:sofa
