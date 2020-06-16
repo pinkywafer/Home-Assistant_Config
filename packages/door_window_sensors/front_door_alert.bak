@@ -10,4 +10,4 @@ alert:
       - 15
     skip_first: true
     notifiers:
-      - broadcast
+      - broadcast_from_home_assistant

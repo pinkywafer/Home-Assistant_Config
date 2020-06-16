@@ -27,7 +27,7 @@ automation:
     - condition: zone
       entity_id: person.jenny_gorton
       zone: zone.home
-    - service: notify.broadcast
+    - service: notify.broadcast_from_home_assistant
       data_template:
         message: >-
           The {% if is_state("sensor.general_waste", "tomorrow") and is_state("sensor.recycling", "tomorrow") -%}

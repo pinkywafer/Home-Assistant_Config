@@ -8,4 +8,4 @@ alert:
     repeat: 60
     skip_first: true
     notifiers:
-      - broadcast
+      - broadcast_from_home_assistant

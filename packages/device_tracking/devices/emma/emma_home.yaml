@@ -12,7 +12,7 @@ automation:
         message: Emma has arrived home
         data:
           tag: emma_location
-    - service: notify.broadcast
+    - service: notify.broadcast_from_home_assistant
       data:
         message: 'Emma is home!'
 
@@ -29,6 +29,6 @@ automation:
         message: Emma has Left The House
         data:
           tag: emma_location
-    - service: notify.broadcast
+    - service: notify.broadcast_from_home_assistant
       data:
         message: 'Emma has Left The House!'

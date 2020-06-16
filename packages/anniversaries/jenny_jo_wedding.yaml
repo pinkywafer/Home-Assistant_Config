@@ -13,11 +13,11 @@ automation:
       entity_id: sensor.anniversary_jenny_jo_s_wedding_anniversary
       state:  '0'
   action:
-    - service: notify.html
+    - service: notify.mobile_app_jenny_s_oppo_reno
       data:
         message: "Happy Wedding Anniversary Jenny and Jo!"
         data:
           tag: birthday
-    - service: notify.broadcast
+    - service: notify.broadcast_from_home_assistant
       data:
         message: "Happy Wedding anniversary Jenny and Jo!"

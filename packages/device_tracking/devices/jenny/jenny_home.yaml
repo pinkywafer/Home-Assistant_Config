@@ -6,6 +6,6 @@ automation:
       zone: zone.home
       event: enter
     action:
-    - service: notify.broadcast
+    - service: notify.broadcast_from_jenny
       data:
-        message: 'Jenny is home!'
+        message: "I'm home!"

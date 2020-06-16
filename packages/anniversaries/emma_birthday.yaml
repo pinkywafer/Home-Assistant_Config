@@ -13,11 +13,16 @@ automation:
       entity_id: sensor.anniversary_emma_s_birthday
       state:  '0'
   action:
-    - service: notify.html
-      data:
-        message: "Happy Birthday To Emma!"
-        data:
-          tag: birthday
-    - service: notify.broadcast
+    - service: notify.mobile_app_emma_s_blackberry_dtek_50
       data:
         message: "Happy Birthday Emma!"
+        data:
+          tag: birthday
+    - service: notify.broadcast_from_home_assistant
+      data:
+        message: "Happy Birthday Emma!"
+    - service: notify.mobile_app_jenny_s_oppo_reno
+      data:
+        message: "Happy Birthday Emma!"
+        data:
+          tag: birthday
