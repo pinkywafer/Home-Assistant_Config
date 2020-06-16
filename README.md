@@ -19,25 +19,25 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Number of entities: 415
+Number of entities: 390
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 0
-Automation | 60
+Automation | 65
 Binary Sensor | 82
 Camera | 4
 Device Tracker | 27
 Group | 0
-Input Boolean | 1
+Input Boolean | 2
 Input Datetime | 1
 Input Text | 3
-Light | 21
-Media Player | 12
+Light | 20
+Media Player | 13
 Person | 3
 Scene | 1
-Script | 50
+Script | 15
 Sensor | 121
 Sun | 1
 Switch | 22
