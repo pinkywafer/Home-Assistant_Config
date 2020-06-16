@@ -118,7 +118,7 @@ class calendarific(Entity):
         self.async_schedule_update_ha_state(True)
 
     async def async_update(self):
-        self._reader.update()
+        await self.hass.async_add_executor_job(self._reader.update)
         self._description = self._reader.get_description(self._holiday)
         self._date = self._reader.get_date(self._holiday)
         if self._date == "-":
