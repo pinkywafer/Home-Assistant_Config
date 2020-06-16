@@ -46,13 +46,12 @@ cards:
             action: toggle
           hold_action:
             action: more-info
-    
-        - type: entity-button
-          name: Night Light
-          icon: mdi:hotel
-          entity: light.emma_night_light
-          tap_action:
-            action: toggle
+          double_tap_action:
+              action: call-service
+              service: light.turn_on
+              service_data:
+                entity_id: light.emma_led
+                effect: "Night Light"
 
     - break
     - type: custom:button-card

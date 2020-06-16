@@ -105,23 +105,18 @@ cards:
             hold_action:
               action: more-info
               haptic: success
+            double_tap_action:
+              action: call-service
+              service: light.turn_on
+              service_data:
+                entity_id: light.emma_led
+                effect: "Night Light"
             styles:
               card:
                 - height: 60px
               name:
                 - font-size: 14px
-          - type: custom:button-card
-            entity: light.emma_night_light
-            icon: mdi:hotel
-            name: Night Light
-            tap_action:
-              action: toggle
-              haptic: light
-            styles:
-              card:
-                - height: 60px
-              name:
-                - font-size: 14px
+
   - type: divider
   - type: vertical-stack
     cards:
