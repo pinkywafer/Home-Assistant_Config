@@ -8,6 +8,8 @@ automation:
       platform: time
       at: "07:40:00"
     action:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.sunrise_for_emma_led
       - service: light.turn_on
         entity_id: light.emma_led
         data:
@@ -15,34 +17,45 @@ automation:
 
   - alias: turn on sunrise input boolean for Emma_led
     trigger:
-      platform: sun
-      event: sunrise
-      offset: "01:00:00"
+      platform: numeric_state
+      entity_id: sun.sun
+      value_template: "{{ state_attr('sun.sun', 'elevation') }}"
+      above: 4.0
+      below: 5.0
     condition:
-      - condition: template
-        value_template: >
-          {{ is_state_attr("light.emma_led","effect","Sunrise") or
-          is_state_attr('light.emma_led','effect','Daylight') or
-          is_state_attr('light.emma_led','effect','Night Light')}}
+      - condition: state
+        entity_id: automation.sunrise_in_emma_s_room_for_8am
+        state: 'on'
     action:
       - service: input_boolean.turn_on
         entity_id: input_boolean.sunrise_for_emma_led
 
   - alias: Emma's Daylight mode off after sunrise
     trigger:
-      - platform: state
-        entity_id: input_boolean.sunrise_for_emma_led
       - platform: template
-        value_template: >-
+        value_template: >
           {{ is_state_attr('light.emma_led','effect', 'Daylight') }}
+      - platform: numeric_state
+        entity_id: sun.sun
+        value_template: "{{ state_attr('sun.sun', 'elevation') }}"
+        above: 4.0
+        below: 5.0
     condition:
       - condition: template
-        value_template: >-
-          {{ is_state_attr("light.emma_led","effect","Daylight") and
-          is_state('input_boolean.sunrise_for_emma_led') }}
+        value_template: >
+          {{is_state('input_boolean.sunrise_for_emma_led') and
+          state_attr('sun.sun', 'elevation') > 4 }}
     action:
+      - condition: template
+        value_template: >
+          {{ not is_state_attr("light.emma_led","effect","Night Light") and
+          not is_state_attr("light.emma_led","effect","Sunrise") and
+          state_attr("light.emma_led","effect") != None }}
       - service: input_boolean.turn_off
         entity_id: input_boolean.sunrise_for_emma_led
+      - condition: template
+        value_template: >
+          {{ is_state_attr('light.emma_led','effect', 'Daylight') }}
       - service: light.turn_off
         entity_id: light.emma_led
 
