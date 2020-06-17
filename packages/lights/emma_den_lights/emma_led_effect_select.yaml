@@ -2,6 +2,7 @@ input_select:
   den_lights_effect:
     name: Den
     options:
+      - None
       - Confetti Colour
       - Glitter Colour
       - Juggle Colour
@@ -47,6 +48,12 @@ automation:
     trigger:
       platform: state
       entity_id: input_select.den_lights_effect
+    condition:
+      condition: not
+      conditions:
+        - condition: state
+          entity_id: input_select.den_lights_effect
+          state: None 
     action:
       service: light.turn_on
       entity_id: light.emma_led
