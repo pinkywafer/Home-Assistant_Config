@@ -43,7 +43,7 @@ automation:
     condition:
       - condition: template
         value_template: >
-          {{is_state('input_boolean.sunrise_for_emma_led') and
+          {{is_state('input_boolean.sunrise_for_emma_led', 'on') and
           state_attr('sun.sun', 'elevation') > 4 }}
     action:
       - condition: template
