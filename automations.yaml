@@ -1,8 +1,8 @@
 - id: '1564897842321'
-  alias: 'Set default theme at startup'
+  alias: Set default theme at startup
   trigger:
-    - platform: homeassistant
-      event: start
+  - platform: homeassistant
+    event: start
   action:
     service: frontend.set_theme
     data:
@@ -58,3 +58,18 @@
   action:
   - entity_id: light.sitting_room_light, light.sink_light, light.bathroom_light, light.landing_light
     service: light.turn_on
+- id: '1593364811767'
+  alias: Jo medication reminder
+  description: ''
+  trigger:
+  - at: '10:30'
+    platform: time
+  - at: '16:30'
+    platform: time
+  - at: '22:30'
+    platform: time
+  condition: []
+  action:
+  - data:
+      message: Jo, it's time for your tablet
+    service: notify.broadcast_from_home_assistant
