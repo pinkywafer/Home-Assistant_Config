@@ -154,8 +154,10 @@ cards:
                     card:
                       - height: 80px
 
-
-
+      - type: entities
+        entities:
+          - entity: automation.ender_3_auto_shutdown_when_done
+            title: Shutdown when finished printing
 
       - type: conditional
         conditions:
@@ -168,6 +170,8 @@ cards:
           entity: switch.ender3_controls
           show_icon: false
           name: Enable Controls
+
+
       - type: conditional
         conditions:
           - entity: sensor.octoprint_print_status

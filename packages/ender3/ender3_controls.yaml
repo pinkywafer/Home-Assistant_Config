@@ -9,11 +9,25 @@ script:
         entity_id: switch.octoprint_shutdown_system
       - wait_template: "{{ is_state('sensor.octoprint_print_status', 'unavailable') }}"
         timeout: '00:01:00'
+        continue_on_timeout: false
       - delay:
           seconds: 10
       - service: switch.turn_off
-        data:
-          entity_id: switch.3d_printer_psu
+        entity_id: switch.3d_printer_psu
+
+  ender3_shutdown_when_cool:
+    alias: Ender3 Filament Change
+    sequence:
+      - condition: state
+        entity_id: binary_sensor.octoprint_printing
+        state: 'off'
+      - condition: state
+        entity_id: automation.ender_3_auto_shutdown_when_done
+        state: 'on'
+      - wait_template: "{{ states('sensor.octoprint_tool_0_temperature')|int < 10  }}"
+        timeout: '00:10:00'
+        continue_on_timeout: false
+      - service: script.ender3_safe_power_down
 
   ender3_cancel_print:
     alias: Ender3 Cancel
@@ -49,10 +63,13 @@ script:
         entity_id: switch.ender3_controls
         state: 'on'
       - condition: state
-        entity_id: sensor.ender3_current_state
+        entity_id: sensor.octoprint_print_status
         state: 'Operational'
-      - service: rest_command.ender3_home
-  
+      - service: mqtt.publish
+        data:
+          topic: "octoPrint/hassControl/home"
+          payload: "[\"x\", \"y\", \"z\"]"
+
   ender3_level_bed:
     alias: Ender3 Bed Levelling
     sequence:
@@ -60,11 +77,12 @@ script:
         entity_id: switch.ender3_controls
         state: 'on'
       - condition: state
-        entity_id: sensor.ender3_current_state
+        entity_id: sensor.octoprint_print_status
         state: 'Operational'
-      - service: rest_command.ender3_printer_command
+      - service: mqtt.publish
         data:
-          cmd: "G29"
+          topic: "octoPrint/hassControl/commands"
+          payload: "G29"
   
   ender3_cooldown:
     alias: Ender3 cooldown
@@ -73,14 +91,16 @@ script:
         entity_id: switch.ender3_controls
         state: 'on'
       - condition: state
-        entity_id: sensor.ender3_current_state
+        entity_id: sensor.octoprint_print_status
         state: 'Operational'
-      - service: rest_command.ender3_bed_temp
+      - service: mqtt.publish
         data:
-          temp: 0
-      - service: rest_command.ender3_nozzle_temp
+          topic: "octoPrint/hassControl/commands"
+          payload: "M140 S0"
+      - service: mqtt.publish
         data:
-          temp: 0
+          topic: "octoPrint/hassControl/commands"
+          payload: "M104 S0"
 
   ender3_preheat_petg:
     alias: Ender3 PETG Preheat 
@@ -89,14 +109,16 @@ script:
         entity_id: switch.ender3_controls
         state: 'on'
       - condition: state
-        entity_id: sensor.ender3_current_state
+        entity_id: sensor.octoprint_print_status
         state: 'Operational'
-      - service: rest_command.ender3_bed_temp
+      - service: mqtt.publish
         data:
-          temp: 75
-      - service: rest_command.ender3_nozzle_temp
+          topic: "octoPrint/hassControl/commands"
+          payload: "M140 S75"
+      - service: mqtt.publish
         data:
-          temp: 215
+          topic: "octoPrint/hassControl/commands"
+          payload: "M104 S215"
 
   ender3_preheat_pla:
     alias: Ender3 PLA Preheat
@@ -105,14 +127,16 @@ script:
         entity_id: switch.ender3_controls
         state: 'on'
       - condition: state
-        entity_id: sensor.ender3_current_state
+        entity_id: sensor.octoprint_print_status
         state: 'Operational'
-      - service: rest_command.ender3_bed_temp
+      - service: mqtt.publish
         data:
-          temp: 55
-      - service: rest_command.ender3_nozzle_temp
+          topic: "octoPrint/hassControl/commands"
+          payload: "M140 S55"
+      - service: mqtt.publish
         data:
-          temp: 185
+          topic: "octoPrint/hassControl/commands"
+          payload: "M104 S185"
 
   ender3_change_filament:
     alias: Ender3 Filament Change
@@ -120,6 +144,18 @@ script:
       - condition: state
         entity_id: switch.ender3_controls
         state: 'on'
-      - service: rest_command.ender3_printer_command
+      - service: mqtt.publish
         data:
-          cmd: "M600"
+          topic: "octoPrint/hassControl/commands"
+          payload: "M600"
+
+automation:
+  - alias: Ender 3 Auto shutdown when done
+    description: Shutdown the printer once is has cooled down
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.octoprint_printing
+        from: 'on'
+        to: 'off'
+    action:
+      - service: script.ender3_shutdown_when_cool
