@@ -1,12 +1,4 @@
 rest_command:
-  ender3_job_command:
-    url: !secret ender3_octoprint_api_job_command
-    payload: '{{ payload }}'
-    headers:
-        Content-Type: 'application/json'
-        X-Api-Key: !secret ender3_octoprint_api_key
-    method: POST
-
   ender3_home:
     url: !secret ender3_octoprint_printhead_command
     payload: '{"command": "home", "axes": ["x", "y", "z"]}'
