@@ -9,7 +9,7 @@ cards:
       - type: horizontal-stack
         cards:
           - type: custom:button-card
-            entity: binary_sensor.ender3_printing
+            entity: binary_sensor.octoprint_printing
             icon: mdi:printer-3d-nozzle
             show_name: false
             styles:
@@ -31,17 +31,12 @@ cards:
               - value: 'on'
                 color: yellow
           - type: custom:button-card
-            entity: binary_sensor.ender3_printing_error
-            icon: mdi:printer-alert
+            entity: sensor.octoprint_print_status
             show_name: false
+            show_state: true
             styles:
               card:
                 - height: 65px
-            state:
-              - value: 'on'
-                color: red 
-              - value: 'off'
-                color: grey 
       - type: conditional
         conditions:
           - entity: switch.ender3
@@ -72,22 +67,22 @@ cards:
           cards:
             - type: custom:mini-graph-card
               entities:
-                - entity: sensor.ender3_actual_tool0_temp
+                - entity: sensor.octoprint_tool_0_temperature
                   name: Nozzle temp
-                - entity: sensor.ender3_target_tool0_temp
+                - entity: sensor.octoprint_tool_0_target
                   name: Nozzle temp target
               height: 75
               points_per_hour: 4
-              hours_to_show: 12
+              hours_to_show: 4
             - type: custom:mini-graph-card
               entities:
-                - entity: sensor.ender3_actual_bed_temp
+                - entity: sensor.octoprint_bed_temperature
                   name: Bed temp
-                - entity: sensor.ender3_target_bed_temp
+                - entity: sensor.octoprint_bed_target
                   name: Bed temp target
               height: 75
               points_per_hour: 4
-              hours_to_show: 12
+              hours_to_show: 4
       - type: conditional
         conditions:
           - entity: switch.ender3
@@ -97,62 +92,13 @@ cards:
           cards:
             - type: horizontal-stack
               cards:
+
                 - type: custom:button-card
-                  entity: sensor.ender3_current_state
+                  entity: sensor.octoprint_print_file
+                  #icon: mdi:file-percent
+                  layout: icon_state
                   show_name: false
                   show_state: true
-                  styles:
-                    card:
-                      - height: 80px
-                - type: custom:button-card
-                  entity: sensor.ender3_job_percentage
-                  show_name: false
-                  show_state: true
-                  styles:
-                    card:
-                      - height: 80px
-                - type: custom:button-card
-                  entity: sensor.ender3_time_elapsed
-                  label: >
-                    [[[
-                      var totalSeconds = entity.state;
-                      if (!isNaN(totalSeconds)) {
-                        var hours = Math.floor(totalSeconds / 3600);
-                        totalSeconds %= 3600;
-                        var minutes = (Math.floor(totalSeconds / 60)).toLocaleString(undefined, {minimumIntegerDigits: 2});
-                        var seconds = (totalSeconds % 60).toLocaleString(undefined, {minimumIntegerDigits: 2});
-                        return hours + ":" + minutes + ":" + seconds;
-                      } else {
-                        return "Unknown";
-                      }
-                    ]]]
-                  show_label: true
-                  show_name: false
-                  show_state: false
-                  state:
-                    - value: 'unknown'
-                      color: grey
-                  styles:
-                    card:
-                      - height: 80px
-                - type: custom:button-card
-                  entity: sensor.ender3_time_remaining
-                  label:  >
-                    [[[
-                      var totalSeconds = entity.state;
-                      if (!isNaN(totalSeconds)) {
-                        var hours = Math.floor(totalSeconds / 3600);
-                        totalSeconds %= 3600;
-                        var minutes = (Math.floor(totalSeconds / 60)).toLocaleString(undefined, {minimumIntegerDigits: 2});
-                        var seconds = (totalSeconds % 60).toLocaleString(undefined, {minimumIntegerDigits: 2});
-                        return hours + ":" + minutes + ":" + seconds;
-                      } else {
-                        return "Unknown";
-                      }
-                    ]]]
-                  show_label: true
-                  show_name: false
-                  show_state: false
                   state:
                     - value: 'unknown'
                       color: grey
@@ -160,9 +106,60 @@ cards:
                     card:
                       - height: 80px
 
+
+            - type: horizontal-stack
+              cards:
+
+                - type: custom:button-card
+                  entity: sensor.octoprint_print_progress
+                  icon: mdi:file-percent
+                  show_name: false
+                  show_state: true
+                  state:
+                    - value: 'unknown'
+                      color: grey
+                  styles:
+                    card:
+                      - height: 80px
+                - type: custom:button-card
+                  entity: sensor.octoprint_print_time
+                  show_name: false
+                  show_state: true
+                  state:
+                    - value: 'None'
+                      color: grey
+                  styles:
+                    card:
+                      - height: 80px
+                - type: custom:button-card
+                  entity: sensor.octoprint_print_time_left
+                  show_name: false
+                  show_state: true
+                  state:
+                    - value: 'None'
+                      color: grey
+                  styles:
+                    card:
+                      - height: 80px
+
+                - type: custom:button-card
+                  entity: sensor.octoprint_current_z
+                  #icon: mdi:file-percent
+                  show_name: false
+                  show_state: true
+                  state:
+                    - value: 'unknown'
+                      color: grey
+                  styles:
+                    card:
+                      - height: 80px
+
+
+
+
       - type: conditional
         conditions:
-          - entity: sensor.ender3_current_state
+          - entity: sensor.octoprint_print_status
             state_not: 'unknown'
           - entity: switch.ender3_controls
             state: 'off'
@@ -173,7 +170,7 @@ cards:
           name: Enable Controls
       - type: conditional
         conditions:
-          - entity: sensor.ender3_current_state
+          - entity: sensor.octoprint_print_status
             state: 'Operational'
           - entity: switch.ender3_controls
             state: 'on'
@@ -228,11 +225,11 @@ cards:
                     service: script.ender3_change_filament
       - type: conditional
         conditions:
-          - entity: sensor.ender3_current_state
+          - entity: sensor.octoprint_print_status
             state_not: 'Operational'
-          - entity: sensor.ender3_current_state
+          - entity: sensor.octoprint_print_status
             state_not: 'unknown'
-          - entity: sensor.ender3_current_state
+          - entity: sensor.octoprint_print_status
             state_not: 'Cancelling'
           - entity: switch.ender3
             state: 'on'
@@ -250,7 +247,7 @@ cards:
                 service: script.ender3_cancel_print
             - type: conditional
               conditions:
-                - entity: sensor.ender3_current_state
+                - entity: sensor.octoprint_print_status
                   state: 'Printing'
               card:
                 type: entity-button

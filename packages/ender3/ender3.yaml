@@ -33,26 +33,6 @@ automation:
       - service: switch.turn_off
         entity_id: switch.ender3_controls
 
-octoprint:
-  host: !secret ender3_octoprint_host
-  api_key: !secret ender3_octoprint_api_key
-  name: Ender3
-  number_of_tools: 1
-  bed: true
-  sensors:
-    monitored_conditions:
-      - 'Current State'
-      - 'Temperatures'
-      - 'Job Percentage'
-      - 'Time Elapsed'
-      - 'Time Remaining'
-
-binary_sensor:
-  - platform: octoprint
-    monitored_conditions:
-      - Printing
-      - Printing Error
-
 camera:
   platform: mjpeg
   name: Ender3

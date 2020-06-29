@@ -3,12 +3,14 @@ script:
     alias: Ender3 Safe Power Down
     sequence:
       - condition: state
-        entity_id: binary_sensor.ender3_printing
+        entity_id: binary_sensor.octoprint_printing
         state: 'off'
-      - service: rest_command.ender3_octoprint_shutdown
-        data: {}
+      - service: switch.turn_on
+        entity_id: switch.octoprint_shutdown_system
+      - wait_template: "{{ is_state('sensor.octoprint_print_status', 'unavailable') }}"
+        timeout: '00:01:00'
       - delay:
-          seconds: 20
+          seconds: 10
       - service: switch.turn_off
         data:
           entity_id: switch.3d_printer_psu
@@ -19,9 +21,8 @@ script:
       - condition: state
         entity_id: switch.ender3_controls
         state: 'on'
-      - service: rest_command.ender3_job_command
-        data:
-          payload: '{"command": "cancel"}'
+      - service: switch.turn_on
+        entity_id: switch.octoprint_cancel_print
 
   ender3_pause_print:
     alias: Ender3 Pause
@@ -29,9 +30,8 @@ script:
       - condition: state
         entity_id: switch.ender3_controls
         state: 'on'
-      - service: rest_command.ender3_job_command
-        data:
-          payload: '{"command": "pause", "action": "pause"}'
+      - service: switch.turn_on
+        entity_id: switch.octoprint_pause_print
   
   ender3_resume_print:
     alias: Ender3 Resume
@@ -39,9 +39,8 @@ script:
       - condition: state
         entity_id: switch.ender3_controls
         state: 'on'
-      - service: rest_command.ender3_job_command
-        data:
-          payload: '{"command": "pause", "action": "resume"}'
+      - service: switch.turn_off
+        entity_id: switch.octoprint_pause_print
 
   ender3_home:
     alias: Ender3 Homing
