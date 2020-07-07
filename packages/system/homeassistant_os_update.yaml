@@ -11,6 +11,8 @@ automation:
     trigger:
       - platform: state
         entity_id: sensor.homeassistant_version_available
+      - platform: homeassistant
+        event: start
     condition:
       - condition: template
         value_template: '{{ states("sensor.hassos_current_version") != state_attr("sensor.homeassistant_version_available", "hassos") }}'
@@ -36,6 +38,8 @@ automation:
 
   - alias: OS Update Notification Dismiss
     trigger:
+      - platform: homeassistant
+        event: start
       - platform: state
         entity_id:
           - sensor.homeassistant_version_available

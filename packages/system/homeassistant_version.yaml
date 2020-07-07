@@ -10,6 +10,8 @@ sensor:
 automation:
   - alias: Home Assistant Update Notification
     trigger:
+      - platform: homeassistant
+        event: start
       - platform: state
         entity_id: sensor.homeassistant_version_available
     condition:
@@ -43,6 +45,8 @@ automation:
 
   - alias: Home Assistant Update Notification Dismiss
     trigger:
+      - platform: homeassistant
+        event: start
       - platform: state
         entity_id:
           - sensor.homeassistant_version_available

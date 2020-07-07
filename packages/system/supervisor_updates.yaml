@@ -11,6 +11,8 @@ sensor:
 automation:
   - alias: Supervisor Update Notification
     trigger:
+      - platform: homeassistant
+        event: start
       - platform: state
         entity_id: sensor.supervisor_update
     condition:
@@ -39,6 +41,8 @@ automation:
 
   - alias: Supervisor Update Notification Dismiss
     trigger:
+      - platform: homeassistant
+        event: start
       - platform: state
         entity_id: sensor.supervisor
         to: 'False'
