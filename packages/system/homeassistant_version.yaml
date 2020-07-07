@@ -1,0 +1,48 @@
+sensor: 
+  - platform: version
+    name: homeassistant_version_available
+    source: hassio
+    image: qemux86-64
+
+  - platform: version
+    name: homeassistant_current_version
+
+automation:
+  - alias: Home Assistant Update Notification
+    trigger:
+      - platform: template
+        value_template: '{{ states("sensor.homeassistant_version_available") != states("sensor.homeassistant_current_version") }}'
+    action:
+    - service: notify.mobile_app_jenny_s_oppo_reno
+      data:
+        message: >
+          There is an update to Home Assistant core
+            * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
+        title: Update Home Assistant
+        data:
+          sticky: 'true'
+          tag: update_ha
+          color: '#ff8c00'
+          clickAction: /hassio/dashboard
+    - service: persistent_notification.create
+      data_template:
+        title: Update Home Assistant
+        message: >
+          There is an update to Home Assistant core
+            * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
+        notification_id: update_ha
+
+  - alias: Home Assistant Update Notification Dismiss
+    trigger:
+      - platform: template
+        value_template: '{{ states("sensor.version_available") == states("sensor.version_current") }}'
+          
+    action:
+    - service: notify.mobile_app_jenny_s_oppo_reno
+      data:
+        message: clear_notification
+        data:
+          tag: update_ha
+    - service: persistent_notification.dismiss
+      data:
+        notification_id: update_ha
