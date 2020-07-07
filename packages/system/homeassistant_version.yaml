@@ -10,7 +10,10 @@ sensor:
 automation:
   - alias: Home Assistant Update Notification
     trigger:
-      - platform: template
+      - platform: state
+        entity_id: sensor.homeassistant_version_available
+    condition:
+      - condition: template
         value_template: '{{ states("sensor.homeassistant_version_available") != states("sensor.homeassistant_current_version") }}'
     action:
     - service: notify.mobile_app_jenny_s_oppo_reno
@@ -31,12 +34,22 @@ automation:
           There is an update to Home Assistant core
             * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
         notification_id: update_ha
+    - service: rest_command.new_version_github_issue
+      data_template:
+        status: "open"
+    - service: rest_command.new_version_github_issue_comment
+      data_template:
+        version: '{{ states("sensor.homeassistant_version_available") }}'
 
   - alias: Home Assistant Update Notification Dismiss
     trigger:
-      - platform: template
-        value_template: '{{ states("sensor.version_available") == states("sensor.version_current") }}'
-          
+      - platform: state
+        entity_id:
+          - sensor.homeassistant_version_available
+          - sensor.homeassistant_current_version
+    condition:
+      - condition: template
+        value_template: '{{ states("sensor.homeassistant_version_available") == states("sensor.homeassistant_current_version") }}'
     action:
     - service: notify.mobile_app_jenny_s_oppo_reno
       data:
@@ -46,3 +59,18 @@ automation:
     - service: persistent_notification.dismiss
       data:
         notification_id: update_ha
+
+rest_command:
+  new_version_github_issue:
+    url: "https://api.github.com/repos/pinkywafer/Home-Assistant_Config/issues/11"
+    method: PATCH
+    headers:
+      Authorization: !secret github_issue_token
+    payload: '{"state":"{{ status }}"}'
+
+  new_version_github_issue_comment:
+    url: 'https://api.github.com/repos/pinkywafer/Home-Assistant_Config/issues/11/comments'
+    method: POST
+    headers:
+      Authorization: !secret github_issue_token
+    payload: '{ "body": "Home Assistant version {{ version }} is now available"}'
