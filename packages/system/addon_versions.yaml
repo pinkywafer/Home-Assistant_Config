@@ -1,0 +1,57 @@
+sensor:
+# addons
+  - platform: command_line
+    name: addon updates
+    command: 'curl http://supervisor/supervisor/info -H "Authorization: Bearer $(printenv SUPERVISOR_TOKEN)" | jq ''{"addons":[.data.addons[] | select(.version != .installed)]}'''
+    value_template: "{{ value_json.addons | length }}"
+    json_attributes:
+    - addons
+    scan_interval: 3600
+
+automation:
+  - alias: Addons Update Notification
+    trigger:
+      - platform: state
+        entity_id: sensor.addon_updates
+    condition:
+      - condition: numeric_state
+        entity_id: sensor.addon_updates
+        above: 0
+    action:
+    - service: notify.mobile_app_jenny_s_oppo_reno
+      data:
+        message: >
+          There are updates to {{ states("sensor.addon_updates") }} Add-Ons:
+          {% for addon in state_attr("sensor.addon_updates","addons") %}
+            * {{addon['name'] }} {{ addon['installed'] }} -> {{ addon['version'] }}
+          {%- endfor %}
+        title: Add-ons Updates Available
+        data:
+          sticky: 'true'
+          tag: update_addons
+          color: '#ff8c00'
+          clickAction: /hasio/dashboard
+    - service: persistent_notification.create
+      data_template:
+        title: Update Home Assistant Add-ons
+        message: >-
+          There are updates to {{ states("sensor.addon_updates") }} Add-Ons:
+          {% for addon in state_attr("sensor.addon_updates","addons") %}
+            * **{{addon['name'] }}** _{{ addon['installed'] }}_ -> _{{ addon['version'] }}_
+          {%- endfor %}
+        notification_id: update_addons
+
+  - alias: Addons Update Notification Dismiss
+    trigger:
+      - platform: state
+        entity_id: sensor.supervisor
+        to: '0'
+    action:
+    - service: notify.mobile_app_jenny_s_oppo_reno
+      data:
+        message: clear_notification
+        data:
+          tag: update_addons
+    - service: persistent_notification.dismiss
+      data:
+        notification_id: update_addons
