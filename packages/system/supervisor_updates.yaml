@@ -1,0 +1,53 @@
+sensor:
+  - platform: command_line
+    name: supervisor update
+    command: 'curl http://supervisor/supervisor/info -H "Authorization: Bearer $(printenv SUPERVISOR_TOKEN)" | jq ''{"newest_version":.data.version_latest,"current_version":.data.version}'''
+    value_template: "{{ value_json.newest_version != value_json.current_version }}"
+    json_attributes:
+    - newest_version
+    - current_version
+    scan_interval: 3600
+
+automation:
+  - alias: Supervisor Update Notification
+    trigger:
+      - platform: state
+        entity_id: sensor.supervisor_update
+    condition:
+      - condition: state
+        entity_id: sensor.supervisor_update
+        state: 'True'
+    action:
+    - service: notify.mobile_app_jenny_s_oppo_reno
+      data:
+        message: >
+          There is an updates to Home Assistant Supervisor:
+          * {{ state_attr("sensor.supervisor_update", "current_version") }} -> {{ state_attr("sensor.supervisor_update", "newest_version") }}
+        title: Supervisor Update Available
+        data:
+          sticky: 'true'
+          tag: update_supervisor
+          color: '#ff8c00'
+          clickAction: /hasio/dashboard
+    - service: persistent_notification.create
+      data_template:
+        title: Supervisor Update Available
+        message: >-
+          There is an updates to Home Assistant Supervisor:
+          * {{ state_attr("sensor.supervisor_update", "current_version") }} -> {{ state_attr("sensor.supervisor_update", "newest_version") }}
+        notification_id: update_supervisor
+
+  - alias: Supervisor Update Notification Dismiss
+    trigger:
+      - platform: state
+        entity_id: sensor.supervisor
+        to: 'False'
+    action:
+    - service: notify.mobile_app_jenny_s_oppo_reno
+      data:
+        message: clear_notification
+        data:
+          tag: update_supervisor
+    - service: persistent_notification.dismiss
+      data:
+        notification_id: update_supervisor
