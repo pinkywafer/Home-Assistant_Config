@@ -4,32 +4,47 @@ path: devices
 panel: true
 cards:
   - type: custom:layout-card
-    layout: horizontal
+    layout: vertical
     cards:
-      - type: vertical-stack
-        cards:
-          - type: entities
-            entities:
-              - entity: sensor.myip
-                name: Public IP Address
-          - type: entity-filter
-            entities:
-              - device_tracker.sitting_room_speaker
-              - device_tracker.emma_s_room_speaker
-              - device_tracker.bedroom_speaker
-              - device_tracker.emma_led
-              - device_tracker.pc_mediacenter
-              - device_tracker.tv_wifi
-              - device_tracker.dev_hassio
-              - device_tracker.plex_server
-              - device_tracker.fileserver
-              
-            state_filter:
-              - home
-            card:
-              type: glance
-              show_state: false
-              title: Online Devices
+      - type: entities
+        entities:
+          - entity: sensor.myip
+            name: Public IP Address
+      - type: 'custom:mini-graph-card'
+        name: Broadband Speed
+        align_state: center
+        show:
+          average: true
+        entities:
+          - entity: sensor.speedtest_download
+            name: Download
+            color: green
+          - entity: sensor.speedtest_upload
+            name: Upload
+            color: red
+          - entity: sensor.speedtest_ping
+            name: Ping
+            color: yellow
+      - break
+      - type: entity-filter
+        entities:
+          - device_tracker.sitting_room_speaker
+          - device_tracker.kitchen_speaker
+          - device_tracker.breakfast_bar_led
+          - device_tracker.emma_s_room_speaker
+          - device_tracker.bedroom_speaker
+          - device_tracker.emma_led
+          - device_tracker.pc_mediacenter
+          - device_tracker.tv_wifi
+          - device_tracker.dev_hassio
+          - device_tracker.plex_server
+          - device_tracker.fileserver
+        state_filter:
+          - home
+        card:
+          type: glance
+          show_state: false
+          title: Online Devices
 
       - type: glance
         title: Lights Status
@@ -57,6 +72,7 @@ cards:
             name: Jenny Bedside
           - entity: binary_sensor.jos_bedside_light_sonoff_status
             name: Jo Bedside
+      - break
       - type: custom:github-card
         entities:
           - sensor.anniversaries
