@@ -15,6 +15,11 @@ automation:
       - platform: state
         entity_id: sensor.homeassistant_version_available
     condition:
+      - condition: not
+        conditions:
+          - condition: state
+            entity_id: sensor.homeassistant_version_available
+            state: "Unavailable"
       - condition: template
         value_template: '{{ states("sensor.homeassistant_version_available") != states("sensor.homeassistant_current_version") }}'
     action:
