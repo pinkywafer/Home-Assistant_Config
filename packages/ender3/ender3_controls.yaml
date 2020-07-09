@@ -11,12 +11,12 @@ script:
         entity_id: switch.octoprint_shutdown_system
       - wait_template: "{{ is_state('sensor.octoprint_print_status', 'unavailable') }}"
       - delay:
-          seconds: 10
+          seconds: 30
       - service: switch.turn_off
         entity_id: switch.3d_printer_psu
 
   ender3_shutdown_when_cool:
-    alias: Ender3 Filament Change
+    alias: Ender3 shutdown when cool
     sequence:
       - condition: state
         entity_id: binary_sensor.octoprint_printing
@@ -24,7 +24,7 @@ script:
       - condition: state
         entity_id: automation.ender_3_auto_shutdown_when_done
         state: 'on'
-      - wait_template: "{{ states('sensor.octoprint_tool_0_temperature')|int < 10  }}"
+      - wait_template: "{{ states('sensor.octoprint_tool_0_temperature')|int < 40  }}"
         timeout: '00:10:00'
         continue_on_timeout: false
       - service: script.ender3_safe_power_down
