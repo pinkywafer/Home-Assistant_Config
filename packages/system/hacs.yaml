@@ -4,7 +4,8 @@ hacs:
   sidepanel_icon: hacs:hacs
 
 automation:
-  - alias: HACS Component Update Notification
+  - id: 'd73b2704-f6e5-42dc-9dfd-0c43a4853c05'
+    alias: HACS Component Update Notification
     trigger:
       - platform: state
         entity_id: sensor.hacs
@@ -36,7 +37,8 @@ automation:
           {%- endfor %}
         notification_id: update_hacs
 
-  - alias: HACS Component Update Notification Dismiss
+  - id: 'f72cfd6c-954f-42d6-9e01-d421f816ee14'
+    alias: HACS Component Update Notification Dismiss
     trigger:
       - platform: state
         entity_id: sensor.hacs

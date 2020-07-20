@@ -1,5 +1,6 @@
 automation:
-  - alias: Night - Bedroom light on at 00:30
+  - id: '35625726-0661-40b7-84a0-ea71c9ac5ba3'
+    alias: Night - Bedroom light on at 00:30
     trigger:
     - at: 00:30
       platform: time

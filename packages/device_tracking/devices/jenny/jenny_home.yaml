@@ -1,5 +1,6 @@
 automation:
-  - alias: Jenny home
+  - id: '7fa7966c-9994-42a8-8f9d-0235704de97c'
+    alias: Jenny home
     trigger:
     - platform: zone
       entity_id: person.jenny_gorton

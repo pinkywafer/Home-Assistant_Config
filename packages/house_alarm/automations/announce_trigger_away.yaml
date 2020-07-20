@@ -1,5 +1,6 @@
 automation:
-  - alias: start pending to trigger away alarm
+  - id: 'c3326759-b52d-4cbf-9725-1957f2f19fa4'
+    alias: start pending to trigger away alarm
     trigger:
     - platform: state
       entity_id: alarm_control_panel.alarm

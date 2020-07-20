@@ -7,7 +7,8 @@ sensor:
     channel_id: UCZ2Ku6wrhdYDHCaBzLaA3bw
 
 automation:
-  - alias: YouTube Notification - Frank Nijhof
+  - id: 'ba25c6a0-c3b5-4418-b378-54d98c76b26a'
+    alias: YouTube Notification - Frank Nijhof
     trigger:
       - platform: state
         entity_id: sensor.franck_nijhof

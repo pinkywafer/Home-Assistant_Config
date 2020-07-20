@@ -1,5 +1,6 @@
 automation:
-  - alias: Evening - vestibule light on 1 hour before sunset
+  - id: '7ba5889f-44d3-453e-8aff-3455da0f3282'
+    alias: Evening - vestibule light on 1 hour before sunset
     trigger:
     - event: sunset
       offset: '-1:00'

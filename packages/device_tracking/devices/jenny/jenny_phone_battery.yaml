@@ -1,5 +1,6 @@
 automation:
-  - alias: Jenny phone battery warning
+  - id: 'c206c458-aa56-49e9-abcc-bf3190cb3e93'
+    alias: Jenny phone battery warning
     trigger:
     - entity_id: sensor.jenny_s_oppo_reno_battery_level
       below: 15
@@ -13,7 +14,8 @@ automation:
       data:
         message: "Remember to charge your phone Jenny, It's down to {{ states('sensor.jenny_s_oppo_reno_battery_level')}} percent!"
 
-  - alias: Jenny phone battery critical
+  - id: '2fad6acb-b674-4632-b540-821f59cccfde'
+    alias: Jenny phone battery critical
     trigger:
     - entity_id: sensor.jenny_s_oppo_reno_battery_level
       below: 5

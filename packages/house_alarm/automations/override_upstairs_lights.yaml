@@ -1,5 +1,6 @@
 automation:
-  - alias: override upstairs lights
+  - id: '5d9b29ab-dd31-4910-b78c-f75bcbadc7c4'
+    alias: override upstairs lights
     trigger:
     - platform: state
       entity_id: light.bedroom_ceiling_light

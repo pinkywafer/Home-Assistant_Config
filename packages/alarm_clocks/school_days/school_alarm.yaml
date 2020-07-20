@@ -1,5 +1,6 @@
 automation:
-  - alias: Wake Up For School
+  - id: 'e72e5e02-8e97-43c2-a3d4-e752017df4ee'
+    alias: Wake Up For School
     trigger:
       - at: '8:00'
         platform: time

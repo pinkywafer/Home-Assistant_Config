@@ -1,5 +1,6 @@
 automation:
-  - alias: door and window battery warnings
+  - id: '220754fa-ec6c-47f6-a880-b2f23c354d41'
+    alias: door and window battery warnings
     trigger:
       - platform: state
         entity_id: 

@@ -1,7 +1,8 @@
 readme:
 
 automation:
-  - alias: Generate readme
+  - id: '0a55daf1-ea12-4fbe-951d-39c33b80ae51'
+    alias: Generate readme
     trigger:
       - platform: homeassistant
         event: start

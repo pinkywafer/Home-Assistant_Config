@@ -7,7 +7,8 @@ sensor:
     channel_id: UC301G8JJFzY0BZ_0lshpKpQ
 
 automation:
-  - alias: YouTube Notification - vCloudInfo
+  - id: '3b2e2907-c067-4678-9725-482250d9b43c'
+    alias: YouTube Notification - vCloudInfo
     trigger:
       - platform: state
         entity_id: sensor.vcloudinfo

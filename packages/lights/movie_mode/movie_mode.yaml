@@ -49,7 +49,8 @@ light:
               entity_id: light.sitting_room_light
 
 automation:
-  - alias: Reset kitchen LEDs after movie mode
+  - id: '2fbe2413-56e9-4c21-8899-0152e8e04366'
+    alias: Reset kitchen LEDs after movie mode
     trigger:
       - platform: state
         entity_id: light.movie_mode_lights

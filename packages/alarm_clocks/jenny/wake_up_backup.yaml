@@ -1,13 +1,14 @@
 automation:
-  alias: Jenny wake up - backup
-  trigger:
-    platform: template
-    value_template: "{{states('sensor.time') == ((states.input_datetime.jenny_alarm_time.attributes.timestamp | int + 1800 ) | timestamp_custom('%H:%M',False))}}"
-  condition:
-    - condition: state
-      entity_id: 'automation.jenny_wake_up'
-      state: 'on'
-  action:
-  - service: light.turn_on
-    entity_id:
-    - light.jennys_bedside_light
+  - id: '6268a24f-4a81-4bd0-a476-e7f141030e67'
+    alias: Jenny wake up - backup
+    trigger:
+      platform: template
+      value_template: "{{states('sensor.time') == ((states.input_datetime.jenny_alarm_time.attributes.timestamp | int + 1800 ) | timestamp_custom('%H:%M',False))}}"
+    condition:
+      - condition: state
+        entity_id: 'automation.jenny_wake_up'
+        state: 'on'
+    action:
+    - service: light.turn_on
+      entity_id:
+      - light.jennys_bedside_light

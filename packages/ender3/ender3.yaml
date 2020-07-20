@@ -23,7 +23,8 @@ switch ender3_controls:
   command_topic: "ender3_controls"
 
 automation:
-  - alias: ender3 disable controls
+  - id: '383db63c-ffcc-4b77-90b4-3b0fd04a33c0'
+    alias: ender3 disable controls
     trigger:
       - platform: state
         entity_id: switch.ender3_controls

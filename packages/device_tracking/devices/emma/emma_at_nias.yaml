@@ -1,5 +1,6 @@
 automation:
-  - alias: Emma at Nia's
+  - id: 'f47e81e2-d138-4226-b0fc-0364671613c9'
+    alias: Emma at Nia's
     trigger:
     - platform: zone
       entity_id: person.emma_gorton
@@ -13,7 +14,8 @@ automation:
         data:
           tag: emma_location
 
-  - alias: Emma left Nia's
+  - id: 'dbfc30bd-5e48-4bcc-b980-a695442b1aa7'
+    alias: Emma left Nia's
     trigger:
     - platform: zone
       entity_id: person.emma_gorton

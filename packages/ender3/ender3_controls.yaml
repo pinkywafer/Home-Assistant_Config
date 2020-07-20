@@ -150,7 +150,8 @@ script:
           payload: "M600"
 
 automation:
-  - alias: Ender 3 Auto shutdown when done
+  - id: '21c0b61f-1a27-43af-8044-60a83de0eec2'
+    alias: Ender 3 Auto shutdown when done
     description: Shutdown the printer once is has cooled down
     trigger:
       - platform: state

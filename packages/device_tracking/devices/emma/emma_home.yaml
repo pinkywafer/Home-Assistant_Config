@@ -1,5 +1,6 @@
 automation:
-  - alias: Emma home
+  - id: '21d1a683-8d42-44c2-8cfa-3f94e769d9ea'
+    alias: Emma home
     trigger:
     - platform: zone
       entity_id: person.emma_gorton
@@ -16,7 +17,8 @@ automation:
       data:
         message: 'Emma is home!'
 
-  - alias: Emma left home
+  - id: 'fb86e809-5d31-4505-8949-360413654c6b'
+    alias: Emma left home
     trigger:
     - platform: zone
       entity_id: person.emma_gorton

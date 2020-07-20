@@ -1,5 +1,6 @@
 automation:
-  - alias: Evening - Sitting Room light on 2 hours before sunset
+  - id: 'eaa1418c-1e48-4a08-9779-58ed8c71128a'
+    alias: Evening - Sitting Room light on 2 hours before sunset
     trigger:
     - event: sunset
       offset: '-2:00'

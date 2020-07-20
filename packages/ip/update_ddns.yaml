@@ -3,7 +3,8 @@ rest_command:
     url: 'https://{{ddns_username}}:{{ddns_password}}@domains.google.com/nic/update?hostname={{ddns_hostname}}&myip={{states("sensor.myip")}}'
 
 automation:
-  - alias: update DDNS records
+  - id: 'f1b23b8a-9cb8-41fd-baa3-27f7f2ebdf4e'
+    alias: update DDNS records
     trigger:
       - platform: state
         entity_id: sensor.myip

@@ -1,5 +1,6 @@
 automation:
-  - alias: Emma phone battery warning
+  - id: 'd6dd7f0a-c439-4c10-90d2-d3bd8cbaef1a'
+    alias: Emma phone battery warning
     trigger:
     - entity_id: sensor.emma_s_blackberry_dtek50_battery_level
       below: 15

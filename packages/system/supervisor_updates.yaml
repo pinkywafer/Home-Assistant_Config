@@ -9,7 +9,8 @@ sensor:
     scan_interval: 3600
 
 automation:
-  - alias: Supervisor Update Notification
+  - id: 'ef8b316b-02fa-4470-b336-095cfc9a074b'
+    alias: Supervisor Update Notification
     trigger:
       - platform: homeassistant
         event: start
@@ -39,7 +40,8 @@ automation:
           * {{ state_attr("sensor.supervisor_update", "current_version") }} -> {{ state_attr("sensor.supervisor_update", "newest_version") }}
         notification_id: update_supervisor
 
-  - alias: Supervisor Update Notification Dismiss
+  - id: '09859cbe-cd66-4cba-9b64-ae3e0937c8f4'
+    alias: Supervisor Update Notification Dismiss
     trigger:
       - platform: homeassistant
         event: start

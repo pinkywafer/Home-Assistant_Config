@@ -9,7 +9,8 @@ sensor:
     scan_interval: 3600
 
 automation:
-  - alias: Addons Update Notification
+  - id: 'b0751eed-372c-4500-902f-4fe1b356be72'
+    alias: Addons Update Notification
     trigger:
       - platform: state
         entity_id: sensor.addon_updates
@@ -41,10 +42,11 @@ automation:
           {%- endfor %}
         notification_id: update_addons
 
-  - alias: Addons Update Notification Dismiss
+  - id: '4d6dbee0-d90b-4ef6-ae82-ed3064e126c7'
+    alias: Addons Update Notification Dismiss
     trigger:
       - platform: state
-        entity_id: sensor.supervisor
+        entity_id: sensor.addon_updates
         to: '0'
     action:
     - service: notify.mobile_app_jenny_s_oppo_reno

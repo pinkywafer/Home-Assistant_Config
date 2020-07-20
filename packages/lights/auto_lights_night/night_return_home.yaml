@@ -1,5 +1,6 @@
 automation:
-  - alias: Night - Return home lights
+  - id: 'dc151c2b-87ae-43fa-89fd-597409f47b72'
+    alias: Night - Return home lights
     trigger:
     - entity_id: person.jenny_gorton
       from: not_home

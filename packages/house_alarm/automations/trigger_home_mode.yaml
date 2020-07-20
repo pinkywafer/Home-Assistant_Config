@@ -1,5 +1,6 @@
 automation:
-  - alias: Alarm Trigger - Home mode
+  - id: '9ec72eae-f839-4f79-830e-cc0f903779a8'
+    alias: Alarm Trigger - Home mode
     trigger:
       ##########################################
       #   Doors only

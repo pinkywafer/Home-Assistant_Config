@@ -1,5 +1,6 @@
 automation:
-  - alias: Emma at Agatha's
+  - id: '9709ecab-deec-41a6-87e1-af9e75ea497c'
+    alias: Emma at Agatha's
     trigger:
       - platform: zone
         entity_id: person.emma_gorton
@@ -12,7 +13,8 @@ automation:
         data:
           tag: emma_location
   
-  - alias: Emma left Agatha's
+  - id: '79a8f099-61a8-43ab-9f1a-9915df95c196'
+    alias: Emma left Agatha's
     trigger:
       - platform: zone
         entity_id: person.emma_gorton

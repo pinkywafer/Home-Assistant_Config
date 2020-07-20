@@ -4,25 +4,26 @@ anniversaries:
     date: !secret emma_birthday
 
 automation:
-- alias: Emma's Birthday Greeting
-  trigger:
-    platform: time
-    at: "15:50:00"
-  condition:
-    - condition: state
-      entity_id: sensor.anniversary_emma_s_birthday
-      state:  '0'
-  action:
-    - service: notify.mobile_app_emma_s_blackberry_dtek_50
-      data:
-        message: "Happy Birthday Emma!"
+  - id: '73729515-0630-42b7-98ad-b1ae7fc4c3b5'
+    alias: Emma's Birthday Greeting
+    trigger:
+      platform: time
+      at: "15:50:00"
+    condition:
+      - condition: state
+        entity_id: sensor.anniversary_emma_s_birthday
+        state:  '0'
+    action:
+      - service: notify.mobile_app_emma_s_blackberry_dtek_50
         data:
-          tag: birthday
-    - service: notify.broadcast_from_home_assistant
-      data:
-        message: "Happy Birthday Emma!"
-    - service: notify.mobile_app_jenny_s_oppo_reno
-      data:
-        message: "Happy Birthday Emma!"
+          message: "Happy Birthday Emma!"
+          data:
+            tag: birthday
+      - service: notify.broadcast_from_home_assistant
         data:
-          tag: birthday
+          message: "Happy Birthday Emma!"
+      - service: notify.mobile_app_jenny_s_oppo_reno
+        data:
+          message: "Happy Birthday Emma!"
+          data:
+            tag: birthday

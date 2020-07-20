@@ -1,5 +1,6 @@
 automation:
-  - alias: Kitchen LEDs on with Sink light
+  - id: '98e9e765-84db-4e25-ac61-b3cbc85b68c3'
+    alias: Kitchen LEDs on with Sink light
     trigger:
     - platform: state
       entity_id: light.sink_light
@@ -8,7 +9,8 @@ automation:
     - service: light.turn_on
       entity_id: light.breakfast_bar_led
 
-  - alias: Kitchen LEDs off with Sink light
+  - id: 'd1c5b5c2-3191-46a8-849a-c100c0f24728'
+    alias: Kitchen LEDs off with Sink light
     trigger:
     - platform: state
       entity_id: light.sink_light

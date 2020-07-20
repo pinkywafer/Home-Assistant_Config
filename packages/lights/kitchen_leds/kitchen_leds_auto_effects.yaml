@@ -52,7 +52,8 @@ sensor:
             {%- endif %}
 
 automation:
-  - alias: Auto set Kitchen LEDs
+  - id: '3a751475-257f-4292-8298-bb4efa720309'
+    alias: Auto set Kitchen LEDs
     trigger:
       - platform: state
         entity_id: sensor.default_kitchen_effect

@@ -1,5 +1,6 @@
 automation:
-  - alias: Alarm announce arming in away mode
+  - id: 'b9fbc004-bc9d-437b-b5af-9a029b8ff04e'
+    alias: Alarm announce arming in away mode
     trigger:
     - platform: state
       entity_id: alarm_control_panel.alarm

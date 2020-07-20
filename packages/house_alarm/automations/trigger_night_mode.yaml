@@ -1,5 +1,6 @@
 automation:
-  - alias: Alarm Trigger - Night mode
+  - id: 'cb36036e-5826-4251-85d9-a1e3b1f71e2c'
+    alias: Alarm Trigger - Night mode
     trigger:
     # panic button
     - platform: state

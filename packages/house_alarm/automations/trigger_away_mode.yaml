@@ -1,5 +1,6 @@
 automation:
-  - alias: Alarm Trigger - Away mode
+  - id: 'f13aa989-cd90-410e-aa44-c51f5db977c3'
+    alias: Alarm Trigger - Away mode
     trigger:
     # Panic Button
     - platform: state

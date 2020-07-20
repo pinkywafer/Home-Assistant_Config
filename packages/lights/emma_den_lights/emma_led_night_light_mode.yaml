@@ -3,7 +3,8 @@ input_boolean:
     name: Sunrise for Emma's Den Lights
 
 automation:
-  - alias: Sunrise in emma's room for 8am
+  - id: '580f4811-a280-4e1c-b354-73fdf0c420af'
+    alias: Sunrise in emma's room for 8am
     trigger:
       platform: time
       at: "07:40:00"
@@ -15,7 +16,8 @@ automation:
         data:
           effect: "Sunrise"
 
-  - alias: turn on sunrise input boolean for Emma_led
+  - id: '9ee19169-f080-416d-95fd-f8118b7d5ad4'
+    alias: turn on sunrise input boolean for Emma_led
     trigger:
       platform: numeric_state
       entity_id: sun.sun
@@ -30,7 +32,8 @@ automation:
       - service: input_boolean.turn_on
         entity_id: input_boolean.sunrise_for_emma_led
 
-  - alias: Emma's Daylight mode off after sunrise
+  - id: '3724cb2b-1f74-4a2d-a981-70cdf033bc46'
+    alias: Emma's Daylight mode off after sunrise
     trigger:
       - platform: template
         value_template: >
@@ -59,7 +62,8 @@ automation:
       - service: light.turn_off
         entity_id: light.emma_led
 
-  - alias: sunset in emma's room at sunset
+  - id: 'a50b9a77-ea44-4ab9-8143-83695bbe38f8'
+    alias: sunset in emma's room at sunset
     trigger:
       platform: sun
       event: sunset

@@ -7,7 +7,8 @@ sensor:
     channel_id: UC7G4tLa4Kt6A9e3hJ-HO8ng
 
 automation:
-  - alias: YouTube Notification - DrZzs
+  - id: 'e55f763f-0b24-4fe6-83af-525fdad4a7c8'
+    alias: YouTube Notification - DrZzs
     trigger:
       - platform: state
         entity_id: sensor.drzzs

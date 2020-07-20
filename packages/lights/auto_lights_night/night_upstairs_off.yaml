@@ -1,5 +1,6 @@
 automation:
-  - alias: Night - Upstairs lights off at 1:30
+  - id: '04e4777d-2738-4c88-979b-7410ff41f89f'
+    alias: Night - Upstairs lights off at 1:30
     trigger:
     - platform: time
       at: 01:30

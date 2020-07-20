@@ -1,5 +1,6 @@
 automation:
-  - alias: Alarm Trigger - Panic Button
+  - id: '91f46014-633a-43a4-a051-a922ec17ebad'
+    alias: Alarm Trigger - Panic Button
     trigger:
     - platform: state
       entity_id: input_boolean.panic_button

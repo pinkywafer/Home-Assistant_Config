@@ -1,5 +1,6 @@
 automation:
-  - alias: Alarm triggered actions
+  - id: 'bfe22989-0b04-4e93-93da-a565b46f6aa3'
+    alias: Alarm triggered actions
     trigger:
     - platform: state
       entity_id: alarm_control_panel.alarm

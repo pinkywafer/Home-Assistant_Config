@@ -7,7 +7,8 @@ sensor:
     channel_id: UCSC1HqVmTaE4Shn32ihbC7w
 
 automation:
-  - alias: YouTube Notification - Bobby Duke Arts
+  - id: 'd44e80dd-7494-4735-b3cd-24bd4c59241c'
+    alias: YouTube Notification - Bobby Duke Arts
     trigger:
       - platform: state
         entity_id: sensor.bobby_duke_arts

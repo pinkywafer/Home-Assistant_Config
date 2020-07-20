@@ -7,7 +7,8 @@ sensor:
     - data
 
 automation:
-  - alias: OS Update Notification
+  - id: '52c99e93-e48a-4cc0-a63f-7c1d9b270947'
+    alias: OS Update Notification
     trigger:
       - platform: state
         entity_id: sensor.homeassistant_version_available
@@ -36,7 +37,8 @@ automation:
             * {{ states("sensor.hassos_current_version") }} -> {{ state_attr("sensor.homeassistant_version_available", "hassos") }}
         notification_id: update_os
 
-  - alias: OS Update Notification Dismiss
+  - id: 'f02024a1-9b86-4157-ba97-1c876bdbe44e'
+    alias: OS Update Notification Dismiss
     trigger:
       - platform: homeassistant
         event: start

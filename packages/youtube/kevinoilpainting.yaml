@@ -7,7 +7,8 @@ sensor:
     channel_id: UCx2xTsk2RnLHU-a139MOcmA
 
 automation:
-  - alias: YouTube Notification - KevinOilPainting
+  - id: '964dd78a-8667-4cff-9a67-16f3da44fd4d'
+    alias: YouTube Notification - KevinOilPainting
     trigger:
       - platform: state
         entity_id: sensor.kevinoilpainting

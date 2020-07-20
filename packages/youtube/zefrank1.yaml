@@ -7,7 +7,8 @@ sensor:
     channel_id: UCVpankR4HtoAVtYnFDUieYA
 
 automation:
-  - alias: YouTube Notification - zefrank1
+  - id: '6fe8bf58-7300-4fb4-8a6c-df52dad4b552'
+    alias: YouTube Notification - zefrank1
     trigger:
       - platform: state
         entity_id: sensor.zefrank1

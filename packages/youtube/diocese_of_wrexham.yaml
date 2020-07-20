@@ -7,7 +7,8 @@ sensor:
     channel_id: UCGvWVUTM8wQ3AfMuS4rXbPQ
 
 automation:
-  - alias: YouTube Notification - Diocese of Wrexham (TTS)
+  - id: 'ae5ad15c-82f8-4639-b81e-d978a0694675'
+    alias: YouTube Notification - Diocese of Wrexham (TTS)
     trigger:
       - platform: state
         entity_id: sensor.diocese_of_wrexham

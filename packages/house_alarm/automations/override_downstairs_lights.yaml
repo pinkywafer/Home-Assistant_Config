@@ -1,5 +1,6 @@
 automation:
-  - alias: override downstairs lights
+  - id: '7ad33a85-4c5a-407f-a9f0-41a0058054f7'
+    alias: override downstairs lights
     trigger:
     - platform: state
       entity_id: light.sitting_room_light

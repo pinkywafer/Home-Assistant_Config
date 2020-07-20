@@ -1,5 +1,6 @@
 automation:
-  - alias: Alarm Shut Off
+  - id: 'dff52442-3c7e-4e23-9396-4baa97cf2d78'
+    alias: Alarm Shut Off
     trigger:
     - platform: state
       entity_id: alarm_control_panel.alarm
