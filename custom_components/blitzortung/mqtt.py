@@ -20,8 +20,8 @@ DEFAULT_PORT = 1883
 DEFAULT_KEEPALIVE = 60
 PROTOCOL_311 = "3.1.1"
 DEFAULT_PROTOCOL = PROTOCOL_311
-MQTT_CONNECTED = "mqtt_connected"
-MQTT_DISCONNECTED = "mqtt_disconnected"
+MQTT_CONNECTED = "blitzortung_mqtt_connected"
+MQTT_DISCONNECTED = "blitzortung_mqtt_disconnected"
 
 
 MAX_RECONNECT_WAIT = 300  # seconds
@@ -301,7 +301,7 @@ class MQTT:
         """Disconnected callback."""
         self.connected = False
         dispatcher_send(self.hass, MQTT_DISCONNECTED)
-        _LOGGER.warning(
+        _LOGGER.info(
             "Disconnected from MQTT server %s:%s (%s)",
             self.host,
             self.port,

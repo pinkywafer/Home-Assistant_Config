@@ -1,5 +1,4 @@
 import logging
-from typing import Optional, Dict
 
 from homeassistant.const import (
     ATTR_ATTRIBUTION,
@@ -31,34 +30,51 @@ _LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup_entry(hass, config_entry, async_add_entities):
-    name = config_entry.data[CONF_NAME]
+    integration_name = config_entry.data[CONF_NAME]
 
     coordinator = hass.data[DOMAIN][config_entry.entry_id]
 
     unique_prefix = config_entry.unique_id
 
-    sensor_classes = (DistanceSensor, AzimuthSensor, CounterSensor)
-
-    config = hass.data[DOMAIN].get("config") or {}
-    if config.get(SERVER_STATS):
-        sensor_classes += (ServerStatsSensor, )
-
     sensors = [
-        klass(coordinator, name, unique_prefix)
-        for klass in sensor_classes
+        klass(coordinator, integration_name, unique_prefix)
+        for klass in (DistanceSensor, AzimuthSensor, CounterSensor)
     ]
 
     async_add_entities(sensors, False)
+
+    config = hass.data[DOMAIN].get("config") or {}
+    if config.get(SERVER_STATS):
+        server_stat_sensors = {}
+
+        def on_message(message):
+            if not message.topic.startswith("$SYS/broker/"):
+                return
+            topic = message.topic.replace("$SYS/broker/", "")
+            if topic.startswith("load") and not topic.endswith("/1min"):
+                return
+            if topic.startswith("clients") and topic != "clients/connected":
+                return
+            sensor = server_stat_sensors.get(topic)
+            if not sensor:
+                sensor = ServerStatSensor(
+                    topic, coordinator, integration_name, unique_prefix
+                )
+                server_stat_sensors[topic] = sensor
+                async_add_entities([sensor], False)
+            sensor.on_message(topic, message)
+
+        coordinator.register_message_receiver(on_message)
 
 
 class BlitzortungSensor(Entity):
     """Define a Blitzortung sensor."""
 
-    def __init__(self, coordinator, name, unique_prefix):
+    def __init__(self, coordinator, integration_name, unique_prefix):
         """Initialize."""
         self.coordinator = coordinator
-        self._name = name
-        self.entity_id = f"sensor.{name}-{self.name}"
+        self._integration_name = integration_name
+        self.entity_id = f"sensor.{integration_name}-{self.name}"
         self._unique_id = f"{unique_prefix}-{self.kind}"
         self._device_class = None
         self._state = None
@@ -108,8 +124,8 @@ class BlitzortungSensor(Entity):
     @property
     def device_info(self):
         return {
-            "name": f"{self._name} Lightning Detector",
-            "identifiers": {(DOMAIN, self._name)},
+            "name": f"{self._integration_name} Lightning Detector",
+            "identifiers": {(DOMAIN, self._integration_name)},
             "model": "Lightning Detector",
             "sw-version": "0.0.1",
         }
@@ -120,48 +136,100 @@ class BlitzortungSensor(Entity):
     def on_message(self, message):
         pass
 
+    def tick(self):
+        pass
 
-class DistanceSensor(BlitzortungSensor):
+
+class LightningSensor(BlitzortungSensor):
+    INITIAL_STATE = None
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._state = self.INITIAL_STATE
+
+    def tick(self):
+        if self._state != self.INITIAL_STATE and self.coordinator.is_inactive:
+            self._state = self.INITIAL_STATE
+            self.async_write_ha_state()
+
+
+class DistanceSensor(LightningSensor):
     kind = ATTR_LIGHTNING_DISTANCE
     unit_of_measurement = LENGTH_KILOMETERS
 
-    def update_lightning(self, lightning: Optional[Dict]):
-        self._state = lightning and lightning["distance"]
-        self._attrs[ATTR_LAT] = lightning and lightning[ATTR_LAT]
-        self._attrs[ATTR_LON] = lightning and lightning[ATTR_LON]
+    def update_lightning(self, lightning):
+        self._state = lightning["distance"]
+        self._attrs[ATTR_LAT] = lightning[ATTR_LAT]
+        self._attrs[ATTR_LON] = lightning[ATTR_LON]
         self.async_write_ha_state()
 
 
-class AzimuthSensor(BlitzortungSensor):
+class AzimuthSensor(LightningSensor):
     kind = ATTR_LIGHTNING_AZIMUTH
     unit_of_measurement = DEGREE
 
-    def update_lightning(self, lightning: Optional[Dict]):
-        self._state = lightning and lightning["azimuth"]
-        self._attrs[ATTR_LAT] = lightning and lightning[ATTR_LAT]
-        self._attrs[ATTR_LON] = lightning and lightning[ATTR_LON]
+    def update_lightning(self, lightning):
+        self._state = lightning["azimuth"]
+        self._attrs[ATTR_LAT] = lightning[ATTR_LAT]
+        self._attrs[ATTR_LON] = lightning[ATTR_LON]
         self.async_write_ha_state()
 
 
-class CounterSensor(BlitzortungSensor):
+class CounterSensor(LightningSensor):
     kind = ATTR_LIGHTNING_COUNTER
     unit_of_measurement = "↯"
+    INITIAL_STATE = 0
 
-    def update_lightning(self, lightning: Optional[Dict]):
-        if not lightning:
-            self._state = 0
-        else:
-            self._state = (self._state or 0) + 1
+    def update_lightning(self, lightning):
+        self._state = self._state + 1
         self.async_write_ha_state()
 
 
-class ServerStatsSensor(BlitzortungSensor):
-    kind = "server_stats"
-    unit_of_measurement = "."
+class ServerStatSensor(BlitzortungSensor):
+    def __init__(self, topic, coordinator, integration_name, unique_prefix):
+        self._topic = topic
 
-    name = "Clients Connected"
+        topic_parts = topic.replace("$SYS/broker/", "").split("/")
+        self.kind = "_".join(topic_parts)
+        if self.kind.startswith("load"):
+            self.data_type = float
+        elif self.kind in ("uptime", "version"):
+            self.data_type = str
+        else:
+            self.data_type = int
 
-    def on_message(self, message):
-        if message.topic == "$SYS/broker/clients/connected":
-            self._state = int(message.payload)
-            self.async_write_ha_state()
+        if self.kind == "clients_connected":
+            self.kind = "server_stats"
+
+        self._name = " ".join(part.capitalize() for part in topic_parts)
+
+        super().__init__(coordinator, integration_name, unique_prefix)
+
+    @property
+    def unit_of_measurement(self):
+        if self.data_type in (int, float):
+            return "." if self.kind == "server_stats" else " "
+        else:
+            return None
+
+    @classmethod
+    def for_topic(cls, topic, coordinator, integration_name, unique_prefix):
+        return cls(topic, coordinator, integration_name, unique_prefix)
+
+    def on_message(self, topic, message):
+        if topic == self._topic:
+            payload = message.payload.decode("utf-8")
+            try:
+                self._state = self.data_type(payload)
+            except ValueError:
+                self._state = str(payload)
+            if self.hass:
+                self.async_write_ha_state()
+
+    @property
+    def label(self):
+        return self._name
+
+    @property
+    def name(self):
+        return self._name
