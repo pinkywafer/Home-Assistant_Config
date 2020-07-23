@@ -29,6 +29,7 @@ automation:
         message: >
           There is an update to Home Assistant core
             * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
+            Triggering Travis build...
         title: Update Home Assistant
         data:
           sticky: 'true'
@@ -41,13 +42,62 @@ automation:
         message: >
           There is an update to Home Assistant core
             * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
+            Triggering Travis build...
         notification_id: update_ha
     - service: rest_command.new_version_github_issue
       data_template:
         status: "open"
     - service: rest_command.new_version_github_issue_comment
       data_template:
-        version: '{{ states("sensor.homeassistant_version_available") }}'
+        message: ' Home Assistant version {{ states("sensor.homeassistant_version_available") }} is now available"}'
+    - service: rest_command.travis_build
+    # wait for travis build to start then update notification
+    - wait_template: "{{ is_state('sensor.pinkywafer_home_assistant_config_state', 'started') }}"
+    - service: notify.mobile_app_jenny_s_oppo_reno
+      data:
+        message: >
+          There is an update to Home Assistant core
+            * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
+            Travis Build has started
+        title: Update Home Assistant
+        data:
+          sticky: 'true'
+          tag: update_ha
+          color: '#ff8c00'
+          clickAction: /hassio/dashboard
+    - service: persistent_notification.create
+      data_template:
+        title: Update Home Assistant
+        message: >
+          There is an update to Home Assistant core
+            * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
+            Travis Build has started
+        notification_id: update_ha
+    # wait for build to complete and update notification with status
+    - wait_template: "{{ not is_state('sensor.pinkywafer_home_assistant_config_state', 'created') and not is_state('sensor.pinkywafer_home_assistant_config_state', 'started') }}"
+    - service: notify.mobile_app_jenny_s_oppo_reno
+      data:
+        message: >
+          There is an update to Home Assistant core
+            * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
+            Travis Build has {{states('sensor.pinkywafer_home_assistant_config_state')}}
+        title: Update Home Assistant
+        data:
+          sticky: 'true'
+          tag: update_ha
+          color: '#ff8c00'
+          clickAction: /hassio/dashboard
+    - service: persistent_notification.create
+      data_template:
+        title: Update Home Assistant
+        message: >
+          There is an update to Home Assistant core
+            * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
+            Travis Build has {{states('sensor.pinkywafer_home_assistant_config_state')}}
+        notification_id: update_ha
+    - service: rest_command.new_version_github_issue_comment
+      data_template:
+        message: "Travis build has {{ states('sensor.pinkywafer_home_assistant_config_state') }}"
 
   - id: '7e81d1d4-9fb7-47d1-89d1-2e8624673f3d'
     alias: Home Assistant Update Notification Dismiss
@@ -84,4 +134,4 @@ rest_command:
     method: POST
     headers:
       Authorization: !secret github_issue_token
-    payload: '{ "body": "Home Assistant version {{ version }} is now available"}'
+    payload: '{ "body": "{{ message }}" }' 
