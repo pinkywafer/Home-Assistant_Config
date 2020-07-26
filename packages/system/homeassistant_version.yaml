@@ -7,6 +7,10 @@ sensor:
   - platform: version
     name: homeassistant_current_version
 
+input_text:
+  ha_version_notified:
+    name: Home assistant update version notified
+
 automation:
   - id: 'cf6506cb-87e3-4dcd-ae33-3d93fa04d140'
     alias: Home Assistant Update Notification
@@ -16,14 +20,18 @@ automation:
       - platform: state
         entity_id: sensor.homeassistant_version_available
     condition:
-      - condition: not
-        conditions:
-          - condition: state
-            entity_id: sensor.homeassistant_version_available
-            state: "unknown"
       - condition: template
-        value_template: '{{ states("sensor.homeassistant_version_available") != states("sensor.homeassistant_current_version") }}'
+        value_template: >
+          {{
+          states("sensor.homeassistant_version_available") != states("sensor.homeassistant_current_version")
+          and states("sensor.homeassistant_version_available") != "unknown"
+          and states("sensor.homeassistant_version_available") != states("input_text.ha_version_notified")
+          }}
     action:
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.ha_version_notified
+        value: '{{ states("sensor.homeassistant_version_available") }}'
     - service: notify.mobile_app_jenny_s_oppo_reno
       data:
         message: >
