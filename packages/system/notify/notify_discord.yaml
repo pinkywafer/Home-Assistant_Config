@@ -1,0 +1,4 @@
+notify:
+  - platform: discord
+    name: discord_bot
+    token: !secret discord_bot_token
