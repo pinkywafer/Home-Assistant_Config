@@ -1,0 +1,11 @@
+# Configuration for probot-stale - https://github.com/probot/stale
+daysUntilStale: 7
+daysUntilClose: 1
+onlyLabels: ['weekly-digest']
+exemptLabels: []
+staleLabel: oldnews
+markComment: >
+  This issue has been automatically marked as old news and will be closed shortly.
+  There is a new Weekly digest available.  Please see that one for the most up to date information. 
+closeComment: false
+only: issues
