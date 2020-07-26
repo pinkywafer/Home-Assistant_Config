@@ -26,6 +26,7 @@ automation:
   
   - id: 'f1be40e5-fcae-4d9c-bf01-5d3b6d78c073'
     alias: Removed Saved Notifications on Dismiss
+    mode: parallel
     initial_state: 'on'
     trigger:
       - platform: event
