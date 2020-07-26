@@ -1,0 +1,60 @@
+automation:
+  - id: '33348373-a93c-4eaf-80d5-44f1e8d52b11'
+    alias: Save Notifications on Create
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: call_service
+        event_data:
+          domain: persistent_notification
+          service: create
+    condition:
+      - condition: template
+        value_template: >-
+          {{ trigger.event.data.service_data.notification_id != "config_entry_discovery" }}
+    action:
+      - service: mqtt.publish
+        data_template:
+          topic: "home-assistant/notifications/{{ trigger.event.data.service_data.notification_id }}"
+          payload: >-
+            {
+              "notification_id" : "{{ trigger.event.data.service_data.notification_id }}",
+              "title" : "{{ trigger.event.data.service_data.title }}",
+              "message" : "{{ trigger.event.data.service_data.message }}"
+            }
+          retain: true
+  
+  - id: 'f1be40e5-fcae-4d9c-bf01-5d3b6d78c073'
+    alias: Removed Saved Notifications on Dismiss
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: call_service
+        event_data:
+          domain: persistent_notification
+          service: dismiss
+    action:
+      - service: mqtt.publish
+        data_template:
+          topic: "home-assistant/notifications/{{ trigger.event.data.service_data.notification_id }}"
+          retain: true
+  
+  - id: '7683afd1-a618-43b9-bb82-df79bc792b26'
+    alias: Restore Notifications
+    initial_state: 'on'
+    trigger:
+      - platform: mqtt
+        topic: home-assistant/notifications/+
+    condition:
+      - condition: template
+        value_template: >-
+          {{ trigger.payload != '' and state_attr("persistent_notification." + trigger.payload_json.notification_id | replace("-","_"),"message") != trigger.payload_json.message }}
+    action:
+      - service: persistent_notification.create
+        data_template:
+          title: >-
+            {{ trigger.payload_json.title }}
+          message: >-
+            {{ trigger.payload_json.message }}
+          notification_id: >-
+            {{ trigger.payload_json.notification_id }}
