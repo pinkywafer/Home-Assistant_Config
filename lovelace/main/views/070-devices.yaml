@@ -25,6 +25,24 @@ cards:
           - entity: sensor.speedtest_ping
             name: Ping
             color: yellow
+      - type: glance
+        entities:
+          - entity: binary_sensor.server_home_assistant_running
+            name: Home Assistant
+          - entity: binary_sensor.server_dev_hass_running
+            name: Dev-Hass
+          - entity: binary_sensor.server_plex_running
+            name: Plex
+          - entity: binary_sensor.server_fileserver_running
+            name: Fileserver
+          - entity: binary_sensor.server_tuya_convert_running
+            name: Tuya Convert
+        title: Proxmox
+        show_name: true
+        show_icon: true
+        show_state: false
+        columns: 3
+
       - break
       - type: entity-filter
         entities:
@@ -36,9 +54,6 @@ cards:
           - device_tracker.emma_led
           - device_tracker.pc_mediacenter
           - device_tracker.tv_wifi
-          - device_tracker.dev_hassio
-          - device_tracker.plex_server
-          - device_tracker.fileserver
         state_filter:
           - home
         card:
