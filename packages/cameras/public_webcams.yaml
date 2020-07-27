@@ -1,0 +1,32 @@
+camera:
+  - platform: generic
+    name: Barmouth Bridge
+    still_image_url: https://files.merionethyachtclub.co.uk/webcam/MYC-Webcam-Bridge.jpg
+
+  - platform: generic
+    name: Barmouth Point
+    still_image_url: https://files.merionethyachtclub.co.uk/webcam/MYC-Webcam-Point.jpg
+
+  - platform: generic
+    name: Llyn Ogwen
+    still_image_url: https://ovmro.uk/webcam/d-link/ygarn_camera.jpg
+
+  - platform: ffmpeg
+    name: Llangollen River Dee
+    input: "https://camsecure.co/HLS/tnroutdoors.m3u8"
+
+  - platform: ffmpeg
+    name: The cob
+    input: "https://maybach.railcam.co.uk/FRTheCob_57475/preview.mp4"
+
+  - platform: ffmpeg
+    name: Ffestiniog Railway Tan Y Bwlch
+    input: "https://camsecure.co/HLS/ffestiniog.m3u8"
+
+  - platform: ffmpeg
+    name: Portmeirion
+    input: "https://camsecure.co/HLS/portmeirion1.m3u8"
+
+  - platform: ffmpeg
+    name: Portmeirion Hotel
+    input: "https://camsecure.co/HLS/portmeirion3.m3u8"
