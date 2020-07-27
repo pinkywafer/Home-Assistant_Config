@@ -24,3 +24,5 @@
   type: module
 - url: /hacsfiles/lovelace-card-preloader/lovelace-card-preloader.js
   type: module
+- url: /hacsfiles/aftership-card/aftership-card.js
+  type: module
