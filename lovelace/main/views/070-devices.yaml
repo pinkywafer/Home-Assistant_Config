@@ -10,6 +10,8 @@ cards:
         entities:
           - entity: sensor.myip
             name: Public IP Address
+          - entity: sensor.home_assistant_uptime
+            name: Home Assistant Uptime
       - type: 'custom:mini-graph-card'
         name: Broadband Speed
         align_state: center
