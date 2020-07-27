@@ -50,3 +50,8 @@ cards:
       - !include ../custom_views/window_sensors.yaml
       - !include ../custom_views/motion_sensors.yaml
       - !include ../custom_views/fridge.yaml
+      - break
+      - break
+      - entity: sensor.aftership
+        title: Packages
+        type: 'custom:aftership-card'
