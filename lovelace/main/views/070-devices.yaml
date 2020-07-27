@@ -73,8 +73,17 @@ cards:
           - entity: binary_sensor.jos_bedside_light_sonoff_status
             name: Jo Bedside
       - break
+      - type: entities
+        title: Home Assistant Config Travis CI
+        entities:
+          - entity: sensor.pinkywafer_home_assistant_config_state
+            name: state
+          - entity: sensor.pinkywafer_home_assistant_config_last_build_finished_at
+            name: at
+
       - type: custom:github-card
         entities:
+          - sensor.home_assistant_config
           - sensor.anniversaries
           - sensor.opentx_soundpack_joanne
           - sensor.pinkyleds
