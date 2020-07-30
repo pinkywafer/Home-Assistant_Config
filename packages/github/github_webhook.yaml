@@ -1,38 +1,32 @@
 automation:
   - id: '724c3e88-97c6-4193-b06f-ce468c411e92'
     alias: Test github webhook
+    mode: queued
     trigger:
       platform: webhook
       webhook_id: !secret github_webhook
+    condition:
+        - condition: template
+          value_template: >-
+            {%- if trigger.json.action == "created" or "closed" or "opened" or "reopened" or trigger.json.ref %}
+              True
+            {%- else -%}
+              False
+            {%- endif -%}
     action:
       - service: notify.discord_bot
         data_template:
+          target: !secret discord_ha_instance_id
           message: >-
-            {%- if trigger.json.action == "created" or "closed" or "opened" or "reopened" or trigger.json.ref %}
-              {%- if trigger.json.pull_request -%}
-                Pull request {% if trigger.json.comment %} comment {% endif -%}
-                {{trigger.json.action}}: #{{ trigger.json.pull_request.number}} {{ trigger.json.pull_request.title }}
-                {{trigger.json.pull_request.html_url}}
-              {%- elif trigger.json.issue -%}
-                Issue {% if trigger.json.comment %} comment {% endif -%}
-                {{trigger.json.action}}: #{{ trigger.json.issue.number}} {{ trigger.json.issue.title }}
-                {{trigger.json.issue.html_url}}
-              {%- elif ref %}
-                {{trigger.json.pusher.name}} pushed {{ trigger.json.commits | count }} commits pushed to Home-Assistant_config
-                https
-              {%- endif %}
-            {% endif %}
-    #  - choose:
-    #    - conditions:
-    #        - condition: template
-    #          entity_id: binary_sensor.button1
-    #          state: "on"
-    #      sequence:
-    #        - service: light.turn_on
-    #          entity_id: light.bulb
-    #    - conditions:
-    
-
-input_text:
-  test_github_webhook:
-    initial: "test"
+            {%- if trigger.json.pull_request -%}
+              Pull request {% if trigger.json.comment %} comment {% endif -%}
+              {{trigger.json.action}}: #{{ trigger.json.pull_request.number}} {{ trigger.json.pull_request.title }}
+              {{trigger.json.pull_request.html_url}}
+            {%- elif trigger.json.issue -%}
+              Issue {% if trigger.json.comment %} comment {% endif -%}
+              {{trigger.json.action}}: #{{ trigger.json.issue.number}} {{ trigger.json.issue.title }}
+              {{trigger.json.issue.html_url}}
+            {%- elif ref %}
+              {{ trigger.json.commits | count }} commits pushed to Home-Assistant_config
+              https://github.com/pinkywafer/Home-Assistant_Config/commits/master
+            {%- endif %}
