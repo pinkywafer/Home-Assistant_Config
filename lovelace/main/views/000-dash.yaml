@@ -51,6 +51,17 @@ cards:
       - !include ../custom_views/motion_sensors.yaml
       - !include ../custom_views/fridge.yaml
       - break
+      - type: entities
+        entities:
+          - type: 'custom:multiple-entity-row'
+            entity: sensor.next_bus_to_porthmadog
+            entities:
+              - entity: sensor.next_bus_to_porthmadog_estimated
+                name: Est
+              - entity: sensor.next_bus_to_porthmadog_scheduled
+                name: Scheduled
+              - entity: sensor.next_bus_to_porthmadog_route
+                name: route
       - break
       - entity: sensor.aftership
         title: Packages

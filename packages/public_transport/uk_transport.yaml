@@ -1,0 +1,24 @@
+sensor:
+  - platform: uk_transport
+    app_id: !secret uk_transport_app_id
+    app_key: !secret uk_transport_app_key
+    queries:
+      - mode: bus
+        origin: !secret uk_transport_origin
+        destination: Porthmadog
+    scan_interval: 120
+      #- mode: train
+      #  origin: MAL
+      #  destination: WAT
+
+  - platform: template
+    sensors:
+      next_bus_to_porthmadog_route:
+        friendly_name: 'Next bus route to Porthmadog'
+        value_template: "{{state_attr('sensor.next_bus_to_porthmadog', 'next_buses')[0].route}}"
+      next_bus_to_porthmadog_scheduled:
+        friendly_name: 'Next bus scheduled'
+        value_template: "{{state_attr('sensor.next_bus_to_porthmadog', 'next_buses')[0].scheduled}}"
+      next_bus_to_porthmadog_estimated:
+        friendly_name: 'Next bus estimated'
+        value_template: "{{state_attr('sensor.next_bus_to_porthmadog', 'next_buses')[0].estimated}}"
