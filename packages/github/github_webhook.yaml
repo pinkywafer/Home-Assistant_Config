@@ -14,10 +14,6 @@ automation:
               False
             {%- endif -%}
     action:
-      - service: system_log.write
-        data_template:
-          message: '{{ trigger.json }}'
-          logger: 'GITHUB WEBHOOK AUTOMATION'
       - service: notify.discord_bot
         data_template:
           target: !secret discord_ha_instance_id
