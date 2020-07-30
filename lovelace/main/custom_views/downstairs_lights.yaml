@@ -7,7 +7,7 @@ cards:
           - type: custom:button-card
             entity: light.vestibule_light
             show_state: false
-            icon: mdi:glassdoor
+            icon: mdi:mailbox
             name: Vestibule
             tap_action:
               action: toggle
