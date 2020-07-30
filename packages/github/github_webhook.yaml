@@ -32,8 +32,8 @@ automation:
               {% if trigger.json.comment %}
                 New comment on {{trigger.json.issue.title }} - Issue #{{ 
                 trigger.json.issue.number}} from {{ trigger.json.comment.user.login }}
-              {%- else -%}
-              {{ trigger.json.issue.title }} - Issue #{{ trigger.json.issue.number}}  {{
+              {% else -%}
+              {{ trigger.json.issue.title }} - Issue #{{ trigger.json.issue.number}} {{
                 trigger.json.action }} by {{trigger.json.sender.login}}
               {% endif -%}
               {{trigger.json.issue.html_url}}
