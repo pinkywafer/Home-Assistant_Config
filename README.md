@@ -19,29 +19,29 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Number of entities: 392
+Number of entities: 460
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 0
-Automation | 65
-Binary Sensor | 82
-Camera | 4
-Device Tracker | 27
+Automation | 76
+Binary Sensor | 87
+Camera | 12
+Device Tracker | 29
 Group | 0
 Input Boolean | 2
 Input Datetime | 1
-Input Text | 3
-Light | 21
+Input Text | 5
+Light | 20
 Media Player | 14
 Person | 3
 Scene | 1
-Script | 15
-Sensor | 122
+Script | 16
+Sensor | 154
 Sun | 1
-Switch | 22
-Weather | 1
+Switch | 26
+Weather | 4
 Zone | 4
 
 
@@ -58,6 +58,8 @@ Zone | 4
 * [HACS](https://hacs.xyz/docs/configuration/start)
 
 * [Calendarific](https://github.com/pinkywafer/Calendarific)
+
+* [Blitzortung](https://github.com/mrk-its/homeassistant-blitzortung)
 
 * [Browser mod]()
 
