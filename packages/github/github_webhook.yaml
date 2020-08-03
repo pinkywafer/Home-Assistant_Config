@@ -38,6 +38,9 @@ automation:
               {% endif -%}
               {{trigger.json.issue.html_url}}
             {%- elif trigger.json.ref %}
-              {{ trigger.json.commits | count }} commits pushed to Home-Assistant_config
+              {{ trigger.json.commits | count }} commits pushed to Home-Assistant_config:
+                {% for commit in trigger.json.commits -%}
+                  {{commit.message}}
+                {%- endfor %}
               https://github.com/pinkywafer/Home-Assistant_Config/commits/master
             {%- endif %}
