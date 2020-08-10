@@ -29,6 +29,7 @@ automation:
         title: Supervisor Update Available
         data:
           sticky: 'true'
+          group: updates
           tag: update_supervisor
           color: '#ff8c00'
           clickAction: /hasio/dashboard

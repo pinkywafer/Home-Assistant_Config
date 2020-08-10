@@ -21,6 +21,11 @@ automation:
         message: 'ALARM! The alarm has been triggered: {{ states.input_text.alarm_trigger.state }}'
         title: 'Home Alarm'
         data:
+          channel: Alarm
+          vibrationPattern: "100, 1000, 100, 1000"
+          importance: high
+          persistent: true
+          sticky: true
           image: !secret alarm_picture_1
           tag: alarm
           color: 'red'

@@ -26,6 +26,7 @@ automation:
         title: OS Update Available
         data:
           sticky: 'true'
+          group: updates
           tag: update_os
           color: '#ff8c00'
           clickAction: /hasio/dashboard

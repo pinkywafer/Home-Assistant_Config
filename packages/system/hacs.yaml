@@ -25,6 +25,7 @@ automation:
         data:
           sticky: 'true'
           tag: update_hacs
+          group: updates
           color: '#ff8c00'
           clickAction: /hacs/installed
     - service: persistent_notification.create

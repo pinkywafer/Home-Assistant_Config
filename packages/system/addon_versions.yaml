@@ -29,6 +29,7 @@ automation:
         title: Add-ons Updates Available
         data:
           sticky: 'true'
+          group: updates
           tag: update_addons
           color: '#ff8c00'
           clickAction: /hasio/dashboard

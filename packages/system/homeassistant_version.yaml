@@ -41,6 +41,7 @@ automation:
         title: Update Home Assistant
         data:
           sticky: 'true'
+          group: updates
           tag: update_ha
           color: '#ff8c00'
           clickAction: /hassio/dashboard
