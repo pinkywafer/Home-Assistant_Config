@@ -35,11 +35,11 @@ card:
             - entity: sensor.jenny_location
     - break
     - type: map
-      hours_to_show: 4
+      hours_to_show: 10
       dark_mode: false
       default_zoom: 14
       entities:
-        - entity: device_tracker.jenny_oppo_reno_wifi
+        - person.jenny_gorton
     - break
     - type: 'custom:button-card'
       name: Update Location
