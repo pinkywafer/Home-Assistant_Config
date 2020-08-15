@@ -20,13 +20,13 @@ card:
               secondary_info: last-changed
               show_state: false
               entities:
-                - entity: sensor.emma_s_blackberry_dtek50_battery_level
+                - entity: sensor.emmas_phone_battery_level
                   name: Bat
                   unit: '%'
                 - attribute: is_charging
-                  entity: sensor.emma_s_blackberry_dtek50_battery_level
+                  entity: sensor.emmas_phone_battery_state
                   name: On Charge
-                - entity: sensor.emma_s_blackberry_dtek50_wifi_connection
+                - entity: sensor.emmas_phone_wifi_connection
                   name: WiFi SSID
         - type: history-graph
           hours_to_show: 10
@@ -35,11 +35,11 @@ card:
             - entity: sensor.emma_location
     - break
     - type: map
-      hours_to_show: 4
+      hours_to_show: 10
       dark_mode: false
       default_zoom: 14
       entities:
-        - entity: device_tracker.emma_s_blackberry_dtek50
+        - entity: person.emma_gorton
     - break
     - type: 'custom:button-card'
       name: Update Location
