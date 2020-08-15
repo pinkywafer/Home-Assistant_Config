@@ -26,17 +26,17 @@ cards:
             entity: weather.dark_sky
           - type: entities
             entities:
-              - entity: sensor.lightning_lightning_counter
+              - entity: sensor.lightning_counter
                 name: Lightning
                 type: custom:multiple-entity-row
                 icon: mdi:lightning-bolt
                 show_state: false
                 entities:
-                  - entity: sensor.lightning_lightning_counter
+                  - entity: sensor.lightning_counter
                     name: Strikes
-                  - entity: sensor.lightning_lightning_distance
+                  - entity: sensor.lightning_distance
                     name: Distance
-                  - entity: sensor.lightning_lightning_azimuth
+                  - entity: sensor.lightning_azimuth
                     name: Azimuth
       - break
       - type: custom:vertical-stack-in-card
