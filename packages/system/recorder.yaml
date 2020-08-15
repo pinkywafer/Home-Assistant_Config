@@ -7,5 +7,7 @@ recorder:
       - sensor.time
       - sensor.date_time
       - sensor.next_launch
+    entity_globs:
+      - sensor.accuweather_*
     domains:
       - group
