@@ -1,0 +1,326 @@
+esphome:
+  name: pigeon_clock_in
+  platform: ESP32
+  board: esp-wrover-kit
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_psk
+  manual_ip:
+    static_ip: 192.168.1.90
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Pigeon Clock In Fallback Hotspot"
+    password: !secret fallback_psk
+
+captive_portal:
+
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+uart:
+  rx_pin: 18
+  baud_rate: 9600
+
+rdm6300: 
+  on_tag:
+    then:
+      - sensor.template.publish:
+          id: pigeon_ring
+          state: !lambda 'return x;'
+
+sensor:
+  platform: template
+  name: "Pigeon Ring"
+  accuracy_decimals: 0
+  id: pigeon_ring
+  force_update: true
+  lambda: return {};
+
+switch:
+  - platform: template
+    id: pigeon1
+    name: Pigeon 1
+    optimistic: true
+
+  - platform: template
+    id: pigeon2
+    name: Pigeon 2
+    optimistic: true
+    restore_state: true
+    
+  - platform: template
+    id: pigeon3
+    name: Pigeon 3
+    optimistic: true
+    restore_state: true
+
+  - platform: template
+    id: pigeon4
+    name: Pigeon 4
+    optimistic: true
+    restore_state: true
+
+  - platform: template
+    id: pigeon5
+    name: Pigeon 5
+    optimistic: true
+    restore_state: true
+
+  - platform: template
+    id: pigeon6
+    name: Pigeon 6
+    optimistic: true
+    restore_state: true
+
+  - platform: template
+    id: pigeon7
+    name: Pigeon 7
+    optimistic: true
+    restore_state: true
+
+  - platform: template
+    id: pigeon8
+    name: Pigeon 8
+    optimistic: true
+    restore_state: true
+
+  - platform: template
+    id: pigeon9
+    name: Pigeon 9
+    optimistic: true
+    restore_state: true
+
+  - platform: template
+    id: pigeon10
+    name: Pigeon 10
+    optimistic: true
+    restore_state: true
+
+  - platform: template
+    id: pigeon11
+    name: Pigeon 11
+    optimistic: true
+    restore_state: true
+
+  - platform: template
+    id: pigeon12
+    name: Pigeon 12
+    optimistic: true
+    restore_state: true
+
+  - platform: template
+    id: pigeon13
+    name: Pigeon 13
+    optimistic: true
+    restore_state: true
+
+  - platform: template
+    id: pigeon14
+    name: Pigeon 14
+    optimistic: true
+    restore_state: true
+
+  - platform: template
+    id: pigeon15
+    name: Pigeon 15
+    optimistic: true
+    restore_state: true
+
+  - platform: template
+    id: pigeon16
+    name: Pigeon 16
+    optimistic: true
+    restore_state: true
+
+  - platform: template
+    id: pigeon17
+    name: Pigeon 17
+    optimistic: true
+    restore_state: true
+
+  - platform: template
+    id: pigeon18
+    name: Pigeon 18
+    optimistic: true
+    restore_state: true
+
+  - platform: template
+    id: pigeon19
+    name: Pigeon 19
+    optimistic: true
+    restore_state: true
+
+  - platform: template
+    id: pigeon20
+    name: Pigeon 20
+    optimistic: true
+    restore_state: true
+
+binary_sensor:
+  - platform: rdm6300
+    uid: 8966180
+    name: "Pigeon1 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon1
+  
+  - platform: rdm6300
+    uid: 6461254
+    name: "Pigeon2 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon2
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon3 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon3
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon4 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon4
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon5 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon5
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon6 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon6
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon7 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon7
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon8 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon8
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon9 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon9
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon10 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon10
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon11 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon11
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon12 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon12
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon13 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon13
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon14 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon14
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon15 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon15
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon16 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon16
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon17 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon17
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon18 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon18
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon19 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon19
+
+  - platform: rdm6300
+    uid: 0
+    name: "Pigeon20 Tag"
+    internal: true
+    on_press:
+      then:
+        switch.turn_on: pigeon20
