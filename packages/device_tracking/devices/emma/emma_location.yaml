@@ -2,9 +2,12 @@ sensor:
   - platform: template
     sensors:
       emma_location:
+        entity_id:
+          - person.emma_gorton
+          - sensor.emmas_phone_geocoded_location
         value_template: >-
-          {% if is_state("device_tracker.emma_s_blackberry_dtek50", "not_home") -%}
-            {{ states("sensor.emma_s_blackberry_dtek50_geocoded_location") }}
+          {% if is_state("person.emma_gorton", "not_home") -%}
+            {{ states("sensor.emmas_phone_geocoded_location") }}
           {%- else -%}
-            {{ states("device_tracker.emma_s_blackberry_dtek50") }}
+            {{ states("person.emma_gorton") }}
           {%- endif %}
