@@ -11,6 +11,11 @@ cards:
         entity: media_player.spotify_jenny_gorton
         icon: 'mdi:google-assistant'
         artwork: cover
+      
+      - type: 'custom:mini-media-player'
+        entity: media_player.spotify_emma
+        icon: 'mdi:google-assistant'
+        artwork: cover
 
       - type: custom:mini-media-player
         entity: media_player.all_speakers
