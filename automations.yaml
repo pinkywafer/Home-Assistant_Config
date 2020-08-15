@@ -1,12 +1,3 @@
-- id: '1564897842321'
-  alias: Set default theme at startup
-  trigger:
-  - platform: homeassistant
-    event: start
-  action:
-    service: frontend.set_theme
-    data:
-      name: dark_theme
 - id: '1579876677999'
   alias: Jo's Green Switch
   description: ''
