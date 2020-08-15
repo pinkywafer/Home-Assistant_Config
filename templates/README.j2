@@ -20,6 +20,8 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
+Lines of yaml code in my configuration (excluding secrets): {{states.sensor.yaml_config_lines.state}}
+
 Number of entities: {{states | count}}
 
 Type | Qty
@@ -45,45 +47,19 @@ Switch | {{ states.switch | count }}
 Weather | {{ states.weather | count }}
 Zone | {{ states.zone | count }}
 
-
-{% if custom_components %}
-***
-## custom_components installed
-{% for integration in custom_components %}
-* [{{integration.name}}]({{integration.documentation}})
-{% if integration.domain in custom_component_descriptions %}
-_{{custom_component_descriptions[integration.domain]}}_
-{% endif -%}
-{% endfor -%}
-{% endif %}
-
 ***
 
-## Custom Cards Installed
+## HACS installed components
 
-* [button-card](https://github.com/custom-cards/button-card)
+### Integrations
+{%- for component in hacs_components | selectattr('category', 'equalto', 'integration') | sort(attribute='name') %}
+- [{{component.name}}]({{component.documentation}})
+{%- endfor %}
 
-* [card-mod](https://github.com/thomasloven/lovelace-card-mod)
-
-* [card-tools](https://github.com/thomasloven/lovelace-card-tools)
-
-* [Custom Header](https://github.com/maykar/custom-header)
-
-* [Entity Attributes Card](https://github.com/custom-cards/entity-attributes-card)
-
-* [Github Card](https://github.com/ljmerza/github-card)
-
-* [Layout Card](https://github.com/thomasloven/lovelace-layout-card)
-
-* [Lovelace Card Preloader](https://github.com/gadgetchnnel/lovelace-card-preloader)
-
-* [Mini Graph Card](https://github.com/kalkih/mini-graph-card)
-
-* [Mini Media Player](https://github.com/kalkih/mini-media-player)
-
-* [Multiple Entity Row](https://github.com/benct/lovelace-multiple-entity-row)
-
-* [Simple Weather Card](https://github.com/kalkih/simple-weather-card)
+### Lovelace
+{%- for component in hacs_components | selectattr('category', 'equalto', 'plugin') | sort(attribute='name') %}
+- [{{component.name}}]({{component.documentation}})
+{%- endfor %}
 
 ***
 
