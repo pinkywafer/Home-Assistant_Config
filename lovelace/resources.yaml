@@ -26,3 +26,5 @@
   type: module
 - url: /hacsfiles/aftership-card/aftership-card.js
   type: module
+- url: /hacsfiles/ha-card-weather-conditions/ha-card-weather-conditions.js
+  type: module
