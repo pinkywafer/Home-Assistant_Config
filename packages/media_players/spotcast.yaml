@@ -1,0 +1,7 @@
+spotcast:
+  sp_dc: !secret spotify_jenny_sp_dc
+  sp_key: !secret spotify_jenny_sp_key
+  accounts:
+    emma:
+      sp_dc: !secret spotify_emma_sp_dc
+      sp_key: !secret spotify_emma_sp_key
