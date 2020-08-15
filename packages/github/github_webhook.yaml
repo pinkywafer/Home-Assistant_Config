@@ -1,6 +1,6 @@
 automation:
   - id: '724c3e88-97c6-4193-b06f-ce468c411e92'
-    alias: Test github webhook
+    alias: github webhook
     mode: queued
     trigger:
       platform: webhook
