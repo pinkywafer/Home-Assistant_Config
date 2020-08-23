@@ -1,5 +1,7 @@
 browser_mod:
-  prefix: "browser_"
+  prefix: "browser_mod_"
   devices:
     !secret jenny_phone_device_id:
-      name: jenny_phone
+      name: browser_mod_jenny_phone_app
+    !secret pc_device_id:
+      name: browser_mod_pc
