@@ -14,7 +14,12 @@ sensor:
         entity_id: sensor.lightning_distance
         friendly_name: "Lightning Distance"
         unit_of_measurement: 'miles'
-        value_template: '{{ (states("sensor.lightning_distance") |float * 0.621371 )| int}}'
+        value_template: >
+          {% if is_state("sensor.lightning_distance","unknown") -%}
+            Unknown
+          {% else -%}
+            {{ (states("sensor.lightning_distance") |float * 0.621371 )| int}}
+          {% endif %}
 
 automation:
   - id: "0acb2859-1630-4a1a-88c4-31142991b041"
@@ -22,10 +27,6 @@ automation:
     mode: single
     trigger:
       - platform: numeric_state
-        entity_id: sensor.lightning_counter
-        above: 1
-    condition:
-      - condition: numeric_state
         entity_id: sensor.lightning_distance_miles
         above: 20
     action:
@@ -51,6 +52,7 @@ automation:
       - platform: numeric_state
         entity_id: sensor.lightning_distance_miles
         below: 20
+        above: 5
     action:
       - service: notify.broadcast_from_home_assistant
         data_template:
