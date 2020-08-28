@@ -21,7 +21,7 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 Lines of yaml code in my configuration (excluding secrets): 5333
 
-Number of entities: 591
+Number of entities: 599
 
 Type | Qty
 -- | --
@@ -40,7 +40,7 @@ Media Player | 15
 Person | 3
 Scene | 1
 Script | 16
-Sensor | 288
+Sensor | 296
 Sun | 1
 Switch | 26
 Weather | 5
