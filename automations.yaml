@@ -69,3 +69,16 @@
         "Remember to take your tablet, Jo"
         ] | random }}
     service: notify.broadcast_from_home_assistant
+- id: '1599352861714'
+  alias: Jo's blue switch
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.jo_s_blue_switch
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data: {}
+    entity_id: light.emmas_room_lights
+    service: light.turn_off
+  mode: single
