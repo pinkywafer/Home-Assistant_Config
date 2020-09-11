@@ -1,6 +1,10 @@
 automation:
   - id: 'eaa1418c-1e48-4a08-9779-58ed8c71128a'
     alias: Evening - Sitting Room light on 2 hours before sunset
+    condition:
+      - condition: state
+        entity_id: light.movie_mode_lights
+        state: 'off'
     trigger:
     - event: sunset
       offset: '-2:00'

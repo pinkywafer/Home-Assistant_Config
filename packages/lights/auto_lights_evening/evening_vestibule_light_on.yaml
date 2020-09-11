@@ -5,6 +5,10 @@ automation:
     - event: sunset
       offset: '-1:00'
       platform: sun
+    condition:
+      - condition: state
+        entity_id: light.movie_mode_lights
+        state: 'off'
     action:
     - entity_id: light.vestibule_light
       service: light.turn_on
