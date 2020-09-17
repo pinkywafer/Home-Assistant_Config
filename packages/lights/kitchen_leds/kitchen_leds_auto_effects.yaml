@@ -2,7 +2,6 @@ sensor:
   - platform: template
     sensors:
       default_kitchen_effect:
-        entity_id: sensor.time
         value_template: >-
           {% if is_state("sensor.anniversary_jenny_s_birthday", "0") or 
               is_state("sensor.anniversary_jo_s_birthday", "0") or

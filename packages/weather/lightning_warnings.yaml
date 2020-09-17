@@ -11,7 +11,6 @@ sensor:
   - platform: template
     sensors:
       lightning_distance_miles:
-        entity_id: sensor.lightning_distance
         friendly_name: "Lightning Distance"
         unit_of_measurement: 'miles'
         value_template: >
