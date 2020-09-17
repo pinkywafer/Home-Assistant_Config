@@ -61,7 +61,7 @@
     platform: time
   condition: []
   action:
-  - data_template:
+  - data:
       message: >
         {{ ["Jo, it's time for your tablet", 
         "Don't forget to take your tablet, Jo",

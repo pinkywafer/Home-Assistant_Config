@@ -29,7 +29,7 @@ automation:
           }}
     action:
     - service: input_text.set_value
-      data_template:
+      data:
         entity_id: input_text.ha_version_notified
         value: '{{ states("sensor.homeassistant_version_available") }}'
     - service: notify.mobile_app_jenny_s_oppo_reno
@@ -46,7 +46,7 @@ automation:
           color: '#ff8c00'
           clickAction: /hassio/dashboard
     - service: persistent_notification.create
-      data_template:
+      data:
         title: Update Home Assistant
         message: >
           There is an update to Home Assistant core
@@ -54,10 +54,10 @@ automation:
             Triggering Travis build...
         notification_id: update_ha
     - service: rest_command.new_version_github_issue
-      data_template:
+      data:
         status: "open"
     - service: rest_command.new_version_github_issue_comment
-      data_template:
+      data:
         message: ' Home Assistant version {{ states("sensor.homeassistant_version_available") }} is now available"}'
     - service: rest_command.travis_build
     # wait for travis build to start then update notification
@@ -75,7 +75,7 @@ automation:
           color: '#ff8c00'
           clickAction: /hassio/dashboard
     - service: persistent_notification.create
-      data_template:
+      data:
         title: Update Home Assistant
         message: >
           There is an update to Home Assistant core
@@ -97,7 +97,7 @@ automation:
           color: '#ff8c00'
           clickAction: /hassio/dashboard
     - service: persistent_notification.create
-      data_template:
+      data:
         title: Update Home Assistant
         message: >
           There is an update to Home Assistant core
@@ -105,7 +105,7 @@ automation:
             Travis Build has {{states('sensor.pinkywafer_home_assistant_config_state')}}
         notification_id: update_ha
     - service: rest_command.new_version_github_issue_comment
-      data_template:
+      data:
         message: "Travis build has {{ states('sensor.pinkywafer_home_assistant_config_state') }}"
 
   - id: '7e81d1d4-9fb7-47d1-89d1-2e8624673f3d'

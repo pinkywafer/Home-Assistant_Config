@@ -18,7 +18,7 @@ automation:
     - service: alarm_control_panel.alarm_trigger
       entity_id: alarm_control_panel.alarm
     - service: input_text.set_value
-      data_template:
+      data:
         entity_id: input_text.alarm_trigger
         value: >
           {% if states.input_text.alarm_trigger.state|length == 0 %}

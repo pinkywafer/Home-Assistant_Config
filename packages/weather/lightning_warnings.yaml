@@ -31,10 +31,10 @@ automation:
         above: 20
     action:
       - service: notify.broadcast_from_home_assistant
-        data_template:
+        data:
           message: 'Warning.  Lightning detected at {{states("sensor.lightning_distance_miles")}} miles'
       - service: notify.mobile_app_jenny_s_oppo_reno
-        data_template:
+        data:
           message: 'Lightning detected at {{states("sensor.lightning_distance_miles")}} miles'
           title: Lightning warning
           data:
@@ -55,10 +55,10 @@ automation:
         above: 5
     action:
       - service: notify.broadcast_from_home_assistant
-        data_template:
+        data:
           message: 'Warning.  Lightning detected at {{states("sensor.lightning_distance_miles")}} miles'
       - service: notify.mobile_app_jenny_s_oppo_reno
-        data_template:
+        data:
           message: 'Lightning detected at {{states("sensor.lightning_distance_miles")}} miles'
           title: Lightning warning
           data:
@@ -78,10 +78,10 @@ automation:
         below: 5
     action:
       - service: notify.broadcast_from_home_assistant
-        data_template:
+        data:
           message: 'Warning.  Lightning detected at {{states("sensor.lightning_distance_miles")}} miles'
       - service: notify.mobile_app_jenny_s_oppo_reno
-        data_template:
+        data:
           message: 'Lightning detected at {{states("sensor.lightning_distance_miles")}} miles'
           title: Lightning warning
           data:

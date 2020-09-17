@@ -29,7 +29,7 @@ automation:
           color: '#ff8c00'
           clickAction: /hacs/installed
     - service: persistent_notification.create
-      data_template:
+      data:
         title: Update Home Assistant
         message: >-
           There are updates to {{ states("sensor.hacs") }} HACS components:

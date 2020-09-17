@@ -21,7 +21,7 @@ automation:
               as_timestamp(state_attr("automation.youtube_notification_diocese_of_wrexham_tts","last_triggered")) > 300 }}
     action:
       - service: notify.broadcast_from_home_assistant
-        data_template:
+        data:
           message:  >
             The diocese of Wrexham is live on youtube with 
             {{ states("sensor.diocese_of_wrexham")}}

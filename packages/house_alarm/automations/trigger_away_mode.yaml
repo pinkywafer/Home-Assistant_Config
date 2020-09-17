@@ -81,7 +81,7 @@ automation:
     - service: light.turn_on
       entity_id: light.vestibule_light
     - service: input_text.set_value
-      data_template:
+      data:
         entity_id: input_text.alarm_trigger
         value: >
           {% if states.input_text.alarm_trigger.state|length == 0 %}

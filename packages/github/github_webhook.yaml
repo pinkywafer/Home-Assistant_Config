@@ -15,7 +15,7 @@ automation:
             {%- endif -%}
     action:
       - service: notify.discord_bot
-        data_template:
+        data:
           target: !secret discord_ha_instance_id
           message: >-
             {%- if trigger.json.pull_request -%}

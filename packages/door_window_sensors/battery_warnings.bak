@@ -15,7 +15,7 @@ automation:
         to: 'on'
     action:
       - service: persistent_notification.create
-        data_template:
+        data:
           title: Low Battery Warning
           notification_id: battery_warning
           message: >
@@ -45,7 +45,7 @@ automation:
               * Kitchen Window
             {% endif %}
       - service: notify.mobile_app_jenny_s_oppo_reno
-        data_template:
+        data:
           title: Low Battery Warning
           message: >
             Replace batteries:

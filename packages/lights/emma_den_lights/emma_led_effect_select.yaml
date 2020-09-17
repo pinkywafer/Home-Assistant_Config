@@ -58,7 +58,7 @@ automation:
     action:
       service: light.turn_on
       entity_id: light.emma_led
-      data_template:
+      data:
         effect: "{{states('input_select.den_lights_effect')}}"
 
   - id: 'e3159faa-7f78-4a49-8374-a0c0b861db7f'
@@ -69,5 +69,5 @@ automation:
     action:
       service: input_select.select_option
       entity_id: input_select.den_lights_effect
-      data_template:
+      data:
         option: "{{state_attr('light.emma_led','effect')}}"

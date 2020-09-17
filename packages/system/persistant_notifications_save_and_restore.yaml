@@ -14,7 +14,7 @@ automation:
           {{ trigger.event.data.service_data.notification_id != "config_entry_discovery" }}
     action:
       - service: mqtt.publish
-        data_template:
+        data:
           topic: "home-assistant/notifications/{{ trigger.event.data.service_data.notification_id }}"
           payload: >-
             {
@@ -36,7 +36,7 @@ automation:
           service: dismiss
     action:
       - service: mqtt.publish
-        data_template:
+        data:
           topic: "home-assistant/notifications/{{ trigger.event.data.service_data.notification_id }}"
           retain: true
   
@@ -52,7 +52,7 @@ automation:
           {{ trigger.payload != '' and state_attr("persistent_notification." + trigger.payload_json.notification_id | replace("-","_"),"message") != trigger.payload_json.message }}
     action:
       - service: persistent_notification.create
-        data_template:
+        data:
           title: >-
             {{ trigger.payload_json.title }}
           message: >-
