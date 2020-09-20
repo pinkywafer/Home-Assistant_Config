@@ -34,7 +34,7 @@ sensor:
           {%- endif %}
         attribute_templates:
           color: >-
-            {% if now().weekday() == 6 -%}
+            {% if states("sensor.date") and now().weekday() == 6 -%}
               {"r":0,"g":255,"b":0}
             {%- else -%}
               {"r":255,"g":255,"b":36}

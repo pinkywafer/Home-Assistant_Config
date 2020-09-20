@@ -3,3 +3,4 @@ sensor:
   display_options:
     - 'date_time'
     - 'time'
+    - 'date'
