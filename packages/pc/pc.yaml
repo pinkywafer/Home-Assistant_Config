@@ -4,9 +4,56 @@ switch:
   mac: !secret pc_mac
   host: !secret pc_ip
   turn_off:
-    service: rest_command.shutdown_pc
+    service: mqtt.publish
+    data:
+      topic: "iotlink/workgroup/mediacenter/commands/shutdown"
+      payload: ""
 
-rest_command:
-  shutdown_pc:
-    url: !secret shutdown_pc_rest
-    method: get
+script:
+  pc_suspend:
+    alias: "PC - Suspend"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/mediacenter/commands/suspend"
+          payload: ""
+
+  pc_hibernate:
+    alias: "PC - Hibernate"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/mediacenter/commands/hibernate"
+          payload: ""
+
+  pc_reboot:
+    alias: "PC - Reboot"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/mediacenter/commands/reboot"
+          payload: ""
+
+  pc_lock:
+    alias: "PC - Lock"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/mediacenter/commands/lock"
+          payload: ""
+
+  pc_logoff:
+    alias: "PC - Logoff"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/mediacenter/commands/logoff"
+          payload: ""
+
+  pc_start_chrome:
+    alias: "PC - Start Chrome"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/mediacenter/commands/run"
+          payload: '{ "command": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe", "args": "chrome://newtab", "path": "C:\\Program Files (x86)\\Google\\Chrome\\Application", "user": "", "visible": true, "fallback": true }'
