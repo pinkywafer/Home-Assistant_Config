@@ -19,9 +19,9 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 5355
+Lines of yaml code in my configuration (excluding secrets): 5356
 
-Number of entities: 663
+Number of entities: 662
 
 Type | Qty
 -- | --
@@ -40,7 +40,7 @@ Media Player | 19
 Person | 3
 Scene | 1
 Script | 16
-Sensor | 338
+Sensor | 339
 Sun | 1
 Switch | 26
 Weather | 5
@@ -65,7 +65,6 @@ Zone | 4
 
 ### Lovelace
 - [Aftership Card](https://github.com/iantrich/aftership-card)
-- [Battery Entity Card](https://github.com/cbulock/lovelace-battery-entity)
 - [Button Card](https://github.com/custom-cards/button-card)
 - [Card Mod](https://github.com/thomasloven/lovelace-card-mod)
 - [Card Tools](https://github.com/thomasloven/lovelace-card-tools)
