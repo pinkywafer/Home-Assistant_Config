@@ -8,7 +8,7 @@ automation:
     condition:
         - condition: template
           value_template: >-
-            {%- if trigger.json.action == "created" or "closed" or "opened" or "reopened" or trigger.json.ref %}
+            {%- if trigger.json.action in ["created", "closed", "opened", "reopened"] or trigger.json.ref %}
               True
             {%- else -%}
               False
