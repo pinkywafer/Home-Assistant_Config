@@ -13,6 +13,7 @@ __pycache__
 deps
 /tts
 /ssh
+/image
 
 # Specific file ignores
 .uuid
