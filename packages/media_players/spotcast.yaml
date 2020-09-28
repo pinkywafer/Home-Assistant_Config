@@ -5,3 +5,6 @@ spotcast:
     emma:
       sp_dc: !secret spotify_emma_sp_dc
       sp_key: !secret spotify_emma_sp_key
+
+sensor:
+  - platform: spotcast
