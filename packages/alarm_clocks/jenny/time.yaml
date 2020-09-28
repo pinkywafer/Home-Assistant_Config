@@ -1,5 +1,0 @@
-input_datetime:
-  jenny_alarm_time:
-    has_date: false
-    has_time: true
-
