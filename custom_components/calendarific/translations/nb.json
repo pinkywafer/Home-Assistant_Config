@@ -1,0 +1,24 @@
+{
+    "config": {
+        "abort": {
+            "no_holidays_found": "Ingen høytider funnet. Forsikre deg om at du har konfigurert Calendarific med et gyldig land og api-nøkkel. [Les instruksjonene] (https://github.com/pinkywafer/Calendarific)"
+        },
+        "title": "Calendarific",
+        "step": {
+            "user": {
+                "title": "Calendarific",
+                "description": "Skriv inn sensornavnet og konfigurer sensorparametrene. Mer info på https://github.com/pinkywafer/Calendarific",
+                "data": {
+                    "name": "Vennlig navn (la være tomt for å bruke ferienavn)",
+                    "holiday": "Ferie",
+                    "unit_of_measurement": "Tekst for måling av enhet",
+                    "icon_normal": "Ikon",
+                    "icon_today": "Ikon når ferien er i dag",
+                    "days_as_soon": "Antall dager du bør vurdere snart",
+                    "icon_soon": "Ikon når ferien snart er",
+                    "date_format": "Datoformat (se http://strftime.org/)"
+                }
+            }
+        }
+    }
+}

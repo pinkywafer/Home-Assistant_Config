@@ -1,0 +1,24 @@
+{
+    "config": {
+        "abort": {
+            "no_holidays_found": "Praznici nisu pronađeni. Provjerite da li ste podesili Calendarific na ispravnu zemlju i da li je ispravan api ključ. [Molim da pročitate upute](https://github.com/pinkywafer/Calendarific)."
+        },
+        "title": "Calendarific",
+        "step": {
+            "user": {
+                "title": "Calendarific",
+                "description": "Unesite ime senzora i podesite parametre senzora. Više informacija na https://github.com/pinkywafer/Calendarific",
+                "data": {
+                    "name": "Neformalni naziv (Ostavite prazno da se koristi ime praznika)",
+                    "holiday": "Praznik",
+                    "unit_of_measurement": "Tekst za unit_of_measurement",
+                    "icon_normal": "Ikona",
+                    "icon_today": "Ikona ako je danas praznik",
+                    "days_as_soon": "Za koliko dana je uskoro",
+                    "icon_soon": "Ikona kad je praznik uskoro",
+                    "date_format": "Format datuma (see http://strftime.org/)"
+                }
+            }
+        }
+    }
+}
