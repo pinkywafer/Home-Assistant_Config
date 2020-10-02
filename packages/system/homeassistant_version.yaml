@@ -53,11 +53,13 @@ automation:
             * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
             Triggering Travis build...
         notification_id: update_ha
-    - service: rest_command.new_version_github_issue
+    - service: rest_command.github_issue_state
       data:
+        issue: 11
         status: "open"
-    - service: rest_command.new_version_github_issue_comment
+    - service: rest_command.github_issue_comment
       data:
+        issue: '11'
         message: ' Home Assistant version {{ states("sensor.homeassistant_version_available") }} is now available"}'
     - service: rest_command.travis_build
     # wait for travis build to start then update notification
@@ -104,8 +106,9 @@ automation:
             * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
             Travis Build has {{states('sensor.pinkywafer_home_assistant_config_state')}}
         notification_id: update_ha
-    - service: rest_command.new_version_github_issue_comment
+    - service: rest_command.github_issue_comment
       data:
+        issue: '11'
         message: "Travis build has {{ states('sensor.pinkywafer_home_assistant_config_state') }}"
 
   - id: '7e81d1d4-9fb7-47d1-89d1-2e8624673f3d'
@@ -131,21 +134,7 @@ automation:
     - service: persistent_notification.dismiss
       data:
         notification_id: update_ha
-    - service: rest_command.new_version_github_issue
+    - service: rest_command.github_issue_state
       data:
+        issue: '11'
         status: "closed"
-
-rest_command:
-  new_version_github_issue:
-    url: "https://api.github.com/repos/pinkywafer/Home-Assistant_Config/issues/11"
-    method: PATCH
-    headers:
-      Authorization: !secret github_issue_token
-    payload: '{"state":"{{ status }}"}'
-
-  new_version_github_issue_comment:
-    url: 'https://api.github.com/repos/pinkywafer/Home-Assistant_Config/issues/11/comments'
-    method: POST
-    headers:
-      Authorization: !secret github_issue_token
-    payload: '{ "body": "{{ message }}" }' 

@@ -1,0 +1,14 @@
+rest_command:
+  github_issue_state:
+    url: "https://api.github.com/repos/pinkywafer/Home-Assistant_Config/issues/{{issue}}"
+    method: PATCH
+    headers:
+      Authorization: !secret github_issue_token
+    payload: '{"state":"{{ status }}"}'
+
+  github_issue_comment:
+    url: 'https://api.github.com/repos/pinkywafer/Home-Assistant_Config/issues/{{issue}}/comments'
+    method: POST
+    headers:
+      Authorization: !secret github_issue_token
+    payload: '{ "body": "{{ message }}" }' 
