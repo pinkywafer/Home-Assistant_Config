@@ -3,53 +3,136 @@ hacs:
   sidepanel_title: HACS
   sidepanel_icon: hacs:hacs
 
+# Sensor to monitor open Hacs notifications to ensure Github issue is not spammed
+sensor:
+  - platform: mqtt
+    name: "Active HACS notifications"
+    state_topic: "hacs/notifications"
+    value_template: "{{value_json.components|length}}"
+    json_attributes_topic: "hacs/notifications"
+
 automation:
-  - id: 'd73b2704-f6e5-42dc-9dfd-0c43a4853c05'
-    alias: HACS Component Update Notification
+  - id: '19a2ab95-526e-427f-ae73-ab437696bde0'
+    alias: HACS Components Update Notifier
+    mode: queued
     trigger:
+      # Trigger on any change of the hacs sensor
       - platform: state
         entity_id: sensor.hacs
     condition:
-      - condition: numeric_state
-        entity_id: sensor.hacs
-        above: 0
+      - condition: template
+        value_template: '{{ states("sensor.hacs") != "unknown" }}'
     action:
-    - service: notify.mobile_app_jenny_s_oppo_reno
-      data:
-        message: >
-          There are updates to {{ states("sensor.hacs") }} HACS components:
-          {% for repo in state_attr("sensor.hacs","repositories") %}
-            * {{repo['display_name'] }} {{ repo['installed_version'] }} -> {{ repo['available_version'] }}
-          {%- endfor %}
-        title: HACS Components Updates Available
-        data:
-          sticky: 'true'
-          tag: update_hacs
-          group: updates
-          color: '#ff8c00'
-          clickAction: /hacs/installed
-    - service: persistent_notification.create
-      data:
-        title: Update Home Assistant
-        message: >-
-          There are updates to {{ states("sensor.hacs") }} HACS components:
-          {% for repo in state_attr("sensor.hacs","repositories") %}
-            * **{{repo['display_name'] }}** _{{ repo['installed_version'] }}_ -> _{{ repo['available_version'] }}_
-          {%- endfor %}
-        notification_id: update_hacs
-
-  - id: 'f72cfd6c-954f-42d6-9e01-d421f816ee14'
-    alias: HACS Component Update Notification Dismiss
-    trigger:
-      - platform: state
-        entity_id: sensor.hacs
-        to: '0'
-    action:
-    - service: notify.mobile_app_jenny_s_oppo_reno
-      data:
-        message: clear_notification
-        data:
-          tag: update_hacs
-    - service: persistent_notification.dismiss
-      data:
-        notification_id: update_hacs
+      # for each notification on the mqtt sensor, if it isn't showing in hacs sensor
+      # post github issue comment that it has been updated
+      - repeat:
+          count: '{{state_attr("sensor.active_hacs_notifications","components")|count}}'
+          sequence:
+            - condition: template
+              value_template: '{{state_attr("sensor.active_hacs_notifications","components")[index-1].name not in state_attr("sensor.hacs","repositories")|to_json}}'
+            - service: rest_command.github_issue_comment
+              data:
+                issue: '37'
+                message: '* {{state_attr("sensor.active_hacs_notifications","components")[index-1].display_name }} has been updated'
+      - choose:
+          # if there are no components needing update
+          - conditions: '{{states("sensor.hacs")|int == 0}}'
+            sequence:
+              # clear mobile notifications
+              - service: notify.mobile_app_jenny_s_oppo_reno
+                data:
+                  message: clear_notification
+                  data:
+                    tag: update_hacs
+              # dismiss persistant notifications
+              - service: persistent_notification.dismiss
+                data:
+                  notification_id: update_hacs
+              # close github tracker issue
+              - service: rest_command.github_issue_state
+                data:
+                  issue: '37'
+                  status: 'closed'
+              - service: mqtt.publish
+                data:
+                  topic: hacs/notifications
+                  payload: '{"components":[]}'
+                  retain: true
+        default:
+          # if there are updates pending
+          # send mobile notification
+          - service: notify.mobile_app_jenny_s_oppo_reno
+            data:
+              message: >
+                There are updates to {{ states("sensor.hacs") }} HACS components:
+                {% for repo in state_attr("sensor.hacs","repositories") %}
+                  * {{repo['display_name'] }} {{ repo['installed_version'] }} -> {{ repo['available_version'] }}
+                {%- endfor %}
+              title: HACS Components Updates Available
+              data:
+                sticky: 'true'
+                tag: update_hacs
+                group: updates
+                color: '#ff8c00'
+                clickAction: /hacs/installed
+          # set persistant notification
+          - service: persistent_notification.create
+            data:
+              title: Update Home Assistant
+              message: >-
+                There are updates to {{ states("sensor.hacs") }} HACS components:
+                {% for repo in state_attr("sensor.hacs","repositories") %}
+                  * **{{repo['display_name'] }}** _{{ repo['installed_version'] }}_ -> _{{ repo['available_version'] }}_
+                {%- endfor %}
+              notification_id: update_hacs
+          # open github tracker issue
+          - service: rest_command.github_issue_state
+            data:
+              issue: '37'
+              status: 'open'
+          - choose:
+              # check if notifications have already been sent to github via mqtt sensor
+              - conditions: >
+                  {% set ns = namespace(new_notify = False) -%}
+                  {%- for repo in state_attr("sensor.hacs","repositories") -%}
+                    {%- for item in state_attr("sensor.active_hacs_notifications","components")|selectattr('name','equalto',repo['name']) -%}
+                      {%- if item.version != repo['available_version'] -%}
+                        {%- set ns.new_notify = True -%}
+                      {%- endif -%}
+                    {% endfor %}
+                    {%- if repo['name'] not in state_attr("sensor.active_hacs_notifications","components")|to_json -%}
+                      {%- set ns.new_notify = True -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {{ ns.new_notify }}
+                sequence:
+                  # comment all new versions to github
+                  - service: rest_command.github_issue_comment
+                    data:
+                      issue: '37'
+                      message: >
+                        {% for repo in state_attr("sensor.hacs","repositories") -%}
+                          {% if repo['name'] not in state_attr("sensor.active_hacs_notifications","components")|to_json -%}
+                            * {{repo['display_name'] }} version {{ repo['available_version'] }} is available.  Version {{ repo['installed_version'] }} is currently installed.
+                          {%- else -%}
+                            {%- for item in state_attr("sensor.active_hacs_notifications","components")|selectattr('name','equalto',repo['name']) -%}
+                              {%- if item.version != repo['available_version'] -%}
+                                * {{repo['display_name'] }} version {{ repo['available_version'] }} is available.  Version {{ repo['installed_version'] }} is currently installed.
+                              {%- endif -%}
+                            {%- endfor -%}
+                          {%- endif %}
+                        {% endfor -%}
+          # publish to mqtt sensor
+          - service: mqtt.publish
+            data:
+              topic: hacs/notifications
+              payload: >
+                {"components":[
+                {%- set ns = namespace(added = False) -%}
+                {%- for repo in state_attr("sensor.hacs","repositories") -%}
+                    {%- if ns.added -%},{%- endif -%}
+                    {"name": "{{repo['name']}},"display_name": "{{repo['display_name']}}","version": "{{repo['available_version']}}"}
+                    {%- set ns.added = True -%}
+                {%- endfor -%}
+                ]}
+              retain: true
