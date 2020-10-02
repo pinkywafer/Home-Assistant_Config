@@ -119,7 +119,9 @@ automation:
           - sensor.homeassistant_current_version
     condition:
       - condition: template
-        value_template: '{{ states("sensor.homeassistant_version_available") == states("sensor.homeassistant_current_version") }}'
+        value_template: >
+          {{ states("sensor.homeassistant_version_available") != "unavailable" and
+          states("sensor.homeassistant_version_available") == states("sensor.homeassistant_current_version") }}
     action:
     - service: notify.mobile_app_jenny_s_oppo_reno
       data:
@@ -129,6 +131,9 @@ automation:
     - service: persistent_notification.dismiss
       data:
         notification_id: update_ha
+    - service: rest_command.new_version_github_issue
+      data:
+        status: "closed"
 
 rest_command:
   new_version_github_issue:
