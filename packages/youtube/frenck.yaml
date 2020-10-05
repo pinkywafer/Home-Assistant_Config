@@ -9,24 +9,27 @@ sensor:
 automation:
   - id: 'ba25c6a0-c3b5-4418-b378-54d98c76b26a'
     alias: YouTube Notification - Frank Nijhof
+    mode: single
     trigger:
       - platform: state
         entity_id: sensor.franck_nijhof
     action:
-    - service: notify.mobile_app_jenny_s_oppo_reno
-      data:
-        message: '{{ states("sensor.franck_nijhof")}}'
-        title: >
-          {% if is_state_attr("sensor.drzzs", "live", False) -%}
-          'New Franck Nijhof Video Available'
-          {%- else -%}
-          'Franck Nijhof is Live!'
-          {%- endif %}
+      - service: notify.mobile_app_jenny_s_oppo_reno
         data:
-          image: "{{state_attr('sensor.franck_nijhof','entity_picture')}}"
-          tag: franck_nijhof
-          color: 'green'
-          actions:
-            - action: "URI"
-              title: "Watch Now"
-              uri: '{{ state_attr("sensor.franck_nijhof","url") }}'
+          message: '{{ states("sensor.franck_nijhof")}}'
+          title: >
+            {% if is_state_attr("sensor.drzzs", "live", False) -%}
+            'New Franck Nijhof Video Available'
+            {%- else -%}
+            'Franck Nijhof is Live!'
+            {%- endif %}
+          data:
+            image: "{{state_attr('sensor.franck_nijhof','entity_picture')}}"
+            tag: franck_nijhof
+            color: 'green'
+            actions:
+              - action: "URI"
+                title: "Watch Now"
+                uri: '{{ state_attr("sensor.franck_nijhof","url") }}'
+      - delay:
+          seconds: 300

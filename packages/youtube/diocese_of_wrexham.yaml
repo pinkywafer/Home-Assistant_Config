@@ -9,19 +9,18 @@ sensor:
 automation:
   - id: 'ae5ad15c-82f8-4639-b81e-d978a0694675'
     alias: YouTube Notification - Diocese of Wrexham (TTS)
+    mode: single
     trigger:
       - platform: state
         entity_id: sensor.diocese_of_wrexham
     condition:
       - condition: template
         value_template: '{{ is_state_attr("sensor.diocese_of_wrexham", "live", True) }}'
-      - condition: template
-        value_template: >-
-          {{ as_timestamp(utcnow()) -
-              as_timestamp(state_attr("automation.youtube_notification_diocese_of_wrexham_tts","last_triggered")) > 300 }}
     action:
       - service: notify.broadcast_from_home_assistant
         data:
           message:  >
             The diocese of Wrexham is live on youtube with 
             {{ states("sensor.diocese_of_wrexham")}}
+      - delay:
+          seconds: 300

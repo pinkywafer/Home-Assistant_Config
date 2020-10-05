@@ -9,24 +9,27 @@ sensor:
 automation:
   - id: 'e55f763f-0b24-4fe6-83af-525fdad4a7c8'
     alias: YouTube Notification - DrZzs
+    mode: single
     trigger:
       - platform: state
         entity_id: sensor.drzzs
     action:
-    - service: notify.mobile_app_jenny_s_oppo_reno
-      data:
-        message: '{{ states("sensor.drzzs")}}'
-        title: >
-          {% if is_state_attr("sensor.drzzs", "live", False) -%}
-          'New DrZzs Video Available'
-          {%- else -%}
-          'DrZzs is Live!'
-          {%- endif %}
+      - service: notify.mobile_app_jenny_s_oppo_reno
         data:
-          image: "{{state_attr('sensor.drzzs','entity_picture')}}"
-          tag: drzzs
-          color: 'green'
-          actions:
-            - action: "URI"
-              title: "Watch Now"
-              uri: '{{ state_attr("sensor.drzzs","url") }}'
+          message: '{{ states("sensor.drzzs")}}'
+          title: >
+            {% if is_state_attr("sensor.drzzs", "live", False) -%}
+            'New DrZzs Video Available'
+            {%- else -%}
+            'DrZzs is Live!'
+            {%- endif %}
+          data:
+            image: "{{state_attr('sensor.drzzs','entity_picture')}}"
+            tag: drzzs
+            color: 'green'
+            actions:
+              - action: "URI"
+                title: "Watch Now"
+                uri: '{{ state_attr("sensor.drzzs","url") }}'
+      - delay:
+          seconds: 300
