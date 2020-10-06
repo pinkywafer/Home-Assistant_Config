@@ -25,15 +25,18 @@ automation:
     action:
       # for each notification on the mqtt sensor, if it isn't showing in hacs sensor
       # post github issue comment that it has been updated
-      - repeat:
-          count: '{{state_attr("sensor.active_hacs_notifications","components")|count}}'
-          sequence:
-            - condition: template
-              value_template: '{{state_attr("sensor.active_hacs_notifications","components")[index-1].name not in state_attr("sensor.hacs","repositories")|to_json}}'
-            - service: rest_command.github_issue_comment
-              data:
-                issue: '37'
-                message: '* {{state_attr("sensor.active_hacs_notifications","components")[index-1].display_name }} has been updated'
+      - choose:
+          - conditions: '{{states("sensor.active_hacs_notifications")|int > 0}}'
+            sequence:
+              - repeat:
+                  count: '{{states("sensor.active_hacs_notifications")|int}}'
+                  sequence:
+                    - condition: template
+                      value_template: '{{state_attr("sensor.active_hacs_notifications","components")[repeat.index-1].name not in state_attr("sensor.hacs","repositories")|to_json}}'
+                    - service: rest_command.github_issue_comment
+                      data:
+                        issue: '37'
+                        message: '* {{state_attr("sensor.active_hacs_notifications","components")[repeat.index-1].display_name }} has been updated'
       - choose:
           # if there are no components needing update
           - conditions: '{{states("sensor.hacs")|int == 0}}'
@@ -131,8 +134,10 @@ automation:
                 {%- set ns = namespace(added = False) -%}
                 {%- for repo in state_attr("sensor.hacs","repositories") -%}
                     {%- if ns.added -%},{%- endif -%}
-                    {"name": "{{repo['name']}},"display_name": "{{repo['display_name']}}","version": "{{repo['available_version']}}"}
+                    {"name": "{{repo['name']}}","display_name": "{{repo['display_name']}}","version": "{{repo['available_version']}}"}
                     {%- set ns.added = True -%}
                 {%- endfor -%}
                 ]}
               retain: true
+      - delay:
+          minutes: 2
