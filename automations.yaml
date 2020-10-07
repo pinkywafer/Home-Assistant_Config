@@ -62,12 +62,11 @@
   condition: []
   action:
   - data:
-      message: >
-        {{ ["Jo, it's time for your tablet", 
-        "Don't forget to take your tablet, Jo",
-        "Jo, if you haven't already taken your tablet, its time to take it now",
-        "Remember to take your tablet, Jo"
-        ] | random }}
+      message: '{{ ["Jo, it''s time for your tablet",  "Don''t forget to take your
+        tablet, Jo", "Jo, if you haven''t already taken your tablet, its time to take
+        it now", "Remember to take your tablet, Jo" ] | random }}
+
+        '
     service: notify.broadcast_from_home_assistant
 - id: '1599352861714'
   alias: Jo's blue switch
@@ -81,4 +80,25 @@
   - data: {}
     entity_id: light.emmas_room_lights
     service: light.turn_off
+  mode: single
+- id: '1601999861619'
+  alias: Emma Chore reminder
+  description: ''
+  trigger:
+  - platform: time
+    at: '15:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - fri
+  action:
+  - service: notify.mobile_app_emma_s_phone
+    data:
+      message: Take out recycling today!
+      title: Recycling day
+      data:
+        color: red
+        tag: recycling
+        sticky: true
   mode: single
