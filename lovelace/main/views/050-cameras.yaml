@@ -33,10 +33,14 @@ cards:
       - break
 
       - type: picture-glance
-        title: Outside Front
+        title: ChickenCam
         entities:
-          - light.vestibule_light
-        camera_image: camera.outside_front
+          - binary_sensor.chickencam
+          - entity: light.vestibule_light
+            icon: mdi:mailbox
+          - entity: light.sitting_room_light
+            icon: mdi:sofa
+        camera_image: camera.chickencam
 
 
 
