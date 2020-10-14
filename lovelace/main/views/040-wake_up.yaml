@@ -12,3 +12,5 @@ cards:
 
       - type: divider
       - entity: automation.wake_up_for_school
+      - type: divider
+      - entity: automation.collect_jo

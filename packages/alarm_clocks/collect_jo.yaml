@@ -1,0 +1,20 @@
+automation:
+  - id: '1602259095621'
+    alias: Collect Jo
+    description: ''
+    trigger:
+    - platform: time
+      at: '20:20'
+    condition:
+    - condition: time
+      weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+    action:
+    - service: notify.broadcast_from_home_assistant
+      data:
+        message: It's time to go
+    mode: single
