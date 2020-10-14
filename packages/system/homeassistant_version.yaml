@@ -73,6 +73,7 @@ automation:
         title: Update Home Assistant
         data:
           sticky: 'true'
+          group: updates
           tag: update_ha
           color: '#ff8c00'
           clickAction: /hassio/dashboard
@@ -94,6 +95,7 @@ automation:
             Travis Build has {{states('sensor.pinkywafer_home_assistant_config_state')}}
         title: Update Home Assistant
         data:
+          group: updates
           sticky: 'true'
           tag: update_ha
           color: '#ff8c00'
