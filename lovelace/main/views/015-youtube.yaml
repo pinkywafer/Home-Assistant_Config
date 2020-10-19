@@ -7,6 +7,7 @@ cards:
   - type: custom:layout-card
     layout: vertical
     max_columns: 3
+    column_width: 400
     cards:
       - !include ../youtube_views/pinkywafer.yaml
       - !include ../youtube_views/drzzs.yaml

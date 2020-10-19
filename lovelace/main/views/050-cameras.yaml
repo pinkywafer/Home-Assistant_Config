@@ -5,7 +5,7 @@ panel: true
 cards:
   - type: custom:layout-card
     layout: horizontal
-    #max_columns: 3
+    column_width: 400
     cards:
 
       - type: picture-glance
