@@ -1,0 +1,84 @@
+substitutions:
+  esphome_name: temp_hub
+  ip_address: 192.168.1.15
+
+esphome:
+  name: ${esphome_name}
+  platform: ESP32
+  board: esp-wrover-kit
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_psk
+  manual_ip:
+    static_ip: $ip_address
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+logger:
+  level: debug
+
+api:
+  reboot_timeout: 60min
+
+ota:
+  
+esp32_ble_tracker:
+
+switch:
+#  - platform: gpio
+#    name: "${esphome_name}-Onboard-LED"
+#    pin: 2
+#    inverted: True
+
+  - platform: restart
+    name: ${esphome_name}-restart
+    id: restart_switch
+
+sensor:
+  - platform: uptime
+    name: "${esphome_name}_Uptime Sensor"
+    
+  - platform: wifi_signal
+    name: "${esphome_name} WiFi Signal"
+    update_interval: 60s
+
+  - platform: xiaomi_lywsd03mmc
+    mac_address: "A4:C1:38:2E:27:8E"
+    bindkey: "ecb5253993a64688f2ffc27e39a60072"
+    temperature:
+      name: "Sitting Room Temperature"
+    humidity:
+      name: "Sitting Room Humidity"
+    battery_level:
+      name: "Sitting Room Temp Sensor Battery Level"
+
+  - platform: xiaomi_lywsd03mmc
+    mac_address: "A4:C1:38:6E:79:93"
+    bindkey: "d25787b647b14c66f5aceb95f1a33570"
+    temperature:
+      name: "Leopard Gecko Temperature"
+    humidity:
+      name: "Leopard Gecko Humidity"
+    battery_level:
+      name: "Leopard Gecko Sensor Battery Level" 
+
+  - platform: xiaomi_lywsd03mmc
+    mac_address: "A4:C1:38:41:AE:5F"
+    bindkey: "d25787b647b14c66f5aceb95f1a33570"
+    temperature:
+      name: "Vestibule Temperature"
+    humidity:
+      name: "Vestibule Humidity"
+    battery_level:
+      name: "Vestibule Temp Sensor Battery Level" 
+
+  - platform: xiaomi_lywsd03mmc
+    mac_address: "A4:C1:38:3E:41:7D"
+    bindkey: "d25787b647b14c66f5aceb95f1a33570"
+    temperature:
+      name: "Bedroom Temperature"
+    humidity:
+      name: "Bedroom Humidity"
+    battery_level:
+      name: "Bedroom Temp Sensor Battery Level" 

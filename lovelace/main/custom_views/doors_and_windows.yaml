@@ -3,6 +3,18 @@ cards:
   - type: horizontal-stack
     cards:
       - type: custom:button-card
+        entity: binary_sensor.front_door
+        show_state: false
+        icon: mdi:door-closed
+        state:
+          - value: 'on'
+            icon: mdi:door-open
+        styles:
+          card:
+            - height: 60px
+          name:
+            - font-size: 14px
+      - type: custom:button-card
         entity: binary_sensor.bedroom_window
         name: Bedroom
         show_state: false
@@ -16,7 +28,7 @@ cards:
           name:
             - font-size: 14px
       - type: custom:button-card
-        name: Windows
+        name: 
       - type: custom:button-card
         entity: binary_sensor.emma_s_window
         name: "Emma's"
@@ -32,6 +44,18 @@ cards:
             - font-size: 14px
   - type: horizontal-stack
     cards:
+      - type: custom:button-card
+        entity: binary_sensor.back_door
+        show_state: false
+        icon: mdi:door-closed
+        state:
+          - value: 'on'
+            icon: mdi:door-open
+        styles:
+          card:
+            - height: 60px
+          name:
+            - font-size: 14px
       - type: custom:button-card
         entity: binary_sensor.front_window
         name: Front

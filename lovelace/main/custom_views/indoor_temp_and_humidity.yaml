@@ -1,0 +1,31 @@
+#type: custom:vertical-stack-in-card
+#cards:
+type: horizontal-stack
+cards:
+  - type: 'custom:mini-graph-card'
+    name: Temperature
+    entities:
+      - entity: sensor.sitting_room_temperature
+        name: Sitting Room
+      - entity: sensor.bedroom_temperature
+        name: Bedroom
+      - entity: sensor.vestibule_temperature
+        name: Vestibule
+    line_width: 2
+    points_per_hour: 6
+    height: 100
+    font_size: 70
+
+  - type: 'custom:mini-graph-card'
+    name: Humidity
+    entities:
+      - entity: sensor.sitting_room_humidity
+        name: Sitting Room
+      - entity: sensor.bedroom_humidity
+        name: Bedroom
+      - entity: sensor.vestibule_humidity
+        name: Vestibule
+    line_width: 2
+    points_per_hour: 6
+    height: 100
+    font_size: 70

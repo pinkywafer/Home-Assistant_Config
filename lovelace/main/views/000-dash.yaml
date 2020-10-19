@@ -6,6 +6,7 @@ cards:
   - type: custom:layout-card
     layout: vertical
     max_columns: 3
+    column_width: 400
     cards:
       - !include ../custom_views/family_presence.yaml
       - break
@@ -55,30 +56,14 @@ cards:
                 - color: yellow
       - !include ../custom_views/downstairs_lights.yaml
       - !include ../custom_views/upstairs_lights.yaml
+      - !include ../custom_views/water_heater.yaml
       - break
       
       - !include ../custom_views/appliances.yaml
       - !include ../custom_views/kitchen_sockets.yaml
-      - !include ../custom_views/water_heater.yaml
+      - !include ../custom_views/indoor_temp_and_humidity.yaml
+
       - break
-      
-      - !include ../custom_views/door_sensors.yaml
-      - !include ../custom_views/window_sensors.yaml
+      - !include ../custom_views/leopard_gecko.yaml
+      - !include ../custom_views/doors_and_windows.yaml
       - !include ../custom_views/motion_sensors.yaml
-      - !include ../custom_views/fridge.yaml
-      - break
-      - type: entities
-        entities:
-          - type: 'custom:multiple-entity-row'
-            entity: sensor.next_bus_to_porthmadog
-            entities:
-              - entity: sensor.next_bus_to_porthmadog_estimated
-                name: Est
-              - entity: sensor.next_bus_to_porthmadog_scheduled
-                name: Scheduled
-              - entity: sensor.next_bus_to_porthmadog_route
-                name: route
-      - break
-      - entity: sensor.aftership
-        title: Packages
-        type: 'custom:aftership-card'
