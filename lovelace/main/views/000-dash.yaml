@@ -64,6 +64,6 @@ cards:
       - !include ../custom_views/indoor_temp_and_humidity.yaml
 
       - break
-      - !include ../custom_views/leopard_gecko.yaml
+      - !include ../custom_views/gecko_enclosures.yaml
       - !include ../custom_views/doors_and_windows.yaml
       - !include ../custom_views/motion_sensors.yaml
