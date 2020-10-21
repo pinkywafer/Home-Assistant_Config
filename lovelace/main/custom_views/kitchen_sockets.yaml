@@ -1,8 +1,8 @@
 type: custom:vertical-stack-in-card
 cards:
   - type: custom:button-card
-    entity: group.kitchen_sockets
-    label: Kitchen Sockets
+    entity: group.kitchen_appliances
+    label: Kitchen
     tap_action:
       action: toggle
       haptic: light

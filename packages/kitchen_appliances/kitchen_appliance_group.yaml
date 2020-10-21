@@ -1,0 +1,6 @@
+group:
+  kitchen_appliances:
+    name: Kitchen
+    entities:
+      - switch.kitchen_socket_1
+      - switch.kitchen_socket_2
