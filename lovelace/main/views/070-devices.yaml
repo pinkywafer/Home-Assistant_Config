@@ -2,6 +2,8 @@ title: Devices
 icon: mdi:lan
 path: devices
 panel: true
+visible: 
+  - user: !secret user_jenny
 cards:
   - type: custom:layout-card
     layout: vertical
