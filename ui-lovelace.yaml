@@ -4,5 +4,4 @@ preload_rows:
 preload_cards:
   - picture-entity
   - map
-custom_header: !include lovelace/main/custom-header.yaml
 views: !include_dir_list lovelace/main/views
