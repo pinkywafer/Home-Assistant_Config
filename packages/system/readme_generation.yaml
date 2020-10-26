@@ -7,4 +7,22 @@ automation:
       - platform: homeassistant
         event: start
     action:
-      service: readme.generate
+      - wait_for_trigger:
+          - platform: event
+            event_type: hacs/stage
+            event_data:
+              stage: running
+        timeout:
+          minutes: 5
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ not wait.trigger }}"
+            sequence:
+              # Timeout reached
+              - service: persistent_notification.create
+                data:
+                  title: ReadMe generation failed!
+                  message: Timeout reached! Hacs could not start in time.
+        default:
+          - service: readme.generate
