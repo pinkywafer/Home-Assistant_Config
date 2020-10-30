@@ -1,7 +1,7 @@
 esphome:
   name: jos_control_panel
-  platform: ESP8266
-  board: d1_mini
+  platform: ESP32
+  board: esp-wrover-kit
 
 wifi:
   ssid: !secret wifi_ssid
@@ -20,10 +20,12 @@ api:
 
 ota:
 
+esp32_ble_tracker:
+
 binary_sensor:
   - platform: gpio
     pin:
-      number: D1
+      number: 23
       mode: INPUT_PULLUP
       inverted: true
     name: "Jo's Green switch"
@@ -33,7 +35,7 @@ binary_sensor:
   
   - platform: gpio
     pin:
-      number: D2
+      number: 22
       mode: INPUT_PULLUP
       inverted: true
     name: "Jo's Orange switch"
@@ -43,7 +45,7 @@ binary_sensor:
       
   - platform: gpio
     pin:
-      number: D5
+      number: 21
       mode: INPUT_PULLUP
       inverted: true
     name: "Jo's Red switch"
@@ -53,7 +55,7 @@ binary_sensor:
     
   - platform: gpio
     pin:
-      number: D6
+      number: 19
       mode: INPUT_PULLUP
       inverted: true
     name: "Jo's Blue switch"
@@ -63,7 +65,7 @@ binary_sensor:
     
   - platform: gpio
     pin:
-      number: D7
+      number: 18
       mode: INPUT_PULLUP
       inverted: true
     name: "Jo's Purple switch"
@@ -82,7 +84,27 @@ sensor:
   - platform: uptime
     name: Jo's Control Panel Uptime
 
+  - platform: xiaomi_lywsd03mmc
+    mac_address: "A4:C1:38:C7:7D:64"
+    bindkey: "d25787b647b14c66f5aceb95f1a33570"
+    temperature:
+      name: "Emma's Room Temperature"
+    humidity:
+      name: "Emma's Room Humidity"
+    battery_level:
+      name: "Emma's Room Temp Sensor Battery Level" 
+
+  - platform: xiaomi_lywsd03mmc
+    mac_address: "A4:C1:38:3E:41:7D"
+    bindkey: "d25787b647b14c66f5aceb95f1a33570"
+    temperature:
+      name: "Bedroom Temperature"
+    humidity:
+      name: "Bedroom Humidity"
+    battery_level:
+      name: "Bedroom Temp Sensor Battery Level"
+
 status_led:
   pin:
-    number: D4
+    number: 2
     inverted: true
