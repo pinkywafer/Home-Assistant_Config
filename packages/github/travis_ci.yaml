@@ -1,6 +1,6 @@
 sensor:
   - platform: travisci
-    api_key: !secret github_token
+    api_key: !secret travis_github_token
     monitored_conditions:
       - state
       - last_build_state
@@ -8,7 +8,7 @@ sensor:
       
 rest_command:
   travis_build:
-    url: https://api.travis-ci.org/repo/pinkywafer%2FHome-Assistant_Config/requests
+    url: https://api.travis-ci.com/repo/pinkywafer%2FHome-Assistant_Config/requests
     method: POST
     headers:
       authorization: !secret travis_api_key
