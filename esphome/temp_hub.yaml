@@ -25,6 +25,11 @@ ota:
   
 esp32_ble_tracker:
 
+status_led:
+  pin: 
+    number: GPIO2
+    inverted: true
+  
 switch:
 #  - platform: gpio
 #    name: "${esphome_name}-Onboard-LED"
