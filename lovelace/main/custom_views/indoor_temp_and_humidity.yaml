@@ -11,6 +11,8 @@ cards:
         name: Bedroom
       - entity: sensor.vestibule_temperature
         name: Vestibule
+      - entity: sensor.emma_s_room_temperature
+        name: Emma's room
     line_width: 2
     points_per_hour: 6
     height: 100
@@ -25,6 +27,8 @@ cards:
         name: Bedroom
       - entity: sensor.vestibule_humidity
         name: Vestibule
+      - entity: sensor.emma_s_room_humidity
+        name: Emma's room
     line_width: 2
     points_per_hour: 6
     height: 100
