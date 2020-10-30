@@ -19,30 +19,30 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 5619
+Lines of yaml code in my configuration (excluding secrets): 5756
 
-Number of entities: 705
+Number of entities: 726
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 0
-Automation | 79
+Automation | 78
 Binary Sensor | 103
 Camera | 13
-Device Tracker | 23
-Group | 0
+Device Tracker | 24
+Group | 1
 Input Boolean | 2
 Input Datetime | 1
 Input Text | 4
 Light | 21
-Media Player | 13
+Media Player | 15
 Person | 3
 Scene | 1
 Script | 22
-Sensor | 378
+Sensor | 395
 Sun | 1
-Switch | 27
+Switch | 29
 Weather | 5
 Zone | 4
 
@@ -68,7 +68,6 @@ Zone | 4
 - [Button Card](https://github.com/custom-cards/button-card)
 - [Card Mod](https://github.com/thomasloven/lovelace-card-mod)
 - [Card Tools](https://github.com/thomasloven/lovelace-card-tools)
-- [Custom Header](https://github.com/maykar/custom-header)
 - [Entity Attributes Card](https://github.com/custom-cards/entity-attributes-card)
 - [Github Card](https://github.com/ljmerza/github-card)
 - [Ha (Lovelace) Card Weather Conditions](https://github.com/r-renato/ha-card-weather-conditions)
