@@ -31,10 +31,9 @@ status_led:
     inverted: true
   
 switch:
-#  - platform: gpio
-#    name: "${esphome_name}-Onboard-LED"
-#    pin: 2
-#    inverted: True
+  - platform: gpio
+    name: "Flame Lantern"
+    pin: 4
 
   - platform: restart
     name: ${esphome_name}-restart
