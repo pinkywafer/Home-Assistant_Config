@@ -5,7 +5,9 @@ sensor:
       - state
       - last_build_state
       - last_build_finished_at
-      
+    repository:
+      - Home-Assistant_Config
+
 rest_command:
   travis_build:
     url: https://api.travis-ci.com/repo/pinkywafer%2FHome-Assistant_Config/requests
