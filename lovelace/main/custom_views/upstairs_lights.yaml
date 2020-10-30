@@ -43,7 +43,6 @@ cards:
             - height: 60px
           name:
             - font-size: 14px
-  - type: divider
   - type: vertical-stack
     cards:
       - type: custom:button-card
@@ -117,7 +116,6 @@ cards:
               name:
                 - font-size: 14px
 
-  - type: divider
   - type: vertical-stack
     cards:
       - type: custom:button-card
