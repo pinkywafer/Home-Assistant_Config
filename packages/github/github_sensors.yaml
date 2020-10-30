@@ -6,4 +6,4 @@ sensor:
       - path: 'pinkywafer/PinkyLEDs'
       - path: 'pinkywafer/Anniversaries'
       - path: 'pinkywafer/OpenTX_soundpack-Joanne'
-      - path: 'home-assistant/home-assistant'
+      - path: 'home-assistant/core'
