@@ -1,15 +1,25 @@
-dist: bionic
+dist: Xenial
 language: python
 python:
-  - "3.7"
+  - "3.8"
+
 before_install:
   - sudo apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev
   - mv travis_secrets.yaml secrets.yaml
   - mv travis_google_service_account.json google_service_account.json
-install:
+  - HA_VERSION=$(<.HA_VERSION)	
   - pip3 install netdisco
   - pip3 install spotipy
   - pip3 install pychromecast
-  - pip3 install homeassistant
+  
+jobs:
+  include:
+    - env: HA=CURRENT_INSTALL
+      install:
+        - pip3 install homeassistant==${HA_VERSION}
+    - env: HA=LATEST_RELEASE
+      install:
+        - pip3 install homeassistant
+
 script:
   - hass -c . --script check_config --info all
