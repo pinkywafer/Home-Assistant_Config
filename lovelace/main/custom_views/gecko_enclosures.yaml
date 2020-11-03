@@ -39,7 +39,7 @@ cards:
     color_thresholds:
       - value: 0
         color: black
-      - value: 23
+      - value: 21
         color: green
-      - value: 30
+      - value: 28
         color: red
