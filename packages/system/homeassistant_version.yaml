@@ -63,7 +63,7 @@ automation:
         message: ' Home Assistant version {{ states("sensor.homeassistant_version_available") }} is now available"}'
     - service: rest_command.travis_build
     # wait for travis build to start then update notification
-    - wait_template: "{{ is_state('sensor.pinkywafer_home_assistant_config_state', 'started') }}"
+    - wait_template: "{{ is_state('sensor.travis_ci_home_assistant_config', 'started') }}"
     - service: notify.mobile_app_jenny_s_oppo_reno
       data:
         message: >
@@ -86,13 +86,13 @@ automation:
             Travis Build has started
         notification_id: update_ha
     # wait for build to complete and update notification with status
-    - wait_template: "{{ not is_state('sensor.pinkywafer_home_assistant_config_state', 'created') and not is_state('sensor.pinkywafer_home_assistant_config_state', 'started') }}"
+    - wait_template: "{{ not is_state('sensor.travis_ci_home_assistant_config', 'created') and not is_state('sensor.travis_ci_home_assistant_config', 'started') }}"
     - service: notify.mobile_app_jenny_s_oppo_reno
       data:
         message: >
           There is an update to Home Assistant core
             * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
-            Travis Build has {{states('sensor.pinkywafer_home_assistant_config_state')}}
+            Travis Build has {{states('sensor.travis_ci_home_assistant_config')}}
         title: Update Home Assistant
         data:
           group: updates
@@ -106,12 +106,12 @@ automation:
         message: >
           There is an update to Home Assistant core
             * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
-            Travis Build has {{states('sensor.pinkywafer_home_assistant_config_state')}}
+            Travis Build has {{states('sensor.travis_ci_home_assistant_config')}}
         notification_id: update_ha
     - service: rest_command.github_issue_comment
       data:
         issue: '11'
-        message: "Travis build has {{ states('sensor.pinkywafer_home_assistant_config_state') }}"
+        message: "Travis build has {{ states('sensor.travis_ci_home_assistant_config') }}"
 
   - id: '7e81d1d4-9fb7-47d1-89d1-2e8624673f3d'
     alias: Home Assistant Update Notification Dismiss

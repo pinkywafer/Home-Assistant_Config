@@ -1,12 +1,23 @@
 sensor:
-  - platform: travisci
-    api_key: !secret travis_github_token
-    monitored_conditions:
-      - state
-      - last_build_state
-      - last_build_finished_at
-    repository:
-      - Home-Assistant_Config
+  - platform: rest
+    name: Travis-Ci Home Assistant Config
+    resource: https://api.travis-ci.com/repo/pinkywafer%2FHome-Assistant_Config/builds?limit=1
+    method: GET
+    payload: '{"branch":{"name":"master"}}'
+    headers:
+      authorization: !secret travis_api_key
+      Content-Type: "application/json"
+      Accept: "application/json"
+      Travis-API-Version: 3
+    value_template: '{{value_json.builds.0.state}}'
+    json_attributes_path: "$.builds.[0]"
+    json_attributes:
+      - number
+      - started_at
+      - finished_at
+      - duration
+      - previous_state
+      - commit
 
 rest_command:
   travis_build:
@@ -18,3 +29,4 @@ rest_command:
       Accept: "application/json"
       Travis-API-Version: 3
     payload: '{"request": {"branch":"master"}}'
+    
