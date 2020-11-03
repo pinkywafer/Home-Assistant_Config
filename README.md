@@ -11,7 +11,7 @@ It runs on an [XCY X30 Intel i7 4500U from banggood](https://www.banggood.com/XC
 Proxmox is installed on bare metal,  then this (production) Home Assistant runs in a VM.
 A separate VM provides my Dev. env
 
-This repo is validated by Travis CI
+This repo is validated by Travis CI.  The config is checked against both the currently installed version and the latest release.
 
 I also have containers for file sharing (nas), plex server, and a tuya convert container.
 
@@ -19,28 +19,28 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 5756
+Lines of yaml code in my configuration (excluding secrets): 5768
 
-Number of entities: 726
+Number of entities: 725
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 0
 Automation | 78
-Binary Sensor | 103
+Binary Sensor | 104
 Camera | 13
 Device Tracker | 24
 Group | 1
 Input Boolean | 2
 Input Datetime | 1
 Input Text | 4
-Light | 21
-Media Player | 15
+Light | 20
+Media Player | 14
 Person | 3
 Scene | 1
 Script | 22
-Sensor | 395
+Sensor | 394
 Sun | 1
 Switch | 29
 Weather | 5
