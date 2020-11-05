@@ -40,4 +40,4 @@ www/custom-lovelace/upcoming-media-card
 .vscode
 
 # Specific keeps
-esphome/common
+!esphome/common
