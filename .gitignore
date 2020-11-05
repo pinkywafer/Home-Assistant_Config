@@ -29,6 +29,7 @@ ip_bans.yaml
 # ESPHome ignores
 esphome/secrets.yaml
 esphome/**/
+esphome/common/secrets.yaml
 
 # www ignores
 www/*.jpeg
@@ -40,4 +41,4 @@ www/custom-lovelace/upcoming-media-card
 .vscode
 
 # Specific keeps
-!esphome/common
+!esphome/common***/

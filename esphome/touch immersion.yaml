@@ -1,15 +1,15 @@
+substitutions:
+  esphome_name: temp_hub
+  ip_address: 192.168.1.39
+  reboot_time: 15min
+
 esphome:
   name: immersion_heater
   platform: ESP8266
   board: esp01_1m
 
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_psk
-  manual_ip:
-    static_ip: 192.168.1.39
-    gateway: 192.168.1.1
-    subnet: 255.255.255.0
+packages:
+  wifi: !include common/wifi.yaml
 
 # Enable logging
 logger:

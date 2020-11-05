@@ -3,17 +3,10 @@ esphome:
   platform: ESP8266
   board: esp01_1m
 
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_psk
-  reboot_timeout: $reboot_time
-  manual_ip:
-    static_ip: $ip_address
-    gateway: 192.168.1.1
-    subnet: 255.255.255.0
-
 # Enable logging
 logger:
+
+<<: !include wifi.yaml
 
 # Enable Home Assistant API
 api:
@@ -63,6 +56,4 @@ sensor:
     name: $friendly_name Shelly1 Uptime
 
 switch:
-  - platform: restart
-    id: reboot
-    name: $friendly_name Reboot
+  - <<: !include switch/reboot.yaml

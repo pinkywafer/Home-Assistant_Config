@@ -2,20 +2,16 @@ substitutions:
   devicename: front_sensor
   friendly_name: Front Sensor
   ip_address: 192.168.1.230
+  reboot_time: 15min
 
 esphome:
   name: $devicename
   platform: ESP32
   board: esp-wrover-kit
 
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_psk
-  manual_ip:
-    static_ip: $ip_address
-    gateway: 192.168.1.1
-    subnet: 255.255.255.0
- 
+packages:
+  wifi: !include common/wifi.yaml
+
 # Enable logging
 logger:
 

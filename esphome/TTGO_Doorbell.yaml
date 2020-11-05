@@ -4,6 +4,7 @@ substitutions:
   ip_address: 192.168.1.240
   line1_input_text: input_text.doorbell_line1
   line2_input_text: input_text.doorbell_line2
+  reboot_time: 15min
 
 esphome:
   name: $devicename
@@ -29,14 +30,9 @@ esphome:
           - display.page.show: message_page
           - component.update: lcd
 
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_psk
-  manual_ip:
-    static_ip: $ip_address
-    gateway: 192.168.1.1
-    subnet: 255.255.255.0
- 
+packages:
+  wifi: !include common/wifi.yaml
+
 # Enable logging
 logger:
 
@@ -66,13 +62,8 @@ binary_sensor:
     name: $friendly_name Status
   
 sensor:
-  - platform: wifi_signal
-    name: $friendly_name WiFi Signal
-    update_interval: 10s
-  
-  - platform: uptime
-    name: $friendly_name Uptime
-    id: uptime
+  - <<: !include common/sensor/wifi_signal.yaml
+  - <<: !include common/sensor/uptime.yaml
 
 esp32_camera:
   name: $friendly_name Camera
@@ -97,10 +88,10 @@ i2c:
   scl: GPIO22
 
 font:
-  - file: "fonts/times-new-roman.ttf"
+  - file: "common/fonts/times-new-roman.ttf"
     id: tnr1
     size: 20
-  - file: "fonts/times-new-roman.ttf"
+  - file: "common/fonts/times-new-roman.ttf"
     id: tnr2
     size: 35
 

@@ -3,4 +3,4 @@ substitutions:
   friendly_name: Jennys Bedside Light
   ip_address: 192.168.1.29
 
-<<: !include sonoff_basic_light.yaml
+<<: !include common/sonoff_basic_light.yaml

@@ -3,15 +3,6 @@ esphome:
   platform: ESP8266
   board: esp01_1m
 
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_psk
-  reboot_timeout: $reboot_time
-  manual_ip:
-    static_ip: $ip_address
-    gateway: 192.168.1.1
-    subnet: 255.255.255.0
-
 # Enable logging
 logger:
 
@@ -22,16 +13,11 @@ api:
 ota:
 
 sensor:
-  - platform: wifi_signal
-    name: $friendly_name Wifi Signal
-    update_interval: 10s
-
-  - platform: uptime
-    name: $friendly_name Uptime
+  - <<: !include sensor/wifi_signal.yaml
+  - <<: !include sensor/uptime.yaml
 
 binary_sensor:
-  - platform: status
-    name: $friendly_name Status
+  - <<: !include binary_sensor/status.yaml
 
   - platform: gpio
     pin:
@@ -50,9 +36,7 @@ binary_sensor:
         - switch.turn_on: reboot
 
 switch:
-  - platform: restart
-    id: reboot
-    internal: true
+  - <<: !include switch/reboot.yaml
 
   - platform: gpio
     pin: GPIO15

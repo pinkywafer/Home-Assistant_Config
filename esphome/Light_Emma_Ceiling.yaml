@@ -3,4 +3,4 @@ substitutions:
   friendly_name: Emmas Ceiling Light
   ip_address: 192.168.1.26
 
-<<: !include sonoff_basic_light.yaml
+<<: !include common/sonoff_basic_light.yaml

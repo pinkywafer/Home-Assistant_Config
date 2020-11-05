@@ -4,4 +4,6 @@ substitutions:
   ip_address: 192.168.1.51
   reboot_time: 0s
 
-<<: !include bseed_socket.yaml
+packages:
+  wifi: !include common/wifi.yaml
+  device_base: !include common/bseed_socket.yaml

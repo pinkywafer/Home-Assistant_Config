@@ -1,16 +1,16 @@
+substitutions:
+  ip_address: 192.168.1.11
+  reboot_time: 10min
+  devicename: jos_control_panel
+  friendly_name: Jo's Control Panel
+
+packages:
+  wifi: !include common/wifi.yaml
+
 esphome:
-  name: jos_control_panel
+  name: $devicename
   platform: ESP32
   board: esp-wrover-kit
-
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_psk
-  reboot_timeout: 10min
-  manual_ip:
-    static_ip: 192.168.1.11
-    gateway: 192.168.1.1
-    subnet: 255.255.255.0
 
 # Enable logging
 logger:
@@ -23,6 +23,8 @@ ota:
 esp32_ble_tracker:
 
 binary_sensor:
+  - <<: !include common/binary_sensor/status.yaml
+
   - platform: gpio
     pin:
       number: 23
@@ -72,17 +74,10 @@ binary_sensor:
     filters:
       - delayed_on: 10ms
       - delayed_off: 10ms
-      
-  - platform: status
-    name: Jo's Control Panel Status
-    
-sensor:
-  - platform: wifi_signal
-    name: Jo's Control Panel Wifi Signal
-    update_interval: 10s
 
-  - platform: uptime
-    name: Jo's Control Panel Uptime
+sensor:
+  - <<: !include common/sensor/wifi_signal.yaml
+  - <<: !include common/sensor/uptime.yaml
 
   - platform: xiaomi_lywsd03mmc
     mac_address: "A4:C1:38:C7:7D:64"
