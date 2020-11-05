@@ -106,7 +106,7 @@ jobs:
           pip list
           esphome version
       - name: Copy stub files into configuration folder
-        run: cp -R ci_esphome_secrets.yaml esphome/secrets.yaml
+        run: cp -R ci_esphome_secrets.yaml esphome/common/secrets.yaml
       - name: Run esphome on all files
         # yamllint disable rule:line-length
         run: |
