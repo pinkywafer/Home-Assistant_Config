@@ -102,6 +102,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip setuptools wheel
+          pip install pillow
           pip install esphome
           pip list
           esphome version
