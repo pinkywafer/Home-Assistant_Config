@@ -40,24 +40,19 @@ jobs:
           cp -R ci_secrets.yaml secrets.yaml
           cp -R ci_google_service_account.json google_service_account.json
           sudo mkdir -p /github/workspace/tmp
-      - name: Install Python
-        uses: actions/setup-python@v2
+      - name: Home Assistant Version
+        uses: "docker://homeassistant/home-assistant:stable"
         with:
-          python-version: '3.8'
-      - name: Install Dependancies
-        run: |
-          sudo apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev
-          HA_VERSION=$(<.HA_VERSION)
-          pip3 install netdisco
-          pip3 install spotipy
-          pip3 install pychromecast
-      - name: Install Home Assistant
-        run: pip3 install homeassistant==${HA_VERSION}
+          args: |
+            python -m homeassistant --version
+      - name: Home Assistant downgrade
+        uses: "docker://homeassistant/home-assistant:stable"
+        with:
+          args: python -m homeassistant core update --version=$(<.HA_VERSION)
       - name: Home Assistant Check
-#         uses: "docker://homeassistant/home-assistant:stable"
-#         with:
-#           args: python -m homeassistant --config  ./ --script check_config --info all
-        run: hass -c . --script check_config --info all
+        uses: "docker://homeassistant/home-assistant:stable"
+        with:
+          args: python -m homeassistant --config  ./ --script check_config --info all
 
   home_assistant_stable:
     runs-on: ubuntu-latest
