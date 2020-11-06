@@ -19,28 +19,28 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 5768
+Lines of yaml code in my configuration (excluding secrets): 5844
 
-Number of entities: 725
+Number of entities: 730
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 0
 Automation | 78
-Binary Sensor | 103
+Binary Sensor | 104
 Camera | 13
 Device Tracker | 24
 Group | 1
 Input Boolean | 2
 Input Datetime | 1
 Input Text | 4
-Light | 21
-Media Player | 15
+Light | 22
+Media Player | 16
 Person | 3
 Scene | 1
 Script | 22
-Sensor | 393
+Sensor | 395
 Sun | 1
 Switch | 29
 Weather | 5
@@ -51,32 +51,32 @@ Zone | 4
 ## HACS installed components
 
 ### Integrations
-- [Anniversaries](https://github.com/pinkywafer/Anniversaries)
-- [Authenticated](https://github.com/custom-components/authenticated)
-- [Blitzortung.Org Lightning Detector](https://github.com/mrk-its/homeassistant-blitzortung)
-- [Breaking Changes](https://github.com/custom-components/breaking_changes)
-- [Browser Mod](https://github.com/thomasloven/hass-browser_mod)
-- [Calendarific](https://github.com/pinkywafer/Calendarific)
-- [Garbage Collection](https://github.com/bruxy70/Garbage-Collection)
-- [HACS](https://github.com/hacs/integration)
-- [Readme](https://github.com/custom-components/readme)
-- [Spotcast](https://github.com/fondberg/spotcast)
-- [Youtube](https://github.com/custom-components/youtube)
+  - [Anniversaries](https://github.com/pinkywafer/Anniversaries)
+  - [Authenticated](https://github.com/custom-components/authenticated)
+  - [Blitzortung.Org Lightning Detector](https://github.com/mrk-its/homeassistant-blitzortung)
+  - [Breaking Changes](https://github.com/custom-components/breaking_changes)
+  - [Browser Mod](https://github.com/thomasloven/hass-browser_mod)
+  - [Calendarific](https://github.com/pinkywafer/Calendarific)
+  - [Garbage Collection](https://github.com/bruxy70/Garbage-Collection)
+  - [HACS](https://github.com/hacs/integration)
+  - [Readme](https://github.com/custom-components/readme)
+  - [Spotcast](https://github.com/fondberg/spotcast)
+  - [Youtube](https://github.com/custom-components/youtube)
 
 ### Lovelace
-- [Aftership Card](https://github.com/iantrich/aftership-card)
-- [Button Card](https://github.com/custom-cards/button-card)
-- [Card Mod](https://github.com/thomasloven/lovelace-card-mod)
-- [Card Tools](https://github.com/thomasloven/lovelace-card-tools)
-- [Entity Attributes Card](https://github.com/custom-cards/entity-attributes-card)
-- [Github Card](https://github.com/ljmerza/github-card)
-- [Ha (Lovelace) Card Weather Conditions](https://github.com/r-renato/ha-card-weather-conditions)
-- [Layout Card](https://github.com/thomasloven/lovelace-layout-card)
-- [Lovelace Card Preloader](https://github.com/gadgetchnnel/lovelace-card-preloader)
-- [Mini Graph Card](https://github.com/kalkih/mini-graph-card)
-- [Mini Media Player](https://github.com/kalkih/mini-media-player)
-- [Multiple Entity Row](https://github.com/benct/lovelace-multiple-entity-row)
-- [Simple Weather Card](https://github.com/kalkih/simple-weather-card)
+  - [Aftership Card](https://github.com/iantrich/aftership-card)
+  - [Button Card](https://github.com/custom-cards/button-card)
+  - [Card Mod](https://github.com/thomasloven/lovelace-card-mod)
+  - [Card Tools](https://github.com/thomasloven/lovelace-card-tools)
+  - [Entity Attributes Card](https://github.com/custom-cards/entity-attributes-card)
+  - [Github Card](https://github.com/ljmerza/github-card)
+  - [Ha (Lovelace) Card Weather Conditions](https://github.com/r-renato/ha-card-weather-conditions)
+  - [Layout Card](https://github.com/thomasloven/lovelace-layout-card)
+  - [Lovelace Card Preloader](https://github.com/gadgetchnnel/lovelace-card-preloader)
+  - [Mini Graph Card](https://github.com/kalkih/mini-graph-card)
+  - [Mini Media Player](https://github.com/kalkih/mini-media-player)
+  - [Multiple Entity Row](https://github.com/benct/lovelace-multiple-entity-row)
+  - [Simple Weather Card](https://github.com/kalkih/simple-weather-card)
 
 ***
 
