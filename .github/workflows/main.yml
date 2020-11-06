@@ -40,12 +40,12 @@ jobs:
           cp -R ci_secrets.yaml secrets.yaml
           cp -R ci_google_service_account.json google_service_account.json
           sudo mkdir -p /github/workspace/tmp
-       - name: Install Python
-         uses: actions/setup-python@v2
-         with:
-           python-version: '3.8'
-       - name: Install Dependancies
-         run: |
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install Dependancies
+        run: |
           sudo apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev
           HA_VERSION=$(<.HA_VERSION)
           pip3 install netdisco
