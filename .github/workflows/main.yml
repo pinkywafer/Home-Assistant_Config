@@ -58,7 +58,6 @@ jobs:
 #         with:
 #           args: python -m homeassistant --config  ./ --script check_config --info all
         run: hass -c . --script check_config --info all
-          
 
   home_assistant_stable:
     runs-on: ubuntu-latest
