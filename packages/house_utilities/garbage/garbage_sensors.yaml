@@ -11,7 +11,7 @@ garbage_collection:
     icon_tomorrow: mdi:trash-can
     expire_after: '14:00'
 
-  - name: Recycling 
+  - name: Recycling
     # Each week on Tuesday
     frequency: "weekly"
     collection_days:
