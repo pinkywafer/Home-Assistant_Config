@@ -9,4 +9,4 @@ device_tracker:
     home_interval: 3
     interval_seconds: 90
     new_device_defaults:
-      track_new_devices: True
+      track_new_devices: true

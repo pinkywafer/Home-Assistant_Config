@@ -12,7 +12,7 @@ automation:
         message: Emma has arrived at Agatha's
         data:
           tag: emma_location
-  
+
   - id: '79a8f099-61a8-43ab-9f1a-9915df95c196'
     alias: Emma left Agatha's
     trigger:

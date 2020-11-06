@@ -6,6 +6,6 @@ exemptLabels: []
 staleLabel: oldnews
 markComment: >
   This issue has been automatically marked as old news and will be closed shortly.
-  There is a new Weekly digest available.  Please see that one for the most up to date information. 
+  There is a new Weekly digest available.  Please see that one for the most up to date information.
 closeComment: false
 only: issues
