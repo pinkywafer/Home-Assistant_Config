@@ -11,6 +11,8 @@ rules:
   comments-indentation: disable
   document-start: disable
   indentation: disable
+  new-lines:
+    type: dos
 
 ignore: |
   lovelace-ui.yaml
