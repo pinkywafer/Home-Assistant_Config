@@ -1,6 +1,6 @@
 garbage_collection:
   sensors:
-  - name: General Waste 
+  - name: General Waste
     # Every 3 weeks
     frequency: "every-n-days"
     first_date: '2020-01-07'
@@ -11,7 +11,8 @@ garbage_collection:
     icon_tomorrow: mdi:trash-can
     expire_after: '14:00'
 
-  - name: Recycling # Each week on Tuesday
+  - name: Recycling 
+    # Each week on Tuesday
     frequency: "weekly"
     collection_days:
     - tue
