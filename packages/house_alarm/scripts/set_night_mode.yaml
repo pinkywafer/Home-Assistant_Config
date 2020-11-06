@@ -11,6 +11,6 @@ script:
             entity_id: alarm_control_panel.alarm
             state: 'armed_home'
       - service: alarm_control_panel.alarm_arm_night
-        data: 
+        data:
           entity_id: alarm_control_panel.alarm
           code: !secret alarm_code

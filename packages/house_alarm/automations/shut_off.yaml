@@ -10,7 +10,9 @@ automation:
     - service: media_player.turn_off
       entity_id: all
     - service: mqtt.publish
-      data: { "topic": "cmnd/PinkyLEDs", "payload": "{\"state\": \"OFF\", \"effect\": \"Solid\"}" }
+      data: 
+        topic: cmnd/PinkyLEDs
+        payload: "{\"state\": \"OFF\", \"effect\": \"Solid\"}"
     - service: notify.mobile_app_jenny_s_oppo_reno
       data:
         message: clear_notification

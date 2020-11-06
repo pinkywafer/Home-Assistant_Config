@@ -1,9 +1,9 @@
 lovelace:
   mode: yaml
   resources: !include ../../lovelace/resources.yaml
-  
+
   dashboards:
-    lovelace-generated: # Needs to contain a hyphen (-)
+    lovelace-generated:
       mode: yaml
       filename: notexist.yaml
       title: Generated

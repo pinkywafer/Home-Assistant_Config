@@ -3,7 +3,7 @@
 #  The information on lightning strikes comes from the
 #  custom component Blizortung (installed via HACS).
 #  It is configured on the Integrations page
-#  The additional template sensor is used to convert distance 
+#  The additional template sensor is used to convert distance
 #  to miles instead of km
 #
 

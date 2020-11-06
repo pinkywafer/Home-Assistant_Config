@@ -29,4 +29,3 @@ rest_command:
       Accept: "application/json"
       Travis-API-Version: 3
     payload: '{"request": {"message": "Build triggered by Home Assistant", "branch":"master"}}'
-    

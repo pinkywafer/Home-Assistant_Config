@@ -18,7 +18,7 @@ automation:
     condition:
       - condition: state
         entity_id: light.movie_mode_lights
-        state:  'off'
+        state: 'off'
     action:
     - service: light.turn_off
       entity_id: light.breakfast_bar_led

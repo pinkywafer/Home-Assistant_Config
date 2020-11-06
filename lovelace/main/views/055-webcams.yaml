@@ -5,13 +5,12 @@ panel: true
 cards:
   - type: custom:layout-card
     layout: vertical
-    #max_columns: 3
     cards:
       - type: picture-glance
         camera_image: camera.llyn_ogwen
         entities: []
         title: Llyn Ogwen
-        
+
       - type: picture-glance
         camera_image: camera.llangollen_river_dee
         entities: []

@@ -28,7 +28,7 @@ cards:
           name:
             - font-size: 14px
       - type: custom:button-card
-        name: 
+        name:
       - type: custom:button-card
         entity: binary_sensor.emma_s_window
         name: "Emma's"

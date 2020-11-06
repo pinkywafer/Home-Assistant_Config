@@ -1,7 +1,7 @@
 sensor:
   - platform: youtube
     channel_id: UCZ2Ku6wrhdYDHCaBzLaA3bw
-  
+
   - platform: socialblade
     name: franck_nijhof_info
     channel_id: UCZ2Ku6wrhdYDHCaBzLaA3bw

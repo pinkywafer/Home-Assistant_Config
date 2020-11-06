@@ -1,7 +1,7 @@
 automation:
   - id: '33348373-a93c-4eaf-80d5-44f1e8d52b11'
     alias: Save Notifications on Create
-    initial_state: on
+    initial_state: true
     trigger:
       - platform: event
         event_type: call_service
@@ -23,11 +23,11 @@ automation:
               "message" : "{{ trigger.event.data.service_data.message }}"
             }
           retain: true
-  
+
   - id: 'f1be40e5-fcae-4d9c-bf01-5d3b6d78c073'
     alias: Removed Saved Notifications on Dismiss
     mode: parallel
-    initial_state: on
+    initial_state: true
     trigger:
       - platform: event
         event_type: call_service
@@ -39,10 +39,10 @@ automation:
         data:
           topic: "home-assistant/notifications/{{ trigger.event.data.service_data.notification_id }}"
           retain: true
-  
+
   - id: '7683afd1-a618-43b9-bb82-df79bc792b26'
     alias: Restore Notifications
-    initial_state: on
+    initial_state: true
     trigger:
       - platform: mqtt
         topic: home-assistant/notifications/+

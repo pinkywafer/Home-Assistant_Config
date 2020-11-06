@@ -26,7 +26,7 @@ cards:
       - break
       - type: custom:button-card
         entity: input_boolean.panic_button
-        icon: mdi:alert 
+        icon: mdi:alert
         tap_action:
           action: toggle
         styles:
@@ -49,5 +49,5 @@ cards:
             - height: 100px
 
       - type: entities
-        entities: 
+        entities:
           - input_text.alarm_trigger

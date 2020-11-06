@@ -42,8 +42,6 @@ cards:
             icon: mdi:sofa
         camera_image: camera.chickencam
 
-
-
       - type: picture-glance
         title: Kitchen
         entities:

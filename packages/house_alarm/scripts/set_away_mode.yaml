@@ -6,6 +6,6 @@ script:
         entity_id: alarm_control_panel.alarm
         state: 'disarmed'
       - service: alarm_control_panel.alarm_arm_away
-        data: 
+        data:
           entity_id: alarm_control_panel.alarm
           code: !secret alarm_code

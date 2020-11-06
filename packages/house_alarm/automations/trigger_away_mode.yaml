@@ -6,35 +6,35 @@ automation:
     - platform: state
       entity_id: input_boolean.panic_button
       # all light switches
-    #- platform: state
-    #  entity_id: binary_sensor.sitting_room_light_switch
-    #- platform: state
-    #  entity_id: binary_sensor.vestibule_light_switch
-    #- platform: state
-    #  entity_id: binary_sensor.cooker_light_switch
-    #- platform: state
-    #  entity_id: binary_sensor.sink_light_switch
-    #- platform: state
-    #  entity_id: binary_sensor.bathroom_light_switch
-    #- platform: state
-    #  entity_id: binary_sensor.bedroom_ceiling_light_switch 
-    #- platform: state
-    #  entity_id: binary_sensor.emmas_bedside_light_switch 
-    #- platform: state
-    #  entity_id: binary_sensor.emmas_ceiling_light_switch 
-    #- platform: state
-    #  entity_id: binary_sensor.jos_bedside_light_switch
-    #- platform: state
-    #  entity_id: binary_sensor.jennys_bedside_light_switch 
-    #- platform: state
-    #  entity_id: binary_sensor.landing_light_switch 
+    # - platform: state
+    #   entity_id: binary_sensor.sitting_room_light_switch
+    # - platform: state
+    #   entity_id: binary_sensor.vestibule_light_switch
+    # - platform: state
+    #   entity_id: binary_sensor.cooker_light_switch
+    # - platform: state
+    #   entity_id: binary_sensor.sink_light_switch
+    # - platform: state
+    #   entity_id: binary_sensor.bathroom_light_switch
+    # - platform: state
+    #   entity_id: binary_sensor.bedroom_ceiling_light_switch
+    # - platform: state
+    #   entity_id: binary_sensor.emmas_bedside_light_switch
+    # - platform: state
+    #   entity_id: binary_sensor.emmas_ceiling_light_switch
+    # - platform: state
+    #   entity_id: binary_sensor.jos_bedside_light_switch
+    # - platform: state
+    #   entity_id: binary_sensor.jennys_bedside_light_switch
+    # - platform: state
+    #   entity_id: binary_sensor.landing_light_switch
     # Motion Sensors
     - platform: state
       entity_id: binary_sensor.sitting_room_sensor_pir
       to: 'on'
-    #- platform: state
-    #  entity_id: binary_sensor.kitchen_sensor_pir
-    #  to: 'on'
+    # - platform: state
+    #   entity_id: binary_sensor.kitchen_sensor_pir
+    #   to: 'on'
     - platform: state
       entity_id: binary_sensor.downstairs_motion
       to: 'on'
@@ -95,4 +95,3 @@ automation:
       data:
         entity_id: camera.sitting_room_sensor_camera
         filename: 'www/pics/sitting_room_a.jpg'
-        

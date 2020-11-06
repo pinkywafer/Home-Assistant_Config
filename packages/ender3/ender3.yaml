@@ -12,7 +12,7 @@ switch:
         service: script.ender3_safe_power_down
 
 homeassistant:
-  customize: 
+  customize:
     switch.ender3:
       icon: mdi:printer-3d
 

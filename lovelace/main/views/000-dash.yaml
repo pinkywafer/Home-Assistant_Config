@@ -15,9 +15,6 @@ cards:
           - type: custom:simple-weather-card
             entity: weather.dark_sky
             name: " "
-            #backdrop: 
-            #  day: "var(--paper-card-background-color)"
-            #  night: "var(--paper-card-background-color)"
           - type: entities
             entities:
               - entity: sensor.lightning_counter
@@ -58,7 +55,7 @@ cards:
       - !include ../custom_views/upstairs_lights.yaml
       - !include ../custom_views/water_heater.yaml
       - break
-      
+
       - !include ../custom_views/appliances.yaml
       - !include ../custom_views/kitchen_sockets.yaml
       - !include ../custom_views/indoor_temp_and_humidity.yaml

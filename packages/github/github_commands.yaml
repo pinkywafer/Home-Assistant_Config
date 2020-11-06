@@ -11,4 +11,4 @@ rest_command:
     method: POST
     headers:
       Authorization: !secret github_issue_token
-    payload: '{ "body": "{{ message }}" }' 
+    payload: '{ "body": "{{ message }}" }'

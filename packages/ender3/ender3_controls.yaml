@@ -46,7 +46,7 @@ script:
         state: 'on'
       - service: switch.turn_on
         entity_id: switch.octoprint_pause_print
-  
+
   ender3_resume_print:
     alias: Ender3 Resume
     sequence:
@@ -83,7 +83,7 @@ script:
         data:
           topic: "octoPrint/hassControl/commands"
           payload: "G29"
-  
+
   ender3_cooldown:
     alias: Ender3 cooldown
     sequence:
@@ -103,7 +103,7 @@ script:
           payload: "M104 S0"
 
   ender3_preheat_petg:
-    alias: Ender3 PETG Preheat 
+    alias: Ender3 PETG Preheat
     sequence:
       - condition: state
         entity_id: switch.ender3_controls

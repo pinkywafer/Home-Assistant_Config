@@ -3,7 +3,7 @@ sensor:
     sensors:
       default_kitchen_effect:
         value_template: >-
-          {% if is_state("sensor.anniversary_jenny_s_birthday", "0") or 
+          {% if is_state("sensor.anniversary_jenny_s_birthday", "0") or
               is_state("sensor.anniversary_jo_s_birthday", "0") or
               is_state("sensor.anniversary_emma_s_birthday","0") -%}
             Rainbow
@@ -17,16 +17,16 @@ sensor:
             Holly Jolly
           {%- elif is_state("sensor.feast_of_the_immaculate_conception", "0") -%}
             Hail
-          {%- elif is_state("sensor.christmas_day","0") or 
+          {%- elif is_state("sensor.christmas_day","0") or
               is_state("sensor.easter_sunday","0") -%}
             Rainbow
           {%- elif states("sensor.easter_sunday") |int < 47 -%}
             Punkin
-          {%- elif states("sensor.christmas_day") |int > 200 and 
+          {%- elif states("sensor.christmas_day") |int > 200 and
               states("sensor.epiphany") |int <= 12 -%}
             Holly Jolly
-          {%- elif is_state("sensor.first_sunday_of_advent", "0")  or 
-              (states("sensor.first_sunday_of_advent") |int > 200 and 
+          {%- elif is_state("sensor.first_sunday_of_advent", "0")  or
+              (states("sensor.first_sunday_of_advent") |int > 200 and
               states("sensor.christmas_day") |int < 28) -%}
             Punkin
           {%- else -%}
@@ -59,7 +59,7 @@ automation:
     condition:
       - condition: state
         entity_id: light.movie_mode_lights
-        state:  'off'
+        state: 'off'
     action:
       - service: mqtt.publish
         data:

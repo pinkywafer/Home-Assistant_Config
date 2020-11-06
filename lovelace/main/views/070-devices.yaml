@@ -2,7 +2,7 @@ title: Devices
 icon: mdi:lan
 path: devices
 panel: true
-visible: 
+visible:
   - user: !secret user_jenny
 cards:
   - type: custom:layout-card

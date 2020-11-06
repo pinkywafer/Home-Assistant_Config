@@ -1,7 +1,7 @@
 sensor:
   - platform: youtube
     channel_id: UCGvWVUTM8wQ3AfMuS4rXbPQ
-  
+
   - platform: socialblade
     name: diocese_of_wrexham_info
     channel_id: UCGvWVUTM8wQ3AfMuS4rXbPQ
@@ -19,8 +19,8 @@ automation:
     action:
       - service: notify.broadcast_from_home_assistant
         data:
-          message:  >
-            The diocese of Wrexham is live on youtube with 
+          message: >
+            The diocese of Wrexham is live on youtube with
             {{ states("sensor.diocese_of_wrexham")}}
       - delay:
           seconds: 300

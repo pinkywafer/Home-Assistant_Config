@@ -6,16 +6,16 @@ automation:
     - platform: state
       entity_id: input_boolean.panic_button
     # downstairs light switches
-    #- platform: state
-    #  entity_id: binary_sensor.sitting_room_light_switch
-    #- platform: state
-    #  entity_id: binary_sensor.vestibule_light_switch
-    #- platform: state
-    #  entity_id: binary_sensor.cooker_light_switch
-    #- platform: state
-    #  entity_id: binary_sensor.sink_light_switch  
-    #- platform: state
-    #  entity_id: binary_sensor.bathroom_light_switch 
+    # - platform: state
+    #   entity_id: binary_sensor.sitting_room_light_switch
+    # - platform: state
+    #   entity_id: binary_sensor.vestibule_light_switch
+    # - platform: state
+    #   entity_id: binary_sensor.cooker_light_switch
+    # - platform: state
+    #   entity_id: binary_sensor.sink_light_switch
+    # - platform: state
+    #   entity_id: binary_sensor.bathroom_light_switch
       ##############
       #   Doors
       ##############
@@ -47,15 +47,15 @@ automation:
     - platform: state
       entity_id: binary_sensor.sitting_room_sensor_pir
       to: 'on'
-    #- platform: state
-    #  entity_id: binary_sensor.kitchen_sensor_pir
-    #  to: 'on'
+    # - platform: state
+    #   entity_id: binary_sensor.kitchen_sensor_pir
+    #   to: 'on'
     - platform: state
       entity_id: binary_sensor.downstairs_motion
       to: 'on'
-    #- platform: state
-    #  entity_id: binary_sensor.vestibule_motion
-    #  to: 'on'
+    # - platform: state
+    #   entity_id: binary_sensor.vestibule_motion
+    #   to: 'on'
     condition:
     - condition: state
       entity_id: alarm_control_panel.alarm

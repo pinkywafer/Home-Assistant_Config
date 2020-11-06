@@ -2,7 +2,7 @@ title: YouTube
 icon: mdi:youtube
 panel: true
 path: youtube
-    
+
 cards:
   - type: custom:layout-card
     layout: vertical
@@ -19,5 +19,3 @@ cards:
       - !include ../youtube_views/bobby_duke_arts.yaml
       - !include ../youtube_views/kevinoilpainting.yaml
       - !include ../youtube_views/zefrank1.yaml
-
-

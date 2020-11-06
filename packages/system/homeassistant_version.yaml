@@ -1,4 +1,4 @@
-sensor: 
+sensor:
   - platform: version
     name: homeassistant_version_available
     source: hassio

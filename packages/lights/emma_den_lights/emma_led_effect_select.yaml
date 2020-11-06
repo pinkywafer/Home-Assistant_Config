@@ -54,7 +54,7 @@ automation:
       conditions:
         - condition: state
           entity_id: input_select.den_lights_effect
-          state: None 
+          state: None
     action:
       service: light.turn_on
       entity_id: light.emma_led

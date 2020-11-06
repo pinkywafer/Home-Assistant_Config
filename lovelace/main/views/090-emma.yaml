@@ -57,10 +57,10 @@ cards:
     - type: custom:button-card
       entity_picture: /local/mlp.jpg
       show_entity_picture: true
-    
+
     - type: custom:button-card
       entity: input_boolean.panic_button
-      icon: mdi:alert 
+      icon: mdi:alert
       tap_action:
         action: toggle
       styles:

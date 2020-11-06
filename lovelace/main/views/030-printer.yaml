@@ -95,7 +95,6 @@ cards:
 
                 - type: custom:button-card
                   entity: sensor.octoprint_print_file
-                  #icon: mdi:file-percent
                   layout: icon_state
                   show_name: false
                   show_state: true
@@ -144,7 +143,6 @@ cards:
 
                 - type: custom:button-card
                   entity: sensor.octoprint_current_z
-                  #icon: mdi:file-percent
                   show_name: false
                   show_state: true
                   state:
@@ -191,7 +189,7 @@ cards:
                     action: call-service
                     service: script.ender3_preheat_pla
                 - type: entity-button
-                  entity: script.ender3_cooldown  
+                  entity: script.ender3_cooldown
                   show_icon: false
                   name: Cooldown
                   tap_action:

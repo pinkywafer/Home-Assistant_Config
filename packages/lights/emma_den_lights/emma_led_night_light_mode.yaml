@@ -78,4 +78,3 @@ automation:
       entity_id: light.emma_led
       data:
         effect: "Sunset"
-

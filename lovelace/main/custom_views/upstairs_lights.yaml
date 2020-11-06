@@ -99,7 +99,7 @@ cards:
             name: Den
             color: auto
             tap_action:
-              action: toggle 
+              action: toggle
               haptic: light
             hold_action:
               action: more-info
@@ -171,7 +171,7 @@ cards:
             icon: mdi:wall-sconce
             name: Jo
             tap_action:
-              action: toggle 
+              action: toggle
               haptic: light
             styles:
               card:
