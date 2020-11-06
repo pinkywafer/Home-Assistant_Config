@@ -52,12 +52,12 @@ jobs:
           pip3 install spotipy
           pip3 install pychromecast
       - name: Install Home Assistant
-        run: - pip3 install homeassistant==${HA_VERSION}
+        run: pip3 install homeassistant==${HA_VERSION}
       - name: Home Assistant Check
 #         uses: "docker://homeassistant/home-assistant:stable"
 #         with:
 #           args: python -m homeassistant --config  ./ --script check_config --info all
-        run: - hass -c . --script check_config --info all
+        run: hass -c . --script check_config --info all
           
 
   home_assistant_stable:
