@@ -48,7 +48,7 @@ jobs:
       - name: Home Assistant downgrade
         uses: "docker://homeassistant/home-assistant:stable"
         with:
-          args: pyrhon -m homeassitant core update --version=$(<.HA_VERSION)
+          args: python -m homeassitant core update --version=$(<.HA_VERSION)
       - name: Home Assistant Check
         uses: "docker://homeassistant/home-assistant:stable"
         with:
