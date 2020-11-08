@@ -35,6 +35,8 @@ jobs:
     steps:
       - name: Getting your configuration from GitHub
         uses: actions/checkout@v1
+      - name: install dependencies
+        run: apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev
       - name: Copy stub files into configuration folder
         run: |
           cp -R ci_secrets.yaml secrets.yaml
