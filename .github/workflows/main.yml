@@ -45,7 +45,7 @@ jobs:
         uses: "docker://homeassistant/home-assistant:stable"
         with:
           args: |
-            python -m homeassistant --version
+            python -m homeassistant --version=0.116.0
       - name: Home Assistant downgrade
         uses: "docker://homeassistant/home-assistant:stable"
         with:
