@@ -43,19 +43,9 @@ jobs:
           cp -R ci_google_service_account.json google_service_account.json
           sudo mkdir -p /github/workspace/tmp
           HA_VERSION=$(<.HA_VERSION)
-      - name: Home Assistant Version
-        uses: "docker://homeassistant/home-assistant:stable"
-        with:
-          args: |
-            python -m homeassistant --version=0.116.0
-      - name: Home Assistant downgrade
-        uses: "docker://homeassistant/home-assistant:stable"
-        with:
-          args: python -m homeassistant core update --version=0.116.0
-      - name: Home Assistant Check
-        uses: "docker://homeassistant/home-assistant:stable"
-        with:
-          args: homeassistant --config  ./ --script check_config --info all
+      - name: Home Assistant
+        run: pip3 install homeassistant
+
 
   home_assistant_stable:
     runs-on: ubuntu-latest
