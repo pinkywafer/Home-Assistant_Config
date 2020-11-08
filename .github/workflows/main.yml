@@ -49,7 +49,7 @@ jobs:
       - name: Home Assistant downgrade
         uses: "docker://homeassistant/home-assistant:stable"
         with:
-          args: python -m homeassistant update --version=0.116.0
+          args: python -m homeassistant core update --version=0.116.0
       - name: Home Assistant Check
         uses: "docker://homeassistant/home-assistant:stable"
         with:
