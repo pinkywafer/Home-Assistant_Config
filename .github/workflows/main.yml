@@ -53,7 +53,7 @@ jobs:
       - name: Home Assistant Check
         uses: "docker://homeassistant/home-assistant:stable"
         with:
-          args: python -m homeassistant --config  ./ --script check_config --info all
+          args: homeassistant --config  ./ --script check_config --info all
 
   home_assistant_stable:
     runs-on: ubuntu-latest
