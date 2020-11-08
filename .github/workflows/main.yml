@@ -19,6 +19,7 @@ jobs:
         uses: ibiqlik/action-yamllint@v1
         with:
           config_file: .github/yamllint-config.yml
+
   remarklint:
     runs-on: ubuntu-18.04
     steps:
