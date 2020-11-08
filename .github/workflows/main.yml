@@ -48,7 +48,7 @@ jobs:
           sudo mkdir -p /github/workspace/tmp
           HA_VERSION=$(<.HA_VERSION)
       - name: Home Assistant
-        run: pip3 install homeassistant
+        run: pip3 install homeassistant==${HA_VERSION}
 
 
   home_assistant_stable:
