@@ -74,6 +74,16 @@ sensor:
       name: "Vestibule Temp Sensor Battery Level" 
 
   - platform: xiaomi_lywsd03mmc
+    mac_address: "A4:C1:38:00:c5:96"
+    bindkey: "d25787b647b14c66f5aceb95f1a33570"
+    temperature:
+      name: "Kitchen Temperature"
+    humidity:
+      name: "Kitchen Humidity"
+    battery_level:
+      name: "Kitchen Temp Sensor Battery Level" 
+
+  - platform: xiaomi_lywsd03mmc
     mac_address: "A4:C1:38:1C:BA:24"
     bindkey: "d25787b647b14c66f5aceb95f1a33570"
     temperature:
