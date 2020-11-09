@@ -37,7 +37,7 @@ automation:
         message: >
           There is an update to Home Assistant core
             * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
-            Triggering Travis build...
+            Triggering Github checkruns...
         title: Update Home Assistant
         data:
           sticky: 'true'
@@ -51,7 +51,7 @@ automation:
         message: >
           There is an update to Home Assistant core
             * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
-            Triggering Travis build...
+            Triggering Github checkruns...
         notification_id: update_ha
     - service: rest_command.github_issue_state
       data:
@@ -61,15 +61,15 @@ automation:
       data:
         issue: '11'
         message: ' Home Assistant version {{ states("sensor.homeassistant_version_available") }} is now available"}'
-    - service: rest_command.travis_build
-    # wait for travis build to start then update notification
-    - wait_template: "{{ is_state('sensor.travis_ci_home_assistant_config', 'started') }}"
+    - service: rest_command.trigger_github_checkruns
+    # wait for github checkruns
+    - wait_template: "{{ is_state('sensor.github_checkrun_home_assistant_latest_release', 'queued') }}"
     - service: notify.mobile_app_jenny_s_oppo_reno
       data:
         message: >
           There is an update to Home Assistant core
             * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
-            Travis Build has started
+            Waiting for Github checkruns
         title: Update Home Assistant
         data:
           sticky: 'true'
@@ -83,16 +83,16 @@ automation:
         message: >
           There is an update to Home Assistant core
             * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
-            Travis Build has started
+            Waiting for Github checkruns
         notification_id: update_ha
     # wait for build to complete and update notification with status
-    - wait_template: "{{ not is_state('sensor.travis_ci_home_assistant_config', 'created') and not is_state('sensor.travis_ci_home_assistant_config', 'started') }}"
+    - wait_template: "{{ not is_state('sensor.github_checkrun_home_assistant_latest_release', 'queued') }}"
     - service: notify.mobile_app_jenny_s_oppo_reno
       data:
         message: >
           There is an update to Home Assistant core
             * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
-            Travis Build has {{states('sensor.travis_ci_home_assistant_config')}}
+            Github checkrun returned: {{states('sensor.github_checkrun_home_assistant_latest_release')}}
         title: Update Home Assistant
         data:
           group: updates
@@ -106,12 +106,12 @@ automation:
         message: >
           There is an update to Home Assistant core
             * {{ states("sensor.homeassistant_current_version") }} -> {{ states("sensor.homeassistant_version_available") }}
-            Travis Build has {{states('sensor.travis_ci_home_assistant_config')}}
+            Github checkrun returned: {{states('sensor.github_checkrun_home_assistant_latest_release')}}
         notification_id: update_ha
     - service: rest_command.github_issue_comment
       data:
         issue: '11'
-        message: "Travis build has {{ states('sensor.travis_ci_home_assistant_config') }}"
+        message: "Github checkrun returned: {{states('sensor.github_checkrun_home_assistant_latest_release')}}"
 
   - id: '7e81d1d4-9fb7-47d1-89d1-2e8624673f3d'
     alias: Home Assistant Update Notification Dismiss
