@@ -93,8 +93,68 @@ cards:
             name: Jo Bedside
       - break
       - type: entities
-        title: Home Assistant Config Travis CI
+        title: Home Assistant Config CI
         entities:
+          - entity: sensor.github_checkrun_remarklint
+            name: Remarklint
+            secondary_info:
+              attribute: id
+            type: custom:multiple-entity-row
+            entities:
+              - attribute: started_at
+                format: datetime
+              - attribute: completed_at
+                format: datetime
+          - entity: sensor.github_checkrun_yamllint
+            name: yamllint
+            secondary_info:
+              attribute: id
+            type: custom:multiple-entity-row
+            entities:
+              - attribute: started_at
+                format: datetime
+              - attribute: completed_at
+                format: datetime
+          - entity: sensor.github_checkrun_home_assistant_current_install
+            name: current
+            secondary_info:
+              attribute: id
+            type: custom:multiple-entity-row
+            entities:
+              - attribute: started_at
+                format: datetime
+              - attribute: completed_at
+                format: datetime
+          - entity: sensor.github_checkrun_home_assistant_latest_release
+            name: latest
+            secondary_info:
+              attribute: id
+            type: custom:multiple-entity-row
+            entities:
+              - attribute: started_at
+                format: datetime
+              - attribute: completed_at
+                format: datetime
+          - entity: sensor.github_checkrun_home_assistant_beta
+            name: beta
+            secondary_info:
+              attribute: id
+            type: custom:multiple-entity-row
+            entities:
+              - attribute: started_at
+                format: datetime
+              - attribute: completed_at
+                format: datetime
+          - entity: sensor.github_checkrun_home_assistant_dev
+            name: dev
+            secondary_info:
+              attribute: id
+            type: custom:multiple-entity-row
+            entities:
+              - attribute: started_at
+                format: datetime
+              - attribute: completed_at
+                format: datetime
           - entity: sensor.travis_ci_home_assistant_config
             name: Build
             secondary_info:
