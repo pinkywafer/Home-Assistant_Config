@@ -66,4 +66,3 @@ rest_command:
       authorization: !secret github_issue_token
       Accept: "application/vnd.github.v3+json"
     payload: '{"ref":"master"}'
-    
