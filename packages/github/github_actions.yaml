@@ -57,3 +57,13 @@ sensor:
     state_topic: github_checkrun/home_assistant_dev
     value_template: "{{ value_json.status }}"
     json_attributes_topic: github_checkrun/home_assistant_dev
+
+rest_command:
+  trigger_github_checkruns:
+    url: https://api.github.com/repos/pinkywafer/Home-Assistant_Config/actions/workflows/main.yml/dispatches
+    method: POST
+    headers:
+      authorization: !secret github_issue_token
+      Accept: "application/vnd.github.v3+json"
+    payload: '{"ref":"master"}'
+    
