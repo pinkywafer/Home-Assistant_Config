@@ -51,6 +51,16 @@ sensor:
             {%- endif %}
 
 automation:
+  - id: '5815b9f6-ac4b-4d3d-b53d-753d66176ef8'
+    alias: set default kitchen led mode at startup
+    trigger:
+      - platform: homeassistant
+        event: start
+    action:
+      - service: homeassistant.update_entity
+        data:
+          entity_id: sensor.default_kitchen_effect
+
   - id: '3a751475-257f-4292-8298-bb4efa720309'
     alias: Auto set Kitchen LEDs
     trigger:
