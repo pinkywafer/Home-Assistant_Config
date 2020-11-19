@@ -11,7 +11,10 @@ It runs on an [XCY X30 Intel i7 4500U from banggood](https://www.banggood.com/XC
 Proxmox is installed on bare metal,  then this (production) Home Assistant runs in a VM.
 A separate VM provides my Dev. env
 
-This repo is validated by Travis CI.  The config is checked against both the currently installed version and the latest release.
+This repo is checked using Github Actions for continuous integration.
+The config is first checked with yamllint and remarklint.
+The config is validated against the currently installed version of Home Assistant, the latest release or Home Assistant, the latest beta release of Home Assistant and the Latest Home Assistant Dev branch.
+ESPHome yaml is also validated against the latest version of ESPHome
 
 I also have containers for file sharing (nas), plex server, and a tuya convert container.
 
@@ -21,14 +24,14 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 Lines of yaml code in my configuration (excluding secrets): 6002
 
-Number of entities: 753
+Number of entities: 758
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 0
 Automation | 80
-Binary Sensor | 111
+Binary Sensor | 112
 Camera | 13
 Device Tracker | 24
 Group | 1
@@ -40,7 +43,7 @@ Media Player | 15
 Person | 3
 Scene | 1
 Script | 22
-Sensor | 412
+Sensor | 416
 Sun | 1
 Switch | 29
 Weather | 5
