@@ -24,26 +24,26 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 Lines of yaml code in my configuration (excluding secrets): 6005
 
-Number of entities: 778
+Number of entities: 773
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 0
 Automation | 80
-Binary Sensor | 115
+Binary Sensor | 114
 Camera | 13
 Device Tracker | 24
 Group | 1
 Input Boolean | 2
 Input Datetime | 1
 Input Text | 4
-Light | 21
-Media Player | 15
+Light | 20
+Media Player | 14
 Person | 3
 Scene | 1
 Script | 22
-Sensor | 433
+Sensor | 431
 Sun | 1
 Switch | 29
 Weather | 5
