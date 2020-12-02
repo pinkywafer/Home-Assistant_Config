@@ -50,7 +50,7 @@ cards:
           - value: 'on'
             styles:
               label:
-                - color: yellow
+               - color: yellow
       - !include ../custom_views/downstairs_lights.yaml
       - !include ../custom_views/upstairs_lights.yaml
       - !include ../custom_views/water_heater.yaml
