@@ -51,7 +51,7 @@ cards:
             - height: 60px
           name:
             - font-size: 14px
-    
+
       - type: custom:button-card
         entity: light.emmas_bedside_light
         show_state: false
