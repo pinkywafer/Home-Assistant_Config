@@ -6,41 +6,12 @@ esphome:
   name: sonoff_rf_bridge
   platform: ESP8266
   board: esp01_1m
-  on_boot:
-    then:
-      lambda: |-
-        {
-          id(downstairs_motion).publish_state(false);
-          id(upstairs_motion).publish_state(false);
-          id(front_door).publish_state(false);
-          id(front_door_bat).publish_state(false);
-          id(back_door).publish_state(false);
-          id(back_door_bat).publish_state(false);
-          id(fridge_door).publish_state(false);
-          id(fridge_door_bat).publish_state(false);
-          id(freezer_door).publish_state(false);
-          id(freezer_door_bat).publish_state(false);
-          id(door_window).publish_state(false);
-          id(door_window_bat).publish_state(false);
-          id(kitchen_window).publish_state(false);
-          id(kitchen_window_bat).publish_state(false);
-          id(front_window).publish_state(false);
-          id(front_window_bat).publish_state(false);
-          id(bedroom_window).publish_state(false);
-          id(bedroom_window_bat).publish_state(false);
-          id(emmas_window).publish_state(false);
-          id(emmas_window_bat).publish_state(false);
-        }
 
 packages:
   wifi: !include common/wifi.yaml
+  mqtt: !include common/mqtt.yaml
 
-# Enable logging
 logger:
-
-# Enable Home Assistant API
-api:
-  reboot_timeout: 0s
 
 ota:
 
@@ -51,8 +22,6 @@ sensor:
 
   - platform: uptime
     name: Sonoff RF Bridge Uptime
-
-
 
 binary_sensor:
   - platform: status
@@ -85,60 +54,21 @@ binary_sensor:
 #       DOORS
 #*************************************************
 
-# Front door
-  - platform: remote_receiver
-    id: front_door_open_signal
-    internal: true
-    rc_switch_raw:
-      code: '001100101111000000001010'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: front_door
-          state: ON
-
-  - platform: remote_receiver
-    id: front_door_closed_signal
-    internal: true
-    rc_switch_raw:
-      code: '001100101111000000001110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: front_door
-          state: OFF
-
+# FRONT DOOR
   - platform: template
     name: Front Door
     device_class: door
     id: front_door
     lambda: return {};
 
-# Front door BAT
-  - platform: remote_receiver
-    id: front_door_bat_signal
-    internal: true
-    rc_switch_raw:
-      code: '001100101111000000000110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: front_door_bat
-          state: ON
-
   - platform: remote_receiver
     name: Front Door Tamper
+    id: front_door_tamper
     rc_switch_raw:
       code: '001100101111000000000111'
       protocol: 6
     filters:
-      delayed_off: 200ms
+      delayed_off: 1000ms
     on_press:
       - binary_sensor.template.publish:
           id: front_door_bat
@@ -150,53 +80,12 @@ binary_sensor:
     id: front_door_bat
     lambda: return {};
 
-#################################
 # BACK DOOR
-  - platform: remote_receiver
-    id: back_door_open_signal
-    internal: true
-    rc_switch_raw:
-      code: '010110000101011100001010'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: back_door
-          state: ON
-
-  - platform: remote_receiver
-    id: back_door_closed_signal
-    internal: true
-    rc_switch_raw:
-      code: '010110000101011100001110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: back_door
-          state: OFF
-
   - platform: template
     name: Back Door
     device_class: door
     id: back_door
     lambda: return {};
-
-# back door BAT
-  - platform: remote_receiver
-    id: back_door_bat_signal
-    internal: true
-    rc_switch_raw:
-      code: '010110000101011100000110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: back_door_bat
-          state: ON
 
   - platform: remote_receiver
     id: back_door_tamper
@@ -205,7 +94,7 @@ binary_sensor:
       code: '010110000101011100000111'
       protocol: 6
     filters:
-      delayed_off: 200ms
+      delayed_off: 1000ms
     on_press:
       - binary_sensor.template.publish:
           id: back_door_bat
@@ -220,52 +109,13 @@ binary_sensor:
 #***********************************************
 #       WINDOWS
 #***********************************************
+
 # door window
-  - platform: remote_receiver
-    id: door_window_open_signal
-    internal: true
-    rc_switch_raw:
-      code: '010101000011111000001010'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: door_window
-          state: ON
-
-  - platform: remote_receiver
-    id: door_window_closed_signal
-    internal: true
-    rc_switch_raw:
-      code: '010101000011111000001110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: door_window
-          state: OFF
-
   - platform: template
     name: Door Window
     device_class: window
     id: door_window
     lambda: return {};
-
-# Door Window BAT
-  - platform: remote_receiver
-    id: door_window_bat_signal
-    internal: true
-    rc_switch_raw:
-      code: '010101000011111000000110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: door_window_bat
-          state: ON
 
   - platform: remote_receiver
     name: Door Window Tamper
@@ -285,53 +135,12 @@ binary_sensor:
     id: door_window_bat
     lambda: return {};
 
-################################################
 # Front Window
-  - platform: remote_receiver
-    id: front_window_open_signal
-    internal: true
-    rc_switch_raw:
-      code: '001100100011000000001010'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: front_window
-          state: ON
-
-  - platform: remote_receiver
-    id: front_window_closed_signal
-    internal: true
-    rc_switch_raw:
-      code: '001100100011000000001110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: front_window
-          state: OFF
-
   - platform: template
     name:  Front Window
     device_class: window
     id: front_window
     lambda: return {};
-
-# Front Window BAT
-  - platform: remote_receiver
-    id: front_window_bat_signal
-    internal: true
-    rc_switch_raw:
-      code: '001100100011000000000110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: front_window_bat
-          state: ON
 
   - platform: remote_receiver
     name: Front Window Tamper
@@ -351,52 +160,12 @@ binary_sensor:
     id: front_window_bat
     lambda: return {};
 
-# kitchen window
-  - platform: remote_receiver
-    id: kitchen_window_open_signal
-    internal: true
-    rc_switch_raw:
-      code: '010111100001101100001010'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: kitchen_window
-          state: ON
-
-  - platform: remote_receiver
-    id: kitchen_window_closed_signal
-    internal: true
-    rc_switch_raw:
-      code: '010111100001101100001110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: kitchen_window
-          state: OFF
-
+# Kitchen Window
   - platform: template
     name:  Kitchen Window
     device_class: window
     id: kitchen_window
     lambda: return {};
-
-# Kitchen Window BAT
-  - platform: remote_receiver
-    id: kitchen_window_bat_signal
-    internal: true
-    rc_switch_raw:
-      code: '010111100001101100000110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: kitchen_window_bat
-          state: ON
 
   - platform: remote_receiver
     name: Kitchen Window Tamper
@@ -416,55 +185,12 @@ binary_sensor:
     id: kitchen_window_bat
     lambda: return {};
 
-##########################
 # emmas window
-  - platform: remote_receiver
-    id: emmas_window_open_signal
-    internal: true
-    rc_switch_raw:
-      code: '010110111010001100001010'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: emmas_window
-          state: ON
-
-
-  - platform: remote_receiver
-    id: emmas_window_closed_signal
-    internal: true
-    rc_switch_raw:
-      code: '010110111010001100001110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: emmas_window
-          state: OFF
-
-      
   - platform: template
     name:  Emma's Window
     device_class: window
     id: emmas_window
     lambda: return {};
-
-# Emma's Window BAT
-  - platform: remote_receiver
-    id: emmas_window_bat_signal
-    internal: true
-    rc_switch_raw:
-      code: '010110111010001100000110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: emmas_window_bat
-          state: ON
 
   - platform: remote_receiver
     name: Emma's Window Tamper
@@ -484,54 +210,13 @@ binary_sensor:
     id: emmas_window_bat
     lambda: return {};
 
-#####################
 # bedroom window
-  - platform: remote_receiver
-    id: bedroom_window_open_signal
-    internal: true
-    rc_switch_raw:
-      code: '010111100011001100001010'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: bedroom_window
-          state: ON
-      
-  - platform: remote_receiver
-    id: bedroom_window_closed_signal
-    internal: true
-    rc_switch_raw:
-      code: '010111100011001100001110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: bedroom_window
-          state: OFF
-
   - platform: template
     name:  Bedroom Window
     device_class: window
     id: bedroom_window
     lambda: return {};
 
-# Bedroom Window BAT
-  - platform: remote_receiver
-    id: bedroom_window_bat_signal
-    internal: true
-    rc_switch_raw:
-      code: '010111100011001100000110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: bedroom_window_bat
-          state: ON
-      
   - platform: remote_receiver
     name: Bedroom Window Tamper
     rc_switch_raw:
@@ -543,77 +228,24 @@ binary_sensor:
       - binary_sensor.template.publish:
           id: bedroom_window_bat
           state: OFF
-      
+
   - platform: template
     name: Bedroom Window Battery
     device_class: battery
     id: bedroom_window_bat
     lambda: return {};
 
-
 #************************************
 # FRIDGE FREEZER
 #*****************************************
 
 # FRIDGE DOOR
-  - platform: remote_receiver
-    id: fridge_door_open_signal
-    internal: true
-    rc_switch_raw:
-      code: '010110010101111100001010'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: fridge_door
-          state: ON
-
-  - platform: remote_receiver
-    id: fridge_door_closed_signal
-    internal: true
-    rc_switch_raw:
-      code: '010110010101111100001110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: fridge_door
-          state: OFF
-      
   - platform: template
     name: Fridge Door
     device_class: door
     id: fridge_door
     lambda: return {};
 
-# Fridge Door BAT
-  - platform: remote_receiver
-    id: fridge_door_bat_signal
-    internal: true
-    rc_switch_raw:
-      code: '010110010101111100000110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: fridge_door_bat
-          state: ON
-      
-  - platform: remote_receiver
-    name: Fridge Door Tamper
-    rc_switch_raw:
-      code: '010110010101111100000111'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: fridge_door_bat
-          state: OFF
-      
   - platform: template
     name: Fridge Door Battery
     device_class: battery
@@ -621,64 +253,12 @@ binary_sensor:
     lambda: return {};
 
 # FREEZER DOOR
-  - platform: remote_receiver
-    id: freezer_door_open_signal
-    internal: true
-    rc_switch_raw:
-      code: '010110001010010000001010'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: freezer_door
-          state: ON
-
-  - platform: remote_receiver
-    id: freezer_door_closed_signal
-    internal: true
-    rc_switch_raw:
-      code: '010110001010010000001110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: freezer_door
-          state: OFF
-      
   - platform: template
     name: Freezer Door
     device_class: door
     id: freezer_door
     lambda: return {};
 
-# Freezer Door BAT
-  - platform: remote_receiver
-    id: freezer_door_bat_signal
-    internal: true
-    rc_switch_raw:
-      code: '010110001010010000000110'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: freezer_door_bat
-          state: ON
-
-  - platform: remote_receiver
-    name: Freezer Door Tamper
-    rc_switch_raw:
-      code: '010110001010010000000111'
-      protocol: 6
-    filters:
-      delayed_off: 200ms
-    on_press:
-      - binary_sensor.template.publish:
-          id: freezer_door_bat
-          state: ON
-      
   - platform: template
     name: Freezer Door Battery
     device_class: battery
@@ -694,7 +274,96 @@ remote_receiver:
   tolerance: 60
   filter: 4us
   idle: 4ms
-  
+  on_rc_switch:
+    - lambda: |-
+        if (x.code == 3338250){
+          id(front_door).publish_state(true);
+        }
+        if (x.code == 3338254){
+          id(front_door).publish_state(true);
+        }
+        if (x.code == 3338246){
+          id(front_door_bat).publish_state(true);
+        }
+        if (x.code == 5789450){
+          id(back_door).publish_state(true);
+        }
+        if (x.code == 5789454){
+          id(back_door).publish_state(false);
+        }
+        if (x.code == 5789446){
+          id(back_door_bat).publish_state(true);
+        }
+        if (x.code == 5520906){
+          id(door_window).publish_state(true);
+        }
+        if (x.code == 5520910){
+          id(door_window).publish_state(false);
+        }
+        if (x.code == 5520902){
+          id(door_window_bat).publish_state(true);
+        }
+        if (x.code == 3289098){
+          id(front_window).publish_state(true);
+        }
+        if (x.code == 3289102){
+          id(front_window).publish_state(false);
+        }
+        if (x.code == 3289094){
+          id(front_window_bat).publish_state(true);
+        }
+        if (x.code == 6167306){
+          id(kitchen_window).publish_state(true);
+        }
+        if (x.code == 6167310){
+          id(kitchen_window).publish_state(false);
+        }
+        if (x.code == 6167302){
+          id(kitchen_window_bat).publish_state(true);
+        }
+        if (x.code == 6005514){
+          id(emmas_window).publish_state(true);
+        }
+        if (x.code == 6005518){
+          id(emmas_window).publish_state(false);
+        }
+        if (x.code == 6005510){
+          id(emmas_window_bat).publish_state(true);
+        }
+        if (x.code == 6173450){
+          id(bedroom_window).publish_state(true);
+        }
+        if (x.code == 6173454){
+          id(bedroom_window).publish_state(false);
+        }
+        if (x.code == 6173446){
+          id(bedroom_window_bat).publish_state(true);
+        }
+        if (x.code == 5857034){
+          id(fridge_door).publish_state(true);
+        }
+        if (x.code == 5857038){
+          id(fridge_door).publish_state(false);
+        }
+        if (x.code == 5857030){
+          id(fridge_door_bat).publish_state(true);
+        }
+        if (x.code == 5857031){
+          id(fridge_door_bat).publish_state(false);
+        }
+        if (x.code == 5809162){
+          id(freezer_door).publish_state(true);
+        }
+        if (x.code == 5809166){
+          id(freezer_door).publish_state(false);
+        }
+        if (x.code == 5809158){
+          id(freezer_door_bat).publish_state(true);
+        }
+        if (x.code == 5809159){
+          id(freezer_door_bat).publish_state(false);
+        }
+
 remote_transmitter:
   pin: 5
   carrier_duty_percent: 100%
