@@ -1,0 +1,15 @@
+esphome:
+  name: esphome_device
+  platform: ESP8266
+  board: esp01_1m
+
+# Enable logging
+logger:
+
+wifi:
+  ap:
+    ssid: "ESPHome-Device"
+
+captive_portal:
+
+ota:
