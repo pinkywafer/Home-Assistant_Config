@@ -1,6 +1,8 @@
 substitutions:
-  devicename: sink_light_sonoff
+  devicename: sink_light_shelly1
   friendly_name: Sink Light
+  $reboot_time: 0s
   ip_address: 192.168.1.23
 
-<<: !include common/sonoff_basic_light.yaml
+packages:
+  device_base: !include common/shelly1_light.yaml
