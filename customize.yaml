@@ -16,3 +16,31 @@ device_tracker.emma_s_blackberry_dtek50:
   entity_picture: /local/emma.jpeg
 device_tracker.jenny_s_oppo_reno:
   entity_picture: /local/jenny.jpg
+sensor.sitting_room_temperature:
+  device_class: temperature
+sensor.sitting_room_humidity:
+  device_class: humidity
+sensor.bedroom_humidity:
+  device_class: humidity
+sensor.bedroom_temperature:
+  device_class: temperature
+sensor.emma_s_room_humidity:
+  device_class: humidity
+sensor.emma_s_room_temperature:
+  device_class: temperature
+sensor.crested_gecko_temperature:
+  device_class: temperature
+sensor.crested_gecko_humidity:
+  device_class: humidity
+sensor.leopard_gecko_temperature:
+  device_class: temperature
+sensor.leopard_gecko_humidity:
+  device_class: humidity
+sensor.kitchen_temperature:
+  device_class: temperature
+sensor.kitchen_humidity:
+  device_class: humidity
+sensor.vestibule_temperature:
+  device_class: temperature
+sensor.vestibule_humidity:
+  device_class: humidity
