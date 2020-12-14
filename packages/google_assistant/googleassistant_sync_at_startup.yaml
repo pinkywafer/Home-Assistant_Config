@@ -1,0 +1,10 @@
+automation:
+  - id: '275a01cb-867d-4bb1-ac8e-21b0e436dfc0'
+    alias: Sync Google assistant at start
+    trigger:
+      - platform: homeassistant
+        event: start
+    action:
+      - service: google_assistant.request_sync
+        data:
+          agent_user_id: !secret user_jenny
