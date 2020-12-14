@@ -6,6 +6,48 @@ google_assistant:
     - script
     - scene
   entity_config:
+    sensor.sitting_room_temperature:
+      expose: true
+      room: Living Room
+    sensor.sitting_room_humidity:
+      expose: true
+      room: Living Room
+    sensor.bedroom_humidity:
+      expose: true
+      room: Bedroom
+    sensor.bedroom_temperature:
+      expose: true
+      room: Bedroom
+    sensor.emma_s_room_humidity:
+      expose: true
+      room: Emma's Room
+    sensor.emma_s_room_temperature:
+      expose: true
+      room: Emma's Room
+    sensor.crested_gecko_temperature:
+      expose: true
+      room: Crested Gecko Vivarium
+    sensor.crested_gecko_humidity:
+      expose: true
+      room: Crested Gecko Vivarium
+    sensor.leopard_gecko_temperature:
+      expose: true
+      room: Leopard Gecko Vivarium
+    sensor.leopard_gecko_humidity:
+      expose: true
+      room: Leopard Gecko Vivarium
+    sensor.kitchen_temperature:
+      expose: true
+      room: Kitchen
+    sensor.kitchen_humidity:
+      expose: true
+      room: Kitchen
+    sensor.vestibule_temperature:
+      expose: true
+      room: Vestibule
+    sensor.vestibule_humidity:
+      expose: true
+      room: Vestibule
     light.upstairs_lights:
       room: Upstairs
       expose: true
