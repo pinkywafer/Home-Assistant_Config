@@ -13,9 +13,7 @@
   - data:
       message: '{{ ["Jo, it''s time for your tablet",  "Don''t forget to take your
         tablet, Jo", "Jo, if you haven''t already taken your tablet, its time to take
-        it now", "Remember to take your tablet, Jo" ] | random }}
-
-        '
+        it now", "Remember to take your tablet, Jo" ] | random }}'
     service: notify.broadcast_from_home_assistant
 - id: '1601999861619'
   alias: Emma Chore reminder
