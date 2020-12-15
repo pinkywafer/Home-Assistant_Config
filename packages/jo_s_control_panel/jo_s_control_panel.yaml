@@ -1,0 +1,67 @@
+automation:
+  - id: 'ef09ce68-9d4e-494d-9ee3-29c0952358c2'
+    alias: Jo's Switches
+    mode: queued
+    trigger:
+      - platform: state
+        entity_id:
+          - binary_sensor.jo_s_blue_switch
+          - binary_sensor.jo_s_green_switch
+          - binary_sensor.jo_s_orange_switch
+          - binary_sensor.jo_s_purple_switch
+          - binary_sensor.jo_s_red_switch
+    condition: []
+    action:
+      - choose:
+          - conditions: # Green Switch On
+              - condition: template
+                value_template: >
+                  {{trigger.entity_id == 'binary_sensor.jo_s_green_switch'
+                  and trigger.to_state.state == 'on'}}
+            sequence:
+              - service: homeassistant.turn_off
+                entity_id: 
+                  - light.downstairs_lights
+                  - light.landing_light
+                  - switch.immersion_heater
+                  - switch.bath_mode
+          - conditions: # Red Switch On
+              - condition: template
+                value_template: >
+                  {{trigger.entity_id == 'binary_sensor.jo_s_red_switch'
+                  and trigger.to_state.state == 'on'}}
+              - condition: state
+                entity_id: alarm_control_panel.alarm
+                state: armed_night
+            sequence:
+              - service: script.alarm_set_home_mode
+          - conditions: # Red Switch Off
+            - condition: template
+              value_template: >
+                {{trigger.entity_id == 'binary_sensor.jo_s_red_switch'
+                and trigger.to_state.state == 'off'}}
+            - condition: state
+              entity_id: alarm_control_panel.alarm
+              state: armed_home
+            sequence:
+              - service: script.alarm_set_night_mode
+          - conditions: # Orange Switch On
+            - condition: template
+              value_template: >
+                {{trigger.entity_id == 'binary_sensor.jo_s_orange_switch'
+                and trigger.to_state.state == 'on'}}
+            sequence:
+              - service: light.turn_on
+                entity_id:
+                  - light.sitting_room_light
+                  - light.sink_light
+                  - light.bathroom_light
+                  - light.landing_light
+          - conditions: # Blue Switch On
+            - condition: template
+              value_template: >
+                {{trigger.entity_id == 'binary_sensor.jo_s_blue_switch'
+                and trigger.to_state.state == 'on'}}
+            sequence:
+              - service: light.turn_off
+                entity_id: light.emmas_room_lights
