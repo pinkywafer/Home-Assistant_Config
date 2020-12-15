@@ -13,19 +13,19 @@ automation:
     condition: []
     action:
       - choose:
-          - conditions: # Green Switch On
+          - conditions:  # Green Switch On
               - condition: template
                 value_template: >
                   {{trigger.entity_id == 'binary_sensor.jo_s_green_switch'
                   and trigger.to_state.state == 'on'}}
             sequence:
               - service: homeassistant.turn_off
-                entity_id: 
+                entity_id:
                   - light.downstairs_lights
                   - light.landing_light
                   - switch.immersion_heater
                   - switch.bath_mode
-          - conditions: # Red Switch On
+          - conditions:  # Red Switch On
               - condition: template
                 value_template: >
                   {{trigger.entity_id == 'binary_sensor.jo_s_red_switch'
@@ -35,7 +35,7 @@ automation:
                 state: armed_night
             sequence:
               - service: script.alarm_set_home_mode
-          - conditions: # Red Switch Off
+          - conditions:  # Red Switch Off
             - condition: template
               value_template: >
                 {{trigger.entity_id == 'binary_sensor.jo_s_red_switch'
@@ -45,7 +45,7 @@ automation:
               state: armed_home
             sequence:
               - service: script.alarm_set_night_mode
-          - conditions: # Orange Switch On
+          - conditions:  # Orange Switch On
             - condition: template
               value_template: >
                 {{trigger.entity_id == 'binary_sensor.jo_s_orange_switch'
@@ -57,7 +57,7 @@ automation:
                   - light.sink_light
                   - light.bathroom_light
                   - light.landing_light
-          - conditions: # Blue Switch On
+          - conditions:  # Blue Switch On
             - condition: template
               value_template: >
                 {{trigger.entity_id == 'binary_sensor.jo_s_blue_switch'
