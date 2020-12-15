@@ -1,45 +1,21 @@
-type: horizontal-stack
-cards:
-  - type: 'custom:mini-graph-card'
-    line_width: 3
-    name: Leopard Gecko Enclosure
-    points_per_hour: 4
-    show:
-      icon_adaptive_color: true
-    entities:
-      - entity: sensor.leopard_gecko_temperature
-        name: Temperature
-      - color: blue
-        name: Humidity
-        show_indicator: true
-        entity: sensor.leopard_gecko_humidity
-        y_axis: secondary
-    color_thresholds:
-      - value: 0
-        color: black
-      - value: 23
-        color: green
-      - value: 30
-        color: red
-
-  - type: 'custom:mini-graph-card'
-    line_width: 3
-    name: Crested Gecko Enclosure
-    points_per_hour: 4
-    show:
-      icon_adaptive_color: true
-    entities:
-      - entity: sensor.crested_gecko_temperature
-        name: Temperature
-      - color: blue
-        name: Humidity
-        show_indicator: true
-        entity: sensor.crested_gecko_humidity
-        y_axis: secondary
-    color_thresholds:
-      - value: 0
-        color: black
-      - value: 21
-        color: green
-      - value: 28
-        color: red
+type: 'custom:mini-graph-card'
+line_width: 3
+name: Leopard Gecko Enclosure
+points_per_hour: 4
+show:
+  icon_adaptive_color: true
+entities:
+  - entity: sensor.leopard_gecko_temperature
+    name: Temperature
+  - color: blue
+    name: Humidity
+    show_indicator: true
+    entity: sensor.leopard_gecko_humidity
+    y_axis: secondary
+color_thresholds:
+  - value: 0
+    color: black
+  - value: 23
+    color: green
+  - value: 30
+    color: red
