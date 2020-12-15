@@ -35,4 +35,10 @@
         color: red
         tag: recycling
         sticky: true
+  - service: notify.mobile_app_emma_s_phone
+    data:
+      message: TTS
+      title: Hi There, it's recycling day!
+      data:
+        channel: alarm_stream
   mode: single
