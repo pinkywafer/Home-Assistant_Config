@@ -2,7 +2,7 @@ sensor:
   - platform: command_line
     name: HassOS Current Version
     command: 'curl http://supervisor/host/info -H "Authorization: Bearer $(printenv SUPERVISOR_TOKEN)" '
-    value_template: "{{ value_json.data.operating_system[7:] }}"
+    value_template: "{{ value_json.data.operating_system[18:] }}"
     json_attributes:
     - data
 
