@@ -24,12 +24,6 @@ google_assistant:
     sensor.emma_s_room_temperature:
       expose: true
       room: Emma's Room
-    sensor.crested_gecko_temperature:
-      expose: true
-      room: Crested Gecko Vivarium
-    sensor.crested_gecko_humidity:
-      expose: true
-      room: Crested Gecko Vivarium
     sensor.leopard_gecko_temperature:
       expose: true
       room: Leopard Gecko Vivarium
