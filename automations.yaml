@@ -2,11 +2,11 @@
   alias: Jo medication reminder
   description: ''
   trigger:
-  - at: '11:00'
+  - at: '11:00:00'
     platform: time
-  - at: '17:00'
+  - at: '17:00:00'
     platform: time
-  - at: '23:00'
+  - at: '23:00:00'
     platform: time
   condition: []
   action:
@@ -20,7 +20,7 @@
   description: ''
   trigger:
   - platform: time
-    at: '15:00'
+    at: '16:00:00'
   condition:
   - condition: time
     weekday:
