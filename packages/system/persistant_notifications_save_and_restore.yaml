@@ -1,6 +1,7 @@
 automation:
   - id: '33348373-a93c-4eaf-80d5-44f1e8d52b11'
     alias: Save Notifications on Create
+    mode: queued
     initial_state: true
     trigger:
       - platform: event
