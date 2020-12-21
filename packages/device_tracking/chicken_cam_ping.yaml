@@ -9,6 +9,9 @@ automation:
     trigger:
       - platform: state
         entity_id: binary_sensor.ping_192_168_1_232
+    condition:
+      - condition: template
+        value_template: "{{ trigger.to_state.state != trigger.from_state.state }}"
     action:
       choose:
         - conditions:
