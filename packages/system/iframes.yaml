@@ -1,0 +1,6 @@
+panel_iframe:
+  octoprint:
+    title: 'Octoprint'
+    url: !secret octoprint_url
+    require_admin: true
+    icon: mdi:printer-3d
