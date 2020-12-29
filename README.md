@@ -22,9 +22,9 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 6213
+Lines of yaml code in my configuration (excluding secrets): 6216
 
-Number of entities: 811
+Number of entities: 813
 
 Type | Qty
 -- | --
@@ -68,7 +68,6 @@ Zone | 4
   - [Youtube](https://github.com/custom-components/youtube)
 
 ### Lovelace
-  - [Aftership Card](https://github.com/iantrich/aftership-card)
   - [Button Card](https://github.com/custom-cards/button-card)
   - [Card Mod](https://github.com/thomasloven/lovelace-card-mod)
   - [Card Tools](https://github.com/thomasloven/lovelace-card-tools)
