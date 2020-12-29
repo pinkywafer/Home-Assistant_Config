@@ -87,8 +87,8 @@ sensor:
     mac_address: "A4:C1:38:1C:BA:24"
     bindkey: "d25787b647b14c66f5aceb95f1a33570"
     temperature:
-      name: "Crested Gecko Temperature"
+      name: "Server Cupboard Temperature"
     humidity:
-      name: "Crested Gecko Humidity"
+      name: "Server Cupboard Humidity"
     battery_level:
-      name: "Crested Gecko Temp Sensor Battery Level" 
+      name: "Server Cupboard Temp Sensor Battery Level" 
