@@ -1,0 +1,13 @@
+{
+  "domain": "plex_assistant",
+  "name": "Plex Assistant",
+  "documentation": "https://github.com/maykar/plex_assistant",
+  "dependencies": [],
+  "codeowners": ["@maykar"],
+  "requirements": [
+    "gTTs",
+    "pychromecast>=7.4.1",
+    "fuzzywuzzy",
+    "plexapi>=4.1.1"
+  ]
+}
