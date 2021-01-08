@@ -3,6 +3,13 @@ lovelace:
   resources: !include ../../lovelace/resources.yaml
 
   dashboards:
+    lovelace-animals:
+      mode: yaml
+      filename: lovelace/animals/animals.yaml
+      title: Animals
+      icon: mdi:paw
+      show_in_sidebar: true
+      require_admin: false
     lovelace-generated:
       mode: yaml
       filename: notexist.yaml

@@ -1,0 +1,98 @@
+substitutions:
+  ip_address: 192.168.1.42
+  reboot_time: 10min
+  devicename: leopard_gecko_temp_and_light
+  friendly_name: Leopard Gecko Temperature and Light
+
+packages:
+  wifi: !include common/wifi.yaml
+
+esphome:
+  name: $devicename
+  platform: ESP32
+  board: esp-wrover-kit
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+binary_sensor:
+  - <<: !include common/binary_sensor/status.yaml
+
+dallas:
+  - pin: 23
+    update_interval: 20s
+
+sensor:
+  - <<: !include common/sensor/wifi_signal.yaml
+  - <<: !include common/sensor/uptime.yaml
+  
+
+  - platform: dallas
+    address: 0xD43C01D607C10628
+    name: "Leopard Gecko Hide Temperature"
+    id: hide_temp
+  - platform: dallas
+    address: 0x333C01D607A51028
+    name: "Leopard Gecko Background Temperature"
+    id: background_temp
+  - platform: dallas
+    address: 0x353C01D607F0C728
+    name: Leopard Gecko Thermostat Internal Temperature
+
+light:
+  - platform: fastled_clockless
+    chipset: WS2811
+    pin: 33
+    num_leds: 5
+    rgb_order: GRB
+    name: "Leopard Gecko Light"
+
+switch:
+  - platform: gpio
+    pin: 26
+    name: "Leopard Gecko Radiator"
+    id: radiator
+  - platform: gpio
+    pin: 27
+    name: "Leopard Gecko Heat Mat"
+    id: mat
+
+climate:
+  - platform: bang_bang
+    name: "Leopard Gecko Hide Climate"
+    sensor: hide_temp
+    visual:
+      min_temperature: 15 °C
+      max_temperature: 35 °C
+      temperature_step: 0.1 °C
+    default_target_temperature_low: 26 °C
+    default_target_temperature_high: 29 °C
+    away_config:
+      default_target_temperature_low: 19 °C
+      default_target_temperature_high: 22 °C
+    heat_action:
+      - switch.turn_on: mat
+    idle_action:
+      - switch.turn_off: mat
+
+  - platform: bang_bang
+    name: "Leopard Gecko Background Climate"
+    sensor: background_temp
+    visual:
+      min_temperature: 15 °C
+      max_temperature: 35 °C
+      temperature_step: 0.1 °C
+    default_target_temperature_low: 26 °C
+    default_target_temperature_high: 29 °C
+    away_config:
+      default_target_temperature_low: 17 °C
+      default_target_temperature_high: 20 °C
+    heat_action:
+      - switch.turn_on: radiator
+    idle_action:
+      - switch.turn_off: radiator
