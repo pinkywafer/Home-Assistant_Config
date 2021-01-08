@@ -22,30 +22,30 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 6216
+Lines of yaml code in my configuration (excluding secrets): 6543
 
-Number of entities: 813
+Number of entities: 850
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
-Alert | 0
-Automation | 83
-Binary Sensor | 120
+Alert | 2
+Automation | 92
+Binary Sensor | 122
 Camera | 13
 Device Tracker | 26
 Group | 1
 Input Boolean | 2
 Input Datetime | 1
 Input Text | 4
-Light | 21
-Media Player | 14
+Light | 23
+Media Player | 17
 Person | 3
 Scene | 1
 Script | 22
-Sensor | 457
+Sensor | 474
 Sun | 1
-Switch | 29
+Switch | 31
 Weather | 5
 Zone | 4
 
@@ -62,6 +62,7 @@ Zone | 4
   - [Calendarific](https://github.com/pinkywafer/Calendarific)
   - [Garbage Collection](https://github.com/bruxy70/Garbage-Collection)
   - [HACS](https://github.com/hacs/integration)
+  - [Plex Assistant](https://github.com/maykar/plex_assistant)
   - [Readme](https://github.com/custom-components/readme)
   - [Spacex Next Launch And Starman](https://github.com/djtimca/HASpaceX)
   - [Spotcast](https://github.com/fondberg/spotcast)
