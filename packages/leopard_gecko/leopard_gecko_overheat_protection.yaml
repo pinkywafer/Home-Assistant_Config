@@ -32,4 +32,3 @@ automation:
     action:
       - service: switch.turn_off
         entity_id: switch.leopard_gecko_heat_mat
-
