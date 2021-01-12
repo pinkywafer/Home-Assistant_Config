@@ -7,15 +7,17 @@ cards:
         name: Sitting Room
       - entity: sensor.kitchen_temperature
         name: Kitchen
-      - entity: sensor.bedroom_temperature
-        name: Bedroom
+      - entity: sensor.bathroom_temperature
+        name: Bathroom
       - entity: sensor.vestibule_temperature
         name: Vestibule
+      - entity: sensor.bedroom_temperature
+        name: Bedroom
       - entity: sensor.emma_s_room_temperature
         name: Emma's room
     line_width: 2
     points_per_hour: 6
-    font_size: 55
+    font_size: 60
 
   - type: 'custom:mini-graph-card'
     name: Humidity
@@ -24,10 +26,12 @@ cards:
         name: Sitting Room
       - entity: sensor.kitchen_humidity
         name: Kitchen
-      - entity: sensor.bedroom_humidity
-        name: Bedroom
+      - entity: sensor.bathroom_humidity
+        name: Bathroom
       - entity: sensor.vestibule_humidity
         name: Vestibule
+      - entity: sensor.bedroom_humidity
+        name: Bedroom
       - entity: sensor.emma_s_room_humidity
         name: Emma's room
     line_width: 2
