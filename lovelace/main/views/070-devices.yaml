@@ -91,6 +91,15 @@ cards:
             name: Jenny Bedside
           - entity: binary_sensor.jos_bedside_light_sonoff_status
             name: Jo Bedside
+      - type: custom:button-card
+        name: Mi Temperature Sensor Flasher & Configurator
+        show_icon: false
+        tap_action:
+          action: url
+          url_path: !secret mi_flasher_url
+          styles:
+              card:
+                - height: 40px
       - break
       - type: entities
         title: Home Assistant Config CI
