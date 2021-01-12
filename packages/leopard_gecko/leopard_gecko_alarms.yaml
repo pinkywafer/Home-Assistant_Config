@@ -15,6 +15,7 @@ binary_sensor:
             or states('sensor.leopard_gecko_background_temperature')|float < 14)
           or
             states('sensor.leopard_gecko_temperature') != 'unavailable'
+            and states('sensor.leopard_gecko_temperature') != 'unknown'
             and (
               states('sensor.leopard_gecko_temperature')|float > 32
               or states('sensor.leopard_gecko_temperature')|float < 14)
