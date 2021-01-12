@@ -1,0 +1,90 @@
+automation:
+  - id: 'a0100aab-a4cd-466d-aa73-6909fe76870d'
+    alias: Temperature sensor Battery Warnings
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.temperature_sensor_battery_warning
+        attribute: sensor_locations
+        for: '01:00:00'
+    action:
+      - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.temperature_sensor_battery_warning
+              state: 'on'
+          sequence:
+            - service: persistent_notification.create
+              data:
+                title: Temperature Sensor Low Battery
+                message: >
+                  The Temperature sensor Batteries need changing in
+                  {%- for location in state_attr('binary_sensor.temperature_sensor_battery_warning','sensor_locations') %}
+                    * {{ location }}
+                  {%- endfor %}
+                notification_id: 'temp_sensor_battery_warning'
+            - service: notify.mobile_app_jenny_s_oppo_reno
+              data:
+                title: Temperature Sensor Low Battery
+                message: >
+                  The Temperature sensor Batteries need changing in
+                  {%- for location in state_attr('binary_sensor.temperature_sensor_battery_warning','sensor_locations') %}
+                    <br>* {{ location }}
+                  {%- endfor %}
+                data:
+                  tag: 'temp_sensor_battery_warning'
+                  sticky: true
+                  persistent: true
+            - service: notify.broadcast_from_home_assistant
+              data:
+                message: >
+                  The Temperature sensor Batteries need changing in
+                  {%- for location in state_attr('binary_sensor.temperature_sensor_battery_warning','sensor_locations') -%}
+                    {%- if loop.first %} {% elif loop.last %} and {%else%}, {% endif -%}
+                    {{ location | lower }}
+                  {%- endfor %}.
+        default:
+          - service: notify.mobile_app_jenny_s_oppo_reno
+            data:
+              message: clear_notification
+              data:
+                tag: 'temp_sensor_battery_warning'
+          - service: persistent_notification.dismiss
+            data:
+              notification_id: 'temp_sensor_battery_warning'
+
+binary_sensor:
+  - platform: template
+    sensors:
+      temperature_sensor_battery_warning:
+        value_template: >
+          {{[
+            states('sensor.bathroom_temp_sensor_battery_level') | int,
+            states('sensor.bedroom_temp_sensor_battery_level') | int,
+            states('sensor.emma_s_room_temp_sensor_battery_level') | int,
+            states('sensor.leopard_gecko_sensor_battery_level') | int,
+            states('sensor.kitchen_temp_sensor_battery_level') | int,
+            states('sensor.leopard_gecko_sensor_battery_level') | int,
+            states('sensor.server_cupboard_temp_sensor_battery_level') | int,
+            states('sensor.sitting_room_temp_sensor_battery_level') | int,
+            states('sensor.vestibule_temp_sensor_battery_level') | int
+          ] | min < 15}}
+        attribute_templates:
+          sensor_locations: >
+            {{ [
+              { "name": "The Bathroom",
+                "value": states("sensor.bathroom_temp_sensor_battery_level") | int },
+              { "name": "The Bedroom", 
+                "value": states("sensor.bedroom_temp_sensor_battery_level") | int },
+              { "name": "Emma's Room", 
+                "value": states("sensor.emma_s_room_temp_sensor_battery_level") | int },
+              { "name": "The Kitchen", 
+                "value": states('sensor.kitchen_temp_sensor_battery_level') | int},
+              { "name": "The Leopard Gecko Enclosure",
+                "value": states('sensor.leopard_gecko_sensor_battery_level') | int},
+              { "name": "The Server Cupboard", 
+                "value": states('sensor.server_cupboard_temp_sensor_battery_level') | int},
+              { "name": "The Sitting Room", 
+                "value": states('sensor.sitting_room_temp_sensor_battery_level') | int},
+              { "name": "The Vestibule", 
+                "value": states('sensor.vestibule_temp_sensor_battery_level') | int}
+              ] | selectattr('value', 'lessthan', 15) | map(attribute='name') | list }}
