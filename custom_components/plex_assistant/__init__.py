@@ -55,6 +55,7 @@ async def async_setup(hass, config):
     from pychromecast import get_chromecasts
     from pychromecast.controllers.plex import PlexController
     from homeassistant.helpers.network import get_url
+    from homeassistant.components.zeroconf import async_get_instance
     from .localize import LOCALIZE
     from .process_speech import process_speech
     from .helpers import (
@@ -73,18 +74,11 @@ async def async_setup(hass, config):
     lang = conf.get(CONF_LANG)
     tts_error = conf.get(CONF_TTS_ERROR)
     aliases = conf.get(CONF_ALIASES)
+    zc = await async_get_instance(hass)
 
     _LOGGER = logging.getLogger(__name__)
 
     localize = LOCALIZE[lang] if lang in LOCALIZE.keys() else LOCALIZE["en"]
-    zc = None
-
-    try:
-        from homeassistant.components.zeroconf import async_get_instance
-        zc = await async_get_instance(hass)
-    except:
-        from zeroconf import Zeroconf
-        zc = Zeroconf()
 
     directory = hass.config.path() + "/www/plex_assist_tts/"
     if tts_error and not os.path.exists(directory):
@@ -166,6 +160,11 @@ async def async_setup(hass, config):
         if command["control"]:
             control = command["control"]
             if client:
+                try:
+                    if "127.0.0.1" in cast.url("/"):
+                        cast.proxyThroughServer()
+                except plexapi.exceptions.BadRequest:
+                    cast.proxyThroughServer()
                 plex_c = cast
             else:
                 plex_c = PlexController()
@@ -205,6 +204,11 @@ async def async_setup(hass, config):
 
         if client:
             _LOGGER.debug("Client: %s", cast)
+            try:
+                if "127.0.0.1" in cast.url("/"):
+                    cast.proxyThroughServer()
+            except plexapi.exceptions.BadRequest:
+                cast.proxyThroughServer()
             plex_c = cast
             plex_c.playMedia(media)
         else:
