@@ -1,0 +1,47 @@
+automation:
+  - id: 'b10a4f16-765d-4f84-b13b-d80b6697db67'
+    alias: Youtube Notifications
+    mode: queued
+    trigger:
+      - platform: state
+        entity_id: 
+          - sensor.bobby_duke_arts
+          - sensor.diocese_of_wrexham
+          - sensor.drzzs
+          - sensor.franck_nijhof
+          - sensor.kevinoilpainting
+          - sensor.the_hook_up
+          - sensor.vcloudinfo
+          - sensor.zefrank1
+        attribute: url
+    action:
+      - choose:
+        # entities for broadcast announcements of live streams
+          - conditions: >
+              {{ trigger.to_state.attributes.live and trigger.entity_id in [
+                'sensor.diocese_of_wrexham'
+              ]}}
+            sequence:
+              - service: notify.broadcast_from_home_assistant
+                data:
+                  message: >
+                    {{trigger.to_state.attributes.friendly_name}} is live on youtube with
+                    {{trigger.to_state.state}}
+      # For ALL Videos
+      - service: notify.mobile_app_jenny_s_oppo_reno
+        data:
+          message: '{{ trigger.to_state.state }}'
+          title: >
+            {% if trigger.to_state.attributes.live -%}
+              {{trigger.to_state.attributes.friendly_name}} is Live!
+            {%- else -%}
+              New video from {{trigger.to_state.attributes.friendly_name}}
+            {%- endif %}
+          data:
+            image: '{{ trigger.to_state.attributes.entity_picture }}'
+            tag: '{{ trigger.entity_id }}'
+            color: 'green'
+            actions:
+              - action: "URI"
+                title: "Watch Now"
+                uri: '{{ trigger.to_state.attributes.url }}'
