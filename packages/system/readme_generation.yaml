@@ -24,5 +24,6 @@ automation:
                 data:
                   title: ReadMe generation failed!
                   message: Timeout reached! Hacs could not start in time.
+                  notification_id: readme_generation_failed
         default:
           - service: readme.generate
