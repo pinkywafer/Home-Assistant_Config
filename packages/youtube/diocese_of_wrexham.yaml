@@ -13,6 +13,7 @@ automation:
     trigger:
       - platform: state
         entity_id: sensor.diocese_of_wrexham
+        attribute: url
     condition:
       - condition: template
         value_template: '{{ is_state_attr("sensor.diocese_of_wrexham", "live", True) }}'

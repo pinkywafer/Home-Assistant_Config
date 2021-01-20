@@ -13,6 +13,7 @@ automation:
     trigger:
       - platform: state
         entity_id: sensor.zefrank1
+        attribute: url
     action:
       - service: notify.mobile_app_jenny_s_oppo_reno
         data:
