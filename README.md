@@ -22,9 +22,9 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 6646
+Lines of yaml code in my configuration (excluding secrets): 6664
 
-Number of entities: 852
+Number of entities: 856
 
 Type | Qty
 -- | --
@@ -38,12 +38,12 @@ Group | 1
 Input Boolean | 2
 Input Datetime | 1
 Input Text | 4
-Light | 22
-Media Player | 16
+Light | 23
+Media Player | 17
 Person | 3
 Scene | 1
-Script | 22
-Sensor | 476
+Script | 23
+Sensor | 477
 Sun | 1
 Switch | 31
 Weather | 5
