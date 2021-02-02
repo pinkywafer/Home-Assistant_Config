@@ -11,4 +11,6 @@ automation:
       platform: sun
     action:
     - service: light.turn_on
-      entity_id: light.sitting_room_light
+      entity_id:
+        - light.sitting_room_light
+        - light.flame_lantern

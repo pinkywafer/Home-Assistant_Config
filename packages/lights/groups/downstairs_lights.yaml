@@ -8,3 +8,4 @@ light:
       - light.vestibule_light
       - light.bathroom_light
       - light.breakfast_bar_led
+      - light.flame_lantern

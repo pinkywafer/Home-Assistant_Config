@@ -62,6 +62,8 @@ google_assistant:
       expose: true
     light.sitting_room_wall_lights:
       expose: true
+    light.flame_lantern:
+      expose: true
     light.emmas_bedside_light:
       expose: true
     light.emmas_ceiling_light:

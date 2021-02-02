@@ -39,7 +39,19 @@ cards:
             - height: 60px
           name:
             - font-size: 14px
-
+      - type: custom:button-card
+        entity: light.flame_lantern
+        show_state: false
+        icon: mdi:fire
+        name: Lantern
+        tap_action:
+          action: toggle
+          haptic: light
+        styles:
+          card:
+            - height: 60px
+          name:
+            - font-size: 14px
       - type: custom:button-card
         entity: light.vestibule_light
         show_state: false
