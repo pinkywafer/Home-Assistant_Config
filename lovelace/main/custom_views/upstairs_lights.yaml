@@ -55,7 +55,7 @@ cards:
       - type: custom:button-card
         entity: light.emmas_bedside_light
         show_state: false
-        icon: mdi:wall-sconce
+        icon: mdi:coach-lamp
         name: Bedside
         tap_action:
           action: toggle
