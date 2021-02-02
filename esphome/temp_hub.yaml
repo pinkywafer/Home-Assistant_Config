@@ -25,15 +25,21 @@ status_led:
   pin: 
     number: GPIO2
     inverted: true
-  
-switch:
-  - platform: gpio
-    name: "Flame Lantern"
-    pin: 4
 
+switch:
   - platform: restart
     name: ${esphome_name}-restart
     id: restart_switch
+
+light:
+  platform: binary
+  name: "Flame Lantern"
+  output: relay
+
+output:
+  - platform: gpio
+    id: relay
+    pin: 4
 
 sensor:
   - platform: uptime
