@@ -21,7 +21,7 @@ automation:
             {
               "notification_id" : "{{ trigger.event.data.service_data.notification_id }}",
               "title" : "{{ trigger.event.data.service_data.title }}",
-              "message" : "{{ trigger.event.data.service_data.message }}"
+              "message" : {{ trigger.event.data.service_data.message | to_json}}
             }
           retain: true
 
