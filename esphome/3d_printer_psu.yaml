@@ -7,3 +7,9 @@ substitutions:
 packages:
   wifi: !include common/wifi.yaml
   device_base: !include common/aiiat_313_plug.yaml
+
+web_server:
+  port: 8080
+  auth:
+    username: 3d_printer_user
+    password: !secret 3dprinter_psu_pwd
