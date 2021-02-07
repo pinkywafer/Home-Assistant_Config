@@ -20,12 +20,11 @@
   description: ''
   trigger:
   - platform: time
-    at: '16:00:00'
+    at: '12:00:00'
   condition:
   - condition: time
     weekday:
     - mon
-    - fri
   action:
   - service: notify.mobile_app_emma_s_phone
     data:
