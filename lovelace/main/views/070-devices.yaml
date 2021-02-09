@@ -164,16 +164,6 @@ cards:
                 format: datetime
               - attribute: completed_at
                 format: datetime
-          - entity: sensor.travis_ci_home_assistant_config
-            name: Build
-            secondary_info:
-              attribute: number
-            type: custom:multiple-entity-row
-            entities:
-              - attribute: started_at
-                format: datetime
-              - attribute: finished_at
-                format: datetime
       - type: custom:github-card
         entities:
           - sensor.home_assistant_config
