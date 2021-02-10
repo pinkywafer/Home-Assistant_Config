@@ -22,3 +22,5 @@
   type: module
 - url: /hacsfiles/lovelace-card-preloader/lovelace-card-preloader.js
   type: module
+- url: /hacsfiles/lovelace-time-picker-card/time-picker-card.js
+  type: module
