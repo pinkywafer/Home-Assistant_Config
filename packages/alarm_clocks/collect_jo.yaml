@@ -1,10 +1,15 @@
+input_datetime:
+  collect_jo_time:
+    has_date: false
+    has_time: true
+
 automation:
   - id: '1602259095621'
     alias: Collect Jo
     description: ''
     trigger:
     - platform: time
-      at: '20:20'
+      at: input_datetime.collect_jo_time
     condition:
     - condition: time
       weekday:

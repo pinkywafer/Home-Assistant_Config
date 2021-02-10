@@ -3,23 +3,6 @@ input_datetime:
     has_date: false
     has_time: true
 
-script:
-  wake_up_jenny_with_spotify:
-    description: Starts the wake up spotify playlist on the bedroom speaker
-    mode: single
-    sequence:
-      - service: spotcast.start
-        data:
-          uri: !secret jennys_wake_up_playlist
-          random_song: true
-          shuffle: true
-          repeat: context
-          entity_id: media_player.bedroom_speaker
-      - service: media_player.volume_set
-        entity_id: media_player.bedroom_speaker
-        data:
-          volume_level: 0.8
-
 automation:
   - id: '18af6587-36ed-4b41-8e61-117ee86a1f68'
     alias: Jenny Wake up
@@ -28,7 +11,16 @@ automation:
       at: input_datetime.jenny_alarm_time
     action:
       - service: script.turn_on
-        entity_id: script.wake_up_jenny_with_spotify
+        entity_id: script.play_spotify_playlist
+        data:
+          variables:
+            uri: !secret jennys_wake_up_playlist
+            account: default
+            random_song: true
+            shuffle: true
+            repeat: context
+            entity_id: media_player.bedroom_speaker
+            volume_level: 0.8
       - service: light.turn_on
         entity_id:
           - light.sitting_room_light
@@ -45,4 +37,13 @@ automation:
         entity_id:
           - light.jennys_bedside_light
       - service: script.turn_on
-        entity_id: script.wake_up_jenny_with_spotify
+        entity_id: script.play_spotify_playlist
+        data:
+          variables:
+            uri: !secret jennys_wake_up_playlist
+            account: default
+            random_song: true
+            shuffle: true
+            repeat: context
+            entity_id: media_player.bedroom_speaker
+            volume_level: 0.8

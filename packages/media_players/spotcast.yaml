@@ -8,3 +8,21 @@ spotcast:
 
 sensor:
   - platform: spotcast
+
+script:
+  play_spotify_playlist:
+    description: Starts playing a spotify playlist
+    mode: queued
+    sequence:
+      - service: spotcast.start
+        data:
+          uri: '{{ uri }}'
+          account: '{{ account }}'
+          random_song: '{{random_song}}'
+          shuffle: '{{shuffle}}'
+          repeat: '{{repeat}}'
+          entity_id: '{{entity_id}}'
+      - service: media_player.volume_set
+        data:
+          entity_id: '{{entity_id}}'
+          volume_level: '{{volume_level}}'

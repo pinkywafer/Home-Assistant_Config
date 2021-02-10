@@ -1,0 +1,27 @@
+input_datetime:
+  emma_alarm_time:
+    has_date: false
+    has_time: true
+
+automation:
+  - id: 'b8c303dd-ecea-465d-bd06-4c4f039548da'
+    alias: Emma Wake up
+    trigger:
+      platform: time
+      at: input_datetime.emma_alarm_time
+    action:
+      - service: script.turn_on
+        entity_id: script.play_spotify_playlist
+        data:
+          variables:
+            uri: !secret emmas_wake_up_playlist
+            account: emma
+            random_song: true
+            shuffle: true
+            repeat: context
+            entity_id: media_player.emma_s_room_speaker
+            volume_level: 0.5
+      - service: light.turn_on
+        entity_id:
+          - light.emmas_ceiling_light
+          - light.emmas_bedside_light
