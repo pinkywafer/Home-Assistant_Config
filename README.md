@@ -21,28 +21,28 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 6576
+Lines of yaml code in my configuration (excluding secrets): 6623
 
-Number of entities: 842
+Number of entities: 859
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 2
 Automation | 79
-Binary Sensor | 123
+Binary Sensor | 122
 Camera | 13
-Device Tracker | 26
+Device Tracker | 27
 Group | 1
 Input Boolean | 2
 Input Datetime | 3
 Input Text | 4
-Light | 24
-Media Player | 15
+Light | 30
+Media Player | 21
 Person | 3
 Scene | 1
 Script | 23
-Sensor | 476
+Sensor | 481
 Sun | 1
 Switch | 30
 Weather | 5
@@ -79,6 +79,7 @@ Zone | 4
   - [Mini Media Player](https://github.com/kalkih/mini-media-player)
   - [Multiple Entity Row](https://github.com/benct/lovelace-multiple-entity-row)
   - [Simple Weather Card](https://github.com/kalkih/simple-weather-card)
+  - [Time Picker Card](https://github.com/GeorgeSG/lovelace-time-picker-card)
 
 ***
 
