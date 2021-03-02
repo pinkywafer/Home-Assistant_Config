@@ -8,235 +8,158 @@ cast device names.
 https://github.com/maykar/plex_assistant
 """
 
-import homeassistant.helpers.config_validation as cv
-import voluptuous as vol
+from homeassistant.config_entries import ConfigEntry
+from homeassistant.core import Config, HomeAssistant
+from homeassistant.components.zeroconf import async_get_instance
 
-DOMAIN = "plex_assistant"
-CONF_URL = "url"
-CONF_TOKEN = "token"
-CONF_DEFAULT_CAST = "default_cast"
-CONF_LANG = "language"
-CONF_TTS_ERROR = "tts_errors"
-CONF_ALIASES = "aliases"
+import os
 
-CONFIG_SCHEMA = vol.Schema({DOMAIN: {
-    vol.Required(CONF_URL): cv.url,
-    vol.Required(CONF_TOKEN): cv.string,
-    vol.Optional(CONF_DEFAULT_CAST): cv.string,
-    vol.Optional(CONF_LANG, default='en'): cv.string,
-    vol.Optional(CONF_TTS_ERROR, default=True): cv.boolean,
-    vol.Optional(CONF_ALIASES, default={}): vol.Any(dict),
-}}, extra=vol.ALLOW_EXTRA)
-
-
-class PA:
-    """ Hold our libraries, devices, etc. """
-
-    plex = None
-    server = None
-    lib = {}
-    devices = {}
-    device_names = []
-    clients = {}
-    client_names = []
-    client_sensor = []
-    alias_names = []
-    client_update = True
+from .const import DOMAIN, _LOGGER
+from .plex_assistant import PlexAssistant
+from .process_speech import ProcessSpeech
+from .localize import translations
+from .helpers import (
+    filter_media,
+    find_media,
+    fuzzy,
+    get_devices,
+    get_server,
+    listeners,
+    media_error,
+    media_service,
+    no_device_error,
+    play_tts_error,
+    process_config_item,
+    remote_control,
+    run_start_script,
+    seek_to_offset,
+)
 
 
-async def async_setup(hass, config):
-    """Called when Home Assistant is loading our component."""
+async def async_setup(hass: HomeAssistant, config: Config):
+    if DOMAIN in config:
+        changes_url = "https://github.com/maykar/plex_assistant/blob/master/ver_one_update.md"
+        message = "Configuration is now handled in the UI, please read the %s for how to migrate " \
+                  "to the new version and more info.%s "
+        service_data = {
+            "title": "Plex Assistant Breaking Changes",
+            "message": message % (f"[change log]({changes_url})", "."),
+        }
+        await hass.services.async_call("persistent_notification", "create", service_data, False)
+        _LOGGER.warning("Plex Assistant: " + message % ("change log", f". {changes_url}"))
+    return True
 
-    import os
-    import logging
 
-    from gtts import gTTS
-    from plexapi.server import PlexServer
-    from pychromecast import get_chromecasts
-    from pychromecast.controllers.plex import PlexController
-    from homeassistant.helpers.network import get_url
-    from homeassistant.components.zeroconf import async_get_instance
-    from .localize import LOCALIZE
-    from .process_speech import process_speech
-    from .helpers import (
-        cc_callback,
-        find_media,
-        fuzzy,
-        get_libraries,
-        media_error,
-        video_selection,
-    )
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
+    if hass.data.get(DOMAIN) is None:
+        hass.data.setdefault(DOMAIN, {})
 
-    conf = config[DOMAIN]
-    base_url = conf.get(CONF_URL)
-    token = conf.get(CONF_TOKEN)
-    default_cast = conf.get(CONF_DEFAULT_CAST)
-    lang = conf.get(CONF_LANG)
-    tts_error = conf.get(CONF_TTS_ERROR)
-    aliases = conf.get(CONF_ALIASES)
-    zc = await async_get_instance(hass)
+    server_name = entry.data.get("server_name")
+    default_device = entry.data.get("default_cast")
+    tts_errors = entry.data.get("tts_errors")
+    lang = entry.data.get("language")
+    localize = translations[lang]
+    start_script = process_config_item(entry.options, "start_script")
+    keyword_replace = process_config_item(entry.options, "keyword_replace")
+    jump_amount = [entry.options.get("jump_f") or 30, entry.options.get("jump_b") or 15]
+    zeroconf = await async_get_instance(hass)
 
-    _LOGGER = logging.getLogger(__name__)
+    server = await get_server(hass, hass.config, server_name)
+    if not server:
+        return True
 
-    localize = LOCALIZE[lang] if lang in LOCALIZE.keys() else LOCALIZE["en"]
+    def pa_executor(_server, start_script_keys):
+        _pa = PlexAssistant(_server, start_script_keys)
+        get_devices(hass, _pa)
+        return _pa
 
-    directory = hass.config.path() + "/www/plex_assist_tts/"
-    if tts_error and not os.path.exists(directory):
-        os.makedirs(directory, mode=0o777)
+    pa = await hass.async_add_executor_job(pa_executor, server, list(start_script.keys()))
 
-    get_chromecasts(blocking=False, callback=cc_callback, zeroconf_instance=zc)
+    ifttt_listener = await listeners(hass)
+    hass.data[DOMAIN][entry.entry_id] = {"remove_listener": ifttt_listener}
 
-    def sync_io_server(base_url, token):
-        PA.server = PlexServer(base_url, token)
-        PA.plex = PA.server.library
-        PA.lib = get_libraries(PA.plex)
+    tts_dir = hass.config.path() + "/www/plex_assist_tts/"
+    if tts_errors and not os.path.exists(tts_dir):
+        os.makedirs(tts_dir, mode=0o777)
 
-    await hass.async_add_executor_job(sync_io_server, base_url, token)
-
-    PA.alias_names = list(aliases.keys()) if aliases else []
+    entry.add_update_listener(async_reload_entry)
 
     def handle_input(call):
-        if not call.data.get("command").strip():
+        hass.services.async_call("plex", "scan_for_clients", blocking=False, limit=30)
+        command = call.data.get("command").strip()
+        media = None
+
+        if not command:
             _LOGGER.warning(localize["no_call"])
             return
+        _LOGGER.debug("Command: %s", command)
 
-        command_string = call.data.get("command").strip().lower()
-        _LOGGER.debug("Command: %s", command_string)
+        command = command.lower()
+        if keyword_replace and any(keyword.lower() in command for keyword in keyword_replace.keys()):
+            for keyword in keyword_replace.keys():
+                command = command.replace(keyword.lower(), keyword_replace[keyword].lower())
 
-        PA.client_update = True
-        get_chromecasts(blocking=False, callback=cc_callback,
-                        zeroconf_instance=zc)
+        get_devices(hass, pa)
+        command = ProcessSpeech(pa, localize, command, default_device).results
+        _LOGGER.debug("Processed Command: %s", {i: command[i] for i in command if i != "library" and command[i]})
 
-        if localize["controls"]["update_sensor"] in command_string:
-            update_sensor(hass)
+        if not command["device"] and not default_device:
+            no_device_error(localize)
             return
 
-        cast = None
-        alias = ["", 0]
-        client = False
-        speech_error = False
+        if pa.media["updated"] < pa.library.search(sort="addedAt:desc", limit=1)[0].addedAt:
+            pa.update_libraries()
 
-        command = process_speech(command_string, localize, default_cast, PA)
-        PA.device_names = list(PA.devices.keys())
+        device = fuzzy(command["device"] or default_device, pa.device_names)
+        device = run_start_script(hass, pa, command, start_script, device, default_device)
 
-        if not command["control"]:
-            _LOGGER.debug({i: command[i] for i in command if i != "library"})
-
-        if PA.lib["updated"] < PA.plex.search(sort="addedAt:desc", limit=1)[0].addedAt:
-            PA.lib = get_libraries(PA.plex)
-
-        devices = PA.device_names + PA.client_names + PA.client_ids
-        device = fuzzy(command["device"] or default_cast, devices)
-
-        if aliases:
-            alias = fuzzy(command["device"] or default_cast, PA.alias_names)
-
-        if alias[1] < 60 and device[1] < 60:
-            _LOGGER.warning(
-                '{0} {1}: "{2}"'.format(
-                    localize["cast_device"].capitalize(),
-                    localize["not_found"],
-                    command["device"].title(),
-                )
-            )
-            _LOGGER.debug("Device Score: %s", device[1])
-            _LOGGER.debug("Devices: %s", str(devices))
-
-            if aliases:
-                _LOGGER.debug("Alias Score: %s", alias[1])
-                _LOGGER.debug("Aliases: %s", str(PA.alias_names))
+        _LOGGER.debug("PA Devices: %s", pa.devices)
+        if device[1] < 60:
+            no_device_error(localize, command["device"])
             return
+        _LOGGER.debug("Device: %s", device[0])
 
-        name = aliases[alias[0]] if alias[1] > device[1] else device[0]
-        cast = PA.devices[name] if name in PA.device_names else name
-        client = isinstance(cast, str)
-
-        if client:
-            client_device = next(
-                c for c in PA.clients if c.title == cast or c.machineIdentifier == cast
-            )
-            cast = client_device
+        device = pa.devices[device[0]]
 
         if command["control"]:
-            control = command["control"]
-            if client:
-                try:
-                    if "127.0.0.1" in cast.url("/"):
-                        cast.proxyThroughServer()
-                except plexapi.exceptions.BadRequest:
-                    cast.proxyThroughServer()
-                plex_c = cast
-            else:
-                plex_c = PlexController()
-                cast.wait()
-                cast.register_handler(plex_c)
-            if control == "play":
-                plex_c.play()
-            elif control == "pause":
-                plex_c.pause()
-            elif control == "stop":
-                plex_c.stop()
-            elif control == "jump_forward":
-                plex_c.stepForward()
-            elif control == "jump_back":
-                plex_c.stepBack()
+            remote_control(hass, zeroconf, command["control"], device, jump_amount)
             return
 
-        try:
-            result = find_media(command, command["media"], PA.lib)
-            media = video_selection(command, result["media"], result["library"])
-        except Exception:
-            error = media_error(command, localize)
-            if tts_error:
-                tts = gTTS(error, lang=lang)
-                tts.save(directory + "error.mp3")
-                speech_error = True
+        media, library = find_media(pa, command)
+        media, offset = filter_media(pa, command, media, library)
 
-        if speech_error and not client:
-            cast.wait()
-            med_con = cast.media_controller
-            mp3 = get_url(hass) + "/local/plex_assist_tts/error.mp3"
-            med_con.play_media(mp3, "audio/mpeg")
-            med_con.block_until_active()
+        if not media:
+            error = media_error(command, localize)
+            _LOGGER.warning(error)
+            if tts_errors and device["device_type"] != "plex":
+                play_tts_error(hass, tts_dir, device["entity_id"], error, lang)
             return
 
         _LOGGER.debug("Media: %s", str(media))
 
-        if client:
-            _LOGGER.debug("Client: %s", cast)
-            try:
-                if "127.0.0.1" in cast.url("/"):
-                    cast.proxyThroughServer()
-            except plexapi.exceptions.BadRequest:
-                cast.proxyThroughServer()
-            plex_c = cast
-            plex_c.playMedia(media)
-        else:
-            _LOGGER.debug("Cast: %s", cast.name)
-            plex_c = PlexController()
-            cast.register_handler(plex_c)
-            cast.wait()
-            plex_c.block_until_playing(media)
+        payload = '%s{"playqueue_id": %s, "type": "%s"}' % (
+            "plex://" if device["device_type"] in ["cast", "sonos"] else "",
+            media.playQueueID,
+            media.playQueueType
+        )
 
-        update_sensor(hass)
+        media_service(hass, device["entity_id"], "play_media", payload)
+        seek_to_offset(hass, offset, device["entity_id"])
 
     hass.services.async_register(DOMAIN, "command", handle_input)
     return True
 
 
-def update_sensor(hass):
-    clients = [
-        {client.title: {"ID": client.machineIdentifier, "type": client.product}}
-        for client in PA.clients
-    ]
-    devicelist = list(PA.devices.keys())
-    state = str(len(devicelist + clients)) + " connected devices."
-    attributes = {
-        "Connected Devices": {
-            "Cast Devices": devicelist or "None",
-            "Plex Clients": clients or "None",
-        },
-        "friendly_name": "Plex Assistant Devices",
-    }
-    sensor = "sensor.plex_assistant_devices"
-    hass.states.async_set(sensor, state, attributes)
+async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    try:
+        hass.data[DOMAIN][entry.entry_id]["remove_listener"]()
+    except KeyError:
+        pass
+    hass.services.async_remove(DOMAIN, "command")
+    hass.data[DOMAIN].pop(entry.entry_id)
+    return True
+
+
+async def async_reload_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
+    await async_unload_entry(hass, entry)
+    await async_setup_entry(hass, entry)

@@ -1,328 +1,320 @@
 import re
-from datetime import datetime
+import time
+import uuid
+import json
+import pychromecast
 
 from fuzzywuzzy import fuzz
-from fuzzywuzzy import process as fw
+from fuzzywuzzy import process
+from gtts import gTTS
+from homeassistant.components.plex.services import get_plex_server
+from homeassistant.core import Context
+from pychromecast.controllers.plex import PlexController
 
-from . import PA
-
-
-def cc_callback(chromecast):
-    """ Callback for pychromecast's non-blocking get_chromecasts function.
-    Adds all cast devices and their friendly names to PA.
-    """
-    PA.devices[chromecast.device.friendly_name] = chromecast
-    if PA.client_update:
-        PA.clients = [c for c in PA.server.clients() if '127.0.0.1' not in c._baseurl] if PA.server else []
-        PA.client_names = [client.title for client in PA.clients]
-        PA.client_ids = [client.machineIdentifier for client in PA.clients]
-        PA.client_update = False
-
-
-def get_libraries(plex):
-    """ Return Plex libraries, their contents, media titles, & time updated """
-    plex.reload()
-    movies = plex.search(libtype="movie")
-    movies.sort(key=lambda x: x.addedAt or x.updatedAt)
-    shows = plex.search(libtype="show")
-    shows.sort(key=lambda x: x.addedAt or x.updatedAt)
-
-    return {
-        "movies": movies,
-        "movie_titles": [movie.title for movie in movies],
-        "shows": shows,
-        "show_titles": [show.title for show in shows],
-        "updated": datetime.now(),
-    }
+from .const import DOMAIN, _LOGGER
 
 
 def fuzzy(media, lib, scorer=fuzz.QRatio):
-    """  Use Fuzzy Wuzzy to return highest scoring item. """
     if isinstance(lib, list) and len(lib) > 0:
-        return fw.extractOne(media, lib, scorer=scorer)
-    else:
-        return ["", 0]
+        return process.extractOne(media, lib, scorer=scorer)
+    return ["", 0]
 
 
-def video_selection(option, media, lib):
-    """ Return media item.
-    Narrow it down if season, episode, unwatched, or latest is used
-    """
-    if media and lib:
-        media = next(m for m in lib if m.title == media)
-
-    if option["season"] and option["episode"]:
-        return media.episode(season=int(
-            option["season"]), episode=int(option["episode"]))
-
-    if option["season"]:
-        media = media.season(title=int(option["season"]))
-
-    if option["ondeck"]:
-        if option["media"]:
-            ondeck = PA.plex.onDeck()
-            media = list(
-                filter(lambda x:
-                       (x.type == "movie" and x.title == media.title) or
-                       (getattr(x, "show", None) and media.title == x.show().title) or
-                       (getattr(media, "show", None) and media.show().title == x.show().title), ondeck))
-        elif option["library"]:
-            media = PA.plex.sectionByID(
-                option["library"][0].librarySectionID).onDeck()
-        else:
-            media = PA.plex.onDeck()
-
-    if option["unwatched"]:
-        if not media and not lib:
-            media = list(filter(lambda x: not x.isWatched, PA.plex.recentlyAdded()))
-        elif not media:
-            media = list(filter(lambda x: not x.isWatched, lib))
-        else:
-            media = media.unwatched()
-
-    if option["latest"]:
-        if not option["unwatched"]:
-            if not media:
-                media = PA.plex.recentlyAdded() if not lib else lib
-                media.sort(key=lambda x: x.addedAt or x.updatedAt)
-            if isinstance(media, list):
-                media.sort(key=lambda x: x.addedAt or x.updatedAt)
-        if media.type in ["show", "season"]:
-            media = media.episodes()[-1]
-        if isinstance(media, list):
-            media = media[-1]
-
-    if getattr(media, "TYPE", None) == "show":
-        unWatched = media.unwatched()
-        return unWatched[0] if unWatched else media
-    
-    if isinstance(media, list):
-        media = media[0]
-
-    return media
+def process_config_item(options, item_type):
+    item = options.get(item_type)
+    if item:
+        try:
+            item = json.loads("{" + item + "}")
+            for i in item.keys():
+                _LOGGER.debug(f"{item_type} {i}: {item[i]}")
+        except Exception:
+            item = {}
+        return item
+    return {}
 
 
-def find_media(selected, media, lib):
-    """ Return media item and the library it resides in.
-    If no library was given/found search both and find the closest title match.
-    """
-    result = ""
-    library = ""
-    if selected["library"]:
-        if selected["library"][0].type == 'show':
-            section = "show_titles"
-        else:
-            section = "movie_titles"
-
-        result = "" if not media else fuzzy(
-            media, lib[section], fuzz.WRatio)[0]
-        library = selected["library"]
-    else:
-        if not media:
-            result = ""
-        else:
-            show_test = fuzzy(media, lib["show_titles"], fuzz.WRatio)
-            movie_test = fuzzy(media, lib["movie_titles"], fuzz.WRatio)
-            if show_test[1] > movie_test[1]:
-                result = show_test[0]
-                library = lib["shows"]
-            else:
-                result = movie_test[0]
-                library = lib["movies"]
-    return {"media": result, "library": library}
-
-
-def convert_ordinals(command, item, ordinals):
-    """ Find ordinal numbers (first, second, third).
-    Convert ordinals to int and replace the phrase in command string.
-    Example: "third season of Friends" becomes "season 3 Friends"
-    """
-    match = ""
-    replacement = ""
-    for word in item["keywords"]:
-        for ordinal in ordinals.keys():
-            if ordinal not in ('pre', 'post') and ordinal in command:
-                match_before = re.search(
-                    r"(" + ordinal + r")\s*(" + word + r")", command)
-                match_after = re.search(
-                    r"(" + word + r")\s*(" + ordinal + r")", command)
-                if match_before:
-                    match = match_before
-                    matched = match.group(1)
-                if match_after:
-                    match = match_after
-                    matched = match.group(2)
-                if match:
-                    replacement = match.group(0).replace(
-                        matched, ordinals[matched])
-                    command = command.replace(match.group(0), replacement)
-                    for pre in ordinals["pre"]:
-                        if "%s %s" % (pre, match.group(0)) in command:
-                            command = command.replace("%s %s" % (
-                                match.group(0), pre), replacement)
-                    for post in ordinals["post"]:
-                        if "%s %s" % (match.group(0), post) in command:
-                            command = command.replace("%s %s" % (
-                                match.group(0), post), replacement)
-    return command.strip()
-
-
-def get_season_episode_num(command, item, ordinals):
-    """ Find and return season/episode number.
-    Then remove keyword and number from command string.
-    """
-    command = convert_ordinals(command, item, ordinals)
-    phrase = ""
-    number = None
-    for keyword in item["keywords"]:
-        if keyword in command:
-            phrase = keyword
-            for pre in item["pre"]:
-                if pre in command:
-                    regex = r'(\d+\s+)(' + pre + r'\s+)(' + phrase + r'\s+)'
-                    if re.search(regex, command):
-                        command = re.sub(regex,
-                                         "%s %s " % (phrase, r'\1'), command)
-                    else:
-                        command = re.sub(
-                            r'(' + pre + r'\s+)(' + phrase + r'\s+)(\d+\s+)',
-                            "%s %s" % (phrase, r'\3'),
-                            command
-                        )
-                        command = re.sub(
-                            r'(' + phrase + r'\s+)(\d+\s+)(' + pre + r'\s+)',
-                            "%s %s" % (phrase, r'\2'),
-                            command
-                        )
-            for post in item["post"]:
-                if post in command:
-                    regex = r'(' + phrase + r'\s+)(' + post + r'\s+)(\d+\s+)'
-                    if re.search(regex, command):
-                        command = re.sub(regex,
-                                         "%s %s" % (phrase, r'\3'), command)
-                    else:
-                        command = re.sub(
-                            r'(\d+\s+)(' + phrase + r'\s+)(' + post + r'\s+)',
-                            "%s %s" % (phrase, r'\1'),
-                            command
-                        )
-                        command = re.sub(
-                            r'(' + phrase + r'\s+)(\d+\s+)(' + post + r'\s+)',
-                            "%s %s" % (phrase, r'\2'), command
-                        )
-
-    match = re.search(
-        r"(\d+)\s*(" + phrase + r"|^)|(" + phrase + r"|^)\s*(\d+)",
-        command
-    )
-    if match:
-        number = match.group(1) or match.group(4)
-        command = command.replace(match.group(0), "").strip()
-
-    return {"number": number, "command": command}
-
-
-def _find(item, command):
-    """ Return true if any of the item's keywords is in the command string. """
-    return any(keyword in command for keyword in item["keywords"])
-
-
-def _remove(item, command, replace=""):
-    """ Remove key, pre, and post words from command string. """
-    command = " " + command + " "
-    if replace != "":
-        replace = " " + replace + " "
-    for keyword in item["keywords"]:
-        if item["pre"]:
-            for pre in item["pre"]:
-                command = command.replace("%s %s" % (pre, keyword), replace)
-        if item["post"]:
-            for post in item["post"]:
-                command = command.replace("%s %s" % (
-                    keyword, post), replace)
-        if keyword in command:
-            command = command.replace(" " + keyword + " ", replace)
-    return ' '.join(command.split())
-
-
-def get_library(phrase, lib, localize, devices):
-    """ Return the library type if the phrase contains related keywords. """
-    for device in devices:
-        if device.lower() in phrase:
-            phrase = phrase.replace(device.lower(), "")
-    tv_keywords = localize["shows"] + \
-        localize["season"]["keywords"] + localize["episode"]["keywords"]
-    if any(word in phrase for word in tv_keywords):
-        return lib["shows"]
-    elif any(word in phrase for word in localize["movies"]):
-        return lib["movies"]
-    return None
-
-
-def is_device(command, media_list, separator):
-    """ Return true if string is a cast device.
-    Uses fuzzy wuzzy to score media titles against cast device names.
-    """
-    split = command.split(separator)
-    full_score = fuzzy(command, media_list)[1]
-    split_score = fuzzy(command.replace(split[-1], "")[0], media_list)[1]
-    cast_score = fuzzy(split[-1], PA.device_names +
-                       PA.client_names + PA.alias_names)[1]
-    return full_score < split_score or full_score < cast_score
-
-
-def get_media_and_device(localize, command, lib, library, default_cast):
-    """ Find and return the media item and cast device. """
-    media = None
-    device = default_cast
-    separator = localize["separator"]["keywords"][0]
-    command = _remove(localize["separator"], command, separator)
-
-    if command.strip().startswith(separator + " "):
-        device = command.replace(separator, "").strip()
-        return {"media": "", "device": device}
-
-    separator = " " + separator + " "
-    if separator in command:
-        device = False
-        if library == lib["shows"]:
-            device = is_device(command, lib["show_titles"], separator)
-        elif library == lib["movies"]:
-            device = is_device(command, lib["movie_titles"], separator)
-        else:
-            device = is_device(
-                command,
-                lib["movie_titles"] + lib["show_titles"],
-                separator
+async def get_server(hass, config, server_name):
+    try:
+        await hass.helpers.discovery.async_discover(None, None, "plex", config)
+        return get_plex_server(hass, server_name)._plex_server
+    except Exception as ex:
+        if ex.args[0] == "No Plex servers available":
+            server_name_str = ", the server_name is correct," if server_name else ""
+            _LOGGER.warning(
+                "Plex Assistant: Plex server not found. Ensure that you've setup the HA "
+                f"Plex integration{server_name_str} and the server is reachable. "
             )
+        else:
+            template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+            message = template.format(type(ex).__name__, ex.args)
+            _LOGGER.warning(message)
 
-        if device:
-            split = command.split(separator)
-            media = command.replace(separator + split[-1], "")
-            device = split[-1]
 
-    media = media if media else command
-    return {"media": media, "device": device}
+def get_devices(hass, pa):
+    for entity in list(hass.data["media_player"].entities):
+        info = str(entity.device_info.get("identifiers", "")) if entity.device_info else ""
+        dev_type = [x for x in ["cast", "sonos", "plex", ""] if x in info][0]
+        if not dev_type:
+            continue
+        try:
+            name = hass.states.get(entity.entity_id).attributes.get("friendly_name")
+        except Exception:
+            continue
+        pa.devices[name] = {"entity_id": entity.entity_id, "device_type": dev_type}
+
+
+def run_start_script(hass, pa, command, start_script, device, default_device):
+    if device[0] in start_script.keys():
+        start = hass.data["script"].get_entity(start_script[device[0]])
+        start.script.run(context=Context())
+        get_devices(hass, pa)
+        return fuzzy(command["device"] or default_device, list(pa.devices.keys()))
+    return device
+
+
+async def listeners(hass):
+    def ifttt_webhook_callback(event):
+        if event.data["service"] == "plex_assistant.command":
+            _LOGGER.debug("IFTTT Call: %s", event.data["command"])
+            hass.services.call(DOMAIN, "command", {"command": event.data["command"]})
+
+    listener = hass.bus.async_listen("ifttt_webhook_received", ifttt_webhook_callback)
+    try:
+        await hass.services.async_call("conversation", "process", {"text": "tell plex to initialize_plex_intent"})
+    except Exception:
+        pass
+    return listener
+
+
+def media_service(hass, entity_id, call, payload=None):
+    args = {"entity_id": entity_id}
+    if call == "play_media":
+        args = {**args, **{"media_content_type": "video", "media_content_id": payload}}
+    elif call == "media_seek":
+        args = {**args, **{"seek_position": payload}}
+    hass.services.call("media_player", call, args)
+
+
+def jump(hass, device, amount):
+    if device["device_type"] == "plex":
+        media_service(hass, device["entity_id"], "media_pause")
+        time.sleep(0.5)
+
+    offset = hass.states.get(device["entity_id"]).attributes.get("media_position", 0) + amount
+    media_service(hass, device["entity_id"], "media_seek", offset)
+
+    if device["device_type"] == "plex":
+        media_service(hass, device["entity_id"], "media_play")
+
+
+def cast_next_prev(hass, zeroconf, plex_c, device, direction):
+    entity = hass.data["media_player"].get_entity(device["entity_id"])
+    cast, browser = pychromecast.get_listed_chromecasts(
+        uuids=[uuid.UUID(entity._cast_info.uuid)], zeroconf_instance=zeroconf
+    )
+    pychromecast.discovery.stop_discovery(browser)
+    cast[0].register_handler(plex_c)
+    cast[0].wait()
+    if direction == "next":
+        plex_c.next()
+    else:
+        plex_c.previous()
+
+
+def remote_control(hass, zeroconf, control, device, jump_amount):
+    plex_c = PlexController()
+    if control == "jump_forward":
+        jump(hass, device, jump_amount[0])
+    elif control == "jump_back":
+        jump(hass, device, -jump_amount[1])
+    elif control == "next_track" and device["device_type"] == "cast":
+        cast_next_prev(hass, zeroconf, plex_c, device, "next")
+    elif control == "previous_track" and device["device_type"] == "cast":
+        cast_next_prev(hass, zeroconf, plex_c, device, "previous")
+    else:
+        media_service(hass, device["entity_id"], f"media_{control}")
+
+
+def seek_to_offset(hass, offset, entity):
+    if offset < 1:
+        return
+    timeout = 0
+    while not hass.states.is_state(entity, "playing") and timeout < 100:
+        time.sleep(0.10)
+        timeout += 1
+
+    timeout = 0
+    if hass.states.is_state(entity, "playing"):
+        media_service(hass, entity, "media_pause")
+        while not hass.states.is_state(entity, "paused") and timeout < 100:
+            time.sleep(0.10)
+            timeout += 1
+
+    if hass.states.is_state(entity, "paused"):
+        if hass.states.get(entity).attributes.get("media_position", 0) < 9:
+            media_service(hass, entity, "media_seek", offset)
+        media_service(hass, entity, "media_play")
+
+
+def no_device_error(localize, device=None):
+    device = f': "{device.title()}".' if device else "."
+    _LOGGER.warning(f"{localize['cast_device'].capitalize()} {localize['not_found']}{device}")
 
 
 def media_error(command, localize):
-    """ Return error string. """
-    error = ""
-    if command["latest"]:
-        error += localize["latest"]["keywords"][0] + " "
-    if command["unwatched"]:
-        error += localize["unwatched"]["keywords"][0] + " "
-    if command["ondeck"]:
-        error += localize["ondeck"]["keywords"][0] + " "
+    error = "".join(
+        f"{localize[keyword]['keywords'][0]} " for keyword in ["latest", "unwatched", "ondeck"] if command[keyword]
+    )
     if command["media"]:
-        error += "%s " % command["media"].capitalize()
-    if command["season"]:
-        error += "%s %s " % (
-            localize["season"]["keywords"][0], command["season"]
-        )
-    if command["episode"]:
-        error += "%s %s " % (
-            localize["episode"]["keywords"][0], command["episode"]
-        )
-    error += localize["not_found"] + "."
+        media = command["media"]
+        media = media if isinstance(media, str) else getattr(media, "title", str(media))
+        error += f"{media.capitalize()} "
+    elif command["library"]:
+        error += f"{localize[command['library']+'s'][0]} "
+    for keyword in ["season", "episode"]:
+        if command[keyword]:
+            error += f"{localize[keyword]['keywords'][0]} {command[keyword]} "
+    error += f"{localize['not_found']}."
     return error.capitalize()
+
+
+def play_tts_error(hass, tts_dir, device, error, lang):
+    tts = gTTS(error, lang=lang)
+    tts.save(tts_dir + "error.mp3")
+    hass.services.call(
+        "media_player",
+        "play_media",
+        {
+            "entity_id": device,
+            "media_content_type": "audio/mp3",
+            "media_content_id": "/local/plex_assist_tts/error.mp3",
+        },
+    )
+
+
+def filter_media(pa, command, media, library):
+    offset = 0
+
+    if library == "playlist":
+        media = pa.server.playlist(media) if media else pa.server.playlists()
+    elif media or library:
+        media = pa.library.search(title=media or None, libtype=library or None)
+
+    if isinstance(media, list) and len(media) == 1:
+        media = media[0]
+
+    if command["episode"]:
+        media = media.episode(season=int(command["season"] or 1), episode=int(command["episode"]))
+    elif command["season"]:
+        media = media.season(season=int(command["season"]))
+
+    if command["ondeck"]:
+        title, libtype = [command["media"], command["library"]]
+        if getattr(media, "onDeck", None):
+            media = media.onDeck()
+        elif title or libtype:
+            search_result = pa.library.search(title=title or None, libtype=libtype or None, limit=1)[0]
+            if getattr(search_result, "onDeck", None):
+                media = search_result.onDeck()
+            else:
+                media = pa.library.sectionByID(search_result.librarySectionID).onDeck()
+        else:
+            media = pa.library.sectionByID(pa.tv_id).onDeck() + pa.library.sectionByID(pa.movie_id).onDeck()
+            media.sort(key=lambda x: getattr(x, "addedAt", None), reverse=False)
+
+    if command["unwatched"]:
+        if isinstance(media, list) or (not media and not library):
+            media = media[:200] if isinstance(media, list) else pa.library.recentlyAdded()
+            media = [x for x in media if getattr(x, "viewCount", 0) == 0]
+        elif getattr(media, "unwatched", None):
+            media = media.unwatched()[:200]
+
+    if command["latest"] and not command["unwatched"]:
+        if library and not media and pa.section_id[library]:
+            media = pa.library.sectionByID(pa.section_id[library]).recentlyAdded()[:200]
+        elif not media:
+            media = pa.library.sectionByID(pa.tv_id).recentlyAdded()
+            media += pa.library.sectionByID(pa.mov_id).recentlyAdded()
+            media.sort(key=lambda x: getattr(x, "addedAt", None), reverse=True)
+            media = media[:200]
+    elif command["latest"]:
+        if getattr(media, "type", None) in ["show", "season"]:
+            media = media.episodes()[-1]
+        elif isinstance(media, list):
+            media = media[:200]
+            media.sort(key=lambda x: getattr(x, "addedAt", None), reverse=True)
+
+    if not command["random"] and media:
+        pos = getattr(media[0], "viewOffset", 0) if isinstance(media, list) else getattr(media, "viewOffset", 0)
+        offset = (pos / 1000) - 5 if pos > 15 else 0
+
+    if getattr(media, "TYPE", None) == "show":
+        unwatched = media.unwatched()[:30]
+        media = unwatched if unwatched and not command["random"] else media.episodes()[:30]
+    elif getattr(media, "TYPE", None) == "episode":
+        episodes = media.show().episodes()
+        episodes = episodes[episodes.index(media):episodes.index(media) + 30]
+        media = pa.server.createPlayQueue(episodes, shuffle=int(command["random"]))
+    elif getattr(media, "TYPE", None) in ["artist", "album"]:
+        tracks = media.tracks()
+        media = pa.server.createPlayQueue(tracks, shuffle=int(command["random"]))
+    elif getattr(media, "TYPE", None) == "track":
+        tracks = media.album().tracks()
+        tracks = tracks[tracks.index(media):]
+        media = pa.server.createPlayQueue(tracks, shuffle=int(command["random"]))
+
+    if getattr(media, "TYPE", None) != "playqueue" and media:
+        media = pa.server.createPlayQueue(media, shuffle=int(command["random"]))
+
+    return [media, 0 if media and media.items[0].listType == "audio" else offset]
+
+
+def roman_numeral_test(media, lib):
+    regex = re.compile(r"\b(\d|(10))\b")
+    replacements = {
+        "1": "I",
+        "2": "II",
+        "3": "III",
+        "4": "IV",
+        "5": "V",
+        "6": "VI",
+        "7": "VII",
+        "8": "VIII",
+        "9": "IX",
+        "10": "X",
+    }
+
+    if len(re.findall(regex, media)) > 0:
+        replaced = re.sub(regex, lambda m: replacements[m.group(1)], media)
+        return fuzzy(replaced, lib, fuzz.WRatio)
+    return ["", 0]
+
+
+def find_media(pa, command):
+    result = ""
+    lib = ""
+    if getattr(command["media"], "type", None) in ["artist", "album", "track"]:
+        return [command["media"], command["media"].type]
+    if command["library"]:
+        lib_titles = pa.media[f"{command['library']}_titles"]
+        if command["media"]:
+            result = fuzzy(command["media"], lib_titles, fuzz.WRatio)
+            roman_test = roman_numeral_test(command["media"], lib_titles)
+            result = result[0] if result[1] > roman_test[1] else roman_test[0]
+    elif command["media"]:
+        item = {}
+        score = {}
+        for category in ["show", "movie", "artist", "album", "track", "playlist"]:
+            lib_titles = pa.media[f"{category}_titles"]
+            standard = fuzzy(command["media"], lib_titles, fuzz.WRatio) if lib_titles else ["", 0]
+            roman = roman_numeral_test(command["media"], lib_titles) if lib_titles else ["", 0]
+
+            winner = standard if standard[1] > roman[1] else roman
+            item[category] = winner[0]
+            score[category] = winner[1]
+
+        winning_category = max(score, key=score.get)
+        result = item[winning_category]
+        lib = winning_category
+
+    return [result, lib or command["library"]]

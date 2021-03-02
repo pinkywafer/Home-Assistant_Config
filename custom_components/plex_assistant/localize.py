@@ -1,25 +1,99 @@
-LOCALIZE = {
+# fmt: off
+translations = {
     "en": {
         # Generic Terms
-        "play": "play",
+        "play": [
+            "play",
+        ],
+        "random": [
+            "randomized",
+            "random",
+            "shuffled",
+            "shuffle",
+        ],
         "movies": [
+            "movies",
+            "films",
             "movie",
             "film",
         ],
         "shows": [
+            "episodes",
+            "shows",
             "episode",
             "tv",
-            "show"
+            "show",
+        ],
+        "tracks": [
+            "tracks",
+            "track",
+            "songs",
+            "song",
+            "albums",
+            "album",
+            "records",
+            "record",
+        ],
+        "albums": [
+            "album",
+            "record",
+            "cd",
+            "vinyl",
+        ],
+        "artists": [
+            "band",
+            "artist",
+            "singer",
+            "composer",
+            "player",
+            "guitarist",
+        ],
+        "music": [
+            "music",
+        ],
+        "playlists": [
+            "playlist",
+            "list",
         ],
 
         # Controls
         "controls": {
-            "play": "play",
-            "pause": "pause",
-            "stop": "stop",
-            "jump_forward": "jump forward",
-            "jump_back": "jump back",
-            "update_sensor": "update sensor",
+            "play": [
+                "play",
+            ],
+            "pause": [
+                "pause",
+            ],
+            "stop": [
+                "stop",
+            ],
+            "next_track": [
+                "go to next track",
+                "go to next",
+                "skip to next track",
+                "skip to next",
+                "skip next",
+                "skip forward",
+                "next track",
+                "next",
+                "skip",
+            ],
+            "previous_track": [
+                "go to previous track",
+                "go back one track",
+                "back one track",
+                "go back",
+                "back",
+            ],
+            "jump_forward": [
+                "jump forward",
+                "fast forward",
+                "forward",
+            ],
+            "jump_back": [
+                "jump back",
+                "rewind",
+            ],
         },
 
         # Text for errors
@@ -37,6 +111,8 @@ LOCALIZE = {
             "play tv",
             "play show",
             "play the",
+            "play an",
+            "play a",
             "play",
         ],
 
@@ -134,8 +210,8 @@ LOCALIZE = {
         },
         "ondeck": {
             "keywords": [
-                "on deck",
                 "ondeck",
+                "on deck",
             ],
             "pre": [],
             "post": [
@@ -149,11 +225,35 @@ LOCALIZE = {
                 "of",
             ],
         },
+        "music_album": {
+            "keywords": [
+                "album",
+                "record",
+            ],
+            "pre": [],
+            "post": [],
+        },
+        "music_artist": {
+            "keywords": [
+                "artists",
+                "artist",
+                "band",
+            ],
+            "pre": [],
+            "post": [],
+        },
+        "music_track": {
+            "keywords": [
+                "track",
+                "song",
+            ],
+            "pre": [],
+            "post": [],
+        },
         # This is the separator word used at the end of the command
         # To let us know it is a cast device.
         # Examples:  "Play Coco on Samsung TV" or "Play Coco on the Samsung TV"
         "separator": {
-            # Only use one keyword for this one.
             "keywords": [
                 "on",
             ],
@@ -162,9 +262,324 @@ LOCALIZE = {
                 "the",
             ],
         },
+        # This is the separator word used in a command for music
+        # that narrows down a search by using the artists name.
+        # Examples:  "Play album by artist" or "Play track by the artist"
+        "music_separator": {
+            "keywords": [
+                "by",
+            ],
+            "pre": [],
+            "post": [
+                "the band",
+                "the artists",
+                "the artist",
+                "the group",
+                "the",
+            ],
+        },
+    },
+    "hu": {
+        "play": [
+            "lejátszás",
+            "indít",
+        ],
+        "random": [
+            "véletlenszerű",
+            "random",
+            "véletlen szerű",
+            "véletlen",
+        ],
+        "movies": [
+            "filmek",
+            "mozifilmek",
+            "film",
+            "mozifilm",
+        ],
+        "shows": [
+            "epizódok",
+            "részek",
+            "rész",
+            "sorozatok",
+            "epizód",
+            "tévé",
+            "tv",
+            "sorozat",
+        ],
+        "tracks": [
+            "számok",
+            "szám",
+            "zenék",
+            "zene",
+            "zeneszámok",
+            "zeneszám",
+            "albumok",
+            "album",
+            "lemezek",
+            "lemez",
+            "dalok",
+            "dal",
+        ],
+        "albums": [
+            "albumok",
+            "album",
+            "cédé",
+            "cd",
+            "lemez",
+        ],
+        "artists": [
+            "együttes",
+            "előadó",
+            "énekes",
+            "író",
+            "zenész",
+            "gitáros",
+        ],
+        "music": [
+            "zene",
+        ],
+        "playlists": [
+            "lejátszási lista",
+            "lista",
+        ],
+
+        "controls": {
+            "play": [
+                "lejátszás",
+                "indítás",
+            ],
+            "pause": [
+                "pillanat állj",
+            ],
+            "stop": [
+                "állj",
+                "stop",
+            ],
+            "next_track": [
+                "következő szám",
+                "következő",
+                "ugrás",
+                "ugrás a következőre",
+                "ugrás a következő számra",
+                "következő zene",
+            ],
+            "previous_track": [
+                "előző szám",
+                "előző",
+                "visszalépés",
+                "ugrás vissza",
+                "vissza ugrás",
+                "ugrás az előzőre",
+                "ugrás az előző számra",
+                "előző zene",
+
+            ],
+            "jump_forward": [
+                "előre tekerés",
+                "előre",
+                "tekerés",
+            ],
+            "jump_back": [
+                "vissza tekerés",
+                "vissza",
+            ],
+        },
+
+        "not_found": "nem található",
+        "cast_device": "küldés eszközre",
+        "no_call": "Nem érkezett parancs.",
+
+        "play_start": [
+            "játszd le a filmet",
+            "film lejátszása",
+            "film indítása",
+            "indítsd a filmet",
+            "játszd le a sorozatot",
+            "sorozat lejátszása",
+            "sorozat indítása",
+            "indítsd a sorozatot",
+            "játszd le a sorozatot",
+            "lejátszás",
+            "indítsd",
+            "indítás",
+            "játszd le",
+            "indítsd el",
+        ],
+
+        "ordinals": {
+            "első": "1",
+            "második": "2",
+            "harmadik": "3",
+            "negyedik": "4",
+            "ötödik": "5",
+            "hatodik": "6",
+            "hetedik": "7",
+            "nyolcadik": "8",
+            "kilencedik": "9",
+            "tizedik": "10",
+            "pre": [
+                "a",
+            ],
+            "post": [],
+        },
+
+        "season": {
+            "keywords": [
+                "évad",
+                "év",
+            ],
+            "pre": [
+                '.',
+                'a',
+                'az',
+            ],
+            "post": [
+                "számú",
+            ],
+        },
+        "episode": {
+            "keywords": [
+                "epizódok",
+                "epizód",
+                "részek",
+                "rész",
+            ],
+            "pre": [
+                '.',
+                'a',
+                'az',
+            ],
+            "post": [
+                "számú",
+            ],
+        },
+        "latest": {
+            "keywords": [
+                "legfrissebb",
+                "utolsó",
+                "legutolsó",
+                "új",
+                "legújabb",
+            ],
+            "pre": [
+                "a",
+                "az",
+            ],
+            "post": [
+                "filmek",
+                "film",
+                "epizódok",
+                "epizód",
+                "részek",
+                "rész",
+                "tv",
+                "tévé",
+                "sorozatok",
+                "sorozat",
+            ],
+        },
+        "unwatched": {
+            "keywords": [
+                "nem nézett",
+                "meg nem nézett",
+                "nem játszott",
+            ],
+            "pre": [],
+            "post": [
+                "filmek",
+                "film",
+                "epizódok",
+                "epizód",
+                "részek",
+                "rész",
+                "tv",
+                "tévé",
+                "sorozatok",
+                "sorozat",
+            ],
+        },
+        "ondeck": {
+            "keywords": [
+                "lejátszás folytatása",
+                "folytatás",
+            ],
+            "pre": [],
+            "post": [
+                "filmek",
+                "film",
+                "epizódok",
+                "epizód",
+                "részek",
+                "rész",
+                "tv",
+                "tévé",
+                "sorozatok",
+                "sorozat",
+            ],
+        },
+        "music_album": {
+            "keywords": [
+                "album",
+                "albumok",
+                "zenei album",
+                "zenei albumok",
+            ],
+            "pre": [],
+            "post": [],
+        },
+        "music_artist": {
+            "keywords": [
+                "előadó",
+                "együttes",
+                "csapat",
+            ],
+            "pre": [],
+            "post": [],
+        },
+        "music_track": {
+            "keywords": [
+                "zene",
+                "szám",
+                "zeneszám",
+            ],
+            "pre": [],
+            "post": [],
+        },
+        "separator": {
+            "keywords": [
+                "itt",
+            ],
+            "pre": [],
+            "post": [
+                "a",
+                "az",
+            ],
+        },
+        "music_separator": {
+            "keywords": [
+                "tőle",
+                "tőlük",
+                "ettől",
+                "ezektől",
+            ],
+            "pre": [],
+            "post": [
+                "az együttestől",
+                "az előadótól",
+                "az énekestől",
+                "a bandától",
+                "a",
+                "az",
+            ],
+        },
     },
     "sv": {
-        "play": "spela",
+        "play": [
+            "spela",
+        ],
+        "random": [
+            "slumpmässigt",
+        ],
         "not_found": "finns ej",
         "cast_device": "cast enhet",
         "movies": [
@@ -178,14 +593,34 @@ LOCALIZE = {
             "serien",
             "serie",
         ],
+        "tracks": [],
+        "albums": [],
+        "artists": [],
+        "music": [],
+        "playlists": [],
 
         "controls": {
-            "play": "spela",
-            "pause": "paus",
-            "stop": "sluta",
-            "jump_forward": "hoppa framåt",
-            "jump_back": "hoppa tillbaka",
-            "update_sensor": "update sensor",
+            "play": [
+                "spela",
+            ],
+            "pause": [
+                "paus",
+            ],
+            "stop": [
+                "sluta",
+            ],
+            "next_track": [
+                "nästa",
+            ],
+            "previous_track": [
+                "föregående",
+            ],
+            "jump_forward": [
+                "hoppa framåt",
+            ],
+            "jump_back": [
+                "hoppa tillbaka",
+            ],
         },
         "no_call": "Inget kommando mottogs.",
 
@@ -277,6 +712,22 @@ LOCALIZE = {
                 "tv",
             ],
         },
+        "music_album": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+        "music_artist": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+        "music_track": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+
         "separator": {
             "keywords": [
                 "på",
@@ -284,23 +735,55 @@ LOCALIZE = {
             "pre": [],
             "post": [],
         },
+        "music_separator": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
     },
     "nl": {
-        "play": "speel",
+        "play": [
+            "speel",
+        ],
+        "random": [
+            "willekeurige",
+            "willekeurig",
+        ],
         "movies": [
-            "film"
+            "film",
         ],
         "shows": [
-            "aflevering"
+            "aflevering",
         ],
+        "tracks": [],
+        "albums": [],
+        "artists": [],
+        "music": [],
+        "playlists": [],
 
         "controls": {
-            "play": "speel",
-            "pause": "pauzeer",
-            "stop": "stop",
-            "jump_forward": "spring naar voren",
-            "jump_back": "spring naar achter",
-            "update_sensor": "update sensor",
+            "play": [
+                "speel",
+            ],
+            "pause": [
+                "pauzeer",
+            ],
+            "stop": [
+                "stop",
+            ],
+            "next_track": [
+                "volgende",
+                "volgend",
+            ],
+            "previous_track": [
+                "vorige",
+            ],
+            "jump_forward": [
+                "spring naar voren",
+            ],
+            "jump_back": [
+                "spring naar achter",
+            ],
         },
 
         "not_found": "niet gevonden",
@@ -403,6 +886,22 @@ LOCALIZE = {
                 "aflevering",
             ],
         },
+        "music_album": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+        "music_artist": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+        "music_track": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+
         "separator": {
             "keywords": [
                 "op",
@@ -412,25 +911,55 @@ LOCALIZE = {
                 "de",
             ],
         },
+        "music_separator": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
     },
     "it": {
-        "play": "riproduci",
+        "play": [
+            "riproduci",
+        ],
+        "random": [
+            "casuale",
+        ],
         "movies": [
             "film",
         ],
         "shows": [
             "episodio",
             "telefilm",
-            "serie tv"
+            "serie tv",
         ],
+        "tracks": [],
+        "albums": [],
+        "artists": [],
+        "music": [],
+        "playlists": [],
 
         "controls": {
-            "play": "riproduci",
-            "pause": "metti in pasa",
-            "stop": "interrompi",
-            "jump_forward": "vai avanti",
-            "jump_back": "vai indietro",
-            "update_sensor": "update sensor",
+            "play": [
+                "riproduci",
+            ],
+            "pause": [
+                "metti in pasa",
+            ],
+            "stop": [
+                "interrompi",
+            ],
+            "next_track": [
+                "successivo",
+            ],
+            "previous_track": [
+                "precedente",
+            ],
+            "jump_forward": [
+                "vai avanti",
+            ],
+            "jump_back": [
+                "vai indietro",
+            ],
         },
 
         "not_found": "non trovato",
@@ -537,6 +1066,22 @@ LOCALIZE = {
                 "di",
             ],
         },
+        "music_album": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+        "music_artist": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+        "music_track": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+
         "separator": {
             "keywords": [
                 "su",
@@ -546,13 +1091,23 @@ LOCALIZE = {
                 "il",
             ],
         },
+        "music_separator": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
     },
     "fr": {
-        "play": "joue",
+        "play": [
+            "joue",
+        ],
+        "random": [
+            "aléatoire",
+        ],
         "movies": [
             "vidéo",
             "film",
-            "films"
+            "films",
         ],
         "shows": [
             "épisode",
@@ -563,15 +1118,36 @@ LOCALIZE = {
             "série télévisée",
             "série tv",
             "show",
-            "série"
+            "série",
         ],
+        "tracks": [],
+        "albums": [],
+        "artists": [],
+        "music": [],
+        "playlists": [],
+
         "controls": {
-            "play":  "joue",
-            "pause": "pause",
-            "stop": "arrête",
-            "jump_forward": "avance",
-            "jump_back": "recule",
-            "update_sensor": "update sensor",
+            "play": [
+                "joue",
+            ],
+            "pause": [
+                "pause",
+            ],
+            "stop": [
+                "arrête",
+            ],
+            "next_track": [
+                "suivante",
+            ],
+            "previous_track": [
+                "précédente",
+            ],
+            "jump_forward": [
+                "avance",
+            ],
+            "jump_back": [
+                "recule",
+            ],
         },
         "not_found": "je n'ai pas trouvé",
         "cast_device": "sur",
@@ -610,7 +1186,7 @@ LOCALIZE = {
             "lis série",
             "lire show",
             "lire the",
-            "lire"
+            "lire",
         ],
 
         "ordinals": {
@@ -702,7 +1278,7 @@ LOCALIZE = {
             ],
             "post": [
                 "film",
-                "vidéo"
+                "vidéo",
                 "épisodes",
                 "épisode",
                 "films",
@@ -758,6 +1334,22 @@ LOCALIZE = {
                 "de",
             ],
         },
+        "music_album": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+        "music_artist": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+        "music_track": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+
         "separator": {
             "keywords": [
                 "sur",
@@ -768,9 +1360,20 @@ LOCALIZE = {
                 "la",
             ],
         },
+        "music_separator": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
     },
     "pt": {
-        "play": "ver",
+        "play": [
+            "ver",
+            "play",
+        ],
+        "random": [
+            "aleatório",
+        ],
         "movies": [
             "filmes",
         ],
@@ -778,16 +1381,46 @@ LOCALIZE = {
             "episódio",
             "episódios",
             "serie",
-            "series"
+            "series",
+        ],
+        "tracks": [
+            "músicas",
+        ],
+        "albums": [
+            "albuns",
+        ],
+        "artists": [
+            "artistas",
+        ],
+        "music": [
+            "música",
+        ],
+        "playlists": [
+            "playlists",
         ],
 
         "controls": {
-            "play": "play",
-            "pause": "pausa",
-            "stop": "stop",
-            "jump_forward": "para a frente",
-            "jump_back": "para trás",
-            "update_sensor": "update sensor",
+            "play": [
+                "play",
+            ],
+            "pause": [
+                "pausa",
+            ],
+            "stop": [
+                "stop",
+            ],
+            "next_track": [
+                "próximo",
+            ],
+            "previous_track": [
+                "anterior",
+            ],
+            "jump_forward": [
+                "para a frente",
+            ],
+            "jump_back": [
+                "para trás",
+            ],
         },
 
         "not_found": "não encontrado",
@@ -829,7 +1462,11 @@ LOCALIZE = {
             "keywords": [
                 "temporada",
             ],
-            "pre": [],
+            "pre": [
+                "de",
+                "da",
+                "do",
+            ],
             "post": [
                 "de",
                 "da",
@@ -841,7 +1478,11 @@ LOCALIZE = {
                 "episódio",
                 "episódios",
             ],
-            "pre": [],
+            "pre": [
+                "de",
+                "da",
+                "do",
+            ],
             "post": [
                 "número",
                 "de",
@@ -875,7 +1516,11 @@ LOCALIZE = {
                 "não vistos",
                 "próximo",
             ],
-            "pre": [],
+            "pre": [
+                "de",
+                "da",
+                "do",
+            ],
             "post": [
                 "filmes",
                 "filme",
@@ -892,7 +1537,11 @@ LOCALIZE = {
                 "ao vivo",
                 "live",
             ],
-            "pre": [],
+            "pre": [
+                "de",
+                "da",
+                "do",
+            ],
             "post": [
                 "filmes",
                 "filme",
@@ -904,16 +1553,95 @@ LOCALIZE = {
                 "de",
             ],
         },
+        "music_album": {
+            "keywords": [
+                "album",
+                "disco",
+            ],
+            "pre": [
+                "de",
+                "da",
+                "do",
+            ],
+            "post": [
+                "de",
+                "da",
+                "do",
+            ],
+        },
+        "music_artist": {
+            "keywords": [
+                "artista",
+                "artistas",
+                "banda",
+                "bandas",
+                "músico",
+            ],
+            "pre": [
+                "de",
+                "da",
+                "do",
+            ],
+            "post": [
+                "de",
+                "da",
+                "do",
+            ],
+        },
+        "music_track": {
+            "keywords": [
+                "música",
+            ],
+            "pre": [
+                "de",
+                "da",
+                "do",
+            ],
+            "post": [
+                "de",
+                "da",
+                "do",
+            ],
+        },
+
         "separator": {
             "keywords": [
                 "na",
             ],
+            "pre": [
+                "de",
+                "da",
+                "do",
+            ],
+            "post": [
+                "de",
+                "da",
+                "do",
+            ],
+        },
+        "music_separator": {
+            "keywords": [
+                "pelo",
+                "pela",
+            ],
             "pre": [],
-            "post": [],
+            "post": [
+                "a banda",
+                "o músico",
+                "o artista",
+                "a artista",
+            ],
         },
     },
     "de": {
-        "play": "spiele",
+        "play": [
+            "spiele",
+        ],
+        "random": [
+            "zufällige",
+            "zufälliges",
+            "zufälligen",
+        ],
         "movies": [
             "film",
         ],
@@ -922,13 +1650,38 @@ LOCALIZE = {
             "episode",
             "show",
         ],
+        "tracks": [],
+        "albums": [],
+        "artists": [],
+        "music": [],
+        "playlists": [],
+
         "controls": {
-            "play": "spiele",
-            "pause": "pausiere",
-            "stop": "stoppe",
-            "jump_forward": "springe vor",
-            "jump_back": "springe zurück",
-            "update_sensor": "aktualisiere sensor",
+            "play": [
+                "spiele",
+            ],
+            "pause": [
+                "pausiere",
+            ],
+            "stop": [
+                "stoppe",
+            ],
+            "next_track": [
+                "nächstes",
+                "nächste",
+                "nächsten",
+            ],
+            "previous_track": [
+                "vorheriges",
+                "vorherige",
+                "vorherigen",
+            ],
+            "jump_forward": [
+                "springe vor",
+            ],
+            "jump_back": [
+                "springe zurück",
+            ],
         },
         "not_found": "nicht gefunden",
         "cast_device": "cast gerät",
@@ -996,13 +1749,13 @@ LOCALIZE = {
                 "aktuelle",
             ],
             "pre": [
-                "die"
+                "die",
             ],
             "post": [
                 "episode",
                 "folge",
                 "staffel",
-                "von"
+                "von",
             ],
         },
         "unwatched": {
@@ -1025,7 +1778,7 @@ LOCALIZE = {
         "ondeck": {
             "keywords": [
                 "startseite",
-                "hauptseite"
+                "hauptseite",
             ],
             "pre": [
                 "die",
@@ -1033,6 +1786,21 @@ LOCALIZE = {
             "post": [
                 "von",
             ],
+        },
+        "music_album": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+        "music_artist": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+        "music_track": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
         },
 
         "separator": {
@@ -1044,9 +1812,19 @@ LOCALIZE = {
                 "dem",
             ],
         },
+        "music_separator": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
     },
     "da": {
-        "play": "afspil",
+        "play": [
+            "afspil",
+        ],
+        "random": [
+            "tilfældig",
+        ],
         "movies": [
             "film",
         ],
@@ -1054,16 +1832,36 @@ LOCALIZE = {
             "episode",
             "afsnit",
             "tv",
-            "program"
+            "program",
         ],
+        "tracks": [],
+        "albums": [],
+        "artists": [],
+        "music": [],
+        "playlists": [],
 
         "controls": {
-            "play": "afspil",
-            "pause": "pause",
-            "stop": "stop",
-            "jump_forward": "hop fremad",
-            "jump_back": "hop tilbage",
-            "update_sensor": "opdater sensor",
+            "play": [
+                "afspil",
+            ],
+            "pause": [
+                "pause",
+            ],
+            "stop": [
+                "stop",
+            ],
+            "next_track": [
+                "næste",
+            ],
+            "previous_track": [
+                "forrige",
+            ],
+            "jump_forward": [
+                "hop fremad",
+            ],
+            "jump_back": [
+                "hop tilbage",
+            ],
         },
 
         "not_found": "ikke fundet",
@@ -1080,11 +1878,10 @@ LOCALIZE = {
             "afspil afsnittet",
             "afspil tvprogram",
             "afspil afsnit",
-            "afspil"
+            "afspil",
         ],
 
         "ordinals": {
-            # Edit the keys for translation, not the integers.
             "første": "1",
             "anden": "2",
             "tredje": "3",
@@ -1105,7 +1902,6 @@ LOCALIZE = {
             "attende": "18",
             "nittende": "19",
             "tyvende": "20",
-            # Do not edit the keys of pre and post
             "pre": [
                 "den",
                 "det",
@@ -1195,7 +1991,7 @@ LOCALIZE = {
                 "igangværende",
                 "fortsat",
                 "on deck",
-                "ondeck"
+                "ondeck",
             ],
             "pre": [
                 "fortsat",
@@ -1211,6 +2007,22 @@ LOCALIZE = {
                 "af",
             ],
         },
+        "music_album": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+        "music_artist": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+        "music_track": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+
         "separator": {
             "keywords": [
                 "på",
@@ -1220,20 +2032,432 @@ LOCALIZE = {
             "pre": [],
             "post": [],
         },
+        "music_separator": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+    },
+    "nb": {
+        "play": [
+            "spille",
+        ],
+        "random": [
+            "tilfeldig",
+        ],
+        "movies": [
+            "filmer",
+            "film",
+        ],
+        "shows": [
+            "avsnitt",
+            "tv program",
+            "tv",
+            "serien",
+            "serie",
+        ],
+        "tracks": [],
+        "albums": [],
+        "artists": [],
+        "music": [],
+        "playlists": [],
+
+        "controls": {
+            "play": [
+                "spille",
+            ],
+            "pause": [
+                "pause",
+            ],
+            "stop": [
+                "stopp",
+            ],
+            "next_track": [
+                "neste",
+            ],
+            "previous_track": [
+                "forrige",
+            ],
+            "jump_forward": [
+                "hopp fremover",
+            ],
+            "jump_back": [
+                "hopp tilbake",
+            ],
+        },
+
+        "not_found": "finnes ikke",
+        "cast_device": "cast enhet",
+        "no_call": "Ingen kommandoer mottatt.",
+
+        "play_start": [
+            "spill filmen",
+            "spill film",
+            "spill tv programmet",
+            "spill serien",
+            "spill serie",
+            "spill tv",
+            "spill",
+        ],
+
+        "ordinals": {
+            "første": "1",
+            "andre": "2",
+            "tredje": "3",
+            "fjerde": "4",
+            "femte": "5",
+            "sjette": "6",
+            "syvende": "7",
+            "åttende": "8",
+            "niende": "9",
+            "tiende": "10",
+            "pre": [],
+            "post": [],
+        },
+
+        "season": {
+            "keywords": [
+                "sesong",
+            ],
+            "pre": [
+                "a",
+                "e",
+            ],
+            "post": [
+                "nummer",
+                "av",
+            ],
+        },
+        "episode": {
+            "keywords": [
+                "episoder",
+                "episode",
+            ],
+            "pre": [
+                "a",
+                "e",
+            ],
+            "post": [
+                "nummer",
+                "av",
+            ],
+        },
+        "latest": {
+            "keywords": [
+                "siste",
+                "nyligt",
+                "ny",
+            ],
+            "pre": [
+                "det",
+            ],
+            "post": [
+                "avsnitt",
+                "av",
+            ],
+        },
+        "unwatched": {
+            "keywords": [
+                "usitt",
+            ],
+            "pre": [],
+            "post": [
+                "avsnitt",
+                "av",
+            ],
+        },
+        "ondeck": {
+            "keywords": [
+                "kommende",
+            ],
+            "pre": [],
+            "post": [
+                "filmer",
+                "film",
+                "TV program",
+                "program",
+                "tv",
+            ],
+        },
+        "music_album": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+        "music_artist": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+        "music_track": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+
+        "separator": {
+            "keywords": [
+                "på",
+            ],
+            "pre": [],
+            "post": [],
+        },
+        "music_separator": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+    },
+    "es": {
+        "play": [
+            "reproducir",
+        ],
+        "random": [
+            "aleatorio",
+        ],
+        "movies": [
+            "película",
+            "películas",
+            "video",
+            "videos",
+            "vídeo",
+            "vídeos",
+        ],
+        "shows": [
+            "programa",
+            "programas",
+            "episodio",
+            "episodios",
+            "serie",
+            "series",
+            "serie de televisión",
+            "series de televisión",
+        ],
+        "tracks": [],
+        "albums": [],
+        "artists": [],
+        "music": [],
+        "playlists": [],
+
+        "controls": {
+            "play": [
+                "reproducir",
+            ],
+            "pause": [
+                "pausa",
+            ],
+            "stop": [
+                "detener",
+            ],
+            "next_track": [
+                "siguiente",
+            ],
+            "previous_track": [
+                "anterior",
+            ],
+            "jump_forward": [
+                "avanzar",
+            ],
+            "jump_back": [
+                "retroceder",
+            ],
+        },
+
+        "not_found": "no encontrado",
+        "cast_device": "dispositivo cast",
+        "no_call": "ningún comando recibido",
+
+        "play_start": [
+            "empieza la película",
+            "comienza la película",
+            "inicia la película",
+            "empieza la serie",
+            "comienza la serie",
+            "inicia la serie",
+            "empieza la serie de televisión",
+            "comienza la serie de televisión",
+            "inicia la serie de televisión",
+            "empieza el episodio",
+            "comienza el episodio",
+            "inicia el episodio",
+            "empieza el programa",
+            "comienza el programa",
+            "inicia el programa",
+            "empieza el video",
+            "comienza el video",
+            "inicia el video",
+            "empieza el vídeo",
+            "comienza el vídeo",
+            "inicia el vídeo",
+            "comienza",
+            "comienze",
+            "empieza",
+            "empiece",
+            "inicia",
+            "inicie",
+        ],
+
+        "ordinals": {
+            "primero": "1",
+            "segundo": "2",
+            "tercero": "3",
+            "cuarto": "4",
+            "quinto": "5",
+            "sexto": "6",
+            "séptimo": "7",
+            "octavo": "8",
+            "noveno": "9",
+            "décimo": "10",
+            "pre": [
+                "el",
+                "la",
+            ],
+            "post": [],
+        },
+
+        "season": {
+            "keywords": [
+                "temporada",
+            ],
+            "pre": [
+                "la",
+            ],
+            "post": [
+                "numero",
+                "de",
+            ],
+        },
+        "episode": {
+            "keywords": [
+                "episodio",
+                "episodios",
+            ],
+            "pre": [
+                "el",
+                "los",
+            ],
+            "post": [
+                "número",
+                "de",
+            ],
+        },
+        "latest": {
+            "keywords": [
+                "último",
+                "última",
+                "últimos",
+                "últimas",
+                "reciente",
+                "nuevo",
+                "nueva",
+                "nuevos",
+                "nuevas",
+            ],
+            "pre": [
+                "el",
+                "los",
+                "la",
+                "las",
+            ],
+            "post": [
+                "película",
+                "películas",
+                "episodio",
+                "episodios",
+                "serie",
+                "series",
+                "video",
+                "vídeo",
+                "videos",
+                "vídeos",
+            ],
+        },
+        "unwatched": {
+            "keywords": [
+                "no visto",
+                "siguiente",
+                "aún no visto",
+            ],
+            "pre": [
+                "película",
+                "películas",
+                "serie",
+                "series",
+                "video",
+                "vídeo",
+                "episodio",
+                "episodios",
+            ],
+            "post": [],
+        },
+        "ondeck": {
+            "keywords": [
+                "en progreso",
+            ],
+            "pre": [
+                "película",
+                "películas",
+                "serie",
+                "series",
+                "video",
+                "vídeo",
+                "episodio",
+                "episodios",
+            ],
+            "post": [],
+        },
+        "music_album": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+        "music_artist": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+        "music_track": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
+
+        "separator": {
+            "keywords": [
+                "en",
+            ],
+            "pre": [],
+            "post": [
+                "la",
+            ],
+        },
+        "music_separator": {
+            "keywords": [],
+            "pre": [],
+            "post": [],
+        },
     },
     # "template": {
     #     # Generic Terms
-    #     "play": "",
+    #     "play": [],
+    #     "random": [],
     #     "movies": [],
     #     "shows": [],
+    #     "tracks": [],
+    #     "albums": [],
+    #     "artists": [],
+    #     "music": [],
+    #     "playlists": [],
 
     #     # Controls
     #     "controls": {
-    #         "play": "",
-    #         "pause": "",
-    #         "stop": "",
-    #         "jump_forward": "",
-    #         "jump_back": "",
+    #         "play": [],
+    #         "pause": [],
+    #         "stop": [],
+    #         "next_track": [],
+    #         "previous_track": [],
+    #         "jump_forward": [],
+    #         "jump_back": [],
     #     },
 
     #     # Text for errors
@@ -1289,11 +2513,34 @@ LOCALIZE = {
     #         "pre": [],
     #         "post": [],
     #     },
+    #     "music_album": {
+    #         "keywords": [],
+    #         "pre": [],
+    #         "post": [],
+    #     },
+    #     "music_artist": {
+    #         "keywords": [],
+    #         "pre": [],
+    #         "post": [],
+    #     },
+    #     "music_track": {
+    #         "keywords": [],
+    #         "pre": [],
+    #         "post": [],
+    #     },
+
     #     # This is the separator word used at the end of the command
     #     # to let us know it is a cast device.
     #     # Examples: "Play Coco on Samsung TV" - "Play Coco on the Samsung TV"
     #     "separator": {
-    #         # Only use one keyword for this one.
+    #         "keywords": [],
+    #         "pre": [],
+    #         "post": [],
+    #     },
+    #     # This is the separator word used in a command for music
+    #     # that narrows down a search by using the artists name.
+    #     # Examples:  "Play album by artist" or "Play track by the artist"
+    #     "music_separator": {
     #         "keywords": [],
     #         "pre": [],
     #         "post": [],
