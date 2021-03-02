@@ -83,15 +83,17 @@ cards:
       - entity: alert.leopard_gecko_temperature
         name: Alert
         secondary_info: last-changed
-        style: |
-          :host {
-            --paper-item-icon-color: {% if is_state('alert.leopard_gecko_temperature', 'on') %} black {% endif %} ;
-            }
-    style: |
-      ha-card {
-        background: {% if is_state('alert.leopard_gecko_temperature', 'on') %} red {% endif %};
-        color: {% if is_state('alert.leopard_gecko_temperature', 'on') %} black {% endif %};
-      }
+        card_mod:
+          style: |
+            :host {
+              --paper-item-icon-color: {% if is_state('alert.leopard_gecko_temperature', 'on') %} black {% endif %} ;
+              }
+    card_mod:
+      style: |
+        ha-card {
+          background: {% if is_state('alert.leopard_gecko_temperature', 'on') %} red {% endif %};
+          color: {% if is_state('alert.leopard_gecko_temperature', 'on') %} black {% endif %};
+        }
   - type: entities
     entities:
       - entity: binary_sensor.leopard_gecko_temperature_and_light_status

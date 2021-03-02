@@ -18,8 +18,9 @@ entities:
     name: Humidity
     color: black
     y_axis: secondary
-style: |
-  ha-card {
-    background: {% if is_state('alert.leopard_gecko_temperature', 'on') %} red {% endif %};
-    color: {% if is_state('alert.leopard_gecko_temperature', 'on') %} black {% endif %};
-  }
+card_mod:
+  style: |
+    ha-card {
+      background: {% if is_state('alert.leopard_gecko_temperature', 'on') %} red {% endif %};
+      color: {% if is_state('alert.leopard_gecko_temperature', 'on') %} black {% endif %};
+    }

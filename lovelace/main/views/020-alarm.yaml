@@ -9,16 +9,17 @@ cards:
       - type: alarm-panel
         name: Alarm
         entity: alarm_control_panel.alarm
-        style:
-            .: |
-            "#keypad mwc-button":
-              $: |
-                :host {
-                  background: transparent;
-                }
-                button {
-                  font-size: 17px !important;
-                }
+        card_mod:
+          style:
+              .: |
+              "#keypad mwc-button":
+                $: |
+                  :host {
+                    background: transparent;
+                  }
+                  button {
+                    font-size: 17px !important;
+                  }
         states:
           - arm_home
           - arm_away

@@ -1,11 +1,12 @@
 type: entities
-style: |
-  ha-card {
-    background: url('https://yt3.ggpht.com/a/AATXAJygDgETgAaEuMR06OEwX2lOA3b8VTzvBI3j7Q=s176-c-k-c0x00ffffff-no-rj-mo');
-    background-repeat: no-repeat;
-    background-position: 50% 15%;
-    background-size: 10%;
-  }
+card_mod:
+  style: |
+    ha-card {
+      background: url('https://yt3.ggpht.com/a/AATXAJygDgETgAaEuMR06OEwX2lOA3b8VTzvBI3j7Q=s176-c-k-c0x00ffffff-no-rj-mo');
+      background-repeat: no-repeat;
+      background-position: 50% 15%;
+      background-size: 10%;
+    }
 entities:
   - entity: sensor.drzzs_info
     type: custom:multiple-entity-row
