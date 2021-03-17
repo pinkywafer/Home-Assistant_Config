@@ -21,18 +21,18 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 6620
+Lines of yaml code in my configuration (excluding secrets): 6634
 
-Number of entities: 860
+Number of entities: 879
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 2
 Automation | 79
-Binary Sensor | 123
+Binary Sensor | 127
 Camera | 13
-Device Tracker | 27
+Device Tracker | 28
 Group | 1
 Input Boolean | 2
 Input Datetime | 3
@@ -42,7 +42,7 @@ Media Player | 21
 Person | 3
 Scene | 1
 Script | 23
-Sensor | 481
+Sensor | 495
 Sun | 1
 Switch | 30
 Weather | 5
