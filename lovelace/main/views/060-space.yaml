@@ -1,77 +1,74 @@
 title: Space
 icon: mdi:weather-night
 path: Space
-panel: true
+type: custom:vertical-layout
 cards:
-  - type: custom:layout-card
-    layout: vertical
+  - type: entities
+    entities:
+      - entity: sun.sun
+        type: custom:multiple-entity-row
+        hide_state: false
+        primary:
+          entity: sun.sun
+          attribute: next_dawn
+          name: Next Dawn
+        secondary:
+          entity: sun.sun
+          attribute: next_dusk
+          name: Next Dusk
+      - sensor.moon
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: weather-forecast
+        entity: weather.dark_sky
+      - type: entities
+        entities:
+          - entity: sensor.lightning_counter
+            name: Lightning
+            type: custom:multiple-entity-row
+            icon: mdi:lightning-bolt
+            show_state: false
+            entities:
+              - entity: sensor.lightning_counter
+                name: Strikes
+              - entity: sensor.lightning_distance
+                name: Distance
+              - entity: sensor.lightning_azimuth
+                name: Azimuth
+  - type: custom:layout-break
+  - type: custom:vertical-stack-in-card
     cards:
       - type: entities
         entities:
-          - entity: sun.sun
-            type: custom:multiple-entity-row
-            hide_state: false
-            primary:
-              entity: sun.sun
-              attribute: next_dawn
-              name: Next Dawn
-            secondary:
-              entity: sun.sun
-              attribute: next_dusk
-              name: Next Dusk
-          - sensor.moon
-      - type: custom:vertical-stack-in-card
-        cards:
-          - type: weather-forecast
-            entity: weather.dark_sky
-          - type: entities
-            entities:
-              - entity: sensor.lightning_counter
-                name: Lightning
-                type: custom:multiple-entity-row
-                icon: mdi:lightning-bolt
-                show_state: false
-                entities:
-                  - entity: sensor.lightning_counter
-                    name: Strikes
-                  - entity: sensor.lightning_distance
-                    name: Distance
-                  - entity: sensor.lightning_azimuth
-                    name: Azimuth
-      - break
-      - type: custom:vertical-stack-in-card
-        cards:
-          - type: entities
-            entities:
-              - entity: sensor.next_launch
-                name: Next Space Launch
-          - type: custom:entity-attributes-card
-            heading_name: ' '
-            heading_state: ' '
-            filter:
-              include:
-                - sensor.next_launch.launch_time
-                - sensor.next_launch.agency
-                - sensor.next_launch.agency_country_code
-                - sensor.next_launch.stream
+          - entity: sensor.next_launch
+            name: Next Space Launch
+      - type: custom:entity-attributes-card
+        heading_name: ' '
+        heading_state: ' '
+        filter:
+          include:
+            - sensor.next_launch.launch_time
+            - sensor.next_launch.agency
+            - sensor.next_launch.agency_country_code
+            - sensor.next_launch.stream
 
-      - type: custom:vertical-stack-in-card
-        cards:
-          - type: entities
-            entities:
-              - entity: binary_sensor.iss
-                name: International Space Station Visible
-                icon: mdi:eye
-          - type: custom:entity-attributes-card
-            heading_name: ' '
-            heading_state: ' '
-            filter:
-              include:
-                - key: binary_sensor.iss.next_rise
-                  name: Next Rise
-                - key: binary_sensor.iss.number_of_people_in_space
-                  name: People in Space
-                - key: binary_sensor.iss.long
-                  name: Current Lattitude
-                - key: binary_sensor.iss.lat
-                  name: Current Longitude
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: entities
+        entities:
+          - entity: binary_sensor.iss
+            name: International Space Station Visible
+            icon: mdi:eye
+      - type: custom:entity-attributes-card
+        heading_name: ' '
+        heading_state: ' '
+        filter:
+          include:
+            - key: binary_sensor.iss.next_rise
+              name: Next Rise
+            - key: binary_sensor.iss.number_of_people_in_space
+              name: People in Space
+            - key: binary_sensor.iss.long
+              name: Current Lattitude
+            - key: binary_sensor.iss.lat
+              name: Current Longitude

@@ -13,9 +13,7 @@ cards:
             value: home
             entity_picture: /local/jenny_away.jpg
         tap_action:
-          action: call-service
-          service: browser_mod.popup
-          service_data: !include ../popup_cards/jenny_location.yaml
+          action: more-info
         styles:
           card:
             - height: 74px
@@ -33,9 +31,7 @@ cards:
             value: home
             entity_picture: /local/emma_away.jpeg
         tap_action:
-          action: call-service
-          service: browser_mod.popup
-          service_data: !include ../popup_cards/emma_location.yaml
+          action: more-info
         styles:
           card:
             - height: 74px

@@ -1,11 +1,9 @@
-deviceID:
-  - this
 title: Emma
 large: true
 card:
   type: 'custom:layout-card'
   layout: vertical
-  max_columns: 2
+  max_cols: 2
   cards:
     - type: custom:vertical-stack-in-card
       cards:
@@ -33,14 +31,14 @@ card:
           refresh_interval: 0
           entities:
             - entity: sensor.emma_location
-    - break
+    - type: custom:layout-break
     - type: map
       hours_to_show: 10
       dark_mode: false
       default_zoom: 14
       entities:
         - entity: person.emma_gorton
-    - break
+    - type: custom:layout-break
     - type: 'custom:button-card'
       name: Update Location
       show_icon: false

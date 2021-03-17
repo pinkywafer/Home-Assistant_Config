@@ -1,173 +1,170 @@
 title: Devices
 icon: mdi:lan
 path: devices
-panel: true
 visible:
   - user: !secret user_jenny
+type: custom:vertical-layout
 cards:
-  - type: custom:layout-card
-    layout: vertical
-    cards:
-      - type: entities
-        entities:
-          - entity: sensor.myip
-            name: Public IP Address
-          - entity: sensor.home_assistant_uptime
-            name: Home Assistant Uptime
-      - type: 'custom:mini-graph-card'
-        name: Broadband Speed
-        align_state: center
-        show:
-          average: true
-        entities:
-          - entity: sensor.speedtest_download
-            name: Download
-            color: green
-          - entity: sensor.speedtest_upload
-            name: Upload
-            color: red
-          - entity: sensor.speedtest_ping
-            name: Ping
-            color: yellow
-      - type: glance
-        entities:
-          - entity: binary_sensor.server_home_assistant_running
-            name: Home Assistant
-          - entity: binary_sensor.server_dev_hass_running
-            name: Dev-Hass
-          - entity: binary_sensor.server_plex_running
-            name: Plex
-          - entity: binary_sensor.server_fileserver_running
-            name: Fileserver
-          - entity: binary_sensor.server_tuya_convert_running
-            name: Tuya Convert
-        title: Proxmox
-        show_name: true
-        show_icon: true
-        show_state: false
-        columns: 3
+  - type: entities
+    entities:
+      - entity: sensor.myip
+        name: Public IP Address
+      - entity: sensor.home_assistant_uptime
+        name: Home Assistant Uptime
+  - type: 'custom:mini-graph-card'
+    name: Broadband Speed
+    align_state: center
+    show:
+      average: true
+    entities:
+      - entity: sensor.speedtest_download
+        name: Download
+        color: green
+      - entity: sensor.speedtest_upload
+        name: Upload
+        color: red
+      - entity: sensor.speedtest_ping
+        name: Ping
+        color: yellow
+  - type: glance
+    entities:
+      - entity: binary_sensor.server_home_assistant_running
+        name: Home Assistant
+      - entity: binary_sensor.server_dev_hass_running
+        name: Dev-Hass
+      - entity: binary_sensor.server_plex_running
+        name: Plex
+      - entity: binary_sensor.server_fileserver_running
+        name: Fileserver
+      - entity: binary_sensor.server_tuya_convert_running
+        name: Tuya Convert
+    title: Proxmox
+    show_name: true
+    show_icon: true
+    show_state: false
+    columns: 3
 
-      - break
-      - type: entity-filter
-        entities:
-          - device_tracker.sitting_room_speaker
-          - device_tracker.kitchen_speaker
-          - device_tracker.breakfast_bar_led
-          - device_tracker.emma_s_room_speaker
-          - device_tracker.bedroom_speaker
-          - device_tracker.emma_led
-          - device_tracker.pc_mediacenter
-          - device_tracker.tv_wifi
-        state_filter:
-          - home
-        card:
-          type: glance
-          show_state: false
-          title: Online Devices
+  - type: custom:layout-break
+  - type: entity-filter
+    entities:
+      - device_tracker.sitting_room_speaker
+      - device_tracker.kitchen_speaker
+      - device_tracker.breakfast_bar_led
+      - device_tracker.emma_s_room_speaker
+      - device_tracker.bedroom_speaker
+      - device_tracker.emma_led
+      - device_tracker.pc_mediacenter
+      - device_tracker.tv_wifi
+    state_filter:
+      - home
+    card:
+      type: glance
+      show_state: false
+      title: Online Devices
 
-      - type: glance
-        title: Lights Status
-        show_state: false
+  - type: glance
+    title: Lights Status
+    show_state: false
+    entities:
+      - entity: binary_sensor.vestibule_light_shelly1_status
+        name: Vestibule
+      - entity: binary_sensor.sitting_room_light_shelly1_status
+        name: Sitting Room
+      - entity: binary_sensor.cooker_light_sonoff_status
+        name: Cooker
+      - entity: binary_sensor.sink_light_sonoff_status
+        name: Sink
+      - entity: binary_sensor.bathroom_light_sonoff_status
+        name: Bathroom
+      - entity: binary_sensor.landing_light_sonoff_status
+        name: Landing
+      - entity: binary_sensor.emmas_ceiling_light_sonoff_status
+        name: Emma Ceiling
+      - entity: binary_sensor.emmas_bedside_light_sonoff_status
+        name: Emma Bedside
+      - entity: binary_sensor.bedroom_ceiling_light_sonoff_status
+        name: Bedroom Ceiling
+      - entity: binary_sensor.jennys_bedside_light_sonoff_status
+        name: Jenny Bedside
+      - entity: binary_sensor.jos_bedside_light_sonoff_status
+        name: Jo Bedside
+  - type: custom:button-card
+    name: Mi Temperature Sensor Flasher & Configurator
+    show_icon: false
+    tap_action:
+      action: url
+      url_path: !secret mi_flasher_url
+      styles:
+          card:
+            - height: 40px
+  - type: custom:layout-break
+  - type: entities
+    title: Home Assistant Config CI
+    entities:
+      - entity: sensor.github_checkrun_remarklint
+        name: Remarklint
+        secondary_info:
+          attribute: id
+        type: custom:multiple-entity-row
         entities:
-          - entity: binary_sensor.vestibule_light_shelly1_status
-            name: Vestibule
-          - entity: binary_sensor.sitting_room_light_shelly1_status
-            name: Sitting Room
-          - entity: binary_sensor.cooker_light_sonoff_status
-            name: Cooker
-          - entity: binary_sensor.sink_light_sonoff_status
-            name: Sink
-          - entity: binary_sensor.bathroom_light_sonoff_status
-            name: Bathroom
-          - entity: binary_sensor.landing_light_sonoff_status
-            name: Landing
-          - entity: binary_sensor.emmas_ceiling_light_sonoff_status
-            name: Emma Ceiling
-          - entity: binary_sensor.emmas_bedside_light_sonoff_status
-            name: Emma Bedside
-          - entity: binary_sensor.bedroom_ceiling_light_sonoff_status
-            name: Bedroom Ceiling
-          - entity: binary_sensor.jennys_bedside_light_sonoff_status
-            name: Jenny Bedside
-          - entity: binary_sensor.jos_bedside_light_sonoff_status
-            name: Jo Bedside
-      - type: custom:button-card
-        name: Mi Temperature Sensor Flasher & Configurator
-        show_icon: false
-        tap_action:
-          action: url
-          url_path: !secret mi_flasher_url
-          styles:
-              card:
-                - height: 40px
-      - break
-      - type: entities
-        title: Home Assistant Config CI
+          - attribute: started_at
+            format: datetime
+          - attribute: completed_at
+            format: datetime
+      - entity: sensor.github_checkrun_yamllint
+        name: yamllint
+        secondary_info:
+          attribute: id
+        type: custom:multiple-entity-row
         entities:
-          - entity: sensor.github_checkrun_remarklint
-            name: Remarklint
-            secondary_info:
-              attribute: id
-            type: custom:multiple-entity-row
-            entities:
-              - attribute: started_at
-                format: datetime
-              - attribute: completed_at
-                format: datetime
-          - entity: sensor.github_checkrun_yamllint
-            name: yamllint
-            secondary_info:
-              attribute: id
-            type: custom:multiple-entity-row
-            entities:
-              - attribute: started_at
-                format: datetime
-              - attribute: completed_at
-                format: datetime
-          - entity: sensor.github_checkrun_home_assistant_current_install
-            name: current
-            secondary_info:
-              attribute: id
-            type: custom:multiple-entity-row
-            entities:
-              - attribute: started_at
-                format: datetime
-              - attribute: completed_at
-                format: datetime
-          - entity: sensor.github_checkrun_home_assistant_latest_release
-            name: latest
-            secondary_info:
-              attribute: id
-            type: custom:multiple-entity-row
-            entities:
-              - attribute: started_at
-                format: datetime
-              - attribute: completed_at
-                format: datetime
-          - entity: sensor.github_checkrun_home_assistant_beta
-            name: beta
-            secondary_info:
-              attribute: id
-            type: custom:multiple-entity-row
-            entities:
-              - attribute: started_at
-                format: datetime
-              - attribute: completed_at
-                format: datetime
-          - entity: sensor.github_checkrun_home_assistant_dev
-            name: dev
-            secondary_info:
-              attribute: id
-            type: custom:multiple-entity-row
-            entities:
-              - attribute: started_at
-                format: datetime
-              - attribute: completed_at
-                format: datetime
-      - type: custom:github-card
+          - attribute: started_at
+            format: datetime
+          - attribute: completed_at
+            format: datetime
+      - entity: sensor.github_checkrun_home_assistant_current_install
+        name: current
+        secondary_info:
+          attribute: id
+        type: custom:multiple-entity-row
         entities:
-          - sensor.home_assistant_config
-          - sensor.anniversaries
-          - sensor.opentx_soundpack_joanne
-          - sensor.pinkyleds
-          - sensor.home_assistant
+          - attribute: started_at
+            format: datetime
+          - attribute: completed_at
+            format: datetime
+      - entity: sensor.github_checkrun_home_assistant_latest_release
+        name: latest
+        secondary_info:
+          attribute: id
+        type: custom:multiple-entity-row
+        entities:
+          - attribute: started_at
+            format: datetime
+          - attribute: completed_at
+            format: datetime
+      - entity: sensor.github_checkrun_home_assistant_beta
+        name: beta
+        secondary_info:
+          attribute: id
+        type: custom:multiple-entity-row
+        entities:
+          - attribute: started_at
+            format: datetime
+          - attribute: completed_at
+            format: datetime
+      - entity: sensor.github_checkrun_home_assistant_dev
+        name: dev
+        secondary_info:
+          attribute: id
+        type: custom:multiple-entity-row
+        entities:
+          - attribute: started_at
+            format: datetime
+          - attribute: completed_at
+            format: datetime
+  - type: custom:github-card
+    entities:
+      - sensor.home_assistant_config
+      - sensor.anniversaries
+      - sensor.opentx_soundpack_joanne
+      - sensor.pinkyleds
+      - sensor.home_assistant

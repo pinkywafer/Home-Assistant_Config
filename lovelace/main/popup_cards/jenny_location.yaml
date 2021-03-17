@@ -1,5 +1,3 @@
-deviceID:
-  - this
 title: Jenny
 large: true
 card:
@@ -33,14 +31,14 @@ card:
           refresh_interval: 0
           entities:
             - entity: sensor.jenny_location
-    - break
+    - type: custom:layout-break
     - type: map
       hours_to_show: 10
       dark_mode: false
       default_zoom: 14
       entities:
         - person.jenny_gorton
-    - break
+    - type: custom:layout-break
     - type: 'custom:button-card'
       name: Update Location
       show_icon: false

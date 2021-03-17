@@ -1,51 +1,50 @@
 title: Webcams
 icon: mdi:webcam
 path: webcams
-panel: true
+type: custom:vertical-layout
 cards:
-  - type: custom:layout-card
-    layout: vertical
-    cards:
-      - type: picture-glance
-        camera_image: camera.llyn_ogwen
-        entities: []
-        title: Llyn Ogwen
+  - type: picture-glance
+    camera_image: camera.llyn_ogwen
+    entities: []
+    title: Llyn Ogwen
 
-      - type: picture-glance
-        camera_image: camera.llangollen_river_dee
-        entities: []
-        title: Llangollen
+  - type: picture-glance
+    camera_image: camera.llangollen_river_dee
+    entities: []
+    title: Llangollen
 
-      - break
-      - type: picture-glance
-        camera_image: camera.portmeirion
-        entities: []
-        title: Portmeirion
+  - type: custom:layout-break
 
-      - type: picture-glance
-        camera_image: camera.portmeirion_hotel
-        entities: []
-        title: Portmeirion Hotel
+  - type: picture-glance
+    camera_image: camera.portmeirion
+    entities: []
+    title: Portmeirion
 
-      - break
-      - type: picture-glance
-        camera_image: camera.ffestiniog_railway_tan_y_bwlch
-        entities: []
-        title: Tan Y Bwlch
+  - type: picture-glance
+    camera_image: camera.portmeirion_hotel
+    entities: []
+    title: Portmeirion Hotel
 
-      - type: picture-glance
-        camera_image: camera.the_cob
-        entities: []
-        title: The Cob
+  - type: custom:layout-break
+  
+  - type: picture-glance
+    camera_image: camera.ffestiniog_railway_tan_y_bwlch
+    entities: []
+    title: Tan Y Bwlch
 
-      - break
+  - type: picture-glance
+    camera_image: camera.the_cob
+    entities: []
+    title: The Cob
 
-      - type: picture-glance
-        camera_image: camera.barmouth_bridge
-        entities: []
-        title: Barmouth Bridge
+  - type: custom:layout-break
 
-      - type: picture-glance
-        camera_image: camera.barmouth_point
-        entities: []
-        title: Barmouth Point
+  - type: picture-glance
+    camera_image: camera.barmouth_bridge
+    entities: []
+    title: Barmouth Bridge
+
+  - type: picture-glance
+    camera_image: camera.barmouth_point
+    entities: []
+    title: Barmouth Point
