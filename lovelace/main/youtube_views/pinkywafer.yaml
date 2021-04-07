@@ -4,20 +4,10 @@ card_mod:
     ha-card {
       background: url('https://yt3.ggpht.com/a/AGF-l79aX1u13Z3B-KuO5IvVFqwWWzEO-OWsq5AgHQ=s288-c-k-c0xffffffff-no-rj-mo');
       background-repeat: no-repeat;
-      background-position: 50% 15%;
+      background-position: 40% 15%;
       background-size: 10%;
     }
 entities:
-  - entity: sensor.pinkywafer_info
-    type: custom:multiple-entity-row
-    name: Pinkywafer
-    entities:
-      - attribute: total_views
-        name: Views
-    state_header: Subscribers
-    icon: mdi:youtube
-
   - entity: sensor.pinkywafer
     type: custom:multiple-entity-row
-    name: ''
     state_header: Recent Video

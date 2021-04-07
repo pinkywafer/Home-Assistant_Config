@@ -1,7 +1,3 @@
 sensor:
   - platform: youtube
     channel_id: UCVpankR4HtoAVtYnFDUieYA
-
-  - platform: socialblade
-    name: zefrank1_info
-    channel_id: UCVpankR4HtoAVtYnFDUieYA

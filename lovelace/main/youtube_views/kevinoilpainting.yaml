@@ -4,20 +4,10 @@ card_mod:
     ha-card {
       background: url('https://yt3.ggpht.com/a/AGF-l7_jTe0AUztAl1rIlxrfWbBQEo9_F4AWIrghag=s176-c-k-c0x00ffffff-no-rj-mo');
       background-repeat: no-repeat;
-      background-position: 50% 15%;
+      background-position: 40% 15%;
       background-size: 10%;
     }
 entities:
-  - entity: sensor.kevinoilpainting_info
-    type: custom:multiple-entity-row
-    name: KevinOilPainting
-    entities:
-      - attribute: total_views
-        name: Views
-    state_header: Subscribers
-    icon: mdi:youtube
-
   - entity: sensor.kevinoilpainting
     type: custom:multiple-entity-row
-    name: ''
     state_header: Recent Video

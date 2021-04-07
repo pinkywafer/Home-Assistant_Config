@@ -1,7 +1,3 @@
 sensor:
   - platform: youtube
     channel_id: UC301G8JJFzY0BZ_0lshpKpQ
-
-  - platform: socialblade
-    name: vcloudinfo_info
-    channel_id: UC301G8JJFzY0BZ_0lshpKpQ

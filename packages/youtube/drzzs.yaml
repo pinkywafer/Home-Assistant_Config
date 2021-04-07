@@ -1,7 +1,3 @@
 sensor:
   - platform: youtube
     channel_id: UC7G4tLa4Kt6A9e3hJ-HO8ng
-
-  - platform: socialblade
-    name: drzzs_info
-    channel_id: UC7G4tLa4Kt6A9e3hJ-HO8ng

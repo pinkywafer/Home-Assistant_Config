@@ -1,7 +1,3 @@
 sensor:
   - platform: youtube
     channel_id: UCGvWVUTM8wQ3AfMuS4rXbPQ
-
-  - platform: socialblade
-    name: diocese_of_wrexham_info
-    channel_id: UCGvWVUTM8wQ3AfMuS4rXbPQ
