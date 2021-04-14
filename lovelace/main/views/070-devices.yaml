@@ -70,9 +70,11 @@ cards:
         name: Vestibule
       - entity: binary_sensor.sitting_room_light_shelly1_status
         name: Sitting Room
-      - entity: binary_sensor.cooker_light_sonoff_status
+      - entity: binary_sensor.sitting_room_wall_lights_shelly1_status
+        name: Wall
+      - entity: binary_sensor.cooker_light_shelly1_status
         name: Cooker
-      - entity: binary_sensor.sink_light_sonoff_status
+      - entity: binary_sensor.sink_light_shelly1_status
         name: Sink
       - entity: binary_sensor.bathroom_light_sonoff_status
         name: Bathroom
