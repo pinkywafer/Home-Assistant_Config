@@ -12,6 +12,8 @@ device_tracker.bedroom_speaker:
   icon: mdi:google-assistant
 device_tracker.emma_led:
   icon: mdi:led-strip
+device_tracker.breakfast_bar_led:
+  icon: mdi:led-strip
 device_tracker.emma_s_blackberry_dtek50:
   entity_picture: /local/emma.jpeg
 device_tracker.jenny_s_oppo_reno:
