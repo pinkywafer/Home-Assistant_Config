@@ -10,17 +10,17 @@ automation:
       platform: time
       at: input_datetime.emma_alarm_time
     action:
-      # - service: script.turn_on
-      #   entity_id: script.play_spotify_playlist
-      #   data:
-      #     variables:
-      #       uri: !secret emmas_wake_up_playlist
-      #       account: emma
-      #       random_song: true
-      #       shuffle: true
-      #       repeat: context
-      #       entity_id: media_player.emma_s_room_speaker
-      #       volume_level: 0.5
+      - service: script.turn_on
+        entity_id: script.play_spotify_playlist
+        data:
+          variables:
+            uri: !secret emmas_wake_up_playlist
+            account: emma
+            random_song: true
+            shuffle: true
+            repeat: context
+            entity_id: media_player.emma_s_room_speaker
+            volume_level: 0.5
       - service: light.turn_on
         entity_id:
           - light.emmas_ceiling_light
