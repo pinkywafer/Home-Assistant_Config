@@ -1,0 +1,18 @@
+automation:
+  - id: 'db89df0b-e16e-4000-a409-3ea52acf2a30'
+    alias: Ender3 Notifications
+    mode: queued
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.octoprint_printing
+        from: 'on'
+        to: 'off'
+    action:
+      - service: notify.mobile_app_jenny_s_oppo_reno
+        data:
+          message: 'Ender 3 Finished'
+          title: 3D print finished
+          data:
+            image: !secret ender3_camera_still
+            tag: ender-3
+            color: 'green'
