@@ -23,7 +23,7 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 Lines of yaml code in my configuration (excluding secrets): 6437
 
-Number of entities: 836
+Number of entities: 834
 
 Type | Qty
 -- | --
