@@ -55,8 +55,8 @@ esp32_camera:
   power_down_pin: GPIO26
   resolution: 800x600
   jpeg_quality: 10
-  vertical_flip: false
-  horizontal_mirror: false
+  vertical_flip: true
+  horizontal_mirror: true
   
 switch:
   - platform: restart
