@@ -5,6 +5,8 @@ automation:
       - platform: homeassistant
         event: start
     action:
+      - delay:
+          minutes: 2
       - service: google_assistant.request_sync
         data:
           agent_user_id: !secret user_jenny
