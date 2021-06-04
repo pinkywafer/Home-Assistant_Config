@@ -36,8 +36,8 @@ cards:
             - height: 65px
   - type: conditional
     conditions:
-      - entity: switch.ender3
-        state: 'on'
+      - entity: sensor.octoprint_print_status
+        state_not: 'unavailable'
     card:
       type: vertical-stack
       cards:
@@ -57,8 +57,8 @@ cards:
   - type: custom:layout-break
   - type: conditional
     conditions:
-      - entity: switch.ender3
-        state: 'on'
+      - entity: sensor.octoprint_print_status
+        state_not: 'unavailable'
     card:
       type: horizontal-stack
       cards:
@@ -82,8 +82,8 @@ cards:
           hours_to_show: 4
   - type: conditional
     conditions:
-      - entity: switch.ender3
-        state: 'on'
+      - entity: sensor.octoprint_print_status
+        state_not: 'unavailable'
     card:
       type: vertical-stack
       cards:
@@ -148,19 +148,30 @@ cards:
                 card:
                   - height: 80px
 
-  - type: entities
-    entities:
-      - entity: automation.ender_3_auto_shutdown_when_done
-        title: Shutdown when finished printing
+  - type: conditional
+    conditions:
+      - entity: sensor.octoprint_print_status
+        state_not: 'unknown'
+      - entity: sensor.octoprint_print_status
+        state_not: 'unavailable'
+      - entity: switch.ender3_controls
+        state: 'off'
+    card:
+      type: entities
+      entities:
+        - entity: automation.ender_3_auto_shutdown_when_done
+          name: Shutdown when finished printing
 
   - type: conditional
     conditions:
       - entity: sensor.octoprint_print_status
         state_not: 'unknown'
+      - entity: sensor.octoprint_print_status
+        state_not: 'unavailable'
       - entity: switch.ender3_controls
         state: 'off'
     card:
-      type: entity-button
+      type: button
       entity: switch.ender3_controls
       show_icon: false
       name: Enable Controls
@@ -176,21 +187,21 @@ cards:
       cards:
         - type: horizontal-stack
           cards:
-            - type: entity-button
+            - type: button
               entity: script.ender3_preheat_pla
               show_icon: false
               name: Preheat PLA
               tap_action:
                 action: call-service
                 service: script.ender3_preheat_pla
-            - type: entity-button
+            - type: button
               entity: script.ender3_cooldown
               show_icon: false
               name: Cooldown
               tap_action:
                 action: call-service
                 service: script.ender3_cooldown
-            - type: entity-button
+            - type: button
               entity: script.ender3_preheat_petg
               show_icon: false
               name: Preheat PETG
@@ -199,21 +210,21 @@ cards:
                 service: script.ender3_preheat_petg
         - type: horizontal-stack
           cards:
-            - type: entity-button
+            - type: button
               entity: script.ender3_home
               show_icon: false
               name: Home
               tap_action:
                 action: call-service
                 service: script.ender3_home
-            - type: entity-button
+            - type: button
               entity: script.ender3_level_bed
               show_icon: false
               name: Level Bed
               tap_action:
                 action: call-service
                 service: script.ender3_level_bed
-            - type: entity-button
+            - type: button
               entity: script.ender3_change_filament
               show_icon: false
               name: Change Filament
@@ -227,6 +238,8 @@ cards:
       - entity: sensor.octoprint_print_status
         state_not: 'unknown'
       - entity: sensor.octoprint_print_status
+        state_not: 'unavailable'
+      - entity: sensor.octoprint_print_status
         state_not: 'Cancelling'
       - entity: switch.ender3
         state: 'on'
@@ -235,7 +248,7 @@ cards:
     card:
       type: horizontal-stack
       cards:
-        - type: entity-button
+        - type: button
           entity: script.ender3_cancel_print
           show_icon: false
           name: Cancel
@@ -247,7 +260,7 @@ cards:
             - entity: sensor.octoprint_print_status
               state: 'Printing'
           card:
-            type: entity-button
+            type: button
             entity: script.ender3_pause_print
             show_icon: false
             name: Pause
@@ -259,10 +272,17 @@ cards:
             - entity: sensor.ender3_current_state
               state: 'Paused'
           card:
-            type: entity-button
+            type: button
             entity: script.ender3_resume_print
             show_icon: false
             name: Resume
             tap_action:
               action: call-service
               service: script.ender3_resume_print
+        - type: button
+          entity: script.ender3_change_filament
+          show_icon: false
+          name: Change Filament
+          tap_action:
+            action: call-service
+            service: script.ender3_change_filament
