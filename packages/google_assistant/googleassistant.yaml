@@ -81,6 +81,20 @@ google_assistant:
       expose: true
     light.landing_light:
       expose: true
+    light.left_quail_light:
+      expose: true
+      room: Quail house
+    light.right_quail_light:
+      expose: true
+      room: Quail house
+    binary_sensor.quail_left_door:
+      name: Left Quail door
+      expose: true
+      room: Quail house
+    binary_sensor.quail_right_door:
+      name: Right Quail door
+      expose: true
+      room: Quail house
     switch.pc:
       room: Living Room
       expose: true
