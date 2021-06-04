@@ -1,0 +1,60 @@
+substitutions:
+  ip_address: 192.168.1.43
+  reboot_time: 10min
+  devicename: quail_cage
+  friendly_name: Quail House
+
+packages:
+  wifi: !include common/wifi.yaml
+
+esphome:
+  name: $devicename
+  platform: ESP8266
+  board: d1_mini
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+binary_sensor:
+  - <<: !include common/binary_sensor/status.yaml
+
+  - platform: gpio
+    pin:
+      number: D2
+      mode: INPUT_PULLUP
+      inverted: false
+    name: "Quail Left Door"
+    device_class: door
+
+  - platform: gpio
+    pin:
+      number: D5
+      mode: INPUT_PULLUP
+      inverted: false
+    name: "Quail Right Door"
+    device_class: door
+
+sensor:
+  - <<: !include common/sensor/wifi_signal.yaml
+  - <<: !include common/sensor/uptime.yaml
+
+light:
+  - platform: fastled_clockless
+    chipset: WS2811
+    pin: D8
+    num_leds: 4
+    rgb_order: GRB
+    name: "Left Quail Light"
+    id: led_strip
+
+  - platform: fastled_clockless
+    chipset: WS2811
+    pin: D7
+    num_leds: 4
+    rgb_order: GRB
+    name: "Right Quail Light"
