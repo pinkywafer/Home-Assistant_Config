@@ -3,7 +3,7 @@ garbage_collection:
   - name: General Waste
     # Every 3 weeks
     frequency: "every-n-days"
-    first_date: '2020-01-07'
+    first_date: '2021-07-13'
     period: 21
     verbose_state: true
     icon_normal: mdi:trash-can
