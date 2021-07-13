@@ -8,6 +8,7 @@ esphome:
   name: $devicename
   platform: ESP32
   board: esp-wrover-kit
+  arduino_version: 1.0.2
 
 packages:
   wifi: !include common/wifi.yaml
