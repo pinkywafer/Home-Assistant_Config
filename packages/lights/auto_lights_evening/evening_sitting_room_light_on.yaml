@@ -6,11 +6,16 @@ automation:
         entity_id: light.movie_mode_lights
         state: 'off'
     trigger:
-    - event: sunset
-      offset: '-2:00'
-      platform: sun
+      - event: sunset
+        offset: '-2:00'
+        platform: sun
     action:
-    - service: light.turn_on
-      entity_id:
-        - light.sitting_room_light
-        - light.flame_lantern
+      - service: light.turn_on
+        entity_id:
+          - light.sitting_room_light
+      - condition: numeric_state
+        entity_id: sensor.vestibule_temperature
+        below: 15
+      - service: light.turn_on
+        entity_id:
+          - light.flame_lantern
