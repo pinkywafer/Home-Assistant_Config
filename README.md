@@ -21,16 +21,16 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 6655
+Lines of yaml code in my configuration (excluding secrets): 6660
 
-Number of entities: 875
+Number of entities: 878
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 2
 Automation | 81
-Binary Sensor | 129
+Binary Sensor | 130
 Camera | 14
 Device Tracker | 24
 Group | 1
@@ -42,7 +42,7 @@ Media Player | 22
 Person | 3
 Scene | 1
 Script | 23
-Sensor | 477
+Sensor | 479
 Sun | 1
 Switch | 36
 Weather | 6
@@ -62,12 +62,10 @@ Zone | 4
   - [Afvalinfo](https://github.com/heyajohnny/afvalinfo)
   - [Afvalwijzer](https://github.com/xirixiz/homeassistant-afvalwijzer)
   - [Aimp Media Player](https://github.com/xilense/aimp_custom_component)
-  - [Airly](https://github.com/bieniu/ha-airly)
   - [Alarmdotcom](https://github.com/uvjustin/alarmdotcom)
   - [Alarmo](https://github.com/nielsfaber/alarmo)
   - [Alexa Media Player](https://github.com/custom-components/alexa_media_player)
   - [Amazon Rekognition](https://github.com/robmarkcole/HASS-amazon-rekognition)
-  - [Amber Electric](https://github.com/troykelly/hacs-amberelectric)
   - [Ambilight Yeelight](https://github.com/jomwells/ambilight-yeelight)
   - [Ambilights](https://github.com/jomwells/ambilights)
   - [Amshan](https://github.com/toreamun/amshan-homeassistant)
@@ -160,7 +158,7 @@ Zone | 4
   - [Discord Game](https://github.com/LordBoos/discord_game)
   - [Disk Space](https://github.com/kuchel77/diskspace)
   - [Dobiss](https://github.com/kesteraernoudt/dobiss)
-  - [Dpc Binary Sensor](https://github.com/caiosweet/Home-Assistant-custom-components-DPC-Alert)
+  - [Dpc Sensor](https://github.com/caiosweet/Home-Assistant-custom-components-DPC-Alert)
   - [Drk Blutspende](https://github.com/Bouni/drkblutspende)
   - [Easee Ev Charger](https://github.com/fondberg/easee_hass)
   - [Ebeco Thermostats](https://github.com/joggs/home_assistant_ebeco)
@@ -195,7 +193,6 @@ Zone | 4
   - [Fordpass](https://github.com/itchannel/fordpass-ha)
   - [Fortnite Stats](https://github.com/michaellunzer/Home-Assistant-Custom-Component-Fortnite)
   - [Freebox Player](https://github.com/Pouzor/freebox_player)
-  - [Fritz!Box Tools](https://github.com/mammuth/ha-fritzbox-tools)
   - [Fully Kiosk Browser](https://github.com/cgarwood/homeassistant-fullykiosk)
   - [Fxmarketapi Integration](https://github.com/rob196/home-assistant-fxmarketapi)
   - [Garbage Collection](https://github.com/bruxy70/Garbage-Collection)
@@ -274,7 +271,6 @@ Zone | 4
   - [Homewizard Energy](https://github.com/DCSBL/ha-homewizard-energy)
   - [Hp Printers Integration](https://github.com/elad-bar/ha-hpprinter)
   - [Hubitat](https://github.com/jason0x43/hacs-hubitat)
-  - [Hue Sensor Advanced](https://github.com/robmarkcole/Hue-sensors-HASS)
   - [Hue Service Advanced](https://github.com/Cyr-ius/hass-hue-service-advanced)
   - [Hunter Douglas And Luxaflex Powerview Cover](https://github.com/safepay/cover.hd_powerview)
   - [Husqvarna Automower](https://github.com/Thomas55555/husqvarna_automower)
@@ -336,7 +332,6 @@ Zone | 4
   - [Met Alerts Hungary](https://github.com/amaximus/met_alerts_hu)
   - [Meteo Swiss](https://github.com/websylv/homeassistant-meteoswiss)
   - [Meteoalarm](https://github.com/kodi1/meteoalarm)
-  - [Meteoalarmeu](https://github.com/xlcnd/meteoalarmeu)
   - [Meteobridge Datalogger Integration](https://github.com/briis/meteobridge)
   - [Metlink Wellington Transport](https://github.com/make-all/metlink-nz)
   - [Midea Ac Py](https://github.com/andersonshatch/midea-ac-py)
@@ -398,7 +393,7 @@ Zone | 4
   - [Passive Ble Monitor Integration (Xiaomi Mibeacon And Scale, Qingping, Atc, Kegtron And Thermoplus Sensors)](https://github.com/custom-components/ble_monitor)
   - [Pfsense Gateways Monitoring](https://github.com/nagyrobi/home-assistant-custom-components-pfsense-gateways)
   - [Phicomm Dc1](https://github.com/5high/phicomm-dc1-homeassistant)
-  - [Philips Airpurifier](https://github.com/xMrVizzy/philips-airpurifier)
+  - [Philips Airpurifier](https://github.com/kraineff/philips-airpurifier)
   - [Philips Ambilight+Hue Switch](https://github.com/Mr-Groch/ambihue)
   - [Philips Hue Play Hdmi Sync Box](https://github.com/mvdwetering/huesyncbox)
   - [Pijuice Ups Hat](https://github.com/Racailloux/home-assistant-pijuice)
@@ -530,7 +525,6 @@ Zone | 4
   - [Ultimaker](https://github.com/jellespijker/home-assistant-ultimaker)
   - [Ultrasync Beta](https://github.com/caronc/ha-ultrasync)
   - [Unifi Protect Integration](https://github.com/briis/unifiprotect)
-  - [Universal Devices Isy994](https://github.com/shbatm/hacs-isy994)
   - [Unsplash](https://github.com/custom-components/unsplash)
   - [Uonet+ Vulcan](https://github.com/Antoni-Czaplicki/vulcan-for-hassio)
   - [Uponor Smatrix Pulse](https://github.com/asev/homeassistant-uponor)
@@ -569,7 +563,7 @@ Zone | 4
   - [Winix Purifier](https://github.com/iprak/winix)
   - [Wiserhomeassistantplatform](https://github.com/asantaga/wiserHomeAssistantPlatform)
   - [Worldtidesinfocustom](https://github.com/jugla/worldtidesinfocustom)
-  - [Xantech Multi Zone Audio Amplifier](https://github.com/rsnodgrass/hass-xantech)
+  - [Xantech Multi Zone Audio Amps](https://github.com/rsnodgrass/hass-xantech)
   - [Xiaomi Cloud Map Extractor](https://github.com/PiotrMachowski/Home-Assistant-custom-components-Xiaomi-Cloud-Map-Extractor)
   - [Xiaomi Gateway 3](https://github.com/AlexxIT/XiaomiGateway3)
   - [Xiaomi Ir Climate](https://github.com/Anonym-tsk/homeassistant-climate-xiaomi-remote)
@@ -608,6 +602,7 @@ Zone | 4
   - [Aftership Card](https://github.com/iantrich/aftership-card)
   - [Air Purifier Card](https://github.com/fineemb/lovelace-air-filter-card)
   - [Air Visual Card](https://github.com/dnguyen800/air-visual-card)
+  - [Alarmo Card](https://github.com/nielsfaber/alarmo-card)
   - [Analog Clock](https://github.com/tomasrudh/analogclock)
   - [Apexcharts Card](https://github.com/RomRider/apexcharts-card)
   - [Atomic Calendar](https://github.com/atomic7777/atomic_calendar)
@@ -656,7 +651,6 @@ Zone | 4
   - [Decluttering Card](https://github.com/custom-cards/decluttering-card)
   - [Digital Clock](https://github.com/wassy92x/lovelace-digital-clock)
   - [Dual Gauge Card](https://github.com/custom-cards/dual-gauge-card)
-  - [Dummy Entity Row](https://github.com/thomasloven/lovelace-dummy-entity-row)
   - [Entities Button Group](https://github.com/wassy92x/lovelace-entities-btn-group)
   - [Entity Attributes Card](https://github.com/custom-cards/entity-attributes-card)
   - [Entur Card](https://github.com/jonkristian/entur-card)
@@ -677,7 +671,6 @@ Zone | 4
   - [Fullscreen Card](https://github.com/KTibow/fullscreen-card)
   - [Gallery Card](https://github.com/TarheelGrad1998/gallery-card)
   - [Gaode Map Card](https://github.com/fineemb/lovelace-cn-map-card)
-  - [Gap Card](https://github.com/thomasloven/lovelace-gap-card)
   - [Garbage Collection Card](https://github.com/amaximus/garbage-collection-card)
   - [Gauge Card](https://github.com/custom-cards/gauge-card)
   - [Generic Remote Control Card](https://github.com/dimagoltsman/generic-remote-control-card)
@@ -686,7 +679,6 @@ Zone | 4
   - [Github Flexi Card / Entity Row](https://github.com/maxwroc/github-flexi-card)
   - [Group Card](https://github.com/custom-cards/group-card)
   - [Group Element](https://github.com/custom-cards/group-element)
-  - [Gui Sandbox](https://github.com/thomasloven/lovelace-gui-sandbox)
   - [Ha (Lovelace) Card Waze Travel Time](https://github.com/r-renato/ha-card-waze-travel-time)
   - [Ha (Lovelace) Card Weather Conditions](https://github.com/r-renato/ha-card-weather-conditions)
   - [Ha Dashboard](https://github.com/wassy92x/lovelace-ha-dashboard)
@@ -694,6 +686,7 @@ Zone | 4
   - [Harmony Card](https://github.com/sbryfcz/harmony-card)
   - [Hasl Departure Card](https://github.com/hasl-sensor/lovelace-hasl-departure-card)
   - [Hasl Traffic Status Card](https://github.com/hasl-sensor/lovelace-hasl-traffic-status-card)
+  - [Hass Hue Icons](https://github.com/arallsopp/hass-hue-icons)
   - [Honeycomb Menu](https://github.com/Sian-Lee-SA/honeycomb-menu)
   - [Html Jinja2 Template Card](https://github.com/PiotrMachowski/Home-Assistant-Lovelace-HTML-Jinja2-Template-card)
   - [Hui Element](https://github.com/thomasloven/lovelace-hui-element)
@@ -825,6 +818,7 @@ Zone | 4
   - [Tv Remote Card](https://github.com/marrobHD/tv-card)
   - [Unused Card](https://github.com/custom-cards/unused-card)
   - [Upcoming Media Card](https://github.com/custom-cards/upcoming-media-card)
+  - [Update Time Card](https://github.com/itobey/update-time-card)
   - [Uptime Card](https://github.com/dylandoamaral/uptime-card)
   - [Username Element](https://github.com/custom-cards/username-element)
   - [Vacuum Card](https://github.com/denysdovhan/vacuum-card)
