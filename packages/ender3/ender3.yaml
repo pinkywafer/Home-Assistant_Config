@@ -1,15 +1,15 @@
 switch:
-  platform: template
-  switches:
-    ender3:
-      friendly_name: Ender3
-      value_template: "{{ is_state('switch.3d_printer_psu', 'on') }}"
-      turn_on:
-        service: switch.turn_on
-        data:
-          entity_id: switch.3d_printer_psu
-      turn_off:
-        service: script.ender3_safe_power_down
+  - platform: template
+    switches:
+      ender3:
+        friendly_name: Ender3
+        value_template: "{{ is_state('switch.3d_printer_psu', 'on') }}"
+        turn_on:
+          service: switch.turn_on
+          data:
+            entity_id: switch.3d_printer_psu
+        turn_off:
+          service: script.ender3_safe_power_down
 
 homeassistant:
   customize:
@@ -35,7 +35,7 @@ automation:
         entity_id: switch.ender3_controls
 
 camera:
-  platform: mjpeg
-  name: Ender3
-  still_image_url: !secret ender3_camera_still
-  mjpeg_url: !secret ender3_camera_mjpeg
+  - platform: mjpeg
+    name: Ender3
+    still_image_url: !secret ender3_camera_still
+    mjpeg_url: !secret ender3_camera_mjpeg
