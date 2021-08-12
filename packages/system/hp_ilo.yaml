@@ -1,0 +1,108 @@
+sensor:
+  - platform: hp_ilo
+    host: !secret ilo_host
+    username: !secret ilo_user
+    password: !secret ilo_password
+    monitored_variables:
+      - name: Power
+        sensor_type: server_power_status # Whether the server is powered on or not.
+      - name: Power Current
+        sensor_type: server_power_readings # Get current, min, max and average power readings.
+        value_template: '{{ ilo_data.present_power_reading.0 }}'
+        unit_of_measurement: "W"
+      - name: Power Max
+        sensor_type: server_power_readings # Get current, min, max and average power readings.
+        value_template: '{{ ilo_data.maximum_power_reading.0 }}'
+        unit_of_measurement: "W"
+      - name: Power Min
+        sensor_type: server_power_readings # Get current, min, max and average power readings.
+        value_template: '{{ ilo_data.minimum_power_reading.0 }}'
+        unit_of_measurement: "W"
+      - name: Power Average
+        sensor_type: server_power_readings # Get current, min, max and average power readings.
+        value_template: '{{ ilo_data.average_power_reading.0 }}'
+        unit_of_measurement: "W"
+      - name: power on time
+        unit_of_measurement: min
+        sensor_type: server_power_on_time # How many minutes ago has the server been powered on (Non-resetting counter, akin to hours used).
+      - name: uid Light
+        sensor_type: server_uid_status # Get the status of the UID light.
+      - name: fan 1 speed
+        sensor_type: server_health
+        unit_of_measurement: "%"
+        value_template: '{{ ilo_data.fans["Fan 1"].speed.0 }}'
+      - name: fan 2 speed
+        sensor_type: server_health
+        unit_of_measurement: "%"
+        value_template: '{{ ilo_data.fans["Fan 2"].speed.0 }}'
+      - name: fan 3 speed
+        sensor_type: server_health
+        unit_of_measurement: "%"
+        value_template: '{{ ilo_data.fans["Fan 3"].speed.0 }}'
+      - name: fan 4 speed
+        sensor_type: server_health
+        unit_of_measurement: "%"
+        value_template: '{{ ilo_data.fans["Fan 4"].speed.0 }}'
+      - name: fan 5 speed
+        sensor_type: server_health
+        unit_of_measurement: "%"
+        value_template: '{{ ilo_data.fans["Fan 5"].speed.0 }}'
+      - name: fan 6 speed
+        sensor_type: server_health
+        unit_of_measurement: "%"
+        value_template: '{{ ilo_data.fans["Fan 6"].speed.0 }}'
+      - name: power supplies
+        sensor_type: server_health
+        unit_of_measurement: "%"
+        value_template: '{{ ilo_data.power_supplies }}'
+      - name: Temperature Inlet
+        sensor_type: server_health
+        unit_of_measurement: "°C"
+        value_template: '{{ ilo_data.temperature["01-Front Ambient"].currentreading[0] }}'
+      - name: Temperature Exhaust
+        sensor_type: server_health
+        unit_of_measurement: "°C"
+        value_template: '{{ ilo_data.temperature["48-Sys Exhaust"].currentreading[0] }}'
+      - name: Temperature PS1
+        sensor_type: server_health
+        unit_of_measurement: "°C"
+        value_template: '{{ ilo_data.temperature["15-P/S 1"].currentreading[0] }}'
+      - name: Temperature PS2
+        sensor_type: server_health
+        unit_of_measurement: "°C"
+        value_template: '{{ ilo_data.temperature["16-P/S 2"].currentreading[0] }}'
+      - name: Temperature CPU 1
+        sensor_type: server_health
+        unit_of_measurement: "°C"
+        value_template: '{{ ilo_data.temperature["02-CPU 1"].currentreading[0] }}'
+      - name: Temperature CPU 2
+        sensor_type: server_health
+        unit_of_measurement: "°C"
+        value_template: '{{ ilo_data.temperature["03-CPU 2"].currentreading[0] }}'
+      - name: Health Bios
+        sensor_type: server_health
+        value_template: '{{ ilo_data.health_at_a_glance["bios_hardware"].status }}'
+      - name: Health Fans
+        sensor_type: server_health
+        value_template: '{{ ilo_data.health_at_a_glance["fans"].status }}'
+      - name: Health Memory
+        sensor_type: server_health
+        value_template: '{{ ilo_data.health_at_a_glance["memory"].status }}'
+      - name: Health Network
+        sensor_type: server_health
+        value_template: '{{ ilo_data.health_at_a_glance["network"].status }}'
+      - name: Health Processor
+        sensor_type: server_health
+        value_template: '{{ ilo_data.health_at_a_glance["processor"].status }}'
+      - name: Health Storage
+        sensor_type: server_health
+        value_template: '{{ ilo_data.health_at_a_glance["storage"].status }}'
+      - name: Health Temperature
+        sensor_type: server_health
+        value_template: '{{ ilo_data.health_at_a_glance["temperature"].status }}'
+      - name: Health PS 1
+        sensor_type: server_health
+        value_template: '{{ ilo_data.power_supplies["Power Supply 1"].status }}'
+      - name: Health PS 2
+        sensor_type: server_health
+        value_template: '{{ ilo_data.power_supplies["Power Supply 2"].status }}'
