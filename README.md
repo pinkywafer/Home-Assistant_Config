@@ -21,9 +21,9 @@ I also have containers for file sharing (nas), plex server, and a tuya convert c
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 6803
+Lines of yaml code in my configuration (excluding secrets): 6802
 
-Number of entities: 907
+Number of entities: 874
 
 Type | Qty
 -- | --
@@ -32,17 +32,17 @@ Alert | 2
 Automation | 81
 Binary Sensor | 129
 Camera | 14
-Device Tracker | 29
+Device Tracker | 28
 Group | 1
 Input Boolean | 2
-Input Datetime | 3
+Input Datetime | 4
 Input Text | 4
 Light | 34
-Media Player | 22
+Media Player | 17
 Person | 3
 Scene | 1
 Script | 23
-Sensor | 505
+Sensor | 477
 Sun | 1
 Switch | 36
 Weather | 6
@@ -57,6 +57,7 @@ Zone | 4
   - [Abfall Api (Jumomind)](https://github.com/tuxuser/abfallapi_jumomind_ha)
   - [Abfall Api (Regioit)](https://github.com/tuxuser/abfallapi_regioit_ha)
   - [Acv Garbage Collection Sensor](https://github.com/Cadsters/acv-hass-component)
+  - [Adaptive Lighting](https://github.com/basnijholt/adaptive-lighting)
   - [Adax Heaters](https://github.com/Danielhiversen/home_assistant_adax)
   - [Adt Pulse](https://github.com/rsnodgrass/hass-adtpulse)
   - [Afvalinfo](https://github.com/heyajohnny/afvalinfo)
@@ -66,11 +67,13 @@ Zone | 4
   - [Alarmo](https://github.com/nielsfaber/alarmo)
   - [Alexa Media Player](https://github.com/custom-components/alexa_media_player)
   - [Amazon Rekognition](https://github.com/robmarkcole/HASS-amazon-rekognition)
+  - [Amber Electric](https://github.com/madpilot/hass-amber-electric)
   - [Ambilight Yeelight](https://github.com/jomwells/ambilight-yeelight)
   - [Ambilights](https://github.com/jomwells/ambilights)
   - [Amshan](https://github.com/toreamun/amshan-homeassistant)
   - [Anniversaries](https://github.com/pinkywafer/Anniversaries)
   - [Antistorm Sensor](https://github.com/PiotrMachowski/Home-Assistant-custom-components-Antistorm)
+  - [Argoclima](https://github.com/nyffchanium/argoclima-integration)
   - [Arlo Camera Support](https://github.com/twrecked/hass-aarlo)
   - [Arpscan Device Tracker](https://github.com/cyberjunky/home-assistant-arpscan_tracker)
   - [Astroweather](https://github.com/mawinkler/astroweather)
@@ -95,7 +98,6 @@ Zone | 4
   - [Blitzortung.Org Lightning Detector](https://github.com/mrk-its/homeassistant-blitzortung)
   - [Blueiris Nvr](https://github.com/elad-bar/ha-blueiris)
   - [BMR](https://github.com/slesinger/HomeAssistant-BMR)
-  - [Bom Forecast](https://github.com/DavidFW1960/bom_forecast)
   - [Bonaire Myclimate](https://github.com/bremor/bonaire_myclimate)
   - [Bosch Indego Mower](https://github.com/jm-73/Indego)
   - [Bosch Smart Home Controller (Shc) Integration](https://github.com/tschamm/boschshc-hass)
@@ -137,6 +139,7 @@ Zone | 4
   - [Couchpotato](https://github.com/youdroid/home-assistant-couchpotato)
   - [Cover Time Based Rf (Trigger Script)](https://github.com/nagyrobi/home-assistant-custom-components-cover-rf-time-based)
   - [Cozytouch](https://github.com/Cyr-ius/hass-cozytouch)
+  - [Creasol Dombus](https://github.com/CreasolTech/home-assistant-creasol-dombus)
   - [Crunch O Meter](https://github.com/GuyLewin/home-assistant-crunch-o-meter)
   - [Crypto Tracker](https://github.com/PepegaBruh/CryptoTracker)
   - [Cryptoinfo](https://github.com/heyajohnny/cryptoinfo)
@@ -193,6 +196,7 @@ Zone | 4
   - [Fordpass](https://github.com/itchannel/fordpass-ha)
   - [Fortnite Stats](https://github.com/michaellunzer/Home-Assistant-Custom-Component-Fortnite)
   - [Freebox Player](https://github.com/Pouzor/freebox_player)
+  - [Frigate](https://github.com/blakeblackshear/frigate-hass-integration)
   - [Fully Kiosk Browser](https://github.com/cgarwood/homeassistant-fullykiosk)
   - [Fxmarketapi Integration](https://github.com/rob196/home-assistant-fxmarketapi)
   - [Garbage Collection](https://github.com/bruxy70/Garbage-Collection)
@@ -202,10 +206,8 @@ Zone | 4
   - [Gce Eco Devices](https://github.com/Aohzan/ecodevices)
   - [Gecko](https://github.com/gazoodle/gecko-home-assistant)
   - [Generate Readme](https://github.com/custom-components/readme)
-  - [Generic Hygrostat](https://github.com/avdeevsv91/ha_generic_hygrostat)
   - [Georide Integration](https://github.com/ptimatth/GeorideHA)
   - [Gigaset Elements](https://github.com/dynasticorpheus/gigasetelements-ha)
-  - [GIOŚ](https://github.com/bieniu/ha-gios)
   - [Gismeteo](https://github.com/Limych/ha-gismeteo)
   - [Gitea](https://github.com/youdroid/home-assistant-gitea)
   - [Go Echarger](https://github.com/cathiele/homeassistant-goecharger)
@@ -269,6 +271,7 @@ Zone | 4
   - [Homeassistant Teslacustomcomponent](https://github.com/mlowijs/HomeAssistant-TeslaCustomComponent)
   - [Homeassistant Virgintivo](https://github.com/bertbert72/HomeAssistant_VirginTivo)
   - [Homewizard Energy](https://github.com/DCSBL/ha-homewizard-energy)
+  - [Honor Router 3/X3 Tracker](https://github.com/juacas/honor_x3)
   - [Hp Printers Integration](https://github.com/elad-bar/ha-hpprinter)
   - [Hubitat](https://github.com/jason0x43/hacs-hubitat)
   - [Hue Service Advanced](https://github.com/Cyr-ius/hass-hue-service-advanced)
@@ -293,6 +296,7 @@ Zone | 4
   - [Kaco](https://github.com/KoljaWindeler/kaco)
   - [Kan Program](https://github.com/eyalcha/kan_program)
   - [Keymaster](https://github.com/FutureTense/keymaster)
+  - [Knmi](https://github.com/golles/ha-knmi)
   - [Kodi Media Sensors](https://github.com/jtbgroup/kodi-media-sensors)
   - [Kodi Recently Added Media](https://github.com/boralyl/kodi-recently-added)
   - [Konke](https://github.com/5high/konke)
@@ -303,6 +307,7 @@ Zone | 4
   - [Leaf Spy](https://github.com/jesserockz/ha-leafspy)
   - [Lennox Icomfort Wifi Thermostat Integration](https://github.com/thevoltagesource/LennoxiComfort)
   - [Lg Hombot Vacuum Cleaner](https://github.com/ericpignet/home-assistant-lg_hombot)
+  - [Libratone Zipp](https://github.com/Chouffy/home_assistant_libratone_zipp)
   - [Lightwave Rf](https://github.com/bigbadblunt/homeassistant-lightwave2)
   - [Lightwaverf Ha Energysensor](https://github.com/asantaga/lightwaverf_HA_EnergySensor)
   - [Linkplay Based Speakers And Devices](https://github.com/nagyrobi/home-assistant-custom-components-linkplay)
@@ -334,6 +339,7 @@ Zone | 4
   - [Meteoalarm](https://github.com/kodi1/meteoalarm)
   - [Meteobridge Datalogger Integration](https://github.com/briis/meteobridge)
   - [Metlink Wellington Transport](https://github.com/make-all/metlink-nz)
+  - [Midea A/C Via Ewelink](https://github.com/georgezhao2010/climate_ewelink)
   - [Midea Ac Py](https://github.com/andersonshatch/midea-ac-py)
   - [Midea Smart Aircon](https://github.com/mac-zhou/midea-ac-py)
   - [Miele Integration](https://github.com/HomeAssistant-Mods/home-assistant-miele)
@@ -346,6 +352,8 @@ Zone | 4
   - [Momentary Switch Component](https://github.com/twrecked/hass-momentary)
   - [Moneydashboard](https://github.com/shutupflanders/sensor.moneydashboard)
   - [Monitor Docker](https://github.com/ualex73/monitor_docker)
+  - [Moox Track](https://github.com/moox-it/hass-moox-track)
+  - [Moscow Pgu (Госуслуги Москвы)](https://github.com/alryaz/hass-moscow-pgu)
   - [Mqtt Template Switch](https://github.com/lukich48/hass_mqtt_template_switch)
   - [Multiscrape   A Home Assistant Custom Scraping Component](https://github.com/danieldotnl/ha-multiscrape)
   - [Multizone Controller](https://github.com/Petro31/ha-integration-multizone-controller)
@@ -353,25 +361,31 @@ Zone | 4
   - [Myjdownloader](https://github.com/doudz/homeassistant-myjdownloader)
   - [Mylar Sensor Card](https://github.com/DarkSir23/sensor.mylar)
   - [Narodmon.Ru Cloud Integration](https://github.com/Limych/ha-narodmon)
+  - [Neerslag App](https://github.com/aex351/home-assistant-neerslag-app)
   - [Nespresso Ble Coffee Machine](https://github.com/tikismoke/home-assistant-nespressoble)
+  - [Netgear Wax](https://github.com/rroller/netgear)
   - [Nexia Climate Integration](https://github.com/ryannazaretian/hacs-nexia-climate-integration)
   - [Next Rocket Launch](https://github.com/Verbalinsurection/next_rocket_launch)
   - [Nextbike Integration](https://github.com/syssi/nextbike)
   - [NHL API](https://github.com/JayBlackedOut/hass-nhlapi)
   - [Niko Home Control Ii](https://github.com/filipvh/hass-nhc2)
   - [Nintendo Wishlist](https://github.com/custom-components/sensor.nintendo_wishlist)
+  - [Niu Scooter Integration](https://github.com/marcelwestrahome/home-assistant-niu-component)
   - [Niwa Tides](https://github.com/muxa/home-assistant-niwa-tides)
   - [Nobø Hub / Nobø Energy Control](https://github.com/echoromeo/hanobo)
   - [Node Red Companion](https://github.com/zachowj/hass-node-red)
   - [Noonlight   Alarm Monitoring](https://github.com/konnected-io/noonlight-hass)
   - [Nordpool](https://github.com/custom-components/nordpool)
+  - [Nsw Covid Data](https://github.com/troykelly/homeassistant-au-nsw-covid)
   - [Nsw Rural Fire Service   Fire Danger](https://github.com/exxamalte/home-assistant-custom-components-nsw-rural-fire-service-fire-danger)
   - [Nuvo Multi Zone Amplifier (Serial)](https://github.com/sprocket-9/hacs-nuvo-serial)
   - [Nws Alerts](https://github.com/finity69x2/nws_alerts)
   - [Octopus Agile](https://github.com/markgdev/home-assistant_OctopusAgile)
   - [Office 365 Integration](https://github.com/PTST/O365-HomeAssistant)
   - [Omnik Inverter Solar Sensor (No Cloud)](https://github.com/robbinjanssen/home-assistant-omnik-inverter)
+  - [Open Charge Point Protocol (Ocpp)](https://github.com/lbbrhzn/ocpp)
   - [Open Route Service](https://github.com/eifinger/open_route_service)
+  - [Open Source Routing Machine](https://github.com/edekeijzer/osrm_travel_time)
   - [Openhasp](https://github.com/HASwitchPlate/openHASP-custom-component)
   - [Openmediavault](https://github.com/tomaae/homeassistant-openmediavault)
   - [Openmensa Sensor](https://github.com/Mofeywalker/openmensa-hass-component)
@@ -397,11 +411,11 @@ Zone | 4
   - [Philips Ambilight+Hue Switch](https://github.com/Mr-Groch/ambihue)
   - [Philips Hue Play Hdmi Sync Box](https://github.com/mvdwetering/huesyncbox)
   - [Pijuice Ups Hat](https://github.com/Racailloux/home-assistant-pijuice)
+  - [Pirate Weather](https://github.com/alexander0042/pirate-weather-ha)
   - [Places](https://github.com/custom-components/places)
   - [Plcbus Integration](https://github.com/tikismoke/home-assistant-plcbus)
   - [Plex Assistant](https://github.com/maykar/plex_assistant)
   - [Plugwise](https://github.com/cyberjunky/home-assistant-plugwise)
-  - [Plugwise Usb Stick](https://github.com/brefra/home-assistant-plugwise-stick)
   - [Pollen Information Hungary](https://github.com/amaximus/pollen_hu)
   - [Pool Math (Trouble Free Pool)](https://github.com/rsnodgrass/hass-poolmath)
   - [Popular Times](https://github.com/freakshock88/hass-populartimes)
@@ -492,6 +506,7 @@ Zone | 4
   - [Stadtreinigung Hamburg](https://github.com/custom-components/sensor.stadtreinigung_hamburg)
   - [Steam Wishlist](https://github.com/boralyl/steam-wishlist)
   - [Sunspec](https://github.com/CJNE/ha-sunspec)
+  - [Sureha](https://github.com/benleb/sureha)
   - [Svenska Trygghetslosningar](https://github.com/gjohansson-ST/stl)
   - [Svt Play](https://github.com/lindell/home-assistant-svt-play)
   - [Switchbot Press](https://github.com/cagnulein/switchbot_press)
@@ -505,6 +520,7 @@ Zone | 4
   - [Templatebinarysensor](https://github.com/dlashua/templatebinarysensor)
   - [Teufel Raumfeld](https://github.com/B5r1oJ0A9G/teufel_raumfeld)
   - [Thermal](https://github.com/eyalcha/thermal)
+  - [Thermal Vision](https://github.com/TheRealWaldo/thermal)
   - [Thermiq Mqtt](https://github.com/ThermIQ/thermiq_mqtt-ha)
   - [Tide](https://github.com/Hellowlol/ha-tide)
   - [Toon Boiler Status](https://github.com/cyberjunky/home-assistant-toon_boilerstatus)
@@ -515,6 +531,7 @@ Zone | 4
   - [Trackimo Device Tracker](https://github.com/troykelly/hacs-trackimo)
   - [Tractive](https://github.com/Danielhiversen/home_assistant_tractive)
   - [Trakt](https://github.com/custom-components/sensor.trakt)
+  - [Trakt](https://github.com/dylandoamaral/trakt-integration)
   - [Tryfi Dog Monitor](https://github.com/sbabcock23/hass-tryfi)
   - [Ttn Gateway Sensor](https://github.com/cyberjunky/home-assistant-ttn_gateway)
   - [Tv4 Play](https://github.com/lindell/home-assistant-tv4-play)
@@ -555,6 +572,7 @@ Zone | 4
   - [Weback Cloud Integration](https://github.com/opravdin/weback-hass)
   - [Webrtc Camera](https://github.com/AlexxIT/WebRTC)
   - [Weenect](https://github.com/eifinger/hass-weenect)
+  - [Weight Gurus](https://github.com/jcgoette/weight_gurus_homeassistant)
   - [Weishaupt Wem Portal](https://github.com/erikkastelec/hass-WEM-Portal)
   - [Whatpulse Sensor](https://github.com/SLG/home-assistant-whatpulse)
   - [Wibeee   Abacao](https://github.com/abacao/hass_wibeee)
@@ -563,6 +581,7 @@ Zone | 4
   - [Winix Purifier](https://github.com/iprak/winix)
   - [Wiserhomeassistantplatform](https://github.com/asantaga/wiserHomeAssistantPlatform)
   - [Worldtidesinfocustom](https://github.com/jugla/worldtidesinfocustom)
+  - [Wyze](https://github.com/JoshuaMulliken/ha-wyzeapi)
   - [Xantech Multi Zone Audio Amps](https://github.com/rsnodgrass/hass-xantech)
   - [Xiaomi Cloud Map Extractor](https://github.com/PiotrMachowski/Home-Assistant-custom-components-Xiaomi-Cloud-Map-Extractor)
   - [Xiaomi Gateway 3](https://github.com/AlexxIT/XiaomiGateway3)
@@ -578,6 +597,7 @@ Zone | 4
   - [Xiaomi Miot](https://github.com/ha0y/xiaomi_miot_raw)
   - [Xiaomi Miot Auto](https://github.com/al-one/hass-xiaomi-miot)
   - [Xiaomi Philips Lights Integration](https://github.com/syssi/philipslight)
+  - [Xmr Pool Statistics](https://github.com/hwmland/homeassistant-xmrpool_stat)
   - [Yahoo Finance](https://github.com/iprak/yahoofinance)
   - [Yandex Smart Home](https://github.com/dmitry-k/yandex_smart_home)
   - [Yandex.Station](https://github.com/AlexxIT/YandexStation)
@@ -594,6 +614,8 @@ Zone | 4
   - [Zoom](https://github.com/raman325/ha-zoom-automation)
   - [Zwift Sensors](https://github.com/snicker/zwift_hass)
   - [Żadnego Ale](https://github.com/bieniu/ha-zadnego-ale)
+  - [Личный Кабинет Интер Рао (Энергосбыт)](https://github.com/alryaz/hass-lkcomu-interrao)
+  - [Личный Кабинет Тнс Энерго](https://github.com/alryaz/hass-tns-energo)
   - [⛏️ Minecraft Version](https://github.com/xMrVizzy/minecraft-version)
   - [小米云服务](https://github.com/fineemb/xiaomi-cloud)
   - [彩云天气](https://github.com/fineemb/Colorfulclouds-weather)
