@@ -8,7 +8,7 @@ notify:
       broadcast: true
       user: 'jenny'
 
-  - name: broadcast_from_joey
+  - name: broadcast_from_carmel
     platform: rest
     resource: !secret broadcast_url
     message_param_name: "command"

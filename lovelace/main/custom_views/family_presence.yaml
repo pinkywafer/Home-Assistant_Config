@@ -39,15 +39,15 @@ cards:
             - height: 72px
             - width: 72px
       - type: custom:button-card
-        entity: device_tracker.jo_wifi
-        entity_picture: /local/jo.jpg
+        entity: device_tracker.carmel_wifi
+        entity_picture: /local/carmel.jpg
         show_state: false
         show_entity_picture: true
         show_name: false
         state:
           - operator: ==
             value: not_home
-            entity_picture: /local/jo_away.jpg
+            entity_picture: /local/carmel_away.jpg
         tap_action:
           action: more-info
         styles:

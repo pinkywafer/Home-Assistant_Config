@@ -1,15 +1,15 @@
 input_datetime:
-  collect_jo_time:
+  collect_carmel_time:
     has_date: false
     has_time: true
 
 automation:
   - id: '1602259095621'
-    alias: Collect Jo
+    alias: Collect Carmel
     description: ''
     trigger:
     - platform: time
-      at: input_datetime.collect_jo_time
+      at: input_datetime.collect_carmel_time
     condition:
     - condition: time
       weekday:

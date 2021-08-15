@@ -1,22 +1,22 @@
 automation:
   - id: 'ef09ce68-9d4e-494d-9ee3-29c0952358c2'
-    alias: Jo's Switches
+    alias: Carmel's Switches
     mode: queued
     trigger:
       - platform: state
         entity_id:
-          - binary_sensor.jo_s_blue_switch
-          - binary_sensor.jo_s_green_switch
-          - binary_sensor.jo_s_orange_switch
-          - binary_sensor.jo_s_purple_switch
-          - binary_sensor.jo_s_red_switch
+          - binary_sensor.carmel_s_blue_switch
+          - binary_sensor.carmel_s_green_switch
+          - binary_sensor.carmel_s_orange_switch
+          - binary_sensor.carmel_s_purple_switch
+          - binary_sensor.carmel_s_red_switch
     condition: []
     action:
       - choose:
           - conditions:  # Green Switch On
               - condition: template
                 value_template: >
-                  {{trigger.entity_id == 'binary_sensor.jo_s_green_switch'
+                  {{trigger.entity_id == 'binary_sensor.carmel_s_green_switch'
                   and trigger.to_state.state == 'on'}}
             sequence:
               - service: homeassistant.turn_off
@@ -28,7 +28,7 @@ automation:
           - conditions:  # Red Switch On
               - condition: template
                 value_template: >
-                  {{trigger.entity_id == 'binary_sensor.jo_s_red_switch'
+                  {{trigger.entity_id == 'binary_sensor.carmel_s_red_switch'
                   and trigger.to_state.state == 'on'}}
               - condition: state
                 entity_id: alarm_control_panel.alarm
@@ -38,7 +38,7 @@ automation:
           - conditions:  # Red Switch Off
             - condition: template
               value_template: >
-                {{trigger.entity_id == 'binary_sensor.jo_s_red_switch'
+                {{trigger.entity_id == 'binary_sensor.carmel_s_red_switch'
                 and trigger.to_state.state == 'off'}}
             - condition: state
               entity_id: alarm_control_panel.alarm
@@ -48,7 +48,7 @@ automation:
           - conditions:  # Orange Switch On
             - condition: template
               value_template: >
-                {{trigger.entity_id == 'binary_sensor.jo_s_orange_switch'
+                {{trigger.entity_id == 'binary_sensor.carmel_s_orange_switch'
                 and trigger.to_state.state == 'on'}}
             sequence:
               - service: light.turn_on
@@ -60,7 +60,7 @@ automation:
           - conditions:  # Blue Switch On
             - condition: template
               value_template: >
-                {{trigger.entity_id == 'binary_sensor.jo_s_blue_switch'
+                {{trigger.entity_id == 'binary_sensor.carmel_s_blue_switch'
                 and trigger.to_state.state == 'on'}}
             sequence:
               - service: light.turn_off

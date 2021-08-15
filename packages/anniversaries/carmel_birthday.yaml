@@ -1,24 +1,24 @@
 anniversaries:
   sensors:
-  - name: Jo's Birthday
-    date: !secret jo_birthday
+  - name: Carmel's Birthday
+    date: !secret carmel_birthday
 
 automation:
   - id: '637882ac-7024-465d-b528-e043c0e39726'
-    alias: Jo's Birthday Greeting
+    alias: Carmel's Birthday Greeting
     trigger:
       platform: time
       at: "15:50:00"
     condition:
       - condition: state
-        entity_id: sensor.anniversary_jo_s_birthday
+        entity_id: sensor.anniversary_carmel_s_birthday
         state: '0'
     action:
       - service: notify.mobile_app_jenny_s_oppo_reno
         data:
-          message: "Happy Birthday To Jo!"
+          message: "Happy Birthday To Carmel!"
           data:
             tag: birthday
       - service: notify.broadcast_from_home_assistant
         data:
-          message: "Happy Birthday Jo!"
+          message: "Happy Birthday Carmel!"

@@ -145,7 +145,7 @@ cards:
         entity: light.jos_bedside_light
         show_state: false
         icon: mdi:wall-sconce
-        name: Jo
+        name: Carmel
         tap_action:
           action: toggle
           haptic: light

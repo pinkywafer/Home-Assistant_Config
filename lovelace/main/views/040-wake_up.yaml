@@ -48,10 +48,10 @@ cards:
 
   - type: entities
     entities:
-      - entity: automation.collect_jo
-        name: Collect Jo Alarm
+      - entity: automation.collect_carmel
+        name: Collect Carmel Alarm
       - type: 'custom:time-picker-card'
-        entity: input_datetime.collect_jo_time
+        entity: input_datetime.collect_carmel_time
         hour_mode: 24
         hour_step: 1
         minute_step: 5

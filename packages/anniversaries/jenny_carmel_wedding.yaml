@@ -1,24 +1,24 @@
 anniversaries:
   sensors:
-  - name: Jenny & Jo's Wedding Anniversary
-    date: !secret jenny_jo_wedding
+  - name: Jenny & Carmel's Wedding Anniversary
+    date: !secret jenny_carmel_wedding
 
 automation:
   - id: '3dadebf4-a7a1-49a6-bbf5-5cc751ed4b82'
-    alias: Jenny & Jo's Anniversary Greeting
+    alias: Jenny & Carmel's Anniversary Greeting
     trigger:
       platform: time
       at: "15:50:00"
     condition:
       - condition: state
-        entity_id: sensor.anniversary_jenny_jo_s_wedding_anniversary
+        entity_id: sensor.anniversary_jenny_carmel_s_wedding_anniversary
         state: '0'
     action:
       - service: notify.mobile_app_jenny_s_oppo_reno
         data:
-          message: "Happy Wedding Anniversary Jenny and Jo!"
+          message: "Happy Wedding Anniversary Jenny and Carmel!"
           data:
             tag: birthday
       - service: notify.broadcast_from_home_assistant
         data:
-          message: "Happy Wedding anniversary Jenny and Jo!"
+          message: "Happy Wedding anniversary Jenny and Carmel!"

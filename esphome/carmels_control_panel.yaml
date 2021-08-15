@@ -1,8 +1,8 @@
 substitutions:
   ip_address: 192.168.1.11
   reboot_time: 10min
-  devicename: jos_control_panel
-  friendly_name: Jo's Control Panel
+  devicename: carmels_control_panel
+  friendly_name: Carmel's Control Panel
 
 packages:
   wifi: !include common/wifi.yaml
@@ -30,7 +30,7 @@ binary_sensor:
       number: 23
       mode: INPUT_PULLUP
       inverted: true
-    name: "Jo's Green switch"
+    name: "Carmel's Green switch"
     filters:
       - delayed_on: 10ms
       - delayed_off: 10ms
@@ -40,7 +40,7 @@ binary_sensor:
       number: 22
       mode: INPUT_PULLUP
       inverted: true
-    name: "Jo's Orange switch"
+    name: "Carmel's Orange switch"
     filters:
       - delayed_on: 10ms
       - delayed_off: 10ms
@@ -50,7 +50,7 @@ binary_sensor:
       number: 21
       mode: INPUT_PULLUP
       inverted: true
-    name: "Jo's Red switch"
+    name: "Carmel's Red switch"
     filters:
       - delayed_on: 10ms
       - delayed_off: 10ms
@@ -60,7 +60,7 @@ binary_sensor:
       number: 19
       mode: INPUT_PULLUP
       inverted: true
-    name: "Jo's Blue switch"
+    name: "Carmel's Blue switch"
     filters:
       - delayed_on: 10ms
       - delayed_off: 10ms
@@ -70,7 +70,7 @@ binary_sensor:
       number: 18
       mode: INPUT_PULLUP
       inverted: true
-    name: "Jo's Purple switch"
+    name: "Carmel's Purple switch"
     filters:
       - delayed_on: 10ms
       - delayed_off: 10ms

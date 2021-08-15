@@ -79,6 +79,7 @@ google_assistant:
       expose: true
     light.jos_bedside_light:
       expose: true
+      name: Carmel's Bedside Light
     light.landing_light:
       expose: true
     light.left_quail_light:

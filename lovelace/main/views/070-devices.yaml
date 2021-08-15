@@ -89,7 +89,7 @@ cards:
       - entity: binary_sensor.jennys_bedside_light_sonoff_status
         name: Jenny Bedside
       - entity: binary_sensor.jos_bedside_light_sonoff_status
-        name: Jo Bedside
+        name: Carmel Bedside
   - type: custom:button-card
     name: Mi Temperature Sensor Flasher & Configurator
     show_icon: false
