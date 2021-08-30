@@ -32,7 +32,7 @@ cards:
   - type: picture-glance
     title: ChickenCam
     entities:
-      - binary_sensor.chickencam
+      - binary_sensor.chickencam_motion
       - entity: light.vestibule_light
         icon: mdi:mailbox
       - entity: light.sitting_room_light

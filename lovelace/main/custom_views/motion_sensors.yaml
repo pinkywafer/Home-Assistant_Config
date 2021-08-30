@@ -111,7 +111,7 @@ cards:
           name:
             - font-size: 14px
       - type: custom:button-card
-        entity: binary_sensor.chickencam
+        entity: binary_sensor.chickencam_motion
         name: Chickens
         show_state: false
         icon: mdi:walk
