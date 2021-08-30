@@ -53,12 +53,12 @@ Zone | {{ states.zone | count }}
 ## HACS installed components
 
 ### Integrations
-{%- for component in hacs_components | selectattr('category', 'equalto', 'integration') | sort(attribute='name') %}
+{%- for component in hacs_components | selectattr('category', 'equalto', 'integration') | selectattr('installed', 'equalto', True) | sort(attribute='name') %}
   - [{{component.name}}]({{component.documentation}})
 {%- endfor %}
 
 ### Lovelace
-{%- for component in hacs_components | selectattr('category', 'equalto', 'plugin') | sort(attribute='name') %}
+{%- for component in hacs_components | selectattr('category', 'equalto', 'plugin') | selectattr('installed', 'equalto', True) | sort(attribute='name') %}
   - [{{component.name}}]({{component.documentation}})
 {%- endfor %}
 
