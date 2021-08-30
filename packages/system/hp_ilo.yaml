@@ -8,19 +8,19 @@ sensor:
         sensor_type: server_power_status # Whether the server is powered on or not.
       - name: Power Current
         sensor_type: server_power_readings # Get current, min, max and average power readings.
-        value_template: '{{ ilo_data.present_power_reading.0 }}'
+        value_template: '{{ ilo_data.present_power_reading.0 | int}}'
         unit_of_measurement: "W"
       - name: Power Max
         sensor_type: server_power_readings # Get current, min, max and average power readings.
-        value_template: '{{ ilo_data.maximum_power_reading.0 }}'
+        value_template: '{{ ilo_data.maximum_power_reading.0 | int }}'
         unit_of_measurement: "W"
       - name: Power Min
         sensor_type: server_power_readings # Get current, min, max and average power readings.
-        value_template: '{{ ilo_data.minimum_power_reading.0 }}'
+        value_template: '{{ ilo_data.minimum_power_reading.0 | int }}'
         unit_of_measurement: "W"
       - name: Power Average
         sensor_type: server_power_readings # Get current, min, max and average power readings.
-        value_template: '{{ ilo_data.average_power_reading.0 }}'
+        value_template: '{{ ilo_data.average_power_reading.0 | int}}'
         unit_of_measurement: "W"
       - name: power on time
         unit_of_measurement: min
