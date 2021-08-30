@@ -1,13 +1,13 @@
 switch:
-  platform: wake_on_lan
-  name: "PC"
-  mac: !secret pc_mac
-  host: !secret pc_ip
-  turn_off:
-    service: mqtt.publish
-    data:
-      topic: "iotlink/workgroup/mediacenter/commands/shutdown"
-      payload: ""
+  - platform: wake_on_lan
+    name: "PC"
+    mac: !secret pc_mac
+    host: !secret pc_ip
+    turn_off:
+      service: mqtt.publish
+      data:
+        topic: "iotlink/workgroup/mediacenter/commands/shutdown"
+        payload: ""
 
 script:
   pc_suspend:
