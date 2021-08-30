@@ -4,7 +4,7 @@ input_datetime:
     has_time: true
 
 automation:
-  - id: '1602259095621'
+  - id: '123f0ad4-1b31-4080-bf7f-ea6ba4182c1a'
     alias: Collect Carmel
     description: ''
     trigger:
