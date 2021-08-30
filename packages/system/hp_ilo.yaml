@@ -110,3 +110,9 @@ sensor:
       - name: Health PS 2
         sensor_type: server_health
         value_template: '{{ ilo_data.power_supplies["Power Supply 2"].status }}'
+
+  - platform: integration
+    source: sensor.hp_ilo_power_current
+    name: Server energy use
+    unit_prefix: k
+    round: 2
