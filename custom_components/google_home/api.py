@@ -92,6 +92,7 @@ class GlocaltokensApiClient:
             google_devices = await self.hass.async_add_executor_job(_get_google_devices)
             self.google_devices = [
                 GoogleHomeDevice(
+                    device_id=device.device_id,
                     name=device.device_name,
                     auth_token=device.local_auth_token,
                     ip_address=device.ip_address,
@@ -293,7 +294,10 @@ class GlocaltokensApiClient:
                 device.set_do_not_disturb(enabled)
             else:
                 _LOGGER.debug(
-                    "Response not expected from Google Home device %s - %s",
+                    (
+                        "Unexpected response from Google Home device '%s' "
+                        "when fetching DND status - %s"
+                    ),
                     device.name,
                     response,
                 )
@@ -331,7 +335,7 @@ class GlocaltokensApiClient:
             polling=polling,
         )
         if response:
-            if JSON_NOTIFICATIONS_ENABLED in response:
+            if JSON_ALARM_VOLUME in response:
                 volume_raw = str(response[JSON_ALARM_VOLUME])
                 loaded_volume = float(volume_raw)
                 _LOGGER.debug(
@@ -344,7 +348,10 @@ class GlocaltokensApiClient:
                 device.set_alarm_volume(loaded_volume)
             else:
                 _LOGGER.debug(
-                    "Response not expected from Google Home device %s - %s",
+                    (
+                        "Unexpected response from Google Home device '%s' "
+                        "when fetching alarm volume setting - %s"
+                    ),
                     device.name,
                     response,
                 )
