@@ -7,16 +7,15 @@
 [![Buy me a coffee][bmc-shield]][bmc]
 
 This is my live Home Assistant config. 
-It runs on an [XCY X30 Intel i7 4500U from banggood](https://www.banggood.com/XCY-X30-Mini-PC-Intel-Core-I7-4500U-Barebone-1_8GHz-Intel-HD-Graphics-4200-Windows-10-Dual-Core-Fanless-Mini-Desktop-PC-HDMI-VGA-WiFi-Nettop-HTPC-p-1479424.html)
+It has recently migrated to my HP Proliant server.
 Proxmox is installed on bare metal,  then this (production) Home Assistant runs in a VM.
 A separate VM provides my Dev. env
+Various other VMs and LXCs are providing other services such as Plex server, NAS etc on this same machine
 
 This repo is checked using Github Actions for continuous integration.
   * The config is first checked with yamllint and remarklint.
   * The config is validated against the currently installed version of Home Assistant, the latest release of Home Assistant, the latest beta release of Home Assistant and the Latest Home Assistant Dev branch.
   * ESPHome yaml is also validated against the latest version of ESPHome
-
-I also have containers for file sharing (nas), plex server, and a tuya convert container.
 
 ***
 
