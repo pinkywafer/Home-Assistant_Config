@@ -79,6 +79,10 @@ sensor:
         sensor_type: server_health
         unit_of_measurement: "°C"
         value_template: '{{ ilo_data.temperature["03-CPU 2"].currentreading[0] }}'
+      - name: Temperature Raid Card
+        sensor_type: server_health
+        unit_of_measurement: "°C"
+        value_template: '{{ ilo_data.temperature["30-PCI 2"].currentreading[0] }}'
       - name: Health Bios
         sensor_type: server_health
         value_template: '{{ ilo_data.health_at_a_glance["bios_hardware"].status }}'
