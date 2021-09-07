@@ -51,10 +51,6 @@ sensor:
         sensor_type: server_health
         unit_of_measurement: "%"
         value_template: '{{ ilo_data.fans["Fan 6"].speed.0 }}'
-      - name: power supplies
-        sensor_type: server_health
-        unit_of_measurement: "%"
-        value_template: '{{ ilo_data.power_supplies }}'
       - name: Temperature Inlet
         sensor_type: server_health
         unit_of_measurement: "°C"
@@ -116,3 +112,6 @@ sensor:
     name: Server energy use
     unit_prefix: k
     round: 2
+
+shell_command:
+  hp_ilo_set_fan: ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no homeassistant@192.168.1.245 fan pid 29 lo 3500
