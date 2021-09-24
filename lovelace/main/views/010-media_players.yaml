@@ -68,6 +68,8 @@ cards:
 
   - type: custom:layout-break
 
+  - !include ../custom_views/sitting_room_amp.yaml
+
   - type: custom:mini-media-player
     entity: media_player.plex_jennys_phone
     icon: mdi:plex
