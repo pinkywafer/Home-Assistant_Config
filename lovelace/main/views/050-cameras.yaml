@@ -48,6 +48,6 @@ cards:
         icon: mdi:bowl
       - binary_sensor.kitchen_sensor_pir
       - switch.kitchen_sensor_restart
-      - entity: group.kitchen_sockets
+      - entity: group.kitchen_appliances
         icon: mdi:power-socket-uk
     camera_image: camera.kitchen_sensor_camera
