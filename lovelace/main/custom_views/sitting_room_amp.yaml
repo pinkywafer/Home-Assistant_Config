@@ -40,7 +40,6 @@ cards:
           - type: custom:button-card
             label: Treble
             show_label: true
-          
           - type: custom:slider-entity-row
             entity: input_number.sitting_room_amp_treb
             name: Treble

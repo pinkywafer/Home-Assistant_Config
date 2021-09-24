@@ -104,7 +104,7 @@ script:
       - service: input_select.set_options
         data:
           entity_id: input_select.sitting_room_amp_input_source
-          options: 
+          options:
             - '{{states("input_text.sitting_room_amp_sourcename_a")}}'
             - '{{states("input_text.sitting_room_amp_sourcename_b")}}'
             - '{{states("input_text.sitting_room_amp_sourcename_c")}}'
@@ -123,15 +123,13 @@ script:
                 input: '{{"abcd"[repeat.index-1]}}'
       - service: shell_command.sitting_room_amp_get_info
 
-
-
 automation:
   - id: 'ba72365c-241b-4c19-9bb7-5cbc1239a49f'
     alias: Sitting Room Amp Set States
     mode: queued
     trigger:
     - platform: state
-      entity_id: 
+      entity_id:
         - input_number.sitting_room_amp_volume
         - input_number.sitting_room_amp_bass
         - input_number.sitting_room_amp_treb
@@ -200,7 +198,7 @@ automation:
               - repeat:
                   count: 4
                   sequence:
-                    - choose: 
+                    - choose:
                         - conditions: '{{states("input_select.sitting_room_amp_input_source") == states.input_select.sitting_room_amp_input_source.attributes.options[repeat.index-1]}}'
                           sequence:
                             - service: shell_command.sitting_room_amp_set_select
@@ -273,7 +271,7 @@ automation:
               - repeat:
                   count: 4
                   sequence:
-                    - choose: 
+                    - choose:
                         - conditions: '{{trigger.to_state.state[7:] == "ABCD"[repeat.index-1]}}'
                           sequence:
                             - service: input_select.select_option
@@ -297,7 +295,7 @@ automation:
               - service: input_select.set_options
                 data:
                   entity_id: input_select.sitting_room_amp_input_source
-                  options: 
+                  options:
                     - '{{states("input_text.sitting_room_amp_sourcename_a")}}'
                     - '{{states("input_text.sitting_room_amp_sourcename_b")}}'
                     - '{{states("input_text.sitting_room_amp_sourcename_c")}}'
