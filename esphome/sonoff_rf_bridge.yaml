@@ -280,7 +280,7 @@ remote_receiver:
           id(front_door).publish_state(true);
         }
         if (x.code == 3338254){
-          id(front_door).publish_state(true);
+          id(front_door).publish_state(false);
         }
         if (x.code == 3338246){
           id(front_door_bat).publish_state(true);
