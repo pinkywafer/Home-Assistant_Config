@@ -20,30 +20,30 @@ This repo is checked using Github Actions for continuous integration.
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 6605
+Lines of yaml code in my configuration (excluding secrets): 7057
 
-Number of entities: 878
+Number of entities: 922
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 2
-Automation | 81
-Binary Sensor | 124
+Automation | 85
+Binary Sensor | 132
 Camera | 14
-Device Tracker | 12
+Device Tracker | 17
 Group | 1
-Input Boolean | 2
+Input Boolean | 3
 Input Datetime | 3
-Input Text | 4
+Input Text | 8
 Light | 31
-Media Player | 15
+Media Player | 18
 Person | 3
 Scene | 1
-Script | 23
-Sensor | 505
+Script | 25
+Sensor | 511
 Sun | 1
-Switch | 39
+Switch | 40
 Weather | 6
 Zone | 4
 
@@ -72,6 +72,7 @@ Zone | 4
   - [Card Mod](https://github.com/thomasloven/lovelace-card-mod)
   - [Card Tools](https://github.com/thomasloven/lovelace-card-tools)
   - [Entity Attributes Card](https://github.com/custom-cards/entity-attributes-card)
+  - [Fold Entity Row](https://github.com/thomasloven/lovelace-fold-entity-row)
   - [Github Card](https://github.com/ljmerza/github-card)
   - [Layout Card](https://github.com/thomasloven/lovelace-layout-card)
   - [Lovelace Card Preloader](https://github.com/gadgetchnnel/lovelace-card-preloader)
@@ -79,6 +80,7 @@ Zone | 4
   - [Mini Media Player](https://github.com/kalkih/mini-media-player)
   - [Multiple Entity Row](https://github.com/benct/lovelace-multiple-entity-row)
   - [Simple Weather Card](https://github.com/kalkih/simple-weather-card)
+  - [Slider Entity Row](https://github.com/thomasloven/lovelace-slider-entity-row)
   - [Time Picker Card](https://github.com/GeorgeSG/lovelace-time-picker-card)
 
 ***
