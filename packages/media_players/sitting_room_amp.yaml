@@ -167,15 +167,15 @@ automation:
                       {{trigger.to_state.state | int}}
                     {% endif %}
           - alias: Set Input Gain
-            conditions: '{{trigger.entity_id[:23] == "input_number.sitting_room_amp_ipgain"}}'
+            conditions: '{{trigger.entity_id[:36] == "input_number.sitting_room_amp_ipgain"}}'
             sequence:
               - service: shell_command.sitting_room_amp_set_ipgain
                 data_template:
-                  input: '{{trigger.entity_id[24:]}}'
+                  input: '{{trigger.entity_id[37:]}}'
                   value: '{{trigger.to_state.state | int}}'
               - service: shell_command.sitting_room_amp_get_ipgain
                 data_template:
-                  input: '{{trigger.entity_id[24:]}}'
+                  input: '{{trigger.entity_id[37:]}}'
           - alias: Set Bass
             conditions: '{{trigger.entity_id == "input_number.sitting_room_amp_bass"}}'
             sequence:
