@@ -3,6 +3,7 @@ sensor:
     host: !secret ilo_host
     username: !secret ilo_user
     password: !secret ilo_password
+    scan_interval: 60
     monitored_variables:
       - name: Power
         sensor_type: server_power_status  # Whether the server is powered on or not.
