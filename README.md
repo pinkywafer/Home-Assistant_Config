@@ -20,31 +20,31 @@ This repo is checked using Github Actions for continuous integration.
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 7057
+Lines of yaml code in my configuration (excluding secrets): 7555
 
-Number of entities: 922
+Number of entities: 770
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 2
 Automation | 85
-Binary Sensor | 132
+Binary Sensor | 129
 Camera | 14
-Device Tracker | 17
+Device Tracker | 18
 Group | 1
 Input Boolean | 3
 Input Datetime | 3
 Input Text | 8
-Light | 31
-Media Player | 18
+Light | 28
+Media Player | 19
 Person | 3
 Scene | 1
-Script | 25
-Sensor | 511
+Script | 26
+Sensor | 367
 Sun | 1
-Switch | 40
-Weather | 6
+Switch | 41
+Weather | 1
 Zone | 4
 
 ***
@@ -54,7 +54,6 @@ Zone | 4
 ### Integrations
   - [Anniversaries](https://github.com/pinkywafer/Anniversaries)
   - [Authenticated](https://github.com/custom-components/authenticated)
-  - [Blitzortung.Org Lightning Detector](https://github.com/mrk-its/homeassistant-blitzortung)
   - [Breaking Changes](https://github.com/custom-components/breaking_changes)
   - [Browser Mod](https://github.com/thomasloven/hass-browser_mod)
   - [Calendarific](https://github.com/pinkywafer/Calendarific)
