@@ -24,6 +24,17 @@ cards:
           name:
             - font-size: 14px
       - type: custom:button-card
+        entity: switch.sitting_room_amp
+        name: Amp
+        tap_action:
+          action: toggle
+          haptic: light
+        styles:
+          card:
+            - height: 60px
+          name:
+            - font-size: 14px
+      - type: custom:button-card
         entity: switch.ender3
         tap_action:
           action: toggle
