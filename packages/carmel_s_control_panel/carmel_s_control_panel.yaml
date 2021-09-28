@@ -16,7 +16,7 @@ automation:
           - conditions:  # Green Switch On
               - condition: template
                 value_template: >
-                  {{trigger.entity_id == 'binary_sensor.carmel_s_green_switch'
+                  {{trigger.entity_id == 'binary_sensor.carmel_s_purple_switch'
                   and trigger.to_state.state == 'on'}}
             sequence:
               - service: homeassistant.turn_off
