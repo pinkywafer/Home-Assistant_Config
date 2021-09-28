@@ -1,9 +1,56 @@
 switch:
-  - platform: command_line
+  - platform: template
     switches:
       sitting_room_tv:
-        command_on: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no pi@192.168.1.203 'echo on 0 | cec-client -s -d 1'"
-        command_off: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no pi@192.168.1.203 'echo standby 0 | cec-client -s -d 1'"
-        command_state: "tvstatus() { local RESULTS; RESULTS=$(ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no pi@192.168.1.203 \"echo pow 0 | cec-client -s -d 1 | grep -q 'power status: on'\"); echo $?; }; tvstatus"
-        value_template: '{{ value == "0" }}'
+        turn_on:
+          - condition: template
+            value_template: '{{is_state("switch.sitting_room_tv","off")}}'
+          - service: esphome.ir_blaster_blast_lg
+            data:
+              blast_data: 16625743
+              blast_nbits: 32
+          - service: script.turn_on
+            data:
+              entity_id: script.ping_sitting_room_tv
+        turn_off:
+          - condition: template
+            value_template: '{{is_state("switch.sitting_room_tv","on")}}'
+          - service: esphome.ir_blaster_blast_lg
+            data:
+              blast_data: 16625743
+              blast_nbits: 32
+          - service: script.turn_on
+            data:
+              entity_id: script.ping_sitting_room_tv
+        value_template: >-
+          {{ is_state("binary_sensor.sitting_room_tv_ethernet_ping", "on") or 
+          is_state("binary_sensor.sitting_room_tv_wifi_ping","on") }}
         friendly_name: TV
+
+script:
+  ping_sitting_room_tv:
+    mode: restart
+    sequence:
+      repeat:
+        count: 20
+        sequence:
+          - delay:
+              milliseconds: 500
+          - service: homeassistant.update_entity
+            target:
+              entity_id: 
+                - binary_sensor.sitting_room_tv_ethernet_ping
+                - binary_sensor.sitting_room_tv_wifi_ping
+
+binary_sensor:
+  - platform: ping
+    name: Sitting Room TV Ethernet Ping
+    host: !secret sitting_room_tv_ethernet_ip
+    scan_interval: 30
+    count: 2
+
+  - platform: ping
+    name: Sitting Room TV WiFi Ping
+    host: !secret sitting_room_tv_wifi_ip
+    scan_interval: 30
+    count: 2
