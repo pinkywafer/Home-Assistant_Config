@@ -1,0 +1,49 @@
+substitutions:
+  ip_address: 192.168.1.98
+  reboot_time: 10min
+  devicename: ir-blaster
+  friendly_name: IR Blaster
+
+packages:
+  wifi: !include common/wifi.yaml
+
+esphome:
+  name: $devicename
+  platform: ESP32
+  board: esp32dev
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  services:
+    - service: blast_lg
+      variables:
+        blast_data: int
+        blast_nbits: int
+      then:
+        - remote_transmitter.transmit_lg:
+            data:  !lambda 'return blast_data;'
+            nbits:  !lambda 'return blast_nbits;'
+
+ota:
+
+remote_receiver:
+  pin: 
+    number: GPIO32
+    inverted: True
+    mode: INPUT_PULLUP
+  dump: all
+  idle: 25ms
+
+
+remote_transmitter:
+  pin: 
+    number: GPIO27
+  carrier_duty_percent: 40%
+
+switch:
+  - platform: gpio
+    pin: 25
+    name: receiver
