@@ -2,6 +2,7 @@ binary_sensor:
   - platform: ping
     host: !secret chickencam_ip
     scan_interval: 60
+    name: Chickencam Ping
 
   - platform: mqtt
     name: chickencam Motion
@@ -13,7 +14,7 @@ automation:
     alias: Chickencam Offline warning
     trigger:
       - platform: state
-        entity_id: binary_sensor.ping_192_168_1_232
+        entity_id: binary_sensor.chickencam_ping
     condition:
       - condition: template
         value_template: "{{ trigger.to_state.state != trigger.from_state.state }}"
@@ -21,7 +22,7 @@ automation:
       choose:
         - conditions:
             - condition: state
-              entity_id: binary_sensor.ping_192_168_1_232
+              entity_id: binary_sensor.chickencam_ping
               state: 'off'
           sequence:
             - service: notify.broadcast_from_home_assistant
