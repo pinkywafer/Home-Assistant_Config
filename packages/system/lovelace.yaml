@@ -10,6 +10,13 @@ lovelace:
       icon: mdi:paw
       show_in_sidebar: true
       require_admin: false
+    lovelace-remote:
+      mode: yaml
+      filename: lovelace/remotes/remotes.yaml
+      title: Remotes
+      icon: mdi:remote
+      show_in_sidebar: true
+      require_admin: false
     lovelace-generated:
       mode: yaml
       filename: notexist.yaml
