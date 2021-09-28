@@ -11,9 +11,10 @@
   condition: []
   action:
   - data:
-      message: '{{ ["Carmel, it''s time for your tablet",  "Don''t forget to take your
-        tablet, Carmel", "Carmel, if you haven''t already taken your tablet, its time to take
-        it now", "Remember to take your tablet, Carmel" ] | random }}'
+      message: '{{ ["Carmel, it''s time for your tablet",  "Don''t forget to take
+        your tablet, Carmel", "Carmel, if you haven''t already taken your tablet,
+        its time to take it now", "Remember to take your tablet, Carmel" ] | random
+        }}'
     service: notify.broadcast_from_home_assistant
 - id: '1601999861619'
   alias: Emma Chore reminder
@@ -40,4 +41,30 @@
       title: Hi There, it's recycling day!
       data:
         channel: alarm_stream
+  mode: single
+- id: '1621126851304'
+  alias: upstairs warning
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.upstairs_motion
+    to: 'on'
+  condition: []
+  action:
+  - service: notify.mobile_app_jenny_s_oppo_reno
+    data:
+      message: Movement on landing
+      title: Upstairs motion detected
+  mode: single
+- id: '1631486733542'
+  alias: turn on pc in am
+  description: ''
+  trigger:
+  - platform: time
+    at: 07:30
+  condition: []
+  action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.pc
   mode: single
