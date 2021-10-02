@@ -28,16 +28,26 @@ cards:
         color: yellow
   - type: glance
     entities:
-      - entity: binary_sensor.server_home_assistant_running
+      - entity: binary_sensor.gortonserver_pfsense_running
+        name: PfSense
+      - entity: binary_sensor.gortonserver_unbound_running
+        name: Unbound DNS Server
+      - entity: binary_sensor.gortonserver_home_assistant_running
         name: Home Assistant
-      - entity: binary_sensor.server_dev_hass_running
+      - entity: binary_sensor.gortonserver_dev_hass_running
         name: Dev-Hass
-      - entity: binary_sensor.server_plex_running
+      - entity: binary_sensor.gortonserver_plex_running
         name: Plex
-      - entity: binary_sensor.server_fileserver_running
+      - entity: binary_sensor.gortonserver_fileserver_running
         name: Fileserver
-      - entity: binary_sensor.server_tuya_convert_running
-        name: Tuya Convert
+      - entity: binary_sensor.gortonserver_nextcloud_running
+        name: Nextcloud Server
+      - entity: binary_sensor.gortonserver_flightradar24_running
+        name: Flightradar24 Server
+      - entity: binary_sensor.gortonserver_minecraft_running
+        name: Minecraft Server
+      - entity: binary_sensor.gortonserver_ubuntudesktop_running
+        name: Ubuntu Destop
     title: Proxmox
     show_name: true
     show_icon: true
