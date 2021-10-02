@@ -23,7 +23,7 @@ switch:
             data:
               entity_id: script.ping_sitting_room_tv
         value_template: >-
-          {{ is_state("binary_sensor.sitting_room_tv_ethernet_ping", "on") or 
+          {{ is_state("binary_sensor.sitting_room_tv_ethernet_ping", "on") or
           is_state("binary_sensor.sitting_room_tv_wifi_ping","on") }}
         friendly_name: TV
 
@@ -38,7 +38,7 @@ script:
               milliseconds: 500
           - service: homeassistant.update_entity
             target:
-              entity_id: 
+              entity_id:
                 - binary_sensor.sitting_room_tv_ethernet_ping
                 - binary_sensor.sitting_room_tv_wifi_ping
 
