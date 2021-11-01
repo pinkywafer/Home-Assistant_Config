@@ -7,14 +7,15 @@ proxmoxve:
     nodes:
       - node: !secret proxmox_node
         vms:
-          - 103
-          - 104
           - 105
           - 108
         containers:
           - 100
           - 101
           - 102
+          - 103
           - 106
           - 107
           - 109
+          - 110
+
