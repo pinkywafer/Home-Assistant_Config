@@ -114,5 +114,10 @@ sensor:
     unit_prefix: k
     round: 2
 
+homeassistant:
+  customize:
+    sensor.server_energy_use:
+      device_class: energy
+
 shell_command:
   hp_ilo_set_fan: ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no homeassistant@192.168.1.245 fan pid 29 lo 3500
