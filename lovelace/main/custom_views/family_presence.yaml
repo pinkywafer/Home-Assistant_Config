@@ -39,7 +39,7 @@ cards:
             - height: 72px
             - width: 72px
       - type: custom:button-card
-        entity: device_tracker.carmel_wifi
+        entity: person.carmel_gorton
         entity_picture: /local/carmel.jpg
         show_state: false
         show_entity_picture: true
