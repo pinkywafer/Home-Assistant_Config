@@ -10,6 +10,7 @@ esphome:
   name: $devicename
   platform: ESP32
   board: esp-wrover-kit
+  arduino_version: 1.0.5
   on_loop:
     then:
       if:
@@ -53,7 +54,6 @@ binary_sensor:
   - platform: gpio
     pin:
       number: GPIO34
-      mode: INPUT_PULLUP
       inverted: True
     name: $friendly_name Button
     id: button
@@ -82,6 +82,7 @@ esp32_camera:
   jpeg_quality: 10
   vertical_flip: false
   horizontal_mirror: false
+  brightness: 1
   
 i2c:
   sda: GPIO21
@@ -104,7 +105,7 @@ text_sensor:
     entity_id: $line1_input_text
     internal: true
     id: line1
-    
+
   - platform: homeassistant
     entity_id: $line2_input_text
     internal: true
