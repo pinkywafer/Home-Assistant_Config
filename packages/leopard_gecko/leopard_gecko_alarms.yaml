@@ -1,51 +1,55 @@
-binary_sensor:
-  - platform: template
-    sensors:
-      leopard_gecko_temperature_problem:
-        value_template: >
-          {{
-            states('sensor.leopard_gecko_hide_temperature') != 'unavailable'
-            and (
-              states('sensor.leopard_gecko_hide_temperature')|float > 32
-              or states('sensor.leopard_gecko_hide_temperature')|float < 14)
-          or
-            states('sensor.leopard_gecko_background_temperature') != 'unavailable'
-            and (
-            states('sensor.leopard_gecko_background_temperature')|float > 32
-            or states('sensor.leopard_gecko_background_temperature')|float < 14)
-          or
-            states('sensor.leopard_gecko_temperature') != 'unavailable'
-            and states('sensor.leopard_gecko_temperature') != 'unknown'
-            and (
-              states('sensor.leopard_gecko_temperature')|float > 32
-              or states('sensor.leopard_gecko_temperature')|float < 14)
-          or
-            states('sensor.leopard_gecko_thermostat_internal_temperature') != 'unavailable'
-            and (
-              states('sensor.leopard_gecko_thermostat_internal_temperature')|float > 40)
-          }}
+template:
+  - binary_sensor:
+    - name: leopard gecko temperature problem
+      state: >
+        {{
+          states('sensor.leopard_gecko_hide_temperature') != 'unavailable'
+          and (
+            states('sensor.leopard_gecko_hide_temperature')|float > 32
+            or states('sensor.leopard_gecko_hide_temperature')|float < 14)
+        or
+          states('sensor.leopard_gecko_background_temperature') != 'unavailable'
+          and (
+          states('sensor.leopard_gecko_background_temperature')|float > 32
+          or states('sensor.leopard_gecko_background_temperature')|float < 14)
+        or
+          states('sensor.leopard_gecko_temperature') != 'unavailable'
+          and states('sensor.leopard_gecko_temperature') != 'unknown'
+          and (
+            states('sensor.leopard_gecko_temperature')|float > 32
+            or states('sensor.leopard_gecko_temperature')|float < 14)
+        or
+          states('sensor.leopard_gecko_thermostat_internal_temperature') != 'unavailable'
+          and (
+            states('sensor.leopard_gecko_thermostat_internal_temperature')|float > 40)
+        }}
         friendly_name: 'Leopard Gecko Temperature Problem'
-        attribute_templates:
-          nature: >
-            {%- if states('sensor.leopard_gecko_hide_temperature') != 'unavailable'
-            and (states('sensor.leopard_gecko_hide_temperature')|float > 32
+      attributes:
+        nature: >
+          {%- if states('sensor.leopard_gecko_hide_temperature') != 'unavailable' -%}
+            {%- if (states('sensor.leopard_gecko_hide_temperature')|float > 32
               or states('sensor.leopard_gecko_hide_temperature')|float < 14) %}
             Hide Temperature is {{states('sensor.leopard_gecko_hide_temperature')}} Degrees
             {% endif %}
-            {%- if states('sensor.leopard_gecko_background_temperature') != 'unavailable'
-              and (states('sensor.leopard_gecko_background_temperature')|float > 32
-                or states('sensor.leopard_gecko_background_temperature')|float < 14) %}
-              Hot End Temperature is {{states('sensor.leopard_gecko_background_temperature')}} Degrees
+          {% endif %}
+          {%- if states('sensor.leopard_gecko_background_temperature') != 'unavailable' -%}
+            {%- if (states('sensor.leopard_gecko_background_temperature')|float > 32
+              or states('sensor.leopard_gecko_background_temperature')|float < 14) %}
+            Hot End Temperature is {{states('sensor.leopard_gecko_background_temperature')}} Degrees
             {% endif %}
-            {%- if states('sensor.leopard_gecko_temperature') != 'unavailable'
-              and (states('sensor.leopard_gecko_temperature')|float > 32
-                or states('sensor.leopard_gecko_temperature')|float < 14) %}
-              Cool End Temperature is {{states('sensor.leopard_gecko_temperature')}} Degrees
+          {% endif %}
+          {%- if states('sensor.leopard_gecko_temperature') != 'unavailable' 
+            and states('sensor.leopard_gecko_temperature') != 'unknown'-%}
+            {%- if (states('sensor.leopard_gecko_temperature')|float > 32
+              or states('sensor.leopard_gecko_temperature')|float < 14) %}
+            Cool End Temperature is {{states('sensor.leopard_gecko_temperature')}} Degrees
             {% endif %}
-            {%- if states('sensor.leopard_gecko_thermostat_internal_temperature') != 'unavailable'
-              and states('sensor.leopard_gecko_thermostat_internal_temperature')|float > 40 %}
-              Leopard Gecko Thermostat Temperature is {{states('sensor.leopard_gecko_thermostat_internal_temperature')}} Degrees
+          {% endif %}
+          {%- if states('sensor.leopard_gecko_thermostat_internal_temperature') != 'unavailable' -%}
+            {%- if states('sensor.leopard_gecko_thermostat_internal_temperature')|float > 40 %}
+            Leopard Gecko Thermostat Temperature is {{states('sensor.leopard_gecko_thermostat_internal_temperature')}} Degrees
             {% endif %}
+          {% endif %}
 alert:
   leopard_gecko_temperature:
     name: Leopard Gecko Temperature Alert
