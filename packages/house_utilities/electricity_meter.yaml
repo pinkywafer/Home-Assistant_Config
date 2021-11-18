@@ -1,0 +1,47 @@
+input_datetime:
+  electricity_offpeak_start:
+    name: Electricity Off Peak Rate Start Time
+    has_date: false
+    has_time: true
+  electricity_offpeak_end:
+    name: Electricity Off Peak Rate End Time
+    has_date: false
+    has_time: true
+
+utility_meter:
+  electricity:
+    name: Electricity Consumption
+    source: sensor.home_assistant_glow_total_energy
+    tariffs:
+      - peak
+      - offpeak
+
+automation:
+  - id: 'fbb5ac8e-b97d-4722-94fc-03517ca63572'
+    alias: Electricity Meter select Tariff
+    trigger:
+      - platform: time
+        at: 
+          - input_datetime.electricity_offpeak_start
+          - input_datetime.electricity_offpeak_end
+      - platform: homeassistant
+        event: start
+    action:
+      - choose:
+          - alias: 'offpeak time'
+            conditions: 
+              - condition: time
+                after: input_datetime.electricity_offpeak_start
+                before: input_datetime.electricity_offpeak_end
+            sequence:
+              - service: utility_meter.select_tariff
+                target:
+                  entity_id: utility_meter.electricity
+                data:
+                  tariff: 'offpeak'
+        default:
+          - service: utility_meter.select_tariff
+            target:
+              entity_id: utility_meter.electricity
+            data:
+              tariff: 'peak'
