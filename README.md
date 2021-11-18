@@ -20,30 +20,30 @@ This repo is checked using Github Actions for continuous integration.
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 7555
+Lines of yaml code in my configuration (excluding secrets): 7644
 
-Number of entities: 770
+Number of entities: 818
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 2
-Automation | 85
-Binary Sensor | 129
+Automation | 84
+Binary Sensor | 135
 Camera | 14
-Device Tracker | 18
+Device Tracker | 40
 Group | 1
 Input Boolean | 3
-Input Datetime | 3
+Input Datetime | 5
 Input Text | 8
-Light | 28
-Media Player | 19
+Light | 30
+Media Player | 20
 Person | 3
 Scene | 1
 Script | 26
-Sensor | 367
+Sensor | 380
 Sun | 1
-Switch | 41
+Switch | 40
 Weather | 1
 Zone | 4
 
@@ -60,6 +60,7 @@ Zone | 4
   - [Garbage Collection](https://github.com/bruxy70/Garbage-Collection)
   - [Generate Readme](https://github.com/custom-components/readme)
   - [Google Home](https://github.com/leikoilja/ha-google-home)
+  - [Ha Omada](https://github.com/zachcheatham/ha-omada)
   - [HACS](https://github.com/hacs/integration)
   - [Plex Assistant](https://github.com/maykar/plex_assistant)
   - [Spacex Next Launch And Starman](https://github.com/djtimca/HASpaceX)
