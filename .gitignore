@@ -6,6 +6,7 @@
 *.db-wal
 *.pyc
 ._*
+*.fault
 __pycache__
 
 # Directory (contents) ignores
