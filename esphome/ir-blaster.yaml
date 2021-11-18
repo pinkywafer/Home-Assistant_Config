@@ -1,5 +1,5 @@
 substitutions:
-  ip_address: 192.168.1.98
+  ip_address: !secret ir-blaster_ip
   reboot_time: 10min
   devicename: ir-blaster
   friendly_name: IR Blaster
@@ -12,6 +12,11 @@ esphome:
   platform: ESP32
   board: esp32dev
 
+wifi:
+  ap:
+    password: !secret ap-password
+
+captive_portal:
 # Enable logging
 logger:
 
@@ -31,7 +36,7 @@ ota:
 
 remote_receiver:
   pin: 
-    number: GPIO32
+    number: 4
     inverted: True
     mode: INPUT_PULLUP
   dump: all
@@ -40,10 +45,26 @@ remote_receiver:
 
 remote_transmitter:
   pin: 
-    number: GPIO27
+    number: 32
   carrier_duty_percent: 40%
 
 switch:
   - platform: gpio
-    pin: 25
-    name: receiver
+    pin: 13
+    name: $friendly_name Receiver
+    on_turn_on:
+      then:
+        - output.turn_on: blue_led
+    on_turn_off:
+      then:
+        - output.turn_off: blue_led
+
+status_led:
+  pin:
+    number: 26
+    inverted: false
+
+output:
+  - platform: gpio
+    pin: 5
+    id: blue_led
