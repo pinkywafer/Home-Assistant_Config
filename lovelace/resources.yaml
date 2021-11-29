@@ -16,8 +16,6 @@
   type: module
 - url: /hacsfiles/simple-weather-card/simple-weather-card-bundle.js
   type: module
-- url: /hacsfiles/lovelace-card-mod/card-mod.js
-  type: module
 - url: /hacsfiles/github-card/github-card.js
   type: module
 - url: /hacsfiles/lovelace-card-preloader/lovelace-card-preloader.js
