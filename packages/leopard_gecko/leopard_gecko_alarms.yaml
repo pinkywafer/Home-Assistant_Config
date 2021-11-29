@@ -38,7 +38,7 @@ template:
             Hot End Temperature is {{states('sensor.leopard_gecko_background_temperature')}} Degrees
             {% endif %}
           {% endif %}
-          {%- if states('sensor.leopard_gecko_temperature') != 'unavailable' 
+          {%- if states('sensor.leopard_gecko_temperature') != 'unavailable'
             and states('sensor.leopard_gecko_temperature') != 'unknown'-%}
             {%- if (states('sensor.leopard_gecko_temperature')|float > 32
               or states('sensor.leopard_gecko_temperature')|float < 14) %}

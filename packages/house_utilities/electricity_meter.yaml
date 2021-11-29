@@ -21,7 +21,7 @@ automation:
     alias: Electricity Meter select Tariff
     trigger:
       - platform: time
-        at: 
+        at:
           - input_datetime.electricity_offpeak_start
           - input_datetime.electricity_offpeak_end
       - platform: homeassistant
@@ -29,7 +29,7 @@ automation:
     action:
       - choose:
           - alias: 'offpeak time'
-            conditions: 
+            conditions:
               - condition: time
                 after: input_datetime.electricity_offpeak_start
                 before: input_datetime.electricity_offpeak_end
