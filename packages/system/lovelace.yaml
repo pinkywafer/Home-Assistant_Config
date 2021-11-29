@@ -24,3 +24,7 @@ lovelace:
       icon: mdi:tools
       show_in_sidebar: true
       require_admin: true
+
+frontend:
+  extra_module_url:
+    - /hacsfiles/lovelace-card-mod/card-mod.js
