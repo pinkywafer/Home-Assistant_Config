@@ -1,13 +1,20 @@
 switch:
-  - platform: wake_on_lan
-    name: "PC"
-    mac: !secret pc_mac
-    host: !secret pc_ip
-    turn_off:
-      service: mqtt.publish
-      data:
-        topic: "iotlink/workgroup/mediacenter/commands/shutdown"
-        payload: ""
+  - platform: template
+    switches:
+      pc:
+        friendly_name: PC
+        unique_id: "d81daac8-b82c-4e07-bedf-de3b4d3b3244"
+        value_template : '{{is_state("device_tracker.jenny_s_pc_eth","home")}}'
+        turn_on:
+          service: shell_command.pc_wol
+        turn_off:
+          service: mqtt.publish
+          data:
+            topic: "iotlink/workgroup/mediacenter/commands/shutdown"
+            payload: ""
+
+shell_command:
+  pc_wol: !secret pc_wol_command
 
 script:
   pc_suspend:
