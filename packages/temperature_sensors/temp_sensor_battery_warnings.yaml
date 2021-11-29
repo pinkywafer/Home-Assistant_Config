@@ -58,33 +58,33 @@ binary_sensor:
       temperature_sensor_battery_warning:
         value_template: >
           {{[
-            states('sensor.bathroom_temp_sensor_battery_level') | int,
-            states('sensor.bedroom_temp_sensor_battery_level') | int,
-            states('sensor.emma_s_room_temp_sensor_battery_level') | int,
-            states('sensor.leopard_gecko_sensor_battery_level') | int,
-            states('sensor.kitchen_temp_sensor_battery_level') | int,
-            states('sensor.leopard_gecko_sensor_battery_level') | int,
-            states('sensor.server_cupboard_temp_sensor_battery_level') | int,
-            states('sensor.sitting_room_temp_sensor_battery_level') | int,
-            states('sensor.vestibule_temp_sensor_battery_level') | int
+            states('sensor.bathroom_temp_sensor_battery_level') | default(0) | int(0),
+            states('sensor.bedroom_temp_sensor_battery_level') | default(0) | int(0),
+            states('sensor.emma_s_room_temp_sensor_battery_level') | default(0) | int(0),
+            states('sensor.leopard_gecko_sensor_battery_level') | default(0) | int(0),
+            states('sensor.kitchen_temp_sensor_battery_level') | default(0) | int(0),
+            states('sensor.leopard_gecko_sensor_battery_level') | default(0) | int(0),
+            states('sensor.server_cupboard_temp_sensor_battery_level') | default(0) | int(0),
+            states('sensor.sitting_room_temp_sensor_battery_level') | default(0) | int(0),
+            states('sensor.vestibule_temp_sensor_battery_level') | default(0) | int(0)
           ] | min < 15}}
         attribute_templates:
           sensor_locations: >
             {{ [
               { "name": "The Bathroom",
-                "value": states("sensor.bathroom_temp_sensor_battery_level") | int },
+                "value": states("sensor.bathroom_temp_sensor_battery_level") | default(0) | int(0) },
               { "name": "The Bedroom",
-                "value": states("sensor.bedroom_temp_sensor_battery_level") | int },
+                "value": states("sensor.bedroom_temp_sensor_battery_level") | default(0) | int(0) },
               { "name": "Emma's Room",
-                "value": states("sensor.emma_s_room_temp_sensor_battery_level") | int },
+                "value": states("sensor.emma_s_room_temp_sensor_battery_level") | default(0) | int(0) },
               { "name": "The Kitchen",
-                "value": states('sensor.kitchen_temp_sensor_battery_level') | int},
+                "value": states('sensor.kitchen_temp_sensor_battery_level') | default(0) | int(0)},
               { "name": "The Leopard Gecko Enclosure",
-                "value": states('sensor.leopard_gecko_sensor_battery_level') | int},
+                "value": states('sensor.leopard_gecko_sensor_battery_level') | default(0) | int(0)},
               { "name": "The Server Cupboard",
-                "value": states('sensor.server_cupboard_temp_sensor_battery_level') | int},
+                "value": states('sensor.server_cupboard_temp_sensor_battery_level') | default(0) | int(0)},
               { "name": "The Sitting Room",
-                "value": states('sensor.sitting_room_temp_sensor_battery_level') | int},
+                "value": states('sensor.sitting_room_temp_sensor_battery_level') | default(0) | int(0)},
               { "name": "The Vestibule",
-                "value": states('sensor.vestibule_temp_sensor_battery_level') | int}
+                "value": states('sensor.vestibule_temp_sensor_battery_level') | default(0) | int(0)}
               ] | selectattr('value', 'lessthan', 15) | map(attribute='name') | list }}
