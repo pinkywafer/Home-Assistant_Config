@@ -43,10 +43,3 @@ automation:
             message: clear_notification
             data:
               tag: chicken_cam_offline
-
-
-# rest_command:
-#   chickencam_start_detection:
-#     url: !secret chickencam_start_detection_url
-#   chickencam_pause_detection:
-#     url: !secret chickencam_pause_detection_url
