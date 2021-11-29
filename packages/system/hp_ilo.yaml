@@ -120,4 +120,13 @@ homeassistant:
       device_class: energy
 
 shell_command:
-  hp_ilo_set_fan: ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no homeassistant@192.168.1.245 fan pid 29 lo 3500
+  hp_ilo_adjust_fan_pid_29: !secret hp_ilo_adjust_fan_pid_29_command
+
+automation:
+  - id: "7ee66689-e490-47ca-a4df-bae4c350bea6"
+    alias: Server Fan pid adjustment
+    trigger:
+      - platform: homeassistant
+        event: start
+    action:
+      - service: shell_command.hp_ilo_adjust_fan_pid_29
