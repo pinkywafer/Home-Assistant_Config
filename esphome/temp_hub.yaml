@@ -1,6 +1,6 @@
 substitutions:
   esphome_name: temp_hub
-  ip_address: 192.168.1.15
+  ip_address: !secret temp_hub_ip
   reboot_time: 15min
 
 esphome:
