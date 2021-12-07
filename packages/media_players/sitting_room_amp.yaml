@@ -320,6 +320,7 @@ switch:
     switches:
       sitting_room_amp:
         value_template: '{{ not is_state("sensor.sitting_room_amp_rs232", "STANDBY ON") }}'
+        friendly_name: Sitting Room Amp
         turn_on:
           service: shell_command.sitting_room_amp_set_standby_off
         turn_off:
