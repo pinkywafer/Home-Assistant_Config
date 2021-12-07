@@ -20,30 +20,30 @@ This repo is checked using Github Actions for continuous integration.
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 7644
+Lines of yaml code in my configuration (excluding secrets): 7700
 
-Number of entities: 818
+Number of entities: 840
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 2
-Automation | 84
-Binary Sensor | 135
+Automation | 85
+Binary Sensor | 138
 Camera | 14
-Device Tracker | 40
+Device Tracker | 52
 Group | 1
 Input Boolean | 3
 Input Datetime | 5
 Input Text | 8
 Light | 30
-Media Player | 20
+Media Player | 18
 Person | 3
 Scene | 1
 Script | 26
-Sensor | 380
+Sensor | 384
 Sun | 1
-Switch | 40
+Switch | 44
 Weather | 1
 Zone | 4
 
@@ -54,7 +54,6 @@ Zone | 4
 ### Integrations
   - [Anniversaries](https://github.com/pinkywafer/Anniversaries)
   - [Authenticated](https://github.com/custom-components/authenticated)
-  - [Breaking Changes](https://github.com/custom-components/breaking_changes)
   - [Browser Mod](https://github.com/thomasloven/hass-browser_mod)
   - [Calendarific](https://github.com/pinkywafer/Calendarific)
   - [Garbage Collection](https://github.com/bruxy70/Garbage-Collection)
