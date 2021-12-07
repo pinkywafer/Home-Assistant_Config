@@ -123,3 +123,9 @@ google_assistant:
       expose: true
     script.alarm_notifications:
       expose: false
+    switch.sitting_room_amp:
+      expose: true
+      room: Living Room
+      name: Amplifier
+      aliases:
+        - Amp
