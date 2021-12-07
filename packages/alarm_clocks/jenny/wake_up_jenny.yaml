@@ -28,9 +28,6 @@ automation:
           - light.vestibule_light
           - light.landing_light
           - light.cooker_light
-      - service: switch.turn_on
-        entity_id:
-        - switch.immersion_heater
       - delay:
           minutes: 30
       - service: light.turn_on
