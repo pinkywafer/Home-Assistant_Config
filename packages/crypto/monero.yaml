@@ -2,5 +2,5 @@ sensor:
   - platform: rest
     name: 'monero_rate'
     value_template: "{{ value_json['monero'].gbp }}"
-    unit_of_measurement: 'gbp' 
+    unit_of_measurement: 'gbp'
     resource: https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=gbp
