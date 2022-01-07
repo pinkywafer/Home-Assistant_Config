@@ -20,9 +20,9 @@ This repo is checked using Github Actions for continuous integration.
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 7700
+Lines of yaml code in my configuration (excluding secrets): 7638
 
-Number of entities: 840
+Number of entities: 821
 
 Type | Qty
 -- | --
@@ -31,19 +31,19 @@ Alert | 2
 Automation | 85
 Binary Sensor | 138
 Camera | 14
-Device Tracker | 52
+Device Tracker | 34
 Group | 1
 Input Boolean | 3
 Input Datetime | 5
 Input Text | 8
 Light | 30
-Media Player | 18
+Media Player | 20
 Person | 3
 Scene | 1
 Script | 26
 Sensor | 384
 Sun | 1
-Switch | 44
+Switch | 40
 Weather | 1
 Zone | 4
 
@@ -64,6 +64,7 @@ Zone | 4
   - [Plex Assistant](https://github.com/maykar/plex_assistant)
   - [Spacex Next Launch And Starman](https://github.com/djtimca/HASpaceX)
   - [Spotcast](https://github.com/fondberg/spotcast)
+  - [Xmr Pool Statistics](https://github.com/hwmland/homeassistant-xmrpool_stat)
   - [Youtube](https://github.com/custom-components/youtube)
 
 ### Lovelace
