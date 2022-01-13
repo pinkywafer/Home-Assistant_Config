@@ -4,3 +4,27 @@ sensor:
     value_template: "{{ value_json['monero'].gbp }}"
     unit_of_measurement: 'gbp'
     resource: https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=gbp
+
+shell_command:
+  start_mining_monero: !secret start_monero_miners
+  stop_mining_monero: !secret shutdown_monero_miners
+
+automation:
+  - id: 'af47b5e1-7cdc-4d97-9a05-3d624061d6f2'
+    alias: Mine Monero offpeak
+    trigger:
+    - platform: state
+      entity_id: utility_meter.electricity
+    action:
+    - choose:
+      - conditions:
+        - condition: template
+          value_template: '{{trigger.to_state.state == "offpeak"}}'
+        sequence:
+        - service: shell_command.start_mining_monero
+      - conditions:
+        - condition: template
+          value_template: '{{trigger.to_state.state == "peak"}}'
+        sequence:
+        - service: shell_command.stop_mining_monero
+    mode: single
