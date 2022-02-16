@@ -1,12 +1,3 @@
-sensor:
-  - platform: version
-    name: homeassistant_version_available
-    source: hassio
-    image: qemux86-64
-
-  - platform: version
-    name: homeassistant_current_version
-
 input_text:
   ha_version_notified:
     name: Home assistant update version notified
