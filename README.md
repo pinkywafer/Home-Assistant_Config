@@ -20,9 +20,9 @@ This repo is checked using Github Actions for continuous integration.
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 7739
+Lines of yaml code in my configuration (excluding secrets): 7750
 
-Number of entities: 833
+Number of entities: 872
 
 Type | Qty
 -- | --
@@ -31,17 +31,17 @@ Alert | 2
 Automation | 86
 Binary Sensor | 140
 Camera | 14
-Device Tracker | 34
+Device Tracker | 35
 Group | 1
 Input Boolean | 3
 Input Datetime | 5
 Input Text | 8
-Light | 30
-Media Player | 20
+Light | 32
+Media Player | 23
 Person | 3
 Scene | 1
 Script | 26
-Sensor | 393
+Sensor | 427
 Sun | 1
 Switch | 40
 Weather | 1
