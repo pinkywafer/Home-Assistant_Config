@@ -1,14 +1,14 @@
 """Garbage collection calendar."""
 
-import logging
 from datetime import datetime, timedelta
+from typing import List
 
 from homeassistant.components.calendar import CalendarEventDevice
+from homeassistant.core import HomeAssistant
 from homeassistant.util import Throttle
 
 from .const import CALENDAR_NAME, CALENDAR_PLATFORM, DOMAIN, SENSOR_PLATFORM
 
-_LOGGER = logging.getLogger(__name__)
 MIN_TIME_BETWEEN_UPDATES = timedelta(minutes=1)
 
 
@@ -17,20 +17,20 @@ async def async_setup_platform(
 ):  # pylint: disable=unused-argument
     """Add calendar entities to HA, of there are calendar instances."""
     # Only single instance allowed
-    if GarbageCollectionCalendar.instances == 0:
-        async_add_entities([GarbageCollectionCalendar(hass)], True)
+    if not GarbageCollectionCalendar.instances:
+        async_add_entities([GarbageCollectionCalendar()], True)
 
 
 class GarbageCollectionCalendar(CalendarEventDevice):
     """The garbage collection calendar class."""
 
-    instances = 0
+    instances = False
 
-    def __init__(self, hass):
-        """Create empry calendar."""
+    def __init__(self):
+        """Create empty calendar."""
         self._cal_data = {}
         self._name = CALENDAR_NAME
-        GarbageCollectionCalendar.instances += 1
+        GarbageCollectionCalendar.instances = True
 
     @property
     def event(self):
@@ -46,7 +46,9 @@ class GarbageCollectionCalendar(CalendarEventDevice):
         """Update all calendars."""
         await self.hass.data[DOMAIN][CALENDAR_PLATFORM].async_update()
 
-    async def async_get_events(self, hass, start_date, end_date):
+    async def async_get_events(
+        self, hass: HomeAssistant, start_date: datetime, end_date: datetime
+    ):
         """Get all events in a specific time frame."""
         return await self.hass.data[DOMAIN][CALENDAR_PLATFORM].async_get_events(
             hass, start_date, end_date
@@ -64,25 +66,27 @@ class GarbageCollectionCalendar(CalendarEventDevice):
 class EntitiesCalendarData:
     """Class used by the Entities Calendar class to hold all entity events."""
 
-    def __init__(self, hass):
+    def __init__(self, hass: HomeAssistant):
         """Initialize an Entities Calendar Data."""
         self.event = None
         self._hass = hass
-        self.entities = []
+        self.entities: List[str] = []
 
-    def add_entity(self, entity_id):
+    def add_entity(self, entity_id: str) -> None:
         """Append entity ID to the calendar."""
         if entity_id not in self.entities:
             self.entities.append(entity_id)
 
-    def remove_entity(self, entity_id):
+    def remove_entity(self, entity_id: str) -> None:
         """Remove entity ID from the calendar."""
         if entity_id in self.entities:
             self.entities.remove(entity_id)
 
-    async def async_get_events(self, hass, start_datetime, end_datetime):
+    async def async_get_events(
+        self, hass: HomeAssistant, start_datetime: datetime, end_datetime: datetime
+    ) -> List[dict]:
         """Get all tasks in a specific time frame."""
-        events = []
+        events: List[dict] = []
         if SENSOR_PLATFORM not in hass.data[DOMAIN]:
             return events
         start_date = start_datetime.date()
@@ -135,10 +139,10 @@ class EntitiesCalendarData:
         """Get the latest data."""
         next_dates = {}
         for entity in self.entities:
-            if self._hass.data[DOMAIN][SENSOR_PLATFORM][entity]._next_date is not None:
+            if self._hass.data[DOMAIN][SENSOR_PLATFORM][entity].next_date is not None:
                 next_dates[entity] = self._hass.data[DOMAIN][SENSOR_PLATFORM][
                     entity
-                ]._next_date
+                ].next_date
         if len(next_dates) > 0:
             entity_id = min(next_dates.keys(), key=(lambda k: next_dates[k]))
             start = next_dates[entity_id]
