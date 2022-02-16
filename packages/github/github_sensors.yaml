@@ -1,9 +1,0 @@
-sensor:
-  - platform: github
-    access_token: !secret github_token
-    repositories:
-      - path: 'pinkywafer/Home-Assistant_Config'
-      - path: 'pinkywafer/PinkyLEDs'
-      - path: 'pinkywafer/Anniversaries'
-      - path: 'pinkywafer/OpenTX_soundpack-Joanne'
-      - path: 'home-assistant/core'
