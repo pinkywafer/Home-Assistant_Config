@@ -9,8 +9,11 @@ packages:
 
 esphome:
   name: $devicename
-  platform: ESP8266
+
+esp8266:
   board: d1_mini
+  framework:
+    version: 2.7.4
 
 # Enable logging
 logger:
