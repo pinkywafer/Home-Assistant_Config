@@ -28,8 +28,6 @@ scene: !include scenes.yaml
 
 automation: !include automations.yaml
 
-updater:
-
 discovery:
 
 history:
