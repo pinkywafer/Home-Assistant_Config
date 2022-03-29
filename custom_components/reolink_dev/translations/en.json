@@ -1,0 +1,56 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "This camera is already configured"
+        },
+        "error": {
+            "cannot_connect": "Failed to connect with the camera",
+            "invalid_auth": "Invalid username or password",
+            "unknown": "Unexpected error"
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "host": "Host",
+                    "port": "Port",
+                    "use_https": "Enable HTTPS",
+                    "username": "Username",
+                    "password": "Password"
+                }
+            },
+            "nvr": {
+                "data": {
+                    "channel": "Channel"
+                }
+            }
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "data": {
+                    "protocol": "Protocol",
+                    "stream": "Stream",
+                    "timeout": "Timeout (seconds)",
+                    "motion_states_update_fallback_delay": "Motion states update fallback delay (seconds, 0 or less to disable): Reolink's event subscription is not always reliable, this will help to avoid event misses",
+                    "motion_off_delay": "Motion sensor off delay (seconds)",
+                    "playback_months": "Playback range (months)",
+                    "playback_thumbnails": "Create thumbnails for playback items",
+                    "playback_thumbnail_path": "Custom thumbnail path"
+                }
+            }
+        }
+    },
+    "device_automation": {
+        "trigger_type": {
+            "new_vod": "New motion video detected"
+        },
+        "action_type": {
+            "capture_vod_thumbnail": "Save snapshot as motion thumbnail"
+        },
+        "condition_type": {
+            "vod_no_thumbnail": "Latest motion video has no thumbnail",
+            "vod_has_thumbnail": "Latest motion video has a thumbnail"
+        }
+    }
+}
