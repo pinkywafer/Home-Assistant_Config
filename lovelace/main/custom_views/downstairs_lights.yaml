@@ -1,6 +1,8 @@
 type: custom:vertical-stack-in-card
 cards:
-  - type: horizontal-stack
+  - type: grid
+    square: false
+    columns: 5
     cards:
       - type: custom:button-card
         entity: light.downstairs_lights
@@ -9,10 +11,8 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: light.sitting_room_light
         show_state: false
@@ -22,10 +22,8 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: light.sitting_room_wall_lights
         show_state: false
@@ -35,10 +33,8 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: light.flame_lantern
         show_state: false
@@ -48,10 +44,8 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: light.vestibule_light
         show_state: false
@@ -61,14 +55,9 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
-
-  - type: horizontal-stack
-    cards:
-
+            - font-size: 12px
+      - type: custom:button-card
       - type: custom:button-card
         entity: light.sink_light
         show_state: false
@@ -78,10 +67,8 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: light.breakfast_bar_led
         show_state: false
@@ -94,11 +81,8 @@ cards:
         hold_action:
           action: more-info
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
-
+            - font-size: 12px
       - type: custom:button-card
         entity: light.cooker_light
         show_state: false
@@ -108,10 +92,8 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: light.bathroom_light
         show_state: false
@@ -121,7 +103,5 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
+            - font-size: 12px

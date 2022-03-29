@@ -1,6 +1,8 @@
 type: custom:vertical-stack-in-card
 cards:
-  - type: horizontal-stack
+  - type: grid
+    square: false
+    columns: 5
     cards:
       - type: custom:button-card
         entity: light.upstairs_lights
@@ -9,10 +11,8 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
       - type: custom:button-card
         entity: light.stairs_led
@@ -22,10 +22,8 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: light.landing_light
         icon: mdi:airplane-landing
@@ -34,12 +32,9 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
-  - type: horizontal-stack
-    cards:
+            - font-size: 12px
+      - type: custom:button-card
       - type: custom:button-card
         entity: light.emmas_room_lights
         name: Emma's
@@ -47,11 +42,9 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
-
+            - font-size: 12px
+      - type: custom:button-card
       - type: custom:button-card
         entity: light.emmas_bedside_light
         show_state: false
@@ -61,10 +54,8 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: light.emmas_ceiling_light
         show_state: false
@@ -74,10 +65,8 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: light.emma_led
         show_state: false
@@ -95,15 +84,10 @@ cards:
           service: light.turn_on
           service_data:
             entity_id: light.emma_led
-            effect: "Night Light"
+            effect: Night Light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
-
-  - type: horizontal-stack
-    cards:
+            - font-size: 12px
       - type: custom:button-card
         entity: light.bedroom_lights
         name: Bedroom
@@ -111,11 +95,10 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
-      - type: 'custom:button-card'
+            - font-size: 12px
+      - type: custom:button-card
+      - type: custom:button-card
         entity: light.jennys_bedside_light
         show_state: false
         icon: mdi:wall-sconce
@@ -124,10 +107,8 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: light.bedroom_ceiling_light
         show_state: false
@@ -137,10 +118,8 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: light.jos_bedside_light
         show_state: false
@@ -150,7 +129,5 @@ cards:
           action: toggle
           haptic: light
         styles:
-          card:
-            - height: 60px
           name:
-            - font-size: 14px
+            - font-size: 12px

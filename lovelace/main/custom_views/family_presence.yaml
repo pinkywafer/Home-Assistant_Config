@@ -1,6 +1,6 @@
 type: custom:vertical-stack-in-card
 cards:
-  - type: horizontal-stack
+  - type: grid
     cards:
       - type: custom:button-card
         entity: person.jenny_gorton
@@ -45,7 +45,7 @@ cards:
         show_entity_picture: true
         show_name: false
         state:
-          - operator: ==
+          - operator: '=='
             value: not_home
             entity_picture: /local/carmel_away.jpg
         tap_action:
@@ -56,3 +56,5 @@ cards:
           entity_picture:
             - height: 72px
             - width: 72px
+    square: false
+    columns: 3

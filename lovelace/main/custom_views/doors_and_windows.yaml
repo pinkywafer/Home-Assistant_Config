@@ -1,6 +1,8 @@
 type: custom:vertical-stack-in-card
 cards:
-  - type: horizontal-stack
+  - type: grid
+    columns: 4
+    square: false
     cards:
       - type: custom:button-card
         entity: binary_sensor.front_door
@@ -11,9 +13,9 @@ cards:
             icon: mdi:door-open
         styles:
           card:
-            - height: 60px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: binary_sensor.bedroom_window
         name: Bedroom
@@ -24,11 +26,10 @@ cards:
             icon: mdi:window-open
         styles:
           card:
-            - height: 55px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
-        name:
       - type: custom:button-card
         entity: binary_sensor.emma_s_window
         name: "Emma's"
@@ -39,9 +40,9 @@ cards:
             icon: mdi:window-open
         styles:
           card:
-            - height: 55px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
   - type: horizontal-stack
     cards:
       - type: custom:button-card
@@ -53,9 +54,9 @@ cards:
             icon: mdi:door-open
         styles:
           card:
-            - height: 60px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: binary_sensor.front_window
         name: Front
@@ -66,9 +67,9 @@ cards:
             icon: mdi:window-open
         styles:
           card:
-            - height: 55px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: binary_sensor.kitchen_window
         name: Kitchen
@@ -79,9 +80,9 @@ cards:
             icon: mdi:window-open
         styles:
           card:
-            - height: 55px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: binary_sensor.door_window
         show_state: false
@@ -92,6 +93,6 @@ cards:
             icon: mdi:window-open
         styles:
           card:
-            - height: 55px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px

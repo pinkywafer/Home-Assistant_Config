@@ -1,6 +1,8 @@
 type: custom:vertical-stack-in-card
 cards:
-  - type: horizontal-stack
+  - type: grid
+    columns: 4
+    square: false
     cards:
       - type: custom:button-card
         entity: switch.pc
@@ -9,9 +11,9 @@ cards:
           haptic: light
         styles:
           card:
-            - height: 60px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: switch.sitting_room_tv
         icon: mdi:television
@@ -20,9 +22,9 @@ cards:
           haptic: light
         styles:
           card:
-            - height: 60px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: switch.sitting_room_amp
         name: Amp
@@ -31,9 +33,9 @@ cards:
           haptic: light
         styles:
           card:
-            - height: 60px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: switch.ender3
         tap_action:
@@ -45,6 +47,6 @@ cards:
           haptic: light
         styles:
           card:
-            - height: 60px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px

@@ -20,7 +20,9 @@ cards:
           label:
             - color: yellow
 
-  - type: horizontal-stack
+  - type: grid
+    columns: 6
+    square: false
     cards:
       - type: custom:button-card
         entity: switch.cooker_socket
@@ -31,8 +33,10 @@ cards:
           action: toggle
           haptic: light
         styles:
+          card:
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
 
       - type: custom:button-card
         entity: sensor.fridge_freezer_doors
@@ -53,8 +57,10 @@ cards:
             icon: mdi:fridge
             color: var(--paper-item-icon-active-color)
         styles:
+          card:
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
 
 
       - type: custom:button-card
@@ -67,8 +73,10 @@ cards:
           action: toggle
           haptic: light
         styles:
+          card:
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: switch.kitchen_socket_2
         show_state: false
@@ -78,8 +86,10 @@ cards:
           action: toggle
           haptic: light
         styles:
+          card:
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: switch.kitchen_socket_3
         show_state: false
@@ -89,10 +99,11 @@ cards:
           action: toggle
           haptic: light
         styles:
+          card:
+            - height: 50px
           name:
-            - font-size: 14px
-  - type: horizontal-stack
-    cards:
+            - font-size: 12px
+
       - type: custom:button-card
         entity: switch.microwave
         show_state: false
@@ -102,8 +113,10 @@ cards:
           action: toggle
           haptic: light
         styles:
+          card:
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: switch.coffee
         show_state: false
@@ -113,8 +126,10 @@ cards:
           action: toggle
           haptic: light
         styles:
+          card:
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
       - type: custom:button-card
         entity: switch.kitchen_socket_4
@@ -125,8 +140,10 @@ cards:
           action: toggle
           haptic: light
         styles:
+          card:
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: switch.kitchen_socket_5
         show_state: false
@@ -136,8 +153,10 @@ cards:
           action: toggle
           haptic: light
         styles:
+          card:
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: switch.kitchen_socket_6
         show_state: false
@@ -147,5 +166,7 @@ cards:
           action: toggle
           haptic: light
         styles:
+          card:
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px

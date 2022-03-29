@@ -1,6 +1,8 @@
 type: custom:vertical-stack-in-card
 cards:
-  - type: horizontal-stack
+  - type: grid
+    columns: 3
+    square: false
     cards:
       - type: custom:button-card
         entity: sensor.recycling
@@ -17,7 +19,7 @@ cards:
           name:
             - font-size: 14px
           state:
-            - font-size: 12px
+            - font-size: 10px
       - type: custom:button-card
         entity: sensor.general_waste
         show_state: true
@@ -33,4 +35,20 @@ cards:
           name:
             - font-size: 14px
           state:
-            - font-size: 12px
+            - font-size: 10px
+      - type: custom:button-card
+        entity: sensor.garden_waste
+        show_state: true
+        color: green
+        state:
+          - value: 'tomorrow'
+            color: orange
+          - value: 'today'
+            color: red
+        styles:
+          card:
+            - height: 74px
+          name:
+            - font-size: 14px
+          state:
+            - font-size: 10px

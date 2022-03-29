@@ -12,11 +12,12 @@ cards:
             icon: mdi:run
         styles:
           card:
-            - height: 55px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         name: Motion
+        
       - type: custom:button-card
         entity: binary_sensor.doorbell_pir
         show_state: false
@@ -27,9 +28,9 @@ cards:
             icon: mdi:run
         styles:
           card:
-            - height: 55px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
   - type: horizontal-stack
     cards:
       - type: custom:button-card
@@ -42,9 +43,9 @@ cards:
             icon: mdi:run
         styles:
           card:
-            - height: 55px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: binary_sensor.downstairs_motion
         name: Downstairs
@@ -59,9 +60,9 @@ cards:
             icon: mdi:run
         styles:
           card:
-            - height: 55px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: binary_sensor.sitting_room_sensor_pir
         name: Lounge
@@ -76,12 +77,12 @@ cards:
             icon: mdi:run
         styles:
           card:
-            - height: 55px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
-        entity: binary_sensor.front_sensor_pir
-        name: Front
+        entity: binary_sensor.sitting_room_camera_motion
+        name: Sitting Room Camera
         show_state: false
         icon: mdi:walk
         tap_action:
@@ -93,9 +94,9 @@ cards:
             icon: mdi:run
         styles:
           card:
-            - height: 55px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
 
       - type: custom:button-card
         entity: binary_sensor.kitchen_sensor_pir
@@ -107,9 +108,9 @@ cards:
             icon: mdi:run
         styles:
           card:
-            - height: 55px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
       - type: custom:button-card
         entity: binary_sensor.chickencam_motion
         name: Chickens
@@ -120,6 +121,6 @@ cards:
             icon: mdi:run
         styles:
           card:
-            - height: 55px
+            - height: 50px
           name:
-            - font-size: 14px
+            - font-size: 12px
