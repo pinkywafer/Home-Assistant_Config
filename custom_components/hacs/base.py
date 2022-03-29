@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import asyncio
 from dataclasses import asdict, dataclass, field
-from datetime import timedelta
 import gzip
 import json
 import logging
@@ -25,9 +24,10 @@ from aiogithubapi import (
 from aiogithubapi.objects.repository import AIOGitHubAPIRepository
 from aiohttp.client import ClientSession, ClientTimeout
 from awesomeversion import AwesomeVersion
+from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.event import async_call_later
 from homeassistant.loader import Integration
+from homeassistant.util import dt
 
 from .const import TV
 from .enums import (
@@ -39,16 +39,17 @@ from .enums import (
     LovelaceMode,
 )
 from .exceptions import (
+    AddonRepositoryException,
     HacsException,
     HacsExpectedException,
     HacsRepositoryArchivedException,
     HacsRepositoryExistException,
+    HomeAssistantCoreRepositoryException,
 )
 from .repositories import RERPOSITORY_CLASSES
 from .utils.decode import decode_content
 from .utils.logger import get_hacs_logger
 from .utils.queue_manager import QueueManager
-from .utils.store import async_load_from_store, async_save_to_store
 
 if TYPE_CHECKING:
     from .repositories.base import HacsRepository
@@ -98,7 +99,7 @@ class HacsConfiguration:
     appdaemon_path: str = "appdaemon/apps/"
     appdaemon: bool = False
     config: dict[str, Any] = field(default_factory=dict)
-    config_entry: dict[str, str] = field(default_factory=dict)
+    config_entry: ConfigEntry | None = None
     config_type: ConfigurationType | None = None
     country: str = "ALL"
     debug: bool = False
@@ -150,6 +151,7 @@ class HacsCommon:
     categories: set[str] = field(default_factory=set)
     renamed_repositories: dict[str, str] = field(default_factory=dict)
     archived_repositories: list[str] = field(default_factory=list)
+    ignored_repositories: list[str] = field(default_factory=list)
     skip: list[str] = field(default_factory=list)
 
 
@@ -283,6 +285,20 @@ class HacsRepositories:
         if repository_full_name is not None:
             return repository_full_name in self._repositories_by_full_name
         return False
+
+    def is_downloaded(
+        self,
+        repository_id: str | None = None,
+        repository_full_name: str | None = None,
+    ) -> bool:
+        """Check if a repository is registered."""
+        if repository_id is not None:
+            repo = self.get_by_id(repository_id)
+        if repository_full_name is not None:
+            repo = self.get_by_full_name(repository_full_name)
+        if repo is None:
+            return False
+        return repo.data.installed
 
     def get_by_id(self, repository_id: str | None) -> HacsRepository | None:
         """Get repository by id."""
@@ -425,10 +441,13 @@ class HacsBase:
         """Helper to calculate the number of repositories we can fetch data for."""
         try:
             response = await self.async_github_api_method(self.githubapi.rate_limit)
-            if ((limit := response.data.resources.core.remaining or 0) - 1000) >= 15:
-                return math.floor((limit - 1000) / 15)
+            if ((limit := response.data.resources.core.remaining or 0) - 1000) >= 10:
+                return math.floor((limit - 1000) / 10)
+            reset = dt.as_local(dt.utc_from_timestamp(response.data.resources.core.reset))
             self.log.info(
-                "GitHub API ratelimited - %s remaining", response.data.resources.core.remaining
+                "GitHub API ratelimited - %s remaining (%s)",
+                response.data.resources.core.remaining,
+                f"{reset.hour}:{reset.minute}:{reset.second}",
             )
             self.disable_hacs(HacsDisabledReason.RATE_LIMIT)
         except BaseException as exception:  # lgtm [py/catch-base-exception] pylint: disable=broad-except
@@ -494,10 +513,12 @@ class HacsBase:
                 raise HacsExpectedException(f"Skipping {repository_full_name}")
 
         if repository_full_name == "home-assistant/core":
-            raise HacsExpectedException(
-                "You can not add homeassistant/core, to use core integrations "
-                "check the Home Assistant documentation for how to add them."
-            )
+            raise HomeAssistantCoreRepositoryException()
+
+        if repository_full_name == "home-assistant/addons" or repository_full_name.startswith(
+            "hassio-addons/"
+        ):
+            raise AddonRepositoryException()
 
         if category not in RERPOSITORY_CLASSES:
             raise HacsException(f"{category} is not a valid repository category.")
@@ -568,33 +589,54 @@ class HacsBase:
 
         self.hass.bus.async_fire("hacs/status", {})
 
-    async def async_download_file(self, url: str) -> bytes | None:
+    async def async_download_file(self, url: str, *, headers: dict | None = None) -> bytes | None:
         """Download files, and return the content."""
         if url is None:
             return None
-
-        tries_left = 5
 
         if "tags/" in url:
             url = url.replace("tags/", "")
 
         self.log.debug("Downloading %s", url)
 
-        while tries_left > 0:
-            try:
-                request = await self.session.get(url=url, timeout=ClientTimeout(total=60))
+        try:
+            request = await self.session.get(
+                url=url,
+                timeout=ClientTimeout(total=60),
+                headers=headers,
+            )
 
-                # Make sure that we got a valid result
-                if request.status == 200:
-                    return await request.read()
+            # Make sure that we got a valid result
+            if request.status == 200:
+                return await request.read()
 
-                raise HacsException(
-                    f"Got status code {request.status} when trying to download {url}"
-                )
-            except BaseException as exception:  # lgtm [py/catch-base-exception] pylint: disable=broad-except
-                self.log.debug("Download failed - %s", exception)
-                tries_left -= 1
-                await asyncio.sleep(1)
-                continue
+            raise HacsException(f"Got status code {request.status} when trying to download {url}")
+        except asyncio.TimeoutError:
+            self.log.error(
+                "A timeout of 60! seconds was encountered while downloading %s, "
+                "check the network on the host running Home Assistant. This is "
+                "not a problem with HACS but how your host communicates with GitHub",
+                url,
+            )
+        except BaseException as exception:  # lgtm [py/catch-base-exception] pylint: disable=broad-except
+            self.log.exception("Download failed - %s", exception)
 
         return None
+
+    async def async_recreate_entities(self) -> None:
+        """Recreate entities."""
+        if (
+            self.configuration == ConfigurationType.YAML
+            or self.core.ha_version < "2022.4.0.dev0"
+            or not self.configuration.experimental
+        ):
+            return
+
+        platforms = ["sensor", "update"]
+
+        await self.hass.config_entries.async_unload_platforms(
+            entry=self.configuration.config_entry,
+            platforms=platforms,
+        )
+
+        self.hass.config_entries.async_setup_platforms(self.configuration.config_entry, platforms)

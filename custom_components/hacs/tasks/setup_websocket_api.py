@@ -41,6 +41,7 @@ class Task(HacsTask):
         async_register_command(self.hass, hacs_removed)
         async_register_command(self.hass, acknowledge_critical_repository)
         async_register_command(self.hass, get_critical_repositories)
+        async_register_command(self.hass, hacs_repository_ignore)
 
 
 @websocket_api.websocket_command(
@@ -120,7 +121,8 @@ async def hacs_removed(hass, connection, msg):
     hacs: HacsBase = hass.data.get(DOMAIN)
     content = []
     for repo in hacs.repositories.list_removed:
-        content.append(repo.to_json())
+        if repo.repository not in hacs.common.ignored_repositories:
+            content.append(repo.to_json())
     connection.send_message(websocket_api.result_message(msg["id"], content))
 
 
@@ -272,6 +274,7 @@ async def hacs_repository_data(hass, connection, msg):
             repository.state = None
             if not was_installed:
                 hass.bus.async_fire("hacs/reload", {"force": True})
+                await hacs.async_recreate_entities()
 
         elif action == "add":
             repository.state = None
@@ -330,13 +333,14 @@ async def hacs_repository(hass, connection, msg):
             await repository.async_install()
             if not was_installed:
                 hass.bus.async_fire("hacs/reload", {"force": True})
+                await hacs.async_recreate_entities()
 
         elif action == "not_new":
             repository.data.new = False
 
         elif action == "uninstall":
             repository.data.new = False
-            await repository.update_repository(ignore_issues=True)
+            await repository.update_repository(ignore_issues=True, force=True)
             await repository.uninstall()
 
         elif action == "hide":
@@ -364,9 +368,9 @@ async def hacs_repository(hass, connection, msg):
         elif action == "release_notes":
             data = [
                 {
-                    "name": x.attributes["name"],
-                    "body": x.attributes["body"],
-                    "tag": x.attributes["tag_name"],
+                    "name": x.name,
+                    "body": x.body,
+                    "tag": x.tag_name,
                 }
                 for x in repository.releases.objects
             ]
@@ -469,3 +473,18 @@ async def hacs_status(hass, connection, msg):
             },
         )
     )
+
+
+@websocket_api.websocket_command(
+    {
+        vol.Required("type"): "hacs/repository/ignore",
+        vol.Required("repository"): str,
+    }
+)
+@websocket_api.require_admin
+@websocket_api.async_response
+async def hacs_repository_ignore(hass, connection, msg):
+    """Ignore a repository."""
+    hacs: HacsBase = hass.data.get(DOMAIN)
+    hacs.common.ignored_repositories.append(msg["repository"])
+    connection.send_message(websocket_api.result_message(msg["id"]))
