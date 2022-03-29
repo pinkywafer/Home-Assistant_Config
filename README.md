@@ -20,9 +20,9 @@ This repo is checked using Github Actions for continuous integration.
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 7750
+Lines of yaml code in my configuration (excluding secrets): 7878
 
-Number of entities: 872
+Number of entities: 873
 
 Type | Qty
 -- | --
@@ -31,19 +31,19 @@ Alert | 2
 Automation | 86
 Binary Sensor | 140
 Camera | 14
-Device Tracker | 35
+Device Tracker | 37
 Group | 1
 Input Boolean | 3
 Input Datetime | 5
 Input Text | 8
-Light | 32
-Media Player | 23
+Light | 33
+Media Player | 24
 Person | 3
 Scene | 1
 Script | 26
-Sensor | 427
+Sensor | 417
 Sun | 1
-Switch | 40
+Switch | 46
 Weather | 1
 Zone | 4
 
@@ -62,6 +62,7 @@ Zone | 4
   - [Ha Omada](https://github.com/zachcheatham/ha-omada)
   - [HACS](https://github.com/hacs/integration)
   - [Plex Assistant](https://github.com/maykar/plex_assistant)
+  - [Reolink Ip Camera](https://github.com/fwestenberg/reolink_dev)
   - [Spacex Next Launch And Starman](https://github.com/djtimca/HASpaceX)
   - [Spotcast](https://github.com/fondberg/spotcast)
   - [Xmr Pool Statistics](https://github.com/hwmland/homeassistant-xmrpool_stat)
