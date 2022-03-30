@@ -43,8 +43,6 @@ cards:
             - height: 50px
           name:
             - font-size: 12px
-  - type: horizontal-stack
-    cards:
       - type: custom:button-card
         entity: binary_sensor.back_door
         show_state: false
