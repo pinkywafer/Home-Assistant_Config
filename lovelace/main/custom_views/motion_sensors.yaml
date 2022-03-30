@@ -17,7 +17,7 @@ cards:
             - font-size: 12px
       - type: custom:button-card
         name: Motion
-        
+
       - type: custom:button-card
         entity: binary_sensor.doorbell_pir
         show_state: false
