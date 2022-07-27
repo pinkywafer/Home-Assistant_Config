@@ -33,11 +33,11 @@ class BrowserModCamera(Camera, BrowserModEntity):
             self.last_seen = datetime.now()
         self.schedule_update_ha_state()
 
-    def camera_image(self):
+    def camera_image(self, width=None, height=None):
         return base64.b64decode(self.data.split(",")[-1])
 
     @property
-    def device_state_attributes(self):
+    def extra_state_attributes(self):
         return {
             "type": "browser_mod",
             "deviceID": self.deviceID,
