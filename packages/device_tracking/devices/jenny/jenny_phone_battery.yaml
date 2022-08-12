@@ -2,7 +2,7 @@ automation:
   - id: 'c206c458-aa56-49e9-abcc-bf3190cb3e93'
     alias: Jenny phone battery warning
     trigger:
-    - entity_id: sensor.jenny_s_oppo_reno_battery_level
+    - entity_id: sensor.jenny_s_phone_battery_level
       below: 15
       platform: numeric_state
     condition:
@@ -12,12 +12,12 @@ automation:
     action:
     - service: notify.broadcast_from_home_assistant
       data:
-        message: "Remember to charge your phone Jenny, It's down to {{ states('sensor.jenny_s_oppo_reno_battery_level')}} percent!"
+        message: "Remember to charge your phone Jenny, It's down to {{ states('sensor.jenny_s_phone_battery_level')}} percent!"
 
   - id: '2fad6acb-b674-4632-b540-821f59cccfde'
     alias: Jenny phone battery critical
     trigger:
-    - entity_id: sensor.jenny_s_oppo_reno_battery_level
+    - entity_id: sensor.jenny_s_phone_battery_level
       below: 5
       platform: numeric_state
     condition:
@@ -27,4 +27,4 @@ automation:
     action:
     - service: notify.broadcast_from_home_assistant
       data:
-        message: "Jenny, Your phone battery is down to {{ states('sensor.jenny_s_oppo_reno_battery_level')}} percent!"
+        message: "Jenny, Your phone battery is down to {{ states('sensor.jenny_s_phone_battery_level')}} percent!"
