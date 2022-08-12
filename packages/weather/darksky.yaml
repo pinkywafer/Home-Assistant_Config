@@ -1,5 +1,4 @@
 weather:
   platform: darksky
   api_key: !secret darksky
-  units: uk
   mode: daily
