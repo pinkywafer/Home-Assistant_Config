@@ -33,9 +33,3 @@ automation:
       - delay: '00:02:00'
       - service: switch.turn_off
         entity_id: switch.ender3_controls
-
-camera:
-  - platform: mjpeg
-    name: Ender3
-    still_image_url: !secret ender3_camera_still
-    mjpeg_url: !secret ender3_camera_mjpeg
