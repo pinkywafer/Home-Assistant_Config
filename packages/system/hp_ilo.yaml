@@ -121,6 +121,8 @@ homeassistant:
 
 shell_command:
   hp_ilo_adjust_fan_pid_29: !secret hp_ilo_adjust_fan_pid_29_command
+  hp_ilo_adjust_fan_pid_29_1: !secret hp_ilo_adjust_fan_pid_29_command1
+  hp_ilo_adjust_fan_pid_29_2: !secret hp_ilo_adjust_fan_pid_29_command2
 
 automation:
   - id: "7ee66689-e490-47ca-a4df-bae4c350bea6"
@@ -130,3 +132,5 @@ automation:
         event: start
     action:
       - service: shell_command.hp_ilo_adjust_fan_pid_29
+#      - service: shell_command.hp_ilo_adjust_fan_pid_29_1
+      - service: shell_command.hp_ilo_adjust_fan_pid_29_2
