@@ -1,3 +1,0 @@
-binary_sensor:
-  - platform: iss
-    show_on_map: false
