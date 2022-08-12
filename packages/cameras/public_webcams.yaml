@@ -1,16 +1,4 @@
 camera:
-  - platform: generic
-    name: Barmouth Bridge
-    still_image_url: https://files.merionethyachtclub.co.uk/webcam/MYC-Webcam-Bridge.jpg
-
-  - platform: generic
-    name: Barmouth Point
-    still_image_url: https://files.merionethyachtclub.co.uk/webcam/MYC-Webcam-Point.jpg
-
-  - platform: generic
-    name: Llyn Ogwen
-    still_image_url: https://ovmro.uk/webcam/d-link/ygarn_camera.jpg
-
   - platform: ffmpeg
     name: Llangollen River Dee
     input: "https://camsecure.co/HLS/tnroutdoors.m3u8"
