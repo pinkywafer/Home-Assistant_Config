@@ -34,14 +34,14 @@ automation:
                 after: input_datetime.electricity_offpeak_start
                 before: input_datetime.electricity_offpeak_end
             sequence:
-              - service: utility_meter.select_tariff
+              - service: select.select_option
                 target:
-                  entity_id: utility_meter.electricity
+                  entity_id: select.electricity
                 data:
-                  tariff: 'offpeak'
+                  option: 'offpeak'
         default:
-          - service: utility_meter.select_tariff
+          - service: select.select_option
             target:
-              entity_id: utility_meter.electricity
+              entity_id: select.electricity
             data:
-              tariff: 'peak'
+              option: 'peak'
