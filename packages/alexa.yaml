@@ -1,0 +1,55 @@
+alexa:
+  smart_home:
+    locale: en-GB
+    filter:
+      include_entities:
+        - sensor.sitting_room_temperature
+        - sensor.sitting_room_humidity
+        - sensor.bedroom_humidity
+        - sensor.bedroom_temperature
+        - sensor.emma_s_room_humidity
+        - sensor.emma_s_room_temperature
+        - sensor.leopard_gecko_temperature
+        - sensor.leopard_gecko_humidity
+        - sensor.kitchen_temperature
+        - sensor.kitchen_humidity
+        - sensor.vestibule_temperature
+        - sensor.vestibule_humidity
+        - light.upstairs_lights
+        - light.downstairs_lights
+        - light.bathroom_light
+        - light.vestibule_light
+        - light.sink_light
+        - light.cooker_light
+        - light.breakfast_bar_led
+        - light.sitting_room_light
+        - light.sitting_room_wall_lights
+        - light.flame_lantern
+        - light.emmas_bedside_light
+        - light.emmas_ceiling_light
+        - light.emma_led
+        - light.emma_night_light
+        - light.bedroom_ceiling_light
+        - light.jennys_bedside_light
+        - light.jos_bedside_light
+        - light.landing_light
+        - light.left_quail_light
+        - light.right_quail_light
+        - binary_sensor.quail_left_door
+        - binary_sensor.quail_right_door
+        - switch.pc
+        - switch.sitting_room_tv
+        - switch.ender3
+        - switch.ender3_controls
+        - input_select.den_lights_effect
+        - switch.immersion_heater
+        - switch.bath_mode
+        - switch.kitchen_socket_1
+        - switch.kitchen_socket_2
+        - switch.sitting_room_amp
+      include_domains:
+        - script
+        - scene
+    entity_config:
+          light.jos_bedside_light:
+            name: "Carmel's Bedside Light"
