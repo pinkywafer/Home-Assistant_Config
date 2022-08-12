@@ -8,7 +8,7 @@ automation:
         from: 'on'
         to: 'off'
     action:
-      - service: notify.mobile_app_jenny_s_oppo_reno
+      - service: notify.mobile_app_jenny_s_phone
         data:
           message: 'Ender 3 Finished'
           title: 3D print finished
