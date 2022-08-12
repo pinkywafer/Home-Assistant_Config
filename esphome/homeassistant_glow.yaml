@@ -97,6 +97,13 @@ sensor:
     pin: 
       number: ${pulse_pin}
       inverted: true
+    on_value:
+      then:
+        - light.turn_on:
+            id: led_blue
+        - delay: 0.5s
+        - light.turn_off:
+            id: led_blue
     internal_filter: 250ms
     filters:
       - lambda: return x * ((60.0 / ${pulse_rate}) * 1000.0);
@@ -112,16 +119,16 @@ sensor:
 
 binary_sensor:
   - <<: !include common/binary_sensor/status.yaml
-  - platform: gpio
-    pin:
-      number: ${pulse_pin}
-      inverted: true
-    name: '${friendly_name} - Meter Light'
-    on_press:
-      then:
-        - light.turn_on:
-            id: led_blue
-    on_release:
-      then:
-        - light.turn_off:
-            id: led_blue
+#  - platform: gpio
+#    pin:
+#      number: ${pulse_pin}
+#      inverted: true
+#    name: '${friendly_name} - Meter Light'
+#    on_press:
+#      then:
+#        - light.turn_on:
+#            id: led_blue
+#    on_release:
+#      then:
+#        - light.turn_off:
+#            id: led_blue
