@@ -20,28 +20,28 @@ This repo is checked using Github Actions for continuous integration.
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 7878
+Lines of yaml code in my configuration (excluding secrets): 7917
 
-Number of entities: 873
+Number of entities: 888
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 2
 Automation | 86
-Binary Sensor | 140
+Binary Sensor | 125
 Camera | 14
-Device Tracker | 37
+Device Tracker | 44
 Group | 1
 Input Boolean | 3
 Input Datetime | 5
 Input Text | 8
-Light | 33
-Media Player | 24
+Light | 37
+Media Player | 28
 Person | 3
 Scene | 1
 Script | 26
-Sensor | 417
+Sensor | 410
 Sun | 1
 Switch | 46
 Weather | 1
@@ -61,7 +61,6 @@ Zone | 4
   - [Google Home](https://github.com/leikoilja/ha-google-home)
   - [Ha Omada](https://github.com/zachcheatham/ha-omada)
   - [HACS](https://github.com/hacs/integration)
-  - [Plex Assistant](https://github.com/maykar/plex_assistant)
   - [Reolink Ip Camera](https://github.com/fwestenberg/reolink_dev)
   - [Spacex Next Launch And Starman](https://github.com/djtimca/HASpaceX)
   - [Spotcast](https://github.com/fondberg/spotcast)
