@@ -5,6 +5,7 @@ import re
 
 import datetime as dt
 from typing import Optional
+import ssl
 
 from urllib.parse import quote_plus
 from dateutil.relativedelta import relativedelta
@@ -19,7 +20,7 @@ from homeassistant.const import (
 from homeassistant.core import Context, HomeAssistant
 from homeassistant.helpers.network import get_url, NoURLAvailableError
 from homeassistant.helpers.storage import STORAGE_DIR
-from homeassistant.helpers.aiohttp_client import async_get_clientsession
+from homeassistant.helpers.aiohttp_client import async_create_clientsession
 import homeassistant.util.dt as dt_util
 
 from reolink.camera_api import Api
@@ -374,7 +375,7 @@ class ReolinkPush:
             except NoURLAvailableError as ex:
                 # If we can't get a URL for external or internal, we will still mark the camara as available
                 await self.set_available(True)
-                return True
+                return False
 
         self._sman = Manager(self._host, self._port, self._username, self._password)
         if await self._sman.subscribe(self._webhook_url):
@@ -411,6 +412,12 @@ class ReolinkPush:
 
     async def renew(self):
         """Renew the subscription of the motion events (lease time is set to 15 minutes)."""
+
+        # _sman is available only if subscription was able to find an Internal/External URL, we can retry in case user has
+        # fixed it after HASS config change
+        if self._sman is None:
+            return await self.subscribe(self._event_id)
+
         if self._sman.renewtimer <= SESSION_RENEW_THRESHOLD:
             if not await self._sman.renew():
                 _LOGGER.error(
@@ -542,5 +549,11 @@ def callback_get_iohttp_session():
     global last_known_hass
     if last_known_hass is None:
         raise Exception("No Home Assistant instance found")
-    session = async_get_clientsession(last_known_hass, verify_ssl=False)
+        
+    context = ssl.create_default_context()
+    context.set_ciphers("DEFAULT")
+    context.check_hostname = False
+    context.verify_mode = ssl.CERT_NONE
+    session = async_create_clientsession(last_known_hass, verify_ssl=False)
+    session.connector._ssl = context
     return session
