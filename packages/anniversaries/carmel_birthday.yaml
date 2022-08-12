@@ -14,7 +14,7 @@ automation:
         entity_id: sensor.anniversary_carmel_s_birthday
         state: '0'
     action:
-      - service: notify.mobile_app_jenny_s_oppo_reno
+      - service: notify.mobile_app_jenny_s_phone
         data:
           message: "Happy Birthday To Carmel!"
           data:

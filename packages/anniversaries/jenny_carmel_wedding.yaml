@@ -14,7 +14,7 @@ automation:
         entity_id: sensor.anniversary_jenny_carmel_s_wedding_anniversary
         state: '0'
     action:
-      - service: notify.mobile_app_jenny_s_oppo_reno
+      - service: notify.mobile_app_jenny_s_phone
         data:
           message: "Happy Wedding Anniversary Jenny and Carmel!"
           data:
