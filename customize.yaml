@@ -16,7 +16,7 @@ device_tracker.breakfast_bar_led:
   icon: mdi:led-strip
 device_tracker.emma_s_blackberry_dtek50:
   entity_picture: /local/emma.jpeg
-device_tracker.jenny_s_oppo_reno:
+device_tracker.jenny_s_phone_wifi:
   entity_picture: /local/jenny.jpg
 sensor.sitting_room_temperature:
   device_class: temperature
