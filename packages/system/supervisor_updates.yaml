@@ -21,7 +21,7 @@ automation:
         entity_id: sensor.supervisor_update
         state: 'True'
     action:
-    - service: notify.mobile_app_jenny_s_oppo_reno
+    - service: notify.mobile_app_jenny_s_phone
       data:
         message: >
           There is an updates to Home Assistant Supervisor:
@@ -50,7 +50,7 @@ automation:
         entity_id: sensor.supervisor
         to: 'False'
     action:
-    - service: notify.mobile_app_jenny_s_oppo_reno
+    - service: notify.mobile_app_jenny_s_phone
       data:
         message: clear_notification
         data:

@@ -20,7 +20,7 @@ automation:
       data:
         entity_id: light.breakfast_bar_led
         effect: "Police All"
-    - service: notify.mobile_app_jenny_s_oppo_reno
+    - service: notify.mobile_app_jenny_s_phone
       data:
         message: 'ALARM! The alarm has been triggered: {{ states.input_text.alarm_trigger.state }}'
         title: 'Home Alarm'

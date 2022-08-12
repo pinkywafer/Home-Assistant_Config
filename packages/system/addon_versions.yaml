@@ -21,7 +21,7 @@ automation:
               entity_id: sensor.addon_updates
               above: 0
           sequence:
-            - service: notify.mobile_app_jenny_s_oppo_reno
+            - service: notify.mobile_app_jenny_s_phone
               data:
                 message: >
                   There are updates to {{ states("sensor.addon_updates") }} Add-Ons:
@@ -45,7 +45,7 @@ automation:
                   {%- endfor -%}
                 notification_id: update_addons
       default:
-        - service: notify.mobile_app_jenny_s_oppo_reno
+        - service: notify.mobile_app_jenny_s_phone
           data:
             message: clear_notification
             data:

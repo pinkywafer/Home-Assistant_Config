@@ -64,7 +64,7 @@ alert:
     message: 'WARNING. Leopard Gecko Temperature problem. {{state_attr("binary_sensor.leopard_gecko_temperature_problem","nature") }}'
     notifiers:
       - broadcast_from_home_assistant
-      - mobile_app_jenny_s_oppo_reno
+      - mobile_app_jenny_s_phone
     data:
       tag: leopard_gecko_temp
       sticky: 'true'
@@ -88,7 +88,7 @@ alert:
     message: 'WARNING. Home Assistant has lost connection to the Leopard Gecko Heating Controller'
     notifiers:
       - broadcast_from_home_assistant
-      - mobile_app_jenny_s_oppo_reno
+      - mobile_app_jenny_s_phone
     data:
       tag: leopard_gecko_temp
       sticky: 'true'

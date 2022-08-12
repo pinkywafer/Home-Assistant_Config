@@ -13,7 +13,7 @@ automation:
       data:
         topic: cmnd/PinkyLEDs
         payload: "{\"state\": \"OFF\", \"effect\": \"Solid\"}"
-    - service: notify.mobile_app_jenny_s_oppo_reno
+    - service: notify.mobile_app_jenny_s_phone
       data:
         message: clear_notification
         data:

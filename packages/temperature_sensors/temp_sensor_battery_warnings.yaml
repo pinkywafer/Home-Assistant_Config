@@ -22,7 +22,7 @@ automation:
                     * {{ location }}
                   {%- endfor %}
                 notification_id: 'temp_sensor_battery_warning'
-            - service: notify.mobile_app_jenny_s_oppo_reno
+            - service: notify.mobile_app_jenny_s_phone
               data:
                 title: Temperature Sensor Low Battery
                 message: >
@@ -43,7 +43,7 @@ automation:
                     {{ location | lower }}
                   {%- endfor %}.
         default:
-          - service: notify.mobile_app_jenny_s_oppo_reno
+          - service: notify.mobile_app_jenny_s_phone
             data:
               message: clear_notification
               data:

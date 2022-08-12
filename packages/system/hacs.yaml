@@ -37,7 +37,7 @@ automation:
           - conditions: '{{states("sensor.hacs")|int == 0}}'
             sequence:
               # clear mobile notifications
-              - service: notify.mobile_app_jenny_s_oppo_reno
+              - service: notify.mobile_app_jenny_s_phone
                 data:
                   message: clear_notification
                   data:
@@ -59,7 +59,7 @@ automation:
         default:
           # if there are updates pending
           # send mobile notification
-          - service: notify.mobile_app_jenny_s_oppo_reno
+          - service: notify.mobile_app_jenny_s_phone
             data:
               message: >
                 There are updates to {{ states("sensor.hacs") }} HACS components:
