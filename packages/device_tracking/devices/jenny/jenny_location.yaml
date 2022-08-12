@@ -1,10 +1,9 @@
-sensor:
-  - platform: template
-    sensors:
-      jenny_location:
-        value_template: >-
+template:
+  - sensor:
+      - name: "Jenny Location"
+        state: >-
           {% if is_state("person.jenny_gorton", "not_home") -%}
-            {{ states("sensor.jenny_s_oppo_reno_geocoded_location") }}
+            {{ states("sensor.jenny_s_phone_geocoded_location") }}
           {%- else -%}
             {{ states("person.jenny_gorton") }}
           {%- endif %}
