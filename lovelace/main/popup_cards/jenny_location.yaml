@@ -26,7 +26,7 @@ card:
                 - attribute: is_charging
                   entity: sensor.jenny_s_phone_battery_state
                   name: On Charge
-                
+
         - type: history-graph
           hours_to_show: 10
           refresh_interval: 0
