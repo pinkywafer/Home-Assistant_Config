@@ -31,14 +31,14 @@ automation:
                   {{["It looks like the Chicken Cam is offline",
                   "The Stupid dog has done it again! - The Chicken cam is unplugged",
                   "It looks like Bentley has unplugged the Chicken Cam again!"]| random }}
-            - service: notify.mobile_app_jenny_s_oppo_reno
+            - service: notify.mobile_app_jenny_s_phone
               data:
                 message: "Chicken Cam is offline"
                 title: ChickenCam Error
                 data:
                   tag: chicken_cam_offline
       default:
-        - service: notify.mobile_app_jenny_s_oppo_reno
+        - service: notify.mobile_app_jenny_s_phone
           data:
             message: clear_notification
             data:
