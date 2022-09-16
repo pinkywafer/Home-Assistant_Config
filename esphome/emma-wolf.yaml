@@ -1,0 +1,197 @@
+# Wire Colours - HEAD:
+# EYE LED
+# 5v - orange: V+
+# GND - blue: V-
+# 33 - brown: led eyes data
+
+# Jaw Servos
+# 5v - Orange + White: V+
+# Gnd - Blue + White: V-
+# 25 - Green: L Servo
+# 26 - Green + White: R Servo
+
+# SWITCHES:
+#
+# Eye Switch
+# GND - Orange
+# 23 - Orange + white
+#
+# Jaw switch
+# GND - Brown
+# 22 - Brown/white
+
+
+
+#substitutions:
+#  ip_address: 192.168.1.222
+#  reboot_time: 15min
+
+esphome:
+  name: emma-wolf
+  platform: ESP32
+  board: esp32dev
+
+# Enable logging
+logger:
+
+#packages:
+#  wifi: !include common/wifi.yaml
+
+#api:
+#  services:
+#    - service: control_servo
+#      variables:
+#        level: float
+#      then:
+#        - servo.write:
+#            id: rmouth
+#            level: !lambda 'return level / 100.0;'
+#    - service: control_servo_l
+#      variables:
+#        level: float
+#      then:
+#        - servo.write:
+#            id: lmouth
+#            level: !lambda 'return level / 100.0;'
+#ota:
+
+switch:
+  - platform: gpio
+    pin: 14
+    name: battery sensor
+
+globals:
+  - id: eye_effect
+    type: int
+    restore_value: no
+    initial_value: '3'
+  
+  - id: mouth_open
+    type: bool
+    restore_value: no
+    initial_value: 'false'
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: 23
+      mode: INPUT_PULLUP
+      inverted: true
+    filters:
+      delayed_off: 250ms
+    name: "eye button"
+    on_press:
+      then:
+        - lambda: |-
+            if (id(eye_effect) > 2) {
+              id(eye_effect) = 0;
+            } else {
+              id(eye_effect) += 1;
+            }
+        - if:
+            condition:
+              lambda: |-
+                return id(eye_effect) == 0;
+            then:
+              - light.turn_on:
+                  id: eyes
+                  red: 0%
+                  green: 25%
+                  blue: 100%
+                  effect: none
+            else:
+              if:
+                condition:
+                  lambda: |-
+                    return id(eye_effect) == 1;
+                then:
+                  - light.turn_on:
+                      id: eyes
+                      brightness: 100%
+                      red: 100%
+                      green: 0%
+                      blue: 0%
+                      effect: none
+                else:
+                  if:
+                    condition:
+                      lambda: |-
+                        return id(eye_effect) == 2;
+                    then:
+                      - light.turn_on:
+                          id: eyes
+                          brightness: 100%
+                          red: 100%
+                          green: 0%
+                          blue: 0%
+                          effect: flash
+                    else:
+                      - light.turn_off: eyes
+    
+  - platform: gpio
+    pin:
+      number: 22
+      mode: INPUT_PULLUP
+      inverted: true
+    filters:
+      delayed_off: 250ms
+    name: "jaw button"
+    on_press:
+      then:
+        - lambda: |-
+            if (id(mouth_open)) {
+              id(lmouth).write(-0.10);
+              id(rmouth).write(-0.16);
+              id(mouth_open) = false;
+            } else {
+              id(lmouth).write(-0.40);
+              id(rmouth).write(0.26);
+              id(mouth_open) = true;
+            }
+
+light:
+  - platform: fastled_clockless
+    chipset: WS2811
+    pin: 33
+    num_leds: 2
+    rgb_order: GRB
+    name: "eyes"
+    id: eyes
+    default_transition_length: 250ms
+    effects:
+      - pulse:
+          name: "flash"
+          transition_length: 0s
+          update_interval: 0.25s
+
+sensor:
+  - platform: adc
+    pin: 35
+    name: "wolf battery"
+    update_interval: 10s
+    attenuation: 11db
+    filters:
+      - multiply: 1.745
+
+servo:
+  - id: lmouth
+    output: pwm_outputl
+    transition_length: 0.5s
+    #auto_detach_time: 1s
+  - id: rmouth
+    # min_level: 12%
+    # max_level: 3%
+    output: pwm_outputr
+    #transition_length: 0.5s
+    auto_detach_time: 1s
+
+output:
+  - platform: ledc
+    id: pwm_outputr
+    pin: 26
+    frequency: 50 Hz
+
+  - platform: ledc
+    id: pwm_outputl
+    pin: 25
+    frequency: 50 Hz
