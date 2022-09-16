@@ -1,0 +1,44 @@
+shell_command:
+  minecraft_weston_park_start: !secret start_minecraft_weston_park
+  minecraft_weston_park_shutdown: !secret shutdown_minecraft_weston_park
+
+  minecraft_jenny_and_emma_start: !secret start_minecraft_jenny_and_emma
+  minecraft_jenny_and_emma_shutdown: !secret shutdown_minecraft_jenny_and_emma
+
+  minecraft_peaceful_start: !secret start_minecraft_peaceful
+  minecraft_peaceful_shutdown: !secret shutdown_minecraft_peaceful
+
+  minecraft_harlech_castle_start: !secret start_minecraft_harlech_castle
+  minecraft_harlech_castle_shutdown: !secret shutdown_minecraft_harlech_castle
+
+switch:
+  - platform: template
+    switches:
+
+      minecraft_weston_park:
+        value_template: "{{ is_state('binary_sensor.gortonserver_minecraft_weston_park_running', 'on') }}"
+        turn_on:
+          service: shell_command.minecraft_weston_park_start
+        turn_off:
+          service: shell_command.minecraft_weston_park_shutdown
+
+      minecraft_jenny_and_emma:
+        value_template: "{{ is_state('binary_sensor.gortonserver_minecraft_jenny_and_emma_running', 'on') }}"
+        turn_on:
+          service: shell_command.minecraft_jenny_and_emma_start
+        turn_off:
+          service: shell_command.minecraft_jenny_and_emma_shutdown
+
+      minecraft_peaceful:
+        value_template: "{{ is_state('binary_sensor.gortonserver_minecraft_peaceful_running', 'on') }}"
+        turn_on:
+          service: shell_command.minecraft_peaceful_start
+        turn_off:
+          service: shell_command.minecraft_peaceful_shutdown
+
+      minecraft_harlech_castle:
+        value_template: "{{ is_state('binary_sensor.gortonserver_minecraft_harlech_castle_running', 'on') }}"
+        turn_on:
+          service: shell_command.minecraft_harlech_castle_start
+        turn_off:
+          service: shell_command.minecraft_harlech_castle_shutdown
