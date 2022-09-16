@@ -1,0 +1,26 @@
+automation:
+  - id: "7fbd2c79-2881-474b-8c22-4ff0efc98b0a"
+    alias: "Emma's Ceiling light Auto off"
+    mode: restart
+    trigger:
+      - platform: state
+        entity_id:
+          - light.emmas_ceiling_light
+        to: "on"
+      - platform: state
+        entity_id:
+          - light.emmas_bedside_light
+        to: "off"
+    condition: "{{is_state('light.emmas_ceiling_light', 'on')}}"
+    action:
+      - alias: "Wait time for light warning"
+        delay: "01:00:00"
+      - condition: "{{is_state('light.emmas_ceiling_light', 'on')}}"
+      - service: light.turn_on
+        entity_id: light.emmas_bedside_light
+      - alias: "Wait time for acknowledgement"
+        delay: "00:05:00"
+      - service: light.turn_off
+        entity_id:
+          - light.emmas_ceiling_light
+          - light.emmas_bedside_light
