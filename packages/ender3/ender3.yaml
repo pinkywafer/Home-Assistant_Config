@@ -16,11 +16,11 @@ homeassistant:
     switch.ender3:
       icon: mdi:printer-3d
 
-switch ender3_controls:
-  platform: mqtt
-  name: Ender3 Controls
-  optimistic: true
-  command_topic: "ender3_controls"
+mqtt:
+  switch:
+    - name: Ender3 Controls
+      optimistic: true
+      command_topic: "ender3_controls"
 
 automation:
   - id: '383db63c-ffcc-4b77-90b4-3b0fd04a33c0'

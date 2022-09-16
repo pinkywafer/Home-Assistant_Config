@@ -4,8 +4,9 @@ binary_sensor:
     scan_interval: 60
     name: Chickencam Ping
 
-  - platform: mqtt
-    name: chickencam Motion
+mqtt:
+  binary_sensor:
+  - name: chickencam Motion
     state_topic: "cameras/chickencam/motion"
     device_class: motion
 

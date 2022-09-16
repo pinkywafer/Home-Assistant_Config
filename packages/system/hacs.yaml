@@ -1,10 +1,10 @@
 # Sensor to monitor open Hacs notifications to ensure Github issue is not spammed
-sensor:
-  - platform: mqtt
-    name: "Active HACS notifications"
-    state_topic: "hacs/notifications"
-    value_template: "{{value_json.components|length}}"
-    json_attributes_topic: "hacs/notifications"
+mqtt:
+  sensor:
+    - name: "Active HACS notifications"
+      state_topic: "hacs/notifications"
+      value_template: "{{value_json.components|length}}"
+      json_attributes_topic: "hacs/notifications"
 
 automation:
   - id: '19a2ab95-526e-427f-ae73-ab437696bde0'
