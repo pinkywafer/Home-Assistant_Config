@@ -69,14 +69,15 @@
       entity_id: switch.pc
   mode: single
 - id: '1638319707185'
-  alias: immersion heater on at 6am
+  alias: immersion heater on at 5:30am
   description: ''
   trigger:
   - platform: time
-    at: 06:00
+    at: 05:30:00
   condition: []
   action:
   - service: switch.turn_on
     target:
       entity_id: switch.immersion_heater
+    data: {}
   mode: single
