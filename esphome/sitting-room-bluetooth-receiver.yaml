@@ -1,0 +1,55 @@
+substitutions:
+  ip_address: 192.168.1.80
+  reboot_time: 10min
+  devicename: sitting-room-bluetooth-receiver
+  friendly_name: Sitting Room Amp Bluetooth
+
+packages:
+  wifi: !include common/wifi.yaml
+
+esphome:
+  name: $devicename
+  platform: ESP8266
+  board: esp01_1m
+      
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+binary_sensor:
+  - <<: !include common/binary_sensor/status.yaml
+
+  - platform: gpio
+    pin:
+      number: GPIO3
+      mode: INPUT_PULLUP
+      inverted: true
+    name: $friendly_name button
+    filters:
+      # debounce the button press.
+      - delayed_on: 25ms
+      - delayed_off: 25ms
+    on_press:
+      then:
+        - switch.toggle: mosfet
+
+sensor:
+  - <<: !include common/sensor/wifi_signal.yaml
+  - <<: !include common/sensor/uptime.yaml
+
+switch:
+  - <<: !include common/switch/reboot.yaml
+
+    # Power the bluetooth board
+  - platform: gpio
+    pin: GPIO0
+    id: mosfet
+    inverted: true
+    name: $friendly_name power
+
+status_led:
+  pin: GPIO2
