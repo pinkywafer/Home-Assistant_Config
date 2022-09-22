@@ -14,7 +14,7 @@
       runs-on: ubuntu-latest
       steps:
         - name: Get config from GitHub
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
         - name: Run YAMLlint
           uses: ibiqlik/action-yamllint@v1
           with:
@@ -25,7 +25,7 @@
       runs-on: ubuntu-18.04
       steps:
         - name: Get config from GitHub
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
         - name: Run Remark lint
           uses: "docker://pipelinecomponents/remark-lint:latest"
           continue-on-error: true
@@ -39,7 +39,7 @@
         current_version: ${{ steps.currentver.outputs.current_version }}
       steps:
         - name: Get config from GitHub
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
         - name: Get Installed Version from .HA_VERSION
           id: currentver
           run: |
@@ -71,7 +71,7 @@
       needs: [yamllint]
       steps:
         - name: Getting your configuration from GitHub
-          uses: actions/checkout@v1
+          uses: actions/checkout@v3
         - name: Set up Python 3.7
           uses: actions/setup-python@v4
           with:
