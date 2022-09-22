@@ -16,7 +16,7 @@
         - name: Get config from GitHub
           uses: actions/checkout@v2
         - name: Run YAMLlint
-          uses: ibiqlik/action-yamllint@v1
+          uses: ibiqlik/action-yamllint@v3
           with:
             config_file: .github/yamllint-config.yml
 
