@@ -12,36 +12,40 @@ A separate VM provides my Dev. env
 Various other VMs and LXCs are providing other services such as Plex server, NAS etc on this same machine
 
 This repo is checked using Github Actions for continuous integration.
-  * The config is first checked with yamllint and remarklint.
-  * The config is validated against the currently installed version of Home Assistant, the latest release of Home Assistant, the latest beta release of Home Assistant and the Latest Home Assistant Dev branch.
+  * The config is first checked with
+ [Frenck's Github Action: yamllint](https://github.com/frenck/action-yamllint) and remarklint.
+  * The config is validated against the currently installed version of Home Assistant,
+ the latest release of Home Assistant, the latest beta release of Home Assistant and
+ the Latest Home Assistant Dev branch using
+  [Frenck's Github Action: Home Assistant Core Configuration Check](https://github.com/frenck/action-home-assistant)
   * ESPHome yaml is also validated against the latest version of ESPHome
 
 ***
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 7917
+Lines of yaml code in my configuration (excluding secrets): 7941
 
-Number of entities: 888
+Number of entities: 902
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 2
-Automation | 86
+Automation | 87
 Binary Sensor | 125
 Camera | 14
-Device Tracker | 44
+Device Tracker | 49
 Group | 1
 Input Boolean | 3
 Input Datetime | 5
 Input Text | 8
-Light | 37
-Media Player | 28
+Light | 38
+Media Player | 30
 Person | 3
 Scene | 1
 Script | 26
-Sensor | 410
+Sensor | 412
 Sun | 1
 Switch | 46
 Weather | 1
@@ -59,11 +63,11 @@ Zone | 4
   - [Garbage Collection](https://github.com/bruxy70/Garbage-Collection)
   - [Generate Readme](https://github.com/custom-components/readme)
   - [Google Home](https://github.com/leikoilja/ha-google-home)
-  - [Ha Omada](https://github.com/zachcheatham/ha-omada)
   - [HACS](https://github.com/hacs/integration)
   - [Reolink Ip Camera](https://github.com/fwestenberg/reolink_dev)
   - [Spacex Next Launch And Starman](https://github.com/djtimca/HASpaceX)
   - [Spotcast](https://github.com/fondberg/spotcast)
+  - [Tp Link Omada](https://github.com/zachcheatham/ha-omada)
   - [Xmr Pool Statistics](https://github.com/hwmland/homeassistant-xmrpool_stat)
   - [Youtube](https://github.com/custom-components/youtube)
 
