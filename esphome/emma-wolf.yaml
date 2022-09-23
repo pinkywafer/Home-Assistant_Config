@@ -63,7 +63,7 @@ globals:
     type: int
     restore_value: no
     initial_value: '3'
-  
+
   - id: mouth_open
     type: bool
     restore_value: no
@@ -125,7 +125,7 @@ binary_sensor:
                           effect: flash
                     else:
                       - light.turn_off: eyes
-    
+
   - platform: gpio
     pin:
       number: 22

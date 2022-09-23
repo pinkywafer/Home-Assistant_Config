@@ -22,7 +22,7 @@ uart:
   rx_pin: 18
   baud_rate: 9600
 
-rdm6300: 
+rdm6300:
   on_tag:
     then:
       - sensor.template.publish:

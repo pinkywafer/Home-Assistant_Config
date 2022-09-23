@@ -51,7 +51,7 @@ light:
     pin: GPIO2
     internal: true
     id: led_blue
-    
+
 # Status LED for connection
 status_led:
   pin:
@@ -83,7 +83,7 @@ sensor:
     device_class: power
     icon: mdi:flash-outline
     accuracy_decimals: 0
-    pin: 
+    pin:
       number: ${pulse_pin}
       inverted: true
     on_value:
