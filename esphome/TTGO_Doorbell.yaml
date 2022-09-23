@@ -10,9 +10,9 @@ esphome:
   name: $devicename
   platform: ESP32
   board: esp-wrover-kit
-  #arduino_version: 1.0.5
-  # on_loop:
-  #   then:
+  # arduino_version: 1.0.5
+  #   on_loop:
+  #     then:
   #     if:
   #       condition:
   #         lambda: |-
@@ -54,7 +54,7 @@ binary_sensor:
   - platform: gpio
     pin:
       number: GPIO34
-      inverted: True
+      inverted: true
     name: $friendly_name Button
     id: button
 

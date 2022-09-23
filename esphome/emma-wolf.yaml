@@ -20,9 +20,9 @@
 # GND - Brown
 # 22 - Brown/white
 
-#substitutions:
-#  ip_address: 192.168.1.222
-#  reboot_time: 15min
+# substitutions:
+#   ip_address: 192.168.1.222
+#   reboot_time: 15min
 
 esphome:
   name: emma-wolf
@@ -32,26 +32,26 @@ esphome:
 # Enable logging
 logger:
 
-#packages:
-#  wifi: !include common/wifi.yaml
+# packages:
+#   wifi: !include common/wifi.yaml
 
-#api:
-#  services:
-#    - service: control_servo
-#      variables:
-#        level: float
-#      then:
-#        - servo.write:
-#            id: rmouth
-#            level: !lambda 'return level / 100.0;'
-#    - service: control_servo_l
-#      variables:
-#        level: float
-#      then:
-#        - servo.write:
-#            id: lmouth
-#            level: !lambda 'return level / 100.0;'
-#ota:
+# api:
+#   services:
+#     - service: control_servo
+#       variables:
+#         level: float
+#       then:
+#         - servo.write:
+#             id: rmouth
+#             level: !lambda 'return level / 100.0;'
+#     - service: control_servo_l
+#       variables:
+#         level: float
+#       then:
+#         - servo.write:
+#             id: lmouth
+#             level: !lambda 'return level / 100.0;'
+# ota:
 
 switch:
   - platform: gpio
@@ -61,12 +61,12 @@ switch:
 globals:
   - id: eye_effect
     type: int
-    restore_value: no
+    restore_value: false
     initial_value: '3'
 
   - id: mouth_open
     type: bool
-    restore_value: no
+    restore_value: false
     initial_value: 'false'
 
 binary_sensor:
@@ -175,12 +175,12 @@ servo:
   - id: lmouth
     output: pwm_outputl
     transition_length: 0.5s
-    #auto_detach_time: 1s
+    # auto_detach_time: 1s
   - id: rmouth
-    # min_level: 12%
-    # max_level: 3%
+      # min_level: 12%
+      # max_level: 3%
     output: pwm_outputr
-    #transition_length: 0.5s
+    # transition_length: 0.5s
     auto_detach_time: 1s
 
 output:
