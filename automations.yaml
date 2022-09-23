@@ -11,7 +11,8 @@
   condition: []
   action:
   - data:
-      message: '{{ ["Carmel, it''s time for your tablet",  "Don''t forget to take
+      message: >-
+        '{{ ["Carmel, it''s time for your tablet",  "Don''t forget to take
         your tablet, Carmel", "Carmel, if you haven''t already taken your tablet,
         its time to take it now", "Remember to take your tablet, Carmel" ] | random
         }}'
