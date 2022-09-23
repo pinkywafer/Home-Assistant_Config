@@ -13,8 +13,12 @@ A separate VM provides my Dev. env
 Various other VMs and LXCs are providing other services such as Plex server, NAS etc on this same machine
 
 This repo is checked using Github Actions for continuous integration.
-  * The config is first checked with yamllint and remarklint.
-  * The config is validated against the currently installed version of Home Assistant, the latest release of Home Assistant, the latest beta release of Home Assistant and the Latest Home Assistant Dev branch.
+  * The config is first checked with
+ [Frenck's Github Action: yamllint](https://github.com/frenck/action-yamllint) and remarklint.
+  * The config is validated against the currently installed version of Home Assistant,
+ the latest release of Home Assistant, the latest beta release of Home Assistant and
+ the Latest Home Assistant Dev branch using
+  [Frenck's Github Action: Home Assistant Core Configuration Check](https://github.com/frenck/action-home-assistant)
   * ESPHome yaml is also validated against the latest version of ESPHome
 
 ***
