@@ -46,7 +46,7 @@ switch:
       - switch.turn_on: red_led
     on_turn_off:
       - switch.turn_off: red_led
-  
+
   - platform: gpio
     pin: GPIO0
     inverted: True

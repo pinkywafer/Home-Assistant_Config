@@ -42,8 +42,7 @@ binary_sensor:
       max_length: 2s
       then:
         switch.turn_on: bath_mode
- 
-    
+
   - platform: status
     name: Immersion Heater Switch Status
 
@@ -60,7 +59,7 @@ switch:
       - switch.turn_off: auto_switch
     on_turn_off:
       - output.turn_off: relay
-      
+
   - platform: template
     name: Bath Mode
     id: bath_mode
@@ -75,7 +74,7 @@ switch:
     on_turn_off:
       - output.turn_off: relay
       - output.turn_off: led
-      
+
 output:
   - platform: gpio
     pin: GPIO13

@@ -30,7 +30,6 @@ dallas:
 sensor:
   - <<: !include common/sensor/wifi_signal.yaml
   - <<: !include common/sensor/uptime.yaml
-  
 
   - platform: dallas
     address: 0xD43C01D607C10628

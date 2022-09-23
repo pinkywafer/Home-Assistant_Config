@@ -31,12 +31,12 @@ binary_sensor:
 
   - platform: status
     name: $friendly_name Status
-  
+
 sensor:
   - platform: wifi_signal
     name: $friendly_name WiFi Signal
     update_interval: 10s
-  
+
   - platform: uptime
     name: $friendly_name Uptime
 
@@ -57,7 +57,7 @@ esp32_camera:
   jpeg_quality: 10
   vertical_flip: true
   horizontal_mirror: true
-  
+
 switch:
   - platform: restart
     name: $friendly_name Restart

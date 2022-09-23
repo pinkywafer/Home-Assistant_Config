@@ -39,7 +39,7 @@ binary_sensor:
       - light.turn_off: led
     on_release:
       - light.turn_on: led
-  
+
 output:
   - platform: gpio
     pin: GPIO12

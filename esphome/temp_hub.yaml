@@ -18,11 +18,11 @@ api:
   reboot_timeout: 60min
 
 ota:
-  
+
 esp32_ble_tracker:
 
 status_led:
-  pin: 
+  pin:
     number: GPIO2
     inverted: true
 
@@ -44,7 +44,7 @@ output:
 sensor:
   - platform: uptime
     name: "${esphome_name}_Uptime Sensor"
-    
+
   - platform: wifi_signal
     name: "${esphome_name} WiFi Signal"
     update_interval: 60s
@@ -67,7 +67,7 @@ sensor:
     humidity:
       name: "Leopard Gecko Humidity"
     battery_level:
-      name: "Leopard Gecko Sensor Battery Level" 
+      name: "Leopard Gecko Sensor Battery Level"
 
   - platform: xiaomi_lywsd03mmc
     mac_address: "A4:C1:38:41:AE:5F"
@@ -77,7 +77,7 @@ sensor:
     humidity:
       name: "Vestibule Humidity"
     battery_level:
-      name: "Vestibule Temp Sensor Battery Level" 
+      name: "Vestibule Temp Sensor Battery Level"
 
   - platform: xiaomi_lywsd03mmc
     mac_address: "A4:C1:38:00:c5:96"
@@ -87,7 +87,7 @@ sensor:
     humidity:
       name: "Kitchen Humidity"
     battery_level:
-      name: "Kitchen Temp Sensor Battery Level" 
+      name: "Kitchen Temp Sensor Battery Level"
 
   - platform: xiaomi_lywsd03mmc
     mac_address: "A4:C1:38:1C:BA:24"
@@ -97,5 +97,4 @@ sensor:
     humidity:
       name: "Server Cupboard Humidity"
     battery_level:
-      name: "Server Cupboard Temp Sensor Battery Level" 
-
+      name: "Server Cupboard Temp Sensor Battery Level"

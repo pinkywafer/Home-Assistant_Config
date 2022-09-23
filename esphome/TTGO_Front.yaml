@@ -35,15 +35,15 @@ binary_sensor:
 #    on_release:
 #      - display.page.show: blank
 #      - component.update: lcd
-    
+
   - platform: status
     name: $friendly_name Status
-  
+
 sensor:
   - platform: wifi_signal
     name: $friendly_name WiFi Signal
     update_interval: 10s
-  
+
   - platform: uptime
     name: $friendly_name Uptime
 
@@ -68,4 +68,3 @@ esp32_camera:
 switch:
   - platform: restart
     name: $friendly_name Restart
-    

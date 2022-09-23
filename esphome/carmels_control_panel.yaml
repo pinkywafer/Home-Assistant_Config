@@ -34,7 +34,7 @@ binary_sensor:
     filters:
       - delayed_on: 10ms
       - delayed_off: 10ms
-  
+
   - platform: gpio
     pin:
       number: 22
@@ -44,7 +44,7 @@ binary_sensor:
     filters:
       - delayed_on: 10ms
       - delayed_off: 10ms
-      
+
   - platform: gpio
     pin:
       number: 21
@@ -54,7 +54,7 @@ binary_sensor:
     filters:
       - delayed_on: 10ms
       - delayed_off: 10ms
-    
+
   - platform: gpio
     pin:
       number: 19
@@ -64,7 +64,7 @@ binary_sensor:
     filters:
       - delayed_on: 10ms
       - delayed_off: 10ms
-    
+
   - platform: gpio
     pin:
       number: 18
@@ -87,7 +87,7 @@ sensor:
     humidity:
       name: "Emma's Room Humidity"
     battery_level:
-      name: "Emma's Room Temp Sensor Battery Level" 
+      name: "Emma's Room Temp Sensor Battery Level"
 
   - platform: xiaomi_lywsd03mmc
     mac_address: "A4:C1:38:3E:41:7D"

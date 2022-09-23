@@ -1,7 +1,7 @@
 ---
 # Home Assistant Glow
 #
-# Read your electricity meter by means of the pulse LED on your 
+# Read your electricity meter by means of the pulse LED on your
 # meter, useful if you do not have a serial port (P1).
 #
 substitutions:
@@ -27,16 +27,6 @@ esphome:
 packages:
   wifi: !include common/wifi.yaml
 
-#wifi:
-  # ssid: !secret wifi_ssid
-  # password: !secret wifi_password
-
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-#  ap:
-#    ssid: '${device_name}'
-#    password: !secret fallback_password
-
-#captive_portal:
 
 # Enable logging
 logger:
@@ -55,7 +45,6 @@ ota:
 
 web_server:
   port: 80
-
 
 light:
   - platform: status_led
@@ -119,16 +108,3 @@ sensor:
 
 binary_sensor:
   - <<: !include common/binary_sensor/status.yaml
-#  - platform: gpio
-#    pin:
-#      number: ${pulse_pin}
-#      inverted: true
-#    name: '${friendly_name} - Meter Light'
-#    on_press:
-#      then:
-#        - light.turn_on:
-#            id: led_blue
-#    on_release:
-#      then:
-#        - light.turn_off:
-#            id: led_blue

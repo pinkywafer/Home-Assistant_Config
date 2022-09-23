@@ -29,22 +29,21 @@ api:
         blast_nbits: int
       then:
         - remote_transmitter.transmit_lg:
-            data:  !lambda 'return blast_data;'
-            nbits:  !lambda 'return blast_nbits;'
+            data: !lambda 'return blast_data;'
+            nbits: !lambda 'return blast_nbits;'
 
 ota:
 
 remote_receiver:
-  pin: 
+  pin:
     number: 4
     inverted: True
     mode: INPUT_PULLUP
   dump: all
   idle: 25ms
 
-
 remote_transmitter:
-  pin: 
+  pin:
     number: 32
   carrier_duty_percent: 40%
 

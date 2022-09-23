@@ -57,10 +57,10 @@ binary_sensor:
       inverted: True
     name: $friendly_name Button
     id: button
-    
+
   - platform: status
     name: $friendly_name Status
-  
+
 sensor:
   - <<: !include common/sensor/wifi_signal.yaml
   - <<: !include common/sensor/uptime.yaml
@@ -83,7 +83,7 @@ esp32_camera:
   vertical_flip: false
   horizontal_mirror: false
   brightness: 1
-  
+
 i2c:
   sda: GPIO21
   scl: GPIO22
