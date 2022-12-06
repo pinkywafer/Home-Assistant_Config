@@ -121,7 +121,7 @@ cards:
           name:
             - font-size: 12px
       - type: custom:button-card
-        entity: light.jos_bedside_light
+        entity: light.carmels_bedside_light
         show_state: false
         icon: mdi:wall-sconce
         name: Carmel
