@@ -11,10 +11,9 @@
   condition: []
   action:
   - data:
-      message: '{{ ["Carmel, it''s time for your tablet",
-      "Don''t forget to take your tablet, Carmel",
-      "Carmel, if you haven''t already taken your tablet, its time to take it now",
-      "Remember to take your tablet, Carmel" ] | random }}'
+      message: '{{ ["Carmel, it''s time for your tablet", "Don''t forget to take your
+        tablet, Carmel", "Carmel, if you haven''t already taken your tablet, its time
+        to take it now", "Remember to take your tablet, Carmel" ] | random }}'
     service: notify.broadcast_from_home_assistant
 - id: '1601999861619'
   alias: Emma Chore reminder
@@ -80,4 +79,58 @@
     target:
       entity_id: switch.immersion_heater
     data: {}
+  mode: single
+- id: '1667433779345'
+  alias: Doorbell
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.doorbell_button
+    to: 'on'
+  condition: []
+  action:
+  - service: media_player.volume_mute
+    data:
+      is_volume_muted: true
+    target:
+      entity_id: "{% for state in dict([\nstates.media_player.living_room_speaker,\nstates.media_player.bedroom_speaker,\nstates.media_player.emma_s_room_speaker,\nstates.media_player.kitchen_speaker]
+        | groupby('state'))['off']\n-%}\n  {% if not loop.first and loop.length >
+        1 %}, {% endif %}\n  {{- state.entity_id |  trim(\",\") }}\n{%- endfor %}\n"
+    enabled: false
+  - service: media_player.turn_on
+    data: {}
+    target:
+      entity_id: media_player.all_speakers
+  - service: media_player.volume_set
+    data:
+      volume_level: 0.7
+    target:
+      entity_id:
+      - media_player.bedroom_speaker
+      - media_player.kitchen_speaker
+      - media_player.emma_s_room_speaker
+      - media_player.living_room_speaker
+  - service: media_player.volume_mute
+    data:
+      is_volume_muted: false
+    target:
+      entity_id: media_player.all_speakers
+    enabled: false
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.all_speakers
+    data:
+      media_content_id: media-source://media_source/local/the_avengers_theme.mp3
+      media_content_type: audio/mpeg
+    metadata:
+      title: the_avengers_theme.mp3
+      thumbnail:
+      media_class: music
+      children_media_class:
+      navigateIds:
+      - {}
+      - media_content_type: app
+        media_content_id: media-source://media_source
+    enabled: true
   mode: single
