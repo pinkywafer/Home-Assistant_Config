@@ -96,19 +96,7 @@ binary_sensor:
       inverted: true
     name: $friendly_name internal Button
     id: internal_button
-    # on_press:
-    #   - lambda: |-
-    #       id(line1) = "Please";
-    #       id(line2) = "Wait...";
-    #       id(delay_time) = 10000;
-      # - delay: 10 sec
-      # - lambda: |-
-      #     if (id(line1) == "Please" && id(line2) == "Wait...")
-      #     {
-      #       id(line1) = "";
-      #       id(line2) = "";
-      #     }
-  
+
   - platform: gpio
     pin:
       pcf8574: pcf8574_hub
@@ -131,7 +119,7 @@ binary_sensor:
       mode:
         input: true
       inverted: false
-  
+
   - platform: gpio
     name: "Door Locked"
     device_class: lock
@@ -159,7 +147,7 @@ output:
       inverted: false
     id: locked_led
     inverted: true
-  
+
   - platform: gpio
     pin:
       pcf8574: pcf8574_hub
@@ -238,12 +226,6 @@ display:
         lambda: |-
           it.printf(64, 10, id(tnr1), TextAlign::TOP_CENTER, " %s", id(line1).c_str());
           it.printf(64, 55, id(tnr1), TextAlign::BASELINE_CENTER, " %s", id(line2).c_str());
-
-# esp32_camera_web_server:
-#   - port: 8080
-#     mode: stream
-#   - port: 8081
-#     mode: snapshot
 
 pcf8574:
   - id: 'pcf8574_hub'

@@ -20,10 +20,10 @@ binary_sensor:
     name: $friendly_name Touch Switch
     on_press:
       - light.toggle: light_output
-  
+
   - platform: status
     name: $friendly_name Sonoff Status
-  
+
   # - platform: gpio
   #   id: dummy
   #   #internal: true
@@ -38,7 +38,7 @@ output:
   - platform: gpio
     pin: GPIO12
     id: relay
-  
+
   # - platform: esp8266_pwm
   #   id: blue_led
   #   pin: GPIO13
@@ -50,7 +50,7 @@ light:
     id: light_output
     name: $friendly_name
     output: relay
-  
+
   # - platform: monochromatic
   #   id: led
   #   name: blue led

@@ -3,7 +3,7 @@ substitutions:
   friendly_name: Sink Light
   $reboot_time: 0s
   ip_address: !secret sink_light_ip
-  
+
 packages:
   wifi: !include common/wifi.yaml
   device_base: !include common/shelly1_light.yaml
