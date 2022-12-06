@@ -24,32 +24,32 @@ This repo is checked using Github Actions for continuous integration.
 
 ## Some statistics about my installation:
 
-Lines of yaml code in my configuration (excluding secrets): 7941
+Lines of yaml code in my configuration (excluding secrets): 8175
 
-Number of entities: 902
+Number of entities: 949
 
 Type | Qty
 -- | --
 Alarm Control Panel | 1
 Alert | 2
-Automation | 87
-Binary Sensor | 125
-Camera | 14
-Device Tracker | 49
+Automation | 94
+Binary Sensor | 139
+Camera | 15
+Device Tracker | 48
 Group | 1
 Input Boolean | 3
 Input Datetime | 5
 Input Text | 8
-Light | 38
-Media Player | 30
+Light | 42
+Media Player | 31
 Person | 3
 Scene | 1
-Script | 26
-Sensor | 412
+Script | 28
+Sensor | 422
 Sun | 1
-Switch | 46
+Switch | 52
 Weather | 1
-Zone | 4
+Zone | 5
 
 ***
 
