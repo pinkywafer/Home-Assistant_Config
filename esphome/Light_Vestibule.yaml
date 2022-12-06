@@ -1,8 +1,13 @@
 substitutions:
-  devicename: vestibule_light_shelly1
+  devicename: vestibule-light-shelly1
   friendly_name: Vestibule Light
   $reboot_time: 0s
-  ip_address: 192.168.1.21
-
+  ip_address: !secret vestibule_light_ip
+  
 packages:
+  wifi: !include common/wifi.yaml
   device_base: !include common/shelly1_light.yaml
+
+# wifi:
+#   use_address: 192.168.1.21
+  

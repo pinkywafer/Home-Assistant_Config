@@ -1,7 +1,7 @@
 substitutions:
-  devicename: sitting_room_sensor
+  devicename: ttgo-sitting-room-sensor
   friendly_name: Sitting Room Sensor
-  ip_address: 192.168.1.231
+  ip_address: !secret ttgo_sitting_room_sensor_ip
   reboot_time: 15min
 
 esphome:
@@ -57,6 +57,7 @@ esp32_camera:
   jpeg_quality: 10
   vertical_flip: true
   horizontal_mirror: true
+  brightness: 2
 
 switch:
   - platform: restart

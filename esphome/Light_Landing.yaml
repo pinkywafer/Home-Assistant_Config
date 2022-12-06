@@ -1,6 +1,12 @@
 substitutions:
-  devicename: landing_light_sonoff
+  devicename: landing-light-sonoff
   friendly_name: Landing Light
-  ip_address: 192.168.1.25
+  reboot_time: 20min
+  ip_address: !secret landing_light_ip
 
-<<: !include common/sonoff_basic_light.yaml
+packages:
+  wifi: !include common/wifi.yaml
+  device_base: !include common/sonoff_basic_light.yaml
+
+# wifi:
+#   use_address: 192.168.1.25

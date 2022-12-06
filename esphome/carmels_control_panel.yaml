@@ -1,7 +1,7 @@
 substitutions:
-  ip_address: 192.168.1.11
+  ip_address: !secret carmels_control_panel_ip 
   reboot_time: 10min
-  devicename: carmels_control_panel
+  devicename: carmels-control-panel
   friendly_name: Carmel's Control Panel
 
 packages:
@@ -12,7 +12,7 @@ esphome:
   platform: ESP32
   board: esp-wrover-kit
 
-# Enable logging
+  # Enable logging
 logger:
 
 # Enable Home Assistant API

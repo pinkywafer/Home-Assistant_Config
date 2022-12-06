@@ -1,7 +1,7 @@
 substitutions:
-  devicename: kitchen_socket_2
+  devicename: kitchen-socket-2
   friendly_name: Kitchen Socket 2
-  ip_address: 192.168.1.51
+  ip_address: !secret kitchen_socket_2_ip
   reboot_time: 0s
 
 packages:

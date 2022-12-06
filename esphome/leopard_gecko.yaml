@@ -1,7 +1,7 @@
 substitutions:
-  ip_address: 192.168.1.42
+  ip_address: !secret leopard_gecko_temp_and_light_ip
   reboot_time: 10min
-  devicename: leopard_gecko_temp_and_light
+  devicename: leopard-gecko-temp-and-light
   friendly_name: Leopard Gecko Temperature and Light
 
 packages:

@@ -1,6 +1,12 @@
 substitutions:
-  devicename: emmas_bedside_light_sonoff
+  devicename: emmas-bedside-light-sonoff
   friendly_name: Emmas Bedside Light
-  ip_address: 192.168.1.27
+  reboot_time: 20min
+  ip_address: !secret emmas_bedside_light_ip
 
-<<: !include common/sonoff_basic_light.yaml
+packages:
+  wifi: !include common/wifi.yaml
+  device_base: !include common/sonoff_basic_light.yaml
+
+# wifi:
+#   use_address: 192.168.1.27

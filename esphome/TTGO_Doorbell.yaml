@@ -1,35 +1,34 @@
 substitutions:
   devicename: doorbell
   friendly_name: Doorbell
-  ip_address: 10.12.21.19
-  line1_input_text: input_text.doorbell_line1
-  line2_input_text: input_text.doorbell_line2
+  ip_address: !secret doorbell_ip
+  line1_input_text: input_text.doorbell_line_1
+  line2_input_text: input_text.doorbell_line_2
   reboot_time: 15min
 
 esphome:
   name: $devicename
   platform: ESP32
   board: esp-wrover-kit
-  # arduino_version: 1.0.5
-  #   on_loop:
-  #     then:
-  #     if:
-  #       condition:
-  #         lambda: |-
-  #           return (id(line1).state == "") and (id(line2).state == "");
-  #       then:
-  #         if:
-  #           condition:
-  #             binary_sensor.is_on: motion
-  #           then:
-  #             - display.page.show: time_page
-  #             - component.update: lcd
-  #           else:
-  #             - display.page.show: blank_page
-  #             - component.update: lcd
-  #       else:
-  #         - display.page.show: message_page
-  #         - component.update: lcd
+  on_loop:
+    then:
+      if:
+        condition:
+          lambda: |-
+            return (id(line1) == "") and (id(line2) == "");
+        then:
+          if:
+            condition:
+              binary_sensor.is_on: motion
+            then:
+              - display.page.show: time_page
+              - component.update: lcd
+            else:
+              - display.page.show: blank_page
+              - component.update: lcd
+        else:
+          - display.page.show: message_page
+          - component.update: lcd
 
 packages:
   wifi: !include common/wifi.yaml
@@ -41,6 +40,46 @@ logger:
 api:
 
 ota:
+
+globals:
+  - id: line1
+    type: std::string
+    restore_value: no
+    initial_value: ""
+  - id: line2
+    type: std::string
+    restore_value: no
+    initial_value: ""
+  - id: delay_time
+    type: int
+    restore_value: no
+    initial_value: '10000'
+
+script:
+  - id: reset_text
+    mode: restart
+    then:
+      - delay: !lambda "return id(delay_time);"
+      - lambda: |-
+          id(line1) = "";
+          id(line2) = "";
+      - logger.log:
+          format: "Text display Reset"
+      # - script.execute: reset_text
+
+button:
+  - platform: template
+    name: $friendly_name display text
+    on_press:
+      - lambda: |-
+          id(line1) = id(ha_line1).state.c_str();
+          id(line2) = id(ha_line2).state.c_str();
+          id(delay_time) = 40000;
+      - script.execute: reset_text
+      # - delay: 30 sec
+      # - lambda: |-
+      #     id(line1) = "";
+      #     id(line2) = "";
 
 binary_sensor:
   - platform: gpio
@@ -55,11 +94,81 @@ binary_sensor:
     pin:
       number: GPIO34
       inverted: true
+    name: $friendly_name internal Button
+    id: internal_button
+    # on_press:
+    #   - lambda: |-
+    #       id(line1) = "Please";
+    #       id(line2) = "Wait...";
+    #       id(delay_time) = 10000;
+      # - delay: 10 sec
+      # - lambda: |-
+      #     if (id(line1) == "Please" && id(line2) == "Wait...")
+      #     {
+      #       id(line1) = "";
+      #       id(line2) = "";
+      #     }
+  
+  - platform: gpio
+    pin:
+      pcf8574: pcf8574_hub
+      number: 7
+      inverted: true
     name: $friendly_name Button
-    id: button
+    id: doorbell_button
+    on_press:
+      - lambda: |-
+          id(line1) = "Please";
+          id(line2) = "Wait...";
+          id(delay_time) = 10000;
+
+  - platform: gpio
+    name: "Door Closed"
+    device_class: door
+    pin:
+      pcf8574: pcf8574_hub
+      number: 0
+      mode:
+        input: true
+      inverted: false
+  
+  - platform: gpio
+    name: "Door Locked"
+    device_class: lock
+    pin:
+      pcf8574: pcf8574_hub
+      number: 1
+      mode:
+        input: true
+      inverted: false
+    on_press:
+      - output.turn_on: locked_led
+    on_release:
+      - output.turn_off: locked_led
 
   - platform: status
     name: $friendly_name Status
+
+output:
+  - platform: gpio
+    pin:
+      pcf8574: pcf8574_hub
+      number: 2
+      mode:
+        output: true
+      inverted: false
+    id: locked_led
+    inverted: true
+  
+  - platform: gpio
+    pin:
+      pcf8574: pcf8574_hub
+      number: 3
+      mode:
+        output: true
+      inverted: false
+    id: unlocked_led
+    inverted: true
 
 sensor:
   - <<: !include common/sensor/wifi_signal.yaml
@@ -78,59 +187,65 @@ esp32_camera:
   href_pin: GPIO25
   pixel_clock_pin: GPIO19
   power_down_pin: GPIO26
-  resolution: 640x480
+  resolution: 800x600
   jpeg_quality: 10
   vertical_flip: false
   horizontal_mirror: false
-  brightness: 1
+  brightness: 2
+  setup_priority: -200
 
 i2c:
   sda: GPIO21
   scl: GPIO22
 
-# font:
-#   - file: "common/fonts/times-new-roman.ttf"
-#     id: tnr1
-#     size: 20
-#   - file: "common/fonts/times-new-roman.ttf"
-#     id: tnr2
-#     size: 35
+font:
+  - file: "common/fonts/times-new-roman.ttf"
+    id: tnr1
+    size: 20
+  - file: "common/fonts/times-new-roman.ttf"
+    id: tnr2
+    size: 25
 
-# time:
-#   - platform: homeassistant
-#     id: homeassistant_time
+time:
+  - platform: homeassistant
+    id: homeassistant_time
 
-# text_sensor:
-#   - platform: homeassistant
-#     entity_id: $line1_input_text
-#     internal: true
-#     id: line1
+text_sensor:
+  - platform: homeassistant
+    entity_id: $line1_input_text
+    internal: true
+    id: ha_line1
 
-#   - platform: homeassistant
-#     entity_id: $line2_input_text
-#     internal: true
-#     id: line2
+  - platform: homeassistant
+    entity_id: $line2_input_text
+    internal: true
+    id: ha_line2
 
-# display:
-#   - platform: ssd1306_i2c
-#     model: "SSD1306 128x64"
-#     address: 0x3C
-#     id: lcd
-#     pages:
-#       - id: blank_page
-#         lambda: |-
-#           it.fill(COLOR_OFF);
-#       - id: time_page
-#         lambda: |-
-#           it.strftime(64, 0, id(tnr2), TextAlign::TOP_CENTER,"%d-%m-%Y", id(homeassistant_time).now());
-#           it.strftime(64, 64, id(tnr2), TextAlign::BASELINE_CENTER, "%H:%M", id(homeassistant_time).now());
-#       - id: message_page
-#         lambda: |-
-#           it.printf(64, 0, id(tnr1), TextAlign::TOP_CENTER, " %s", id(line1).state.c_str());
-#           it.printf(64, 64, id(tnr1), TextAlign::BASELINE_CENTER, " %s", id(line2).state.c_str());
+display:
+  - platform: ssd1306_i2c
+    model: "SSD1306 128x64"
+    address: 0x3C
+    id: lcd
+    pages:
+      - id: blank_page
+        lambda: |-
+          it.fill(COLOR_OFF);
+      - id: time_page
+        lambda: |-
+          it.strftime(64, 0, id(tnr2), TextAlign::TOP_CENTER,"%d-%m-%Y", id(homeassistant_time).now());
+          it.strftime(64, 60, id(tnr2), TextAlign::BASELINE_CENTER, "%H:%M", id(homeassistant_time).now());
+      - id: message_page
+        lambda: |-
+          it.printf(64, 10, id(tnr1), TextAlign::TOP_CENTER, " %s", id(line1).c_str());
+          it.printf(64, 55, id(tnr1), TextAlign::BASELINE_CENTER, " %s", id(line2).c_str());
 
-esp32_camera_web_server:
-  - port: 8080
-    mode: stream
-  - port: 8081
-    mode: snapshot
+# esp32_camera_web_server:
+#   - port: 8080
+#     mode: stream
+#   - port: 8081
+#     mode: snapshot
+
+pcf8574:
+  - id: 'pcf8574_hub'
+    address: 0x20
+    pcf8575: false

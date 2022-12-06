@@ -1,8 +1,9 @@
 substitutions:
-  devicename: sitting_room_wall_light_shelly1
+  devicename: sitting-room-wall-light-shelly1
   friendly_name: Sitting Room Wall Lights
   $reboot_time: 0s
-  ip_address: 192.168.1.19
+  ip_address: !secret sitting_room_wall_light_ip
 
 packages:
+  wifi: !include common/wifi.yaml
   device_base: !include common/shelly1_light.yaml

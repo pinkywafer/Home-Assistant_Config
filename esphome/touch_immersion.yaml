@@ -1,9 +1,9 @@
 substitutions:
-  ip_address: 192.168.1.39
+  ip_address: !secret immersion_ip
   reboot_time: 15min
 
 esphome:
-  name: immersion_heater
+  name: immersion-heater
   platform: ESP8266
   board: esp01_1m
 
@@ -69,7 +69,7 @@ switch:
       - switch.turn_off: auto_switch
       - output.turn_on: relay
       - output.turn_on: led
-      - delay: 4h
+      - delay: 3h
       - switch.turn_off: bath_mode
     on_turn_off:
       - output.turn_off: relay

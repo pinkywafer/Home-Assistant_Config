@@ -3,21 +3,28 @@ esphome:
   platform: ESP8266
   board: esp01_1m
 
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_psk
-  manual_ip:
-    static_ip: $ip_address
-    gateway: 192.168.1.1
-    subnet: 255.255.255.0
+# <<: !include wifi.yaml
+# wifi:
+#   ssid: !secret wifi_ssid
+#   password: !secret wifi_psk
+#   manual_ip:
+#     static_ip: $ip_address
+#     gateway: 192.168.1.1
+#     subnet: 255.255.255.0
 
 # Enable logging
 logger:
+  level: VERBOSE
+  # 1. TRY THIS FIRST
 
 # Enable Home Assistant API
 api:
+  reboot_timeout: $reboot_time
 
 ota:
+  # safe_mode: false
+  # IF VERBOSE (ABOVE) DOESN'T WORK, TRY THIS
+  # AND REMOVE WIFI_SIGNAL SENSOR
 
 binary_sensor:
   - platform: gpio
@@ -28,6 +35,7 @@ binary_sensor:
     name: $friendly_name Sonoff Button
     on_press:
       - light.toggle: light_output
+
   - platform: gpio
     pin:
       number: GPIO14
@@ -38,6 +46,7 @@ binary_sensor:
       - light.toggle: light_output
     on_release:
       - light.toggle: light_output
+
   - platform: status
     name: $friendly_name Sonoff Status
 
@@ -56,10 +65,12 @@ status_led:
   pin:
     number: GPIO13
     inverted: yes
-
+  # 3. REMOVE THIS IF STILL NO LUCK
 sensor:
   - platform: wifi_signal
     name: $friendly_name Sonoff Wifi Signal
     update_interval: 10s
+  # 2.REMOVE IF STILL NO CONNECTION
+
   - platform: uptime
     name: $friendly_name Sonoff Uptime

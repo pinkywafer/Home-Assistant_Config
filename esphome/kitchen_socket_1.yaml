@@ -1,9 +1,12 @@
 substitutions:
-  devicename: kitchen_socket_1
+  devicename: kitchen-socket-1
   friendly_name: Kitchen Socket 1
-  ip_address: 192.168.1.50
+  ip_address: !secret kitchen_socket_1_ip
   reboot_time: 0s
 
 packages:
   wifi: !include common/wifi.yaml
   device_base: !include common/bseed_socket.yaml
+
+# wifi:
+#   use_address: 192.168.1.51

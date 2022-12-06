@@ -1,6 +1,12 @@
 substitutions:
-  devicename: bedroom_ceiling_light_sonoff
+  devicename: bedroom-ceiling-light-sonoff
   friendly_name: Bedroom Ceiling Light
-  ip_address: 192.168.1.30
+  reboot_time: 20min
+  ip_address: !secret bedroom_ceiling_light_ip
 
-<<: !include common/sonoff_basic_light.yaml
+packages:
+  wifi: !include common/wifi.yaml
+  device_base: !include common/sonoff_basic_light.yaml
+
+# wifi:
+#   use_address: 192.168.1.30

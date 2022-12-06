@@ -6,7 +6,7 @@ esphome:
 # Enable logging
 logger:
 
-<<: !include wifi.yaml
+# <<: !include wifi.yaml
 
 # Enable Home Assistant API
 api:

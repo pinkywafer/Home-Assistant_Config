@@ -3,14 +3,6 @@ esphome:
   platform: ESP8266
   board: esp01_1m
 
-wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_psk
-  manual_ip:
-    static_ip: $ip_address
-    gateway: 192.168.1.1
-    subnet: 255.255.255.0
-
 # Enable logging
 logger:
 
@@ -28,36 +20,42 @@ binary_sensor:
     name: $friendly_name Touch Switch
     on_press:
       - light.toggle: light_output
+  
   - platform: status
     name: $friendly_name Sonoff Status
-  - platform: gpio
-    id: dummy
-    internal: true
-    pin:
-      number: GPIO12
-    on_press:
-      - light.turn_off: led
-    on_release:
-      - light.turn_on: led
+  
+  # - platform: gpio
+  #   id: dummy
+  #   #internal: true
+  #   pin:
+  #     number: GPIO12
+  #   on_press:
+  #     - light.turn_off: led
+  #   on_release:
+  #     - light.turn_on: led
 
 output:
   - platform: gpio
     pin: GPIO12
     id: relay
-  - platform: gpio #esp8266_pwm
-    id: blue_led
-    pin: GPIO13
-    inverted: true
+  
+  # - platform: esp8266_pwm
+  #   id: blue_led
+  #   pin: GPIO13
+  #   inverted: true
+  #   max_power: 0.4
 
 light:
   - platform: binary
     id: light_output
     name: $friendly_name
     output: relay
-  - platform: binary
-    id: led
-    output: blue_led
-    internal: true
+  
+  # - platform: monochromatic
+  #   id: led
+  #   name: blue led
+  #   output: blue_led
+  #   # internal: true
 
 sensor:
   - platform: wifi_signal
@@ -65,3 +63,11 @@ sensor:
     update_interval: 10s
   - platform: uptime
     name: $friendly_name Sonoff Uptime
+
+# status_led:
+#   pin:
+#     number: GPIO13
+#     # inverted: yes
+
+switch:
+  - <<: !include switch/reboot.yaml

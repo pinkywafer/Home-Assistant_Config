@@ -1,7 +1,9 @@
 substitutions:
   devicename: bathroom_light_sonoff
   friendly_name: Bathroom Light
-  ip_address: 192.168.1.24
+  ip_address: !secret bathroom_light_ip
+  reboot_time: 20 min
 
 packages:
+  wifi: !include common/wifi.yaml
   device_base: !include common/sonoff_t1_1_gang.yaml

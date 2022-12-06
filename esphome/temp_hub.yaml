@@ -1,5 +1,5 @@
 substitutions:
-  esphome_name: temp_hub
+  esphome_name: temp-hub
   ip_address: !secret temp_hub_ip
   reboot_time: 15min
 
