@@ -9,23 +9,27 @@ light:
     lights:
       movie_mode_lights:
         friendly_name: "Movie Mode Light"
-        value_template: "{{ is_state('light.cooker_light', 'off') and
+        value_template: >-
+          {{ is_state('light.cooker_light', 'off') and
           is_state('light.sink_light', 'off') and
           is_state('light.sitting_room_light', 'off') and
           is_state('light.vestibule_light', 'off') and
+          is_state('light.landing_light', 'off') and
           is_state('light.breakfast_bar_led', 'on') and
-          is_state('light.landing_light', 'on') and
-          is_state_attr('light.breakfast_bar_led','effect','Solid Color') and
-          is_state_attr('light.breakfast_bar_led','rgb_color',(0, 0, 255)) and
-          is_state_attr('light.breakfast_bar_led','brightness',90)}}"
+          is_state('light.sitting_room_wall_lights', 'on') and
+          is_state_attr('light.breakfast_bar_led', 'effect','Solid Color') and
+          is_state_attr('light.breakfast_bar_led', 'rgb_color', (10, 255, 10)) and
+          is_state_attr('light.breakfast_bar_led', 'brightness', 90)}}
         turn_on:
           - service: light.turn_off
-            entity_id: light.sink_light,
+            entity_id: >
               light.cooker_light,
+              light.sink_light,
               light.sitting_room_light,
-              light.vestibule_light
+              light.vestibule_light,
+              light.landing_light
           - service: light.turn_on
-            entity_id: light.landing_light
+            entity_id: light.sitting_room_wall_lights
           - delay:
               milliseconds: 100
           - service: light.turn_on
@@ -33,19 +37,19 @@ light:
             data:
               effect: "Solid Color"
               brightness: 90
-              rgb_color: [0, 0, 255]
+              rgb_color: [10, 255, 10]
         turn_off:
-          - service: mqtt.publish
-            data:
-              topic: "cmnd/KitchenLEDs"
-              payload_template: >-
-                {"brightness":210,
-                "effect":"{{states("sensor.default_kitchen_effect")}}",
-                "white_value":{{state_attr("sensor.default_kitchen_effect","speed")}},
-                "color": {{state_attr("sensor.default_kitchen_effect","color")}}}
+          # - service: mqtt.publish
+          #   data:
+          #     topic: "cmnd/KitchenLEDs"
+          #     payload_template: >-
+          #       {"brightness":210,
+          #       "effect":"{{states("sensor.default_led_effect")}}",
+          #       "white_value":{{state_attr("sensor.default_led_effect","speed")}},
+          #       "color": {{state_attr("sensor.default_led_effect","color")}}}
           - service: light.turn_on
             data:
-              entity_id: light.sitting_room_light
+              entity_id: light.sink_light
 
 automation:
   - id: '2fbe2413-56e9-4c21-8899-0152e8e04366'
@@ -54,11 +58,16 @@ automation:
       - platform: state
         entity_id: light.movie_mode_lights
         to: 'off'
-    action:
+    action:    
       - service: mqtt.publish
         data:
           topic: "cmnd/KitchenLEDs"
           payload_template: >-
-            {"brightness":210,"effect":"{{states("sensor.default_kitchen_effect")}}"
-            ,"white_value":{{state_attr("sensor.default_kitchen_effect","speed")}}
-            ,"color":{{state_attr("sensor.default_kitchen_effect","color")}}}
+            {"brightness":210,"effect":"{{states("sensor.default_led_effect")}}"
+            ,"white_value":{{state_attr("sensor.default_led_effect","speed")}}
+            ,"color":{{state_attr("sensor.default_led_effect","color")}}}
+      - condition: state
+        entity_id: light.sink_light
+        state: 'off'
+      - service: light.turn_off
+        entity_id: light.breakfast_bar_led
