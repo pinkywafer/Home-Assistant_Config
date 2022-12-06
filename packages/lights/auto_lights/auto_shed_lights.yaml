@@ -54,4 +54,3 @@ automation:
             "effect":"{{states("sensor.default_led_effect")}}",
             "color_temp":{{state_attr("sensor.default_led_effect","speed")}},
             "color": {{state_attr("sensor.default_led_effect","color")}}}
-

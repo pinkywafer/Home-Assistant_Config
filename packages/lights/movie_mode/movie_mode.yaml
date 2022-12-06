@@ -58,7 +58,7 @@ automation:
       - platform: state
         entity_id: light.movie_mode_lights
         to: 'off'
-    action:    
+    action:
       - service: mqtt.publish
         data:
           topic: "cmnd/KitchenLEDs"

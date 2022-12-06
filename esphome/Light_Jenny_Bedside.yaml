@@ -7,5 +7,3 @@ substitutions:
 packages:
   wifi: !include common/wifi.yaml
   device_base: !include common/sonoff_basic_light.yaml
-
-# <<: !include common/sonoff_basic_light.yaml
