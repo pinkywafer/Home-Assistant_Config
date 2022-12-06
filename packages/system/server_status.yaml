@@ -114,6 +114,31 @@ sensor:
     unit_prefix: k
     round: 2
 
+binary_sensor:
+  - platform: command_line
+    unique_id: '75550679-9054-4610-80ad-bbcebad9524e'
+    name: Zpool Storage Problem
+    command: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no root@10.12.29.254 'zpool status storage |grep state |head -n 1'"
+    value_template: >-
+      {% if value == "state: ONLINE" %}
+        OFF
+      {% else %}
+        ON
+      {% endif %}
+    device_class: problem
+
+  - platform: command_line
+    unique_id: '22b8b2a2-7eff-4796-853d-299940ba1b80'
+    name: Zpool Rpool Problem
+    command: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no root@10.12.29.254 'zpool status rpool |grep state |head -n 1'"
+    value_template: >-
+      {% if value == "state: ONLINE" %}
+        OFF
+      {% else %}
+        ON
+      {% endif %}
+    device_class: problem
+
 homeassistant:
   customize:
     sensor.server_energy_use:
@@ -134,3 +159,40 @@ automation:
       - service: shell_command.hp_ilo_adjust_fan_pid_29
 #      - service: shell_command.hp_ilo_adjust_fan_pid_29_1
       - service: shell_command.hp_ilo_adjust_fan_pid_29_2
+
+  - id: "ab5a8d92-6227-4fd9-961f-e4e69f4c90d7"
+    alias: Zpool problem notification
+    trigger:
+      - platform: state
+        entity_id:
+          - binary_sensor.zpool_rpool_problem
+          - binary_sensor.zpool_storage_problem
+    action:
+      - choose:
+          # zpool issues present - send notification
+          - conditions: >-
+              {{ "on" in (
+                states("binary_sensor.zpool_rpool_problem"),
+                states("binary_sensor.zpool_storage_problem")) }}
+            sequence:
+              - service: notify.mobile_app_jenny_s_phone
+                data:
+                  message: >-
+                    Problem detected with:
+                    {% for state in (states.binary_sensor.zpool_rpool_problem,
+                        states.binary_sensor.zpool_storage_problem) | selectattr("state", "equalto", "on") -%}
+                    • {{(state.name).split(" ").1}}
+                    {% endfor %}
+                  title: Zpool Issue
+                  data:
+                    sticky: 'true'
+                    tag: zpool_issue
+                    group: server
+                    color: '#FF0000'
+        default:
+          # no zpool issues - clear notification
+          - service: notify.mobile_app_jenny_s_phone
+            data:
+              message: clear_notification
+              data:
+                tag: zpool_issue
