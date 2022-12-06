@@ -118,7 +118,7 @@ binary_sensor:
   - platform: command_line
     unique_id: '75550679-9054-4610-80ad-bbcebad9524e'
     name: Zpool Storage Problem
-    command: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no root@10.12.29.254 'zpool status storage |grep state |head -n 1'"
+    command: !secret zpool_storage_status_command
     value_template: >-
       {% if value == "state: ONLINE" %}
         OFF
@@ -130,7 +130,7 @@ binary_sensor:
   - platform: command_line
     unique_id: '22b8b2a2-7eff-4796-853d-299940ba1b80'
     name: Zpool Rpool Problem
-    command: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no root@10.12.29.254 'zpool status rpool |grep state |head -n 1'"
+    command: !secret zpool_rpool_status_command
     value_template: >-
       {% if value == "state: ONLINE" %}
         OFF
