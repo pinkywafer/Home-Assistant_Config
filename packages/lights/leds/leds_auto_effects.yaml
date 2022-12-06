@@ -1,7 +1,7 @@
 sensor:
   - platform: template
     sensors:
-      default_kitchen_effect:
+      default_led_effect:
         value_template: >-
           {% if is_state("sensor.anniversary_jenny_s_birthday", "0") or
               is_state("sensor.anniversary_carmel_s_birthday", "0") or
@@ -40,11 +40,11 @@ sensor:
               {"r":255,"g":255,"b":36}
             {%- endif %}
           speed: >-
-            {% if is_state("sensor.default_kitchen_effect", "Rainbow") or
-              is_state("sensor.default_kitchen_effect", "Hail") -%}
+            {% if is_state("sensor.default_led_effect", "Rainbow") or
+              is_state("sensor.default_led_effect", "Hail") -%}
               135
-            {%- elif is_state("sensor.default_kitchen_effect", "Lovey Day") or
-              is_state("sensor.default_kitchen_effect", "Fire") -%}
+            {%- elif is_state("sensor.default_led_effect", "Lovey Day") or
+              is_state("sensor.default_led_effect", "Fire") -%}
               0
             {%- else -%}
               180
@@ -52,20 +52,20 @@ sensor:
 
 automation:
   - id: '5815b9f6-ac4b-4d3d-b53d-753d66176ef8'
-    alias: set default kitchen led mode at startup
+    alias: set default led effect at startup
     trigger:
       - platform: homeassistant
         event: start
     action:
       - service: homeassistant.update_entity
         data:
-          entity_id: sensor.default_kitchen_effect
+          entity_id: sensor.default_led_effect
 
   - id: '3a751475-257f-4292-8298-bb4efa720309'
     alias: Auto set Kitchen LEDs
     trigger:
       - platform: state
-        entity_id: sensor.default_kitchen_effect
+        entity_id: sensor.default_led_effect
     condition:
       - condition: state
         entity_id: light.movie_mode_lights
@@ -76,6 +76,21 @@ automation:
           topic: "cmnd/KitchenLEDs"
           payload_template: >-
             {"brightness":210,
-            "effect":"{{states("sensor.default_kitchen_effect")}}",
-            "white_value":{{state_attr("sensor.default_kitchen_effect","speed")}},
-            "color": {{state_attr("sensor.default_kitchen_effect","color")}}}
+            "effect":"{{states("sensor.default_led_effect")}}",
+            "color_temp":{{state_attr("sensor.default_led_effect","speed")}},
+            "color": {{state_attr("sensor.default_led_effect","color")}}}
+
+  - id: '7162dacf-eb69-499d-afcf-ce5a05958553'
+    alias: Auto set Outside LEDs
+    trigger:
+      - platform: state
+        entity_id: sensor.default_led_effect
+    action:
+      - service: mqtt.publish
+        data:
+          topic: "cmnd/OutsideLights"
+          payload_template: >-
+            {"brightness":4,
+            "effect":"{{states("sensor.default_led_effect")}}",
+            "color_temp":{{state_attr("sensor.default_led_effect","speed")}},
+            "color": {{state_attr("sensor.default_led_effect","color")}}}

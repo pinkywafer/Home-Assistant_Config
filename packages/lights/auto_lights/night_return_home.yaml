@@ -3,10 +3,10 @@ automation:
     alias: Night - Return home lights
     trigger:
     - entity_id: person.jenny_gorton
-      from: not_home
+      to: home
       platform: state
     - entity_id: person.emma_gorton
-      from: not_home
+      to: home
       platform: state
     condition:
     - after: 01:00
@@ -17,4 +17,4 @@ automation:
     - service: light.turn_on
       entity_id:
       - light.vestibule_light
-      - light.sitting_room_light
+      - light.sitting_room_wall_lights

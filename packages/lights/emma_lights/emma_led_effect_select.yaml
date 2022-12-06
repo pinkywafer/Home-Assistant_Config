@@ -66,6 +66,7 @@ automation:
     trigger:
       platform: state
       entity_id: light.emma_led
+    condition: '{{state_attr("light.emma_led","effect") != None}}'
     action:
       service: input_select.select_option
       entity_id: input_select.den_lights_effect
