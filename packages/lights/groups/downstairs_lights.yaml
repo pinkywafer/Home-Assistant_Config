@@ -9,3 +9,4 @@ light:
       - light.bathroom_light
       - light.breakfast_bar_led
       - light.flame_lantern
+      - light.sitting_room_wall_lights
