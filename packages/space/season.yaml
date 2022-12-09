@@ -1,3 +1,0 @@
-sensor:
-  - platform: season
-    type: meteorological
