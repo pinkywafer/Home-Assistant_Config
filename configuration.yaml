@@ -1,6 +1,7 @@
 homeassistant:
   # Name of the location where Home Assistant is running
   name: Masarn Goch
+  country: GB
   latitude: !secret latitude
   longitude: !secret longitude
   elevation: 195
