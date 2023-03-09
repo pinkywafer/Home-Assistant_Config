@@ -7,8 +7,8 @@ automation:
       platform: numeric_state
     condition:
       - condition: time
-        after: " 9:00:00"
-        before: " 11:30:00"
+        after: "09:00:00"
+        before: "11:30:00"
     action:
       - service: notify.mobile_app_emma_s_phone
         data:
