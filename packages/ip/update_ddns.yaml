@@ -41,3 +41,8 @@ script:
           ddns_username: !secret search_ddns_username
           ddns_password: !secret search_ddns_password
           ddns_hostname: !secret search_ddns_hostname
+      - service: rest_command.update_google_domains
+        data:
+          ddns_username: !secret nextcloud_ddns_username
+          ddns_password: !secret nextcloud_ddns_password
+          ddns_hostname: !secret nextcloud_ddns_hostname
