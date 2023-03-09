@@ -44,7 +44,7 @@
           run: |
             HA_VERSION=$(<.HA_VERSION)
             echo $HA_VERSION
-            echo "::set-output name=current_version::$HA_VERSION"
+            echo "{current_version}={$HA_VERSION}" >> $GITHUB_OUTPUT
     home-assistant:
       name: "HA ${{ matrix.version }} Config Check"
       runs-on: ubuntu-latest
