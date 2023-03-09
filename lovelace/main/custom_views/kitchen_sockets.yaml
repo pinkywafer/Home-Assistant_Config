@@ -14,11 +14,13 @@ cards:
         - color: rgb(26, 186, 146)
       card:
         - height: 30px
+    hold_action:
+      action: more-info
     state:
+      - value: 'unavailable'
+        color: grey
       - value: 'on'
-        styles:
-          label:
-            - color: yellow
+        color: yellow
 
   - type: grid
     columns: 6
@@ -37,6 +39,13 @@ cards:
             - height: 50px
           name:
             - font-size: 12px
+        hold_action:
+          action: more-info
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
 
       - type: custom:button-card
         entity: sensor.fridge_freezer_doors
@@ -49,21 +58,23 @@ cards:
             color: var(--paper-item-icon-color)
           - value: 'fridge'
             icon: mdi:fridge-bottom
-            color: var(--paper-item-icon-active-color)
+            color: yellow
           - value: 'freezer'
             icon: mdi:fridge-top
-            color: var(--paper-item-icon-active-color)
+            color: yellow
           - value: 'fridge and freezer'
             icon: mdi:fridge
-            color: var(--paper-item-icon-active-color)
+            color: yellow
         styles:
           card:
             - height: 50px
           name:
             - font-size: 12px
-
+        hold_action:
+          action: more-info
 
       - type: custom:button-card
+
       - type: custom:button-card
         entity: switch.kitchen_socket_1
         show_state: false
@@ -77,6 +88,14 @@ cards:
             - height: 50px
           name:
             - font-size: 12px
+        hold_action:
+          action: more-info
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
         entity: switch.kitchen_socket_2
         show_state: false
@@ -90,6 +109,14 @@ cards:
             - height: 50px
           name:
             - font-size: 12px
+        hold_action:
+          action: more-info
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
         entity: switch.kitchen_socket_3
         show_state: false
@@ -103,12 +130,20 @@ cards:
             - height: 50px
           name:
             - font-size: 12px
+        hold_action:
+          action: more-info
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
 
       - type: custom:button-card
-        entity: switch.microwave
+        entity: switch.fryer
         show_state: false
         icon: mdi:power-socket-uk
-        name: Microwave
+        name: Fryer
         tap_action:
           action: toggle
           haptic: light
@@ -117,6 +152,14 @@ cards:
             - height: 50px
           name:
             - font-size: 12px
+        hold_action:
+          action: more-info
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
         entity: switch.coffee
         show_state: false
@@ -130,7 +173,16 @@ cards:
             - height: 50px
           name:
             - font-size: 12px
+        hold_action:
+          action: more-info
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
+
       - type: custom:button-card
         entity: switch.kitchen_socket_4
         show_state: false
@@ -144,6 +196,14 @@ cards:
             - height: 50px
           name:
             - font-size: 12px
+        hold_action:
+          action: more-info
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
         entity: switch.kitchen_socket_5
         show_state: false
@@ -157,6 +217,14 @@ cards:
             - height: 50px
           name:
             - font-size: 12px
+        hold_action:
+          action: more-info
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
         entity: switch.kitchen_socket_6
         show_state: false
@@ -170,3 +238,11 @@ cards:
             - height: 50px
           name:
             - font-size: 12px
+        hold_action:
+          action: more-info
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+

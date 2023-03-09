@@ -13,7 +13,14 @@ cards:
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
+
       - type: custom:button-card
         entity: light.stairs_led
         icon: mdi:stairs
@@ -24,6 +31,11 @@ cards:
         styles:
           name:
             - font-size: 12px
+        # state:
+        #   - value: 'unavailable'
+        #     color: grey
+        color: grey
+
       - type: custom:button-card
         entity: light.landing_light
         icon: mdi:airplane-landing
@@ -34,6 +46,12 @@ cards:
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
       - type: custom:button-card
         entity: light.emmas_room_lights
@@ -44,7 +62,14 @@ cards:
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
+
       - type: custom:button-card
         entity: light.emmas_bedside_light
         show_state: false
@@ -56,6 +81,12 @@ cards:
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
         entity: light.emmas_ceiling_light
         show_state: false
@@ -67,6 +98,12 @@ cards:
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
         entity: light.emma_led
         show_state: false
@@ -88,6 +125,10 @@ cards:
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+
       - type: custom:button-card
         entity: light.bedroom_lights
         name: Bedroom
@@ -97,6 +138,12 @@ cards:
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
       - type: custom:button-card
         entity: light.jennys_bedside_light
@@ -109,6 +156,12 @@ cards:
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
         entity: light.bedroom_ceiling_light
         show_state: false
@@ -120,6 +173,12 @@ cards:
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
         entity: light.carmels_bedside_light
         show_state: false
@@ -131,3 +190,8 @@ cards:
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow

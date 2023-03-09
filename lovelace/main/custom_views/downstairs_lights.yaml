@@ -10,9 +10,17 @@ cards:
         tap_action:
           action: toggle
           haptic: light
+        hold_action:
+          action: more-info
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
         entity: light.sitting_room_light
         show_state: false
@@ -21,9 +29,17 @@ cards:
         tap_action:
           action: toggle
           haptic: light
+        hold_action:
+          action: more-info
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
         entity: light.sitting_room_wall_lights
         show_state: false
@@ -32,9 +48,17 @@ cards:
         tap_action:
           action: toggle
           haptic: light
+        hold_action:
+          action: more-info
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
         entity: light.flame_lantern
         show_state: false
@@ -43,9 +67,17 @@ cards:
         tap_action:
           action: toggle
           haptic: light
+        hold_action:
+          action: more-info
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
         entity: light.vestibule_light
         show_state: false
@@ -54,9 +86,17 @@ cards:
         tap_action:
           action: toggle
           haptic: light
+        hold_action:
+          action: more-info
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
         entity: light.shed_front_led
         show_state: false
@@ -71,6 +111,10 @@ cards:
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+
       - type: custom:button-card
         entity: light.sink_light
         show_state: false
@@ -79,9 +123,17 @@ cards:
         tap_action:
           action: toggle
           haptic: light
+        hold_action:
+          action: more-info
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
         entity: light.breakfast_bar_led
         show_state: false
@@ -96,6 +148,10 @@ cards:
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+
       - type: custom:button-card
         entity: light.cooker_light
         show_state: false
@@ -104,9 +160,17 @@ cards:
         tap_action:
           action: toggle
           haptic: light
+        hold_action:
+          action: more-info
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
+
       - type: custom:button-card
         entity: light.bathroom_light
         show_state: false
@@ -115,6 +179,13 @@ cards:
         tap_action:
           action: toggle
           haptic: light
+        hold_action:
+          action: more-info
         styles:
           name:
             - font-size: 12px
+        state:
+          - value: 'unavailable'
+            color: grey
+          - value: 'on'
+            color: yellow
