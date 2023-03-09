@@ -1,50 +1,62 @@
 title: Webcams
 icon: mdi:webcam
 path: webcams
-type: custom:vertical-layout
+# type: custom:vertical-layout
+panel: true
 cards:
-  - type: picture-glance
-    camera_image: camera.llyn_ogwen
-    entities: []
-    title: Llyn Ogwen
+  - type: grid
+    columns: 3
+    square: false
+    cards:
 
-  - type: picture-glance
-    camera_image: camera.llangollen_river_dee
-    entities: []
-    title: Llangollen
+      - type: iframe
+        url: 'https://www.youtube.com/embed/Ui2ZwAwiC7g?autoplay=1&mute=1'
+        # title: Tan Y Bwlch
 
-  - type: custom:layout-break
+      - type: iframe
+        url: 'https://www.youtube.com/embed/MneOvtn37A4?autoplay=1&mute=1'
+        # title: The Cob
 
-  - type: picture-glance
-    camera_image: camera.portmeirion
-    entities: []
-    title: Portmeirion
+      - type: iframe
+        url: 'https://www.youtube.com/embed/S_zItPrlWTo?autoplay=1&mute=1'
+        # title: Minffordd
 
-  - type: picture-glance
-    camera_image: camera.portmeirion_hotel
-    entities: []
-    title: Portmeirion Hotel
+      - type: picture-glance
+        camera_image: camera.whhr_cnicht
+        entities: []
+        title: WHHR Cnicht
 
-  - type: custom:layout-break
+      - type: picture-glance
+        camera_image: camera.portmeirion
+        entities: []
+        title: Portmeirion
 
-  - type: picture-glance
-    camera_image: camera.ffestiniog_railway_tan_y_bwlch
-    entities: []
-    title: Tan Y Bwlch
+      - type: picture-glance
+        camera_image: camera.portmeirion_hotel
+        entities: []
+        title: Portmeirion 
 
-  - type: picture-glance
-    camera_image: camera.the_cob
-    entities: []
-    title: The Cob
+      - type: picture-glance
+        camera_image: camera.webcam_port_station
+        entities: []
+        title: Porthmadog Station 
 
-  - type: custom:layout-break
+      - type: picture-glance
+        camera_image: camera.barmouth_bridge
+        entities: []
+        title: Barmouth Bridge
+      
+      - type: picture-glance
+        camera_image: camera.barmouth_point
+        entities: []
+        title: Barmouth Point
 
-  - type: picture-glance
-    camera_image: camera.barmouth_bridge
-    entities: []
-    title: Barmouth Bridge
+      - type: iframe
+        url: 'https://www.youtube.com/embed/qBNTOKUPFw0?autoplay=1&mute=1'
+        # title: Towyn Warf
+        
 
-  - type: picture-glance
-    camera_image: camera.barmouth_point
-    entities: []
-    title: Barmouth Point
+      - type: picture-glance
+        camera_image: camera.llangollen_river_dee
+        entities: []
+        title: Llangollen
