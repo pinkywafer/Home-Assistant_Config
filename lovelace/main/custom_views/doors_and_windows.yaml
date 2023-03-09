@@ -75,7 +75,7 @@ cards:
           - value: 'unavailable'
             color: grey
           - value: 'on'
-            color: 
+            color:
             icon: mdi:door-open
         hold_action:
           action: more-info

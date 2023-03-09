@@ -34,18 +34,18 @@ cards:
       - type: picture-glance
         camera_image: camera.portmeirion_hotel
         entities: []
-        title: Portmeirion 
+        title: Portmeirion
 
       - type: picture-glance
         camera_image: camera.webcam_port_station
         entities: []
-        title: Porthmadog Station 
+        title: Porthmadog Station
 
       - type: picture-glance
         camera_image: camera.barmouth_bridge
         entities: []
         title: Barmouth Bridge
-      
+
       - type: picture-glance
         camera_image: camera.barmouth_point
         entities: []
@@ -54,7 +54,6 @@ cards:
       - type: iframe
         url: 'https://www.youtube.com/embed/qBNTOKUPFw0?autoplay=1&mute=1'
         # title: Towyn Warf
-        
 
       - type: picture-glance
         camera_image: camera.llangollen_river_dee
