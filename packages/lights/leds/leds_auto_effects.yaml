@@ -51,46 +51,49 @@ sensor:
             {%- endif %}
 
 automation:
-  - id: '5815b9f6-ac4b-4d3d-b53d-753d66176ef8'
-    alias: set default led effect at startup
+  - id: '3a751475-257f-4292-8298-bb4efa720309'
+    alias: Auto set LED effect
     trigger:
-      - platform: homeassistant
+      - id: "start"
+        platform: homeassistant
         event: start
+      - id: "start"
+        platform: state
+        entity_id: sensor.default_led_effect
+      - id: "breakfast bar led"
+        platform: state
+        entity_id: light.breakfast_bar_led
+        from: "unavailable"
+      - id: "shed led"
+        platform: state
+        entity_id: light.shed_front_led
+        from: "unavailable"
     action:
       - service: homeassistant.update_entity
         data:
           entity_id: sensor.default_led_effect
-
-  - id: '3a751475-257f-4292-8298-bb4efa720309'
-    alias: Auto set Kitchen LEDs
-    trigger:
-      - platform: state
-        entity_id: sensor.default_led_effect
-    condition:
+      - if:
+          - '{{trigger.id in ("start", "shed led")}}'
+        then:
+          - service: mqtt.publish
+            data:
+              topic: "cmnd/OutsideLights"
+              payload_template: >-
+                {"brightness":20,
+                "effect":"{{states("sensor.default_led_effect")}}",
+                "color_temp":{{state_attr("sensor.default_led_effect","speed")}},
+                "color": {{state_attr("sensor.default_led_effect","color")}}}
       - condition: state
         entity_id: light.movie_mode_lights
         state: 'off'
-    action:
-      - service: mqtt.publish
-        data:
-          topic: "cmnd/KitchenLEDs"
-          payload_template: >-
-            {"brightness":210,
-            "effect":"{{states("sensor.default_led_effect")}}",
-            "color_temp":{{state_attr("sensor.default_led_effect","speed")}},
-            "color": {{state_attr("sensor.default_led_effect","color")}}}
-
-  - id: '7162dacf-eb69-499d-afcf-ce5a05958553'
-    alias: Auto set Outside LEDs
-    trigger:
-      - platform: state
-        entity_id: sensor.default_led_effect
-    action:
-      - service: mqtt.publish
-        data:
-          topic: "cmnd/OutsideLights"
-          payload_template: >-
-            {"brightness":4,
-            "effect":"{{states("sensor.default_led_effect")}}",
-            "color_temp":{{state_attr("sensor.default_led_effect","speed")}},
-            "color": {{state_attr("sensor.default_led_effect","color")}}}
+      - if:
+          - '{{trigger.id in ("start","breakfast bar led")}}'
+        then:
+          - service: mqtt.publish
+            data:
+              topic: "cmnd/KitchenLEDs"
+              payload_template: >-
+                {"brightness":210,
+                "effect":"{{states("sensor.default_led_effect")}}",
+                "color_temp":{{state_attr("sensor.default_led_effect","speed")}},
+                "color": {{state_attr("sensor.default_led_effect","color")}}}
