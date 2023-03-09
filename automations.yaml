@@ -134,3 +134,15 @@
         media_content_id: media-source://media_source
     enabled: true
   mode: single
+- id: '1671043471713'
+  alias: Default Theme
+  description: Set the default theme at startup
+  trigger:
+  - platform: homeassistant
+    event: start
+  condition: []
+  action:
+  - service: frontend.set_theme
+    data:
+      name: No Borders
+  mode: single
