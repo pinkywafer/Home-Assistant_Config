@@ -34,8 +34,6 @@ automation:
           payload_template: >-
             {"brightness":230,
             "effect":"Daylight"}
-  - id: 'a13d00e1-1280-462a-a8dc-eb62c696542b'
-    alias: Auto outside lights off after motion
 
   - id: 'f7d313bd-6ef8-4899-bf1e-7d5129672152'
     alias: Outside lights off after doorbell motion
