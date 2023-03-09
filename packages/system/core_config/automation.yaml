@@ -1,1 +1,1 @@
-automation: !include /config/automations.yaml
+automation: !include ../../../automations.yaml
