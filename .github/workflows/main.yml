@@ -45,13 +45,14 @@
             HA_VERSION=$(<.HA_VERSION)
             echo $HA_VERSION
             echo "::set-output name=current_version::$HA_VERSION"
+            echo "{current_version}={$HA_VERSION}" >> $GITHUB_STATE
     home-assistant:
       name: "HA ${{ matrix.version }} Config Check"
       runs-on: ubuntu-latest
       needs: [yamllint, remarklint, version_env]
       strategy:
         matrix:
-          version: ["${{needs.version_env.outputs.current_version}}", "stable", "beta", "dev"]
+          version: ["${{process.env.STATE_current_version}}", "stable", "beta", "dev"]
       steps:
         - name: ⤵️ Check out configuration from GitHub
           uses: actions/checkout@v3
