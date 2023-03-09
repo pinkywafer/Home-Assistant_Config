@@ -1,4 +1,0 @@
-logbook:
-  exclude:
-    domains:
-      - group
