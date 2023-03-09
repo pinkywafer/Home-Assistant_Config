@@ -1,0 +1,8 @@
+No Borders:
+  modes:
+    light:
+      ha-card-border-radius: 1px ## or whatever radius you want
+      ha-card-border-color: rgba(0,0,0,0) ## transparent
+    dark:
+      ha-card-border-radius: 1px ## or whatever radius you want
+      ha-card-border-color: rgba(0,0,0,0) ## transparent
