@@ -79,7 +79,7 @@ sensor:
       - name: Temperature Raid Card
         sensor_type: server_health
         unit_of_measurement: "°C"
-        value_template: '{{ ilo_data.temperature["30-PCI 2"].currentreading[0] }}'
+        value_template: '{{ ilo_data.temperature["31-PCI 3"].currentreading[0] }}'
       - name: Health Bios
         sensor_type: server_health
         value_template: '{{ ilo_data.health_at_a_glance["bios_hardware"].status }}'
@@ -145,20 +145,20 @@ homeassistant:
       device_class: energy
 
 shell_command:
-  hp_ilo_adjust_fan_pid_29: !secret hp_ilo_adjust_fan_pid_29_command
-  hp_ilo_adjust_fan_pid_29_1: !secret hp_ilo_adjust_fan_pid_29_command1
-  hp_ilo_adjust_fan_pid_29_2: !secret hp_ilo_adjust_fan_pid_29_command2
+  hp_ilo_adjust_fan_pid: !secret hp_ilo_adjust_fan_pid_command
+  hp_server_adjust_clock: !secret hp_server_cpu_clock
+  # hp_ilo_adjust_fan_pid_29_2: !secret hp_ilo_adjust_fan_pid_29_command2
 
 automation:
   - id: "7ee66689-e490-47ca-a4df-bae4c350bea6"
-    alias: Server Fan pid adjustment
+    alias: Server Fan pid and clock speed adjustment
     trigger:
       - platform: homeassistant
         event: start
     action:
-      - service: shell_command.hp_ilo_adjust_fan_pid_29
-#      - service: shell_command.hp_ilo_adjust_fan_pid_29_1
-      - service: shell_command.hp_ilo_adjust_fan_pid_29_2
+      - service: shell_command.hp_ilo_adjust_fan_pid
+      - service: shell_command.hp_server_adjust_clock
+      # - service: shell_command.hp_ilo_adjust_fan_pid_29_2
 
   - id: "ab5a8d92-6227-4fd9-961f-e4e69f4c90d7"
     alias: Zpool problem notification
