@@ -1,336 +1,337 @@
-sensor:
-  - platform: serial
-    serial_port: /dev/ttyS1
-    baudrate: 19200
-    name: Sitting Room Amp RS232
+# sensor:
+#   - platform: serial
+#     serial_port: /dev/ttyS1
+#     baudrate: 19200
+#     name: Sitting Room Amp RS232
 
-shell_command:
-  sitting_room_amp_set_msclvl: /bin/bash -c "echo -e 'set msclvl {{ value }} \r' >> /dev/ttyS1"
-  sitting_room_amp_set_standby_off: /bin/bash -c "echo -e 'set standby off \r' >> /dev/ttyS1"
-  sitting_room_amp_set_standby_on: /bin/bash -c "echo -e 'set standby on \r' >> /dev/ttyS1"
-  sitting_room_amp_get_info: /bin/bash -c "echo -e 'get info \r' >> /dev/ttyS1"
-  sitting_room_amp_set_eqbass: /bin/bash -c "echo -e 'set eqbass {{ value }} \r' >> /dev/ttyS1"
-  sitting_room_amp_set_eqtreb: /bin/bash -c "echo -e 'set eqtreb {{ value }} \r' >> /dev/ttyS1"
-  sitting_room_amp_set_select: /bin/bash -c "echo -e 'set select {{ value }} \r' >> /dev/ttyS1"
-  sitting_room_amp_set_maxmsclvl: /bin/bash -c "echo -e 'set maxmsclvl {{ value }} \r' >> /dev/ttyS1"
-  sitting_room_amp_set_ipgain: /bin/bash -c "echo -e 'set ipgain {{input}} {{ value }} \r' >> /dev/ttyS1"
-  sitting_room_amp_get_ipgain: /bin/bash -c "echo -e 'get ipgain {{input}} \r' >> /dev/ttyS1"
-  sitting_room_amp_get_sourcename: /bin/bash -c "echo -e 'get sourcename {{input}} \r' >> /dev/ttyS1"
-  sitting_room_amp_set_sourcename: /bin/bash -c "echo -e 'set sourcename {{source}} {{ value }} \r' >> /dev/ttyS1"
-  sitting_room_amp_set_autold: /bin/bash -c "echo -e 'set autold {{value}} \r' >> /dev/ttyS1"
+# shell_command:
+#   sitting_room_amp_set_msclvl: /bin/bash -c "echo -e 'set msclvl {{ value }} \r' >> /dev/ttyS1"
+#   sitting_room_amp_set_standby_off: /bin/bash -c "echo -e 'set standby off \r' >> /dev/ttyS1"
+#   sitting_room_amp_set_standby_on: /bin/bash -c "echo -e 'set standby on \r' >> /dev/ttyS1"
+#   sitting_room_amp_get_info: /bin/bash -c "echo -e 'get info \r' >> /dev/ttyS1"
+#   sitting_room_amp_set_eqbass: /bin/bash -c "echo -e 'set eqbass {{ value }} \r' >> /dev/ttyS1"
+#   sitting_room_amp_set_eqtreb: /bin/bash -c "echo -e 'set eqtreb {{ value }} \r' >> /dev/ttyS1"
+#   sitting_room_amp_set_select: /bin/bash -c "echo -e 'set select {{ value }} \r' >> /dev/ttyS1"
+#   sitting_room_amp_set_maxmsclvl: /bin/bash -c "echo -e 'set maxmsclvl {{ value }} \r' >> /dev/ttyS1"
+#   sitting_room_amp_set_ipgain: /bin/bash -c "echo -e 'set ipgain {{input}} {{ value }} \r' >> /dev/ttyS1"
+#   sitting_room_amp_get_ipgain: /bin/bash -c "echo -e 'get ipgain {{input}} \r' >> /dev/ttyS1"
+#   sitting_room_amp_get_sourcename: /bin/bash -c "echo -e 'get sourcename {{input}} \r' >> /dev/ttyS1"
+#   sitting_room_amp_set_sourcename: /bin/bash -c "echo -e 'set sourcename {{source}} {{ value }} \r' >> /dev/ttyS1"
+#   sitting_room_amp_set_autold: /bin/bash -c "echo -e 'set autold {{value}} \r' >> /dev/ttyS1"
 
-input_text:
-  sitting_room_amp_sourcename_a:
-    name: Sitting Room Amp Source A
-  sitting_room_amp_sourcename_b:
-    name: Sitting Room Amp Source B
-  sitting_room_amp_sourcename_c:
-    name: Sitting Room Amp Source C
-  sitting_room_amp_sourcename_d:
-    name: Sitting Room Amp Source D
+# input_text:
+#   sitting_room_amp_sourcename_a:
+#     name: Sitting Room Amp Source A
+#   sitting_room_amp_sourcename_b:
+#     name: Sitting Room Amp Source B
+#   sitting_room_amp_sourcename_c:
+#     name: Sitting Room Amp Source C
+#   sitting_room_amp_sourcename_d:
+#     name: Sitting Room Amp Source D
 
-input_boolean:
-  sitting_room_amp_autold:
-    name: Sitting Room Amp Auto Loudness
+# input_boolean:
+#   sitting_room_amp_autold:
+#     name: Sitting Room Amp Auto Loudness
 
-input_number:
-  sitting_room_amp_volume:
-    name: Sitting Room Amp Volume
-    initial: -10
-    min: -80
-    max: 0
-    step: 1
-  sitting_room_amp_bass:
-    name: Sitting Room Amp Bass
-    initial: 0
-    min: -14
-    max: +14
-  sitting_room_amp_treb:
-    name: Sitting Room Amp Treble
-    initial: 0
-    min: -14
-    max: +14
-  sitting_room_amp_max_volume:
-    name: Sitting Room Amp Max Volume
-    initial: 0
-    min: -80
-    max: 0
-  sitting_room_amp_ipgain_a:
-    name: Sitting Room Amp Input Gain Source A
-    initial: 0
-    min: -20
-    max: 14
-    step: 2
-  sitting_room_amp_ipgain_b:
-    name: Sitting Room Amp Input Gain Source B
-    initial: 0
-    min: -20
-    max: 14
-    step: 2
-  sitting_room_amp_ipgain_c:
-    name: Sitting Room Amp Input Gain Source C
-    initial: 0
-    min: -20
-    max: 14
-    step: 2
-  sitting_room_amp_ipgain_d:
-    name: Sitting Room Amp Input Gain Source D
-    initial: 0
-    min: -20
-    max: 14
-    step: 2
+# input_number:
+#   sitting_room_amp_volume:
+#     name: Sitting Room Amp Volume
+#     initial: -10
+#     min: -80
+#     max: 0
+#     step: 1
+#   sitting_room_amp_bass:
+#     name: Sitting Room Amp Bass
+#     initial: 0
+#     min: -14
+#     max: +14
+#   sitting_room_amp_treb:
+#     name: Sitting Room Amp Treble
+#     initial: 0
+#     min: -14
+#     max: +14
+#   sitting_room_amp_max_volume:
+#     name: Sitting Room Amp Max Volume
+#     initial: 0
+#     min: -80
+#     max: 0
+#   sitting_room_amp_ipgain_a:
+#     name: Sitting Room Amp Input Gain Source A
+#     initial: 0
+#     min: -20
+#     max: 14
+#     step: 2
+#   sitting_room_amp_ipgain_b:
+#     name: Sitting Room Amp Input Gain Source B
+#     initial: 0
+#     min: -20
+#     max: 14
+#     step: 2
+#   sitting_room_amp_ipgain_c:
+#     name: Sitting Room Amp Input Gain Source C
+#     initial: 0
+#     min: -20
+#     max: 14
+#     step: 2
+#   sitting_room_amp_ipgain_d:
+#     name: Sitting Room Amp Input Gain Source D
+#     initial: 0
+#     min: -20
+#     max: 14
+#     step: 2
 
-input_select:
-  sitting_room_amp_input_source:
-    name: Sitting Room Amp Input Source
-    options:
-      - Source A
-      - Source B
-      - Source C
-      - Source D
-    initial: Source A
+# input_select:
+#   sitting_room_amp_input_source:
+#     name: Sitting Room Amp Input Source
+#     options:
+#       - Source A
+#       - Source B
+#       - Source C
+#       - Source D
+#     initial: Source A
 
-script:
-  sitting_room_amp_set_source_names:
-    alias: Set Sitting Room Sourcenames
-    sequence:
-      - repeat:
-          count: 4
-          sequence:
-            - service: shell_command.sitting_room_amp_set_sourcename
-              data_template:
-                source: '{{"abcd"[repeat.index-1]}}'
-                value: '{{states("input_text.sitting_room_amp_sourcename_"+"abcd"[repeat.index-1])}}'
-      - service: input_select.set_options
-        data:
-          entity_id: input_select.sitting_room_amp_input_source
-          options:
-            - '{{states("input_text.sitting_room_amp_sourcename_a")}}'
-            - '{{states("input_text.sitting_room_amp_sourcename_b")}}'
-            - '{{states("input_text.sitting_room_amp_sourcename_c")}}'
-            - '{{states("input_text.sitting_room_amp_sourcename_d")}}'
+# script:
+#   sitting_room_amp_set_source_names:
+#     alias: Set Sitting Room Sourcenames
+#     sequence:
+#       - repeat:
+#           count: 4
+#           sequence:
+#             - service: shell_command.sitting_room_amp_set_sourcename
+#               data_template:
+#                 source: '{{"abcd"[repeat.index-1]}}'
+#                 value: '{{states("input_text.sitting_room_amp_sourcename_"+"abcd"[repeat.index-1])}}'
+#       - service: input_select.set_options
+#         data:
+#           entity_id: input_select.sitting_room_amp_input_source
+#           options:
+#             - '{{states("input_text.sitting_room_amp_sourcename_a")}}'
+#             - '{{states("input_text.sitting_room_amp_sourcename_b")}}'
+#             - '{{states("input_text.sitting_room_amp_sourcename_c")}}'
+#             - '{{states("input_text.sitting_room_amp_sourcename_d")}}'
 
-  sitting_room_amp_get_rs232:
-    sequence:
-      - repeat:
-          count: 4
-          sequence:
-            - service: shell_command.sitting_room_amp_get_sourcename
-              data_template:
-                input: '{{"abcd"[repeat.index-1]}}'
-            - service: shell_command.sitting_room_amp_get_ipgain
-              data_template:
-                input: '{{"abcd"[repeat.index-1]}}'
-      - service: shell_command.sitting_room_amp_get_info
+#   sitting_room_amp_get_rs232:
+#     sequence:
+#       - repeat:
+#           count: 4
+#           sequence:
+#             - service: shell_command.sitting_room_amp_get_sourcename
+#               data_template:
+#                 input: '{{"abcd"[repeat.index-1]}}'
+#             - service: shell_command.sitting_room_amp_get_ipgain
+#               data_template:
+#                 input: '{{"abcd"[repeat.index-1]}}'
+#       - service: shell_command.sitting_room_amp_get_info
 
-automation:
-  - id: 'ba72365c-241b-4c19-9bb7-5cbc1239a49f'
-    alias: Sitting Room Amp Set States
-    mode: queued
-    trigger:
-    - platform: state
-      entity_id:
-        - input_number.sitting_room_amp_volume
-        - input_number.sitting_room_amp_bass
-        - input_number.sitting_room_amp_treb
-        - input_number.sitting_room_amp_max_volume
-        - input_select.sitting_room_amp_input_source
-        - input_number.sitting_room_amp_ipgain_a
-        - input_number.sitting_room_amp_ipgain_b
-        - input_number.sitting_room_amp_ipgain_c
-        - input_number.sitting_room_amp_ipgain_d
-        - input_boolean.sitting_room_amp_autold
-    action:
-      - choose:
-          - alias: Set Volume
-            conditions: '{{trigger.entity_id == "input_number.sitting_room_amp_volume"}}'
-            sequence:
-              - service: shell_command.sitting_room_amp_set_msclvl
-                data_template:
-                  value: >
-                    {% if trigger.to_state.state == -80 -%}
-                      off
-                    {%- else -%}
-                      {{trigger.to_state.state | int}}
-                    {% endif %}
-          - alias: Set Max Music Level
-            conditions: '{{trigger.entity_id == "input_number.sitting_room_amp_max_volume"}}'
-            sequence:
-              - service: shell_command.sitting_room_amp_set_maxmsclvl
-                data_template:
-                  value: >
-                    {% if trigger.to_state.state == -80 -%}
-                      off
-                    {%- else -%}
-                      {{trigger.to_state.state | int}}
-                    {% endif %}
-          - alias: Set Input Gain
-            conditions: '{{trigger.entity_id[:36] == "input_number.sitting_room_amp_ipgain"}}'
-            sequence:
-              - service: shell_command.sitting_room_amp_set_ipgain
-                data_template:
-                  input: '{{trigger.entity_id[37:]}}'
-                  value: '{{trigger.to_state.state | int}}'
-              - service: shell_command.sitting_room_amp_get_ipgain
-                data_template:
-                  input: '{{trigger.entity_id[37:]}}'
-          - alias: Set Bass
-            conditions: '{{trigger.entity_id == "input_number.sitting_room_amp_bass"}}'
-            sequence:
-              - service: shell_command.sitting_room_amp_set_eqbass
-                data_template:
-                  value: '{{ states("input_number.sitting_room_amp_bass") | int }}'
-          - alias: set Treble
-            conditions: '{{trigger.entity_id == "input_number.sitting_room_amp_treb"}}'
-            sequence:
-              - service: shell_command.sitting_room_amp_set_eqtreb
-                data_template:
-                  value: '{{ states("input_number.sitting_room_amp_treb") | int }}'
-          - alias: Set Auto Loudness
-            conditions: '{{trigger.entity_id == "input_boolean.sitting_room_amp_autold"}}'
-            sequence:
-              - service: shell_command.sitting_room_amp_set_autold
-                data_template:
-                  value: '{{states("input_boolean.sitting_room_amp_autold")}}'
-          - alias: Set Input Source
-            conditions: '{{trigger.entity_id == "input_select.sitting_room_amp_input_source"}}'
-            sequence:
-              - repeat:
-                  count: 4
-                  sequence:
-                    - choose:
-                        - conditions: '{{states("input_select.sitting_room_amp_input_source") == states.input_select.sitting_room_amp_input_source.attributes.options[repeat.index-1]}}'
-                          sequence:
-                            - service: shell_command.sitting_room_amp_set_select
-                              data:
-                                value: '{{"abcd"[repeat.index-1]}}'
+# automation:
+#   - id: 'ba72365c-241b-4c19-9bb7-5cbc1239a49f'
+#     alias: Sitting Room Amp Set States
+#     mode: queued
+#     trigger:
+#     - platform: state
+#       entity_id:
+#         - input_number.sitting_room_amp_volume
+#         - input_number.sitting_room_amp_bass
+#         - input_number.sitting_room_amp_treb
+#         - input_number.sitting_room_amp_max_volume
+#         - input_select.sitting_room_amp_input_source
+#         - input_number.sitting_room_amp_ipgain_a
+#         - input_number.sitting_room_amp_ipgain_b
+#         - input_number.sitting_room_amp_ipgain_c
+#         - input_number.sitting_room_amp_ipgain_d
+#         - input_boolean.sitting_room_amp_autold
+#     action:
+#       - choose:
+#           - alias: Set Volume
+#             conditions: '{{trigger.entity_id == "input_number.sitting_room_amp_volume"}}'
+#             sequence:
+#               - service: shell_command.sitting_room_amp_set_msclvl
+#                 data_template:
+#                   value: >
+#                     {% if trigger.to_state.state == -80 -%}
+#                       off
+#                     {%- else -%}
+#                       {{trigger.to_state.state | int}}
+#                     {% endif %}
+#           - alias: Set Max Music Level
+#             conditions: '{{trigger.entity_id == "input_number.sitting_room_amp_max_volume"}}'
+#             sequence:
+#               - service: shell_command.sitting_room_amp_set_maxmsclvl
+#                 data_template:
+#                   value: >
+#                     {% if trigger.to_state.state == -80 -%}
+#                       off
+#                     {%- else -%}
+#                       {{trigger.to_state.state | int}}
+#                     {% endif %}
+#           - alias: Set Input Gain
+#             conditions: '{{trigger.entity_id[:36] == "input_number.sitting_room_amp_ipgain"}}'
+#             sequence:
+#               - service: shell_command.sitting_room_amp_set_ipgain
+#                 data_template:
+#                   input: '{{trigger.entity_id[37:]}}'
+#                   value: '{{trigger.to_state.state | int}}'
+#               - service: shell_command.sitting_room_amp_get_ipgain
+#                 data_template:
+#                   input: '{{trigger.entity_id[37:]}}'
+#           - alias: Set Bass
+#             conditions: '{{trigger.entity_id == "input_number.sitting_room_amp_bass"}}'
+#             sequence:
+#               - service: shell_command.sitting_room_amp_set_eqbass
+#                 data_template:
+#                   value: '{{ states("input_number.sitting_room_amp_bass") | int }}'
+#           - alias: set Treble
+#             conditions: '{{trigger.entity_id == "input_number.sitting_room_amp_treb"}}'
+#             sequence:
+#               - service: shell_command.sitting_room_amp_set_eqtreb
+#                 data_template:
+#                   value: '{{ states("input_number.sitting_room_amp_treb") | int }}'
+#           - alias: Set Auto Loudness
+#             conditions: '{{trigger.entity_id == "input_boolean.sitting_room_amp_autold"}}'
+#             sequence:
+#               - service: shell_command.sitting_room_amp_set_autold
+#                 data_template:
+#                   value: '{{states("input_boolean.sitting_room_amp_autold")}}'
+#           - alias: Set Input Source
+#             conditions: '{{trigger.entity_id == "input_select.sitting_room_amp_input_source"}}'
+#             sequence:
+#               - repeat:
+#                   count: 4
+#                   sequence:
+#                     - choose:
+#                         - conditions: '{{states("input_select.sitting_room_amp_input_source") == states.input_select.sitting_room_amp_input_source.attributes.options[repeat.index-1]}}'
+#                           sequence:
+#                             - service: shell_command.sitting_room_amp_set_select
+#                               data:
+#                                 value: '{{"abcd"[repeat.index-1]}}'
 
-  - id: '964a7bff-2a51-4ace-837f-7a8a5c8a7865'
-    alias: Sitting Room Amp Get rs232 at startup
-    mode: single
-    trigger:
-    - platform: homeassistant
-      event: start
-    action:
-      - service: script.sitting_room_amp_get_rs232
+#   - id: '964a7bff-2a51-4ace-837f-7a8a5c8a7865'
+#     alias: Sitting Room Amp Get rs232 at startup
+#     mode: single
+#     trigger:
+#     - platform: homeassistant
+#       event: start
+#     action:
+#       - service: script.sitting_room_amp_get_rs232
 
-  - id: 'f0eb586d-e901-434f-bbc7-afed4362db23'
-    alias: Sitting Room Amp States From RS232
-    mode: parallel
-    max: 20
-    trigger:
-    - platform: state
-      entity_id: sensor.sitting_room_amp_rs232
-    action:
-      - choose:
-          - alias: "Power on - Get info"
-            conditions: '{{trigger.to_state.state=="STANDBY OFF"}}'
-            sequence:
-              - service: script.sitting_room_amp_get_rs232
-          - alias: "music volume level reported"
-            conditions: '{{trigger.to_state.state[:6]=="MSCLVL"}}'
-            sequence:
-              - service: input_number.set_value
-                data:
-                  entity_id: input_number.sitting_room_amp_volume
-                  value: >
-                    {% if trigger.to_state.state[7:] == 'OFF' -%}
-                      -80
-                    {%- else -%}
-                      {{trigger.to_state.state[7:] | int}}
-                    {% endif %}
-          - alias: Max music level reported
-            conditions: '{{trigger.to_state.state[:9]=="MAXMSCLVL"}}'
-            sequence:
-              - service: input_number.set_value
-                data:
-                  entity_id: input_number.sitting_room_amp_max_volume
-                  value: >
-                    {% if trigger.to_state.state[10:] == 'OFF' -%}
-                      -80
-                    {%- else -%}
-                      {{trigger.to_state.state[10:] | int}}
-                    {% endif %}
-          - alias: "bass level adjusted"
-            conditions: '{{trigger.to_state.state[:6]=="EQBASS"}}'
-            sequence:
-              - service: input_number.set_value
-                data:
-                  entity_id: input_number.sitting_room_amp_bass
-                  value: '{{trigger.to_state.state[7:] | int}}'
-          - alias: "Treble level adjusted"
-            conditions: '{{trigger.to_state.state[:6]=="EQTREB"}}'
-            sequence:
-              - service: input_number.set_value
-                data:
-                  entity_id: input_number.sitting_room_amp_treb
-                  value: '{{trigger.to_state.state[7:] | int}}'
-          - alias: Input Source
-            conditions: '{{trigger.to_state.state[:6]=="SELECT"}}'
-            sequence:
-              - repeat:
-                  count: 4
-                  sequence:
-                    - choose:
-                        - conditions: '{{trigger.to_state.state[7:] == "ABCD"[repeat.index-1]}}'
-                          sequence:
-                            - service: input_select.select_option
-                              data:
-                                entity_id: input_select.sitting_room_amp_input_source
-                                option: '{{states.input_select.sitting_room_amp_input_source.attributes.options[repeat.index-1]}}'
-          - alias: Set Input Gain
-            conditions: '{{trigger.to_state.state[:6]=="IPGAIN"}}'
-            sequence:
-              - service: input_number.set_value
-                data:
-                  entity_id: input_number.sitting_room_amp_ipgain_{{trigger.to_state.state[7:8]|lower}}
-                  value: '{{trigger.to_state.state[9:] | int }}'
-          - alias: Set Source Names
-            conditions: '{{trigger.to_state.state[:10]=="SOURCENAME"}}'
-            sequence:
-              - service: input_text.set_value
-                data:
-                  entity_id: input_text.sitting_room_amp_sourcename_{{trigger.to_state.state[11:12]|lower}}
-                  value: '{{trigger.to_state.state[13:] }}'
-              - service: input_select.set_options
-                data:
-                  entity_id: input_select.sitting_room_amp_input_source
-                  options:
-                    - '{{states("input_text.sitting_room_amp_sourcename_a")}}'
-                    - '{{states("input_text.sitting_room_amp_sourcename_b")}}'
-                    - '{{states("input_text.sitting_room_amp_sourcename_c")}}'
-                    - '{{states("input_text.sitting_room_amp_sourcename_d")}}'
-          - alias: Set Auto Loudness
-            conditions: '{{trigger.to_state.state[:6]=="AUTOLD"}}'
-            sequence:
-              - choose:
-                  - alias: Turn on Auto Loudness
-                    conditions: '{{trigger.to_state.state[7:]=="ON"}}'
-                    sequence:
-                      - service: input_boolean.turn_on
-                        data:
-                          entity_id: input_boolean.sitting_room_amp_autold
-                default:
-                  - service: input_boolean.turn_off
-                    data:
-                      entity_id: input_boolean.sitting_room_amp_autold
+#   - id: 'f0eb586d-e901-434f-bbc7-afed4362db23'
+#     alias: Sitting Room Amp States From RS232
+#     mode: parallel
+#     max: 20
+#     trigger:
+#     - platform: state
+#       entity_id: sensor.sitting_room_amp_rs232
+#     action:
+#       - choose:
+#           - alias: "Power on - Get info"
+#             conditions: '{{trigger.to_state.state=="STANDBY OFF"}}'
+#             sequence:
+#               - service: script.sitting_room_amp_get_rs232
+#           - alias: "music volume level reported"
+#             conditions: '{{trigger.to_state.state[:6]=="MSCLVL"}}'
+#             sequence:
+#               - service: input_number.set_value
+#                 data:
+#                   entity_id: input_number.sitting_room_amp_volume
+#                   value: >
+#                     {% if trigger.to_state.state[7:] == 'OFF' -%}
+#                       -80
+#                     {%- else -%}
+#                       {{trigger.to_state.state[7:] | int}}
+#                     {% endif %}
+#           - alias: Max music level reported
+#             conditions: '{{trigger.to_state.state[:9]=="MAXMSCLVL"}}'
+#             sequence:
+#               - service: input_number.set_value
+#                 data:
+#                   entity_id: input_number.sitting_room_amp_max_volume
+#                   value: >
+#                     {% if trigger.to_state.state[10:] == 'OFF' -%}
+#                       -80
+#                     {%- else -%}
+#                       {{trigger.to_state.state[10:] | int}}
+#                     {% endif %}
+#           - alias: "bass level adjusted"
+#             conditions: '{{trigger.to_state.state[:6]=="EQBASS"}}'
+#             sequence:
+#               - service: input_number.set_value
+#                 data:
+#                   entity_id: input_number.sitting_room_amp_bass
+#                   value: '{{trigger.to_state.state[7:] | int}}'
+#           - alias: "Treble level adjusted"
+#             conditions: '{{trigger.to_state.state[:6]=="EQTREB"}}'
+#             sequence:
+#               - service: input_number.set_value
+#                 data:
+#                   entity_id: input_number.sitting_room_amp_treb
+#                   value: '{{trigger.to_state.state[7:] | int}}'
+#           - alias: Input Source
+#             conditions: '{{trigger.to_state.state[:6]=="SELECT"}}'
+#             sequence:
+#               - repeat:
+#                   count: 4
+#                   sequence:
+#                     - choose:
+#                         - conditions: '{{trigger.to_state.state[7:] == "ABCD"[repeat.index-1]}}'
+#                           sequence:
+#                             - service: input_select.select_option
+#                               data:
+#                                 entity_id: input_select.sitting_room_amp_input_source
+#                                 option: '{{states.input_select.sitting_room_amp_input_source.attributes.options[repeat.index-1]}}'
+#           - alias: Set Input Gain
+#             conditions: '{{trigger.to_state.state[:6]=="IPGAIN"}}'
+#             sequence:
+#               - service: input_number.set_value
+#                 data:
+#                   entity_id: input_number.sitting_room_amp_ipgain_{{trigger.to_state.state[7:8]|lower}}
+#                   value: '{{trigger.to_state.state[9:] | int }}'
+#           - alias: Set Source Names
+#             conditions: '{{trigger.to_state.state[:10]=="SOURCENAME"}}'
+#             sequence:
+#               - service: input_text.set_value
+#                 data:
+#                   entity_id: input_text.sitting_room_amp_sourcename_{{trigger.to_state.state[11:12]|lower}}
+#                   value: '{{trigger.to_state.state[13:] }}'
+#               - service: input_select.set_options
+#                 data:
+#                   entity_id: input_select.sitting_room_amp_input_source
+#                   options:
+#                     - '{{states("input_text.sitting_room_amp_sourcename_a")}}'
+#                     - '{{states("input_text.sitting_room_amp_sourcename_b")}}'
+#                     - '{{states("input_text.sitting_room_amp_sourcename_c")}}'
+#                     - '{{states("input_text.sitting_room_amp_sourcename_d")}}'
+#           - alias: Set Auto Loudness
+#             conditions: '{{trigger.to_state.state[:6]=="AUTOLD"}}'
+#             sequence:
+#               - choose:
+#                   - alias: Turn on Auto Loudness
+#                     conditions: '{{trigger.to_state.state[7:]=="ON"}}'
+#                     sequence:
+#                       - service: input_boolean.turn_on
+#                         data:
+#                           entity_id: input_boolean.sitting_room_amp_autold
+#                 default:
+#                   - service: input_boolean.turn_off
+#                     data:
+#                       entity_id: input_boolean.sitting_room_amp_autold
 
-switch:
-  - platform: template
-    switches:
-      sitting_room_amp:
-        value_template: '{{ not is_state("sensor.sitting_room_amp_rs232", "STANDBY ON") }}'
-        friendly_name: Sitting Room Amp
-        turn_on:
-          service: shell_command.sitting_room_amp_set_standby_off
-        turn_off:
-          service: shell_command.sitting_room_amp_set_standby_on
+# switch:
+#   - platform: template
+#     switches:
+#       sitting_room_amp:
+#         unique_id: '679afbe6-241a-4e15-b87d-9542707ea4de'
+#         value_template: '{{states("sensor.sitting_room_amp_rs232") not in ("STANDBY ON", "unknown", "unavailable")}}'
+#         friendly_name: Sitting Room Amp
+#         turn_on:
+#           service: shell_command.sitting_room_amp_set_standby_off
+#         turn_off:
+#           service: shell_command.sitting_room_amp_set_standby_on
 
-homeassistant:
-  customize:
-    switch.sitting_room_amp:
-      icon: mdi:speaker-multiple
-    input_select.sitting_room_amp_input_source:
-      icon: mdi:import
-    input_boolean.sitting_room_amp_autold:
-      icon: mdi:volume-vibrate
+# homeassistant:
+#   customize:
+#     switch.sitting_room_amp:
+#       icon: mdi:speaker-multiple
+#     input_select.sitting_room_amp_input_source:
+#       icon: mdi:import
+#     input_boolean.sitting_room_amp_autold:
+#       icon: mdi:volume-vibrate

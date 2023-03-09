@@ -41,24 +41,24 @@ cards:
         hold_action:
           action: more-info
 
-      - type: custom:button-card
-        entity: switch.sitting_room_amp
-        name: Amp
-        tap_action:
-          action: toggle
-          haptic: light
-        styles:
-          card:
-            - height: 50px
-          name:
-            - font-size: 12px
-        state:
-          - value: 'unavailable'
-            color: grey
-          - value: 'on'
-            color: yellow
-        hold_action:
-          action: more-info
+      # - type: custom:button-card
+      #   entity: switch.sitting_room_amp
+      #   name: Amp
+      #   tap_action:
+      #     action: toggle
+      #     haptic: light
+      #   styles:
+      #     card:
+      #       - height: 50px
+      #     name:
+      #       - font-size: 12px
+      #   state:
+      #     - value: 'unavailable'
+      #       color: grey
+      #     - value: 'on'
+      #       color: yellow
+      #   hold_action:
+      #     action: more-info
 
       - type: custom:button-card
         entity: switch.ender3
