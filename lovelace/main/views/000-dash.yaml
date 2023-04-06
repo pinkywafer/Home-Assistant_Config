@@ -14,7 +14,7 @@ cards:
   - type: custom:vertical-stack-in-card
     cards:
       - type: custom:simple-weather-card
-        entity: weather.dark_sky
+        entity: weather.masarn_goch
         name: " "
       # - type: entities
       #   entities:
