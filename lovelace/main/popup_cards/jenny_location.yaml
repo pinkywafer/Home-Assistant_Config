@@ -23,8 +23,7 @@ card:
                   unit: '%'
                 - entity: sensor.jenny_s_phone_wifi_connection
                   name: WiFi SSID
-                - attribute: is_charging
-                  entity: sensor.jenny_s_phone_battery_state
+                - entity: sensor.jenny_s_phone_battery_state
                   name: On Charge
 
         - type: history-graph

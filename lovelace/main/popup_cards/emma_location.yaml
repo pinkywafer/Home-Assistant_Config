@@ -21,8 +21,7 @@ card:
                 - entity: sensor.emma_s_phone_battery_level
                   name: Bat
                   unit: '%'
-                - attribute: is_charging
-                  entity: sensor.emma_s_phone_battery_state
+                - entity: sensor.emma_s_phone_battery_state
                   name: On Charge
                 - entity: sensor.emma_s_phone_wifi_connection
                   name: WiFi SSID
