@@ -1,4 +1,0 @@
-nextcloud:
-  url: https://nextcloud.masarngoch.net
-  username: !secret nextcloud_username
-  password: !secret nextcloud_password
