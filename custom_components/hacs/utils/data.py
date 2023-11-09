@@ -207,8 +207,8 @@ class HacsData:
         self.logger.info("<HacsData restore> Restore started")
 
         # Hacs
-        self.hacs.common.archived_repositories = []
-        self.hacs.common.ignored_repositories = []
+        self.hacs.common.archived_repositories = set()
+        self.hacs.common.ignored_repositories = set()
         self.hacs.common.renamed_repositories = {}
 
         # Clear out doubble renamed values
@@ -219,14 +219,14 @@ class HacsData:
                 self.hacs.common.renamed_repositories[entry] = value
 
         # Clear out doubble archived values
-        for entry in hacs.get("archived_repositories", []):
+        for entry in hacs.get("archived_repositories", set()):
             if entry not in self.hacs.common.archived_repositories:
-                self.hacs.common.archived_repositories.append(entry)
+                self.hacs.common.archived_repositories.add(entry)
 
         # Clear out doubble ignored values
-        for entry in hacs.get("ignored_repositories", []):
+        for entry in hacs.get("ignored_repositories", set()):
             if entry not in self.hacs.common.ignored_repositories:
-                self.hacs.common.ignored_repositories.append(entry)
+                self.hacs.common.ignored_repositories.add(entry)
 
         try:
             await self.register_unknown_repositories(repositories)
@@ -286,6 +286,7 @@ class HacsData:
         repository.data.last_updated = repository_data.get("last_updated", 0)
         if self.hacs.system.generator:
             repository.data.etag_releases = repository_data.get("etag_releases")
+            repository.data.open_issues = repository_data.get("open_issues", 0)
         repository.data.etag_repository = repository_data.get("etag_repository")
         repository.data.topics = [
             topic for topic in repository_data.get("topics", []) if topic not in TOPIC_FILTER
