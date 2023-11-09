@@ -74,20 +74,12 @@ class TimersAttributes(TypedDict):
     timers: list[GoogleHomeTimerDict]
 
 
-class DeviceInfo(TypedDict):
-    """Typed dict for device_info"""
-
-    identifiers: set[tuple[str, str]]
-    name: str
-    manufacturer: str
-    model: str
-
-
 class ConfigFlowDict(TypedDict):
     """Typed dict for config flow handler"""
 
     username: str
     password: str
+    master_token: str
 
 
 class OptionsFlowDict(TypedDict):

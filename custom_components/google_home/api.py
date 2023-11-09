@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import asyncio
 from http import HTTPStatus
+import ipaddress
 import logging
 from typing import Literal, cast
 
@@ -77,6 +78,17 @@ class GlocaltokensApiClient:
             raise InvalidMasterToken
         return master_token
 
+    async def async_get_access_token(self) -> str:
+        """Get access token using master token"""
+
+        def _get_access_token() -> str | None:
+            return self._client.get_access_token()
+
+        access_token = await self.hass.async_add_executor_job(_get_access_token)
+        if access_token is None:
+            raise InvalidMasterToken
+        return access_token
+
     async def get_google_devices(self) -> list[GoogleHomeDevice]:
         """Get google device authentication tokens.
         Note this method will fetch necessary access tokens if missing"""
@@ -114,6 +126,8 @@ class GlocaltokensApiClient:
     def create_url(ip_address: str, port: int, api_endpoint: str) -> str:
         """Creates url to endpoint.
         Note: port argument is unused because all request must be done to 8443"""
+        if isinstance(ipaddress.ip_address(ip_address), ipaddress.IPv6Address):
+            ip_address = f"[{ip_address}]"
         return f"https://{ip_address}:{port}/{api_endpoint}"
 
     async def update_google_devices_information(self) -> list[GoogleHomeDevice]:
@@ -307,7 +321,7 @@ class GlocaltokensApiClient:
         return device
 
     async def update_alarm_volume(
-        self, device: GoogleHomeDevice, volume: float | None = None
+        self, device: GoogleHomeDevice, volume: int | None = None
     ) -> GoogleHomeDevice:
         """Gets or sets the alarm volume setting on a Google Home device."""
 
@@ -316,7 +330,7 @@ class GlocaltokensApiClient:
 
         if volume is not None:
             # Setting is inverted on device
-            volume_float = float(volume / 100)
+            volume_float = volume / 100
             data = {JSON_ALARM_VOLUME: volume_float}
             _LOGGER.debug(
                 "Setting alarm volume to %d(float=%f) on Google Home device %s",
@@ -342,23 +356,23 @@ class GlocaltokensApiClient:
             if JSON_ALARM_VOLUME in response:
                 if polling:
                     volume_raw = str(response[JSON_ALARM_VOLUME])
-                    volume_int = round(float(volume_raw) * 100)
+                    volume = round(float(volume_raw) * 100)
                     _LOGGER.debug(
                         "Received alarm volume from Google Home device %s"
                         " - Volume: %d(raw=%s)",
                         device.name,
-                        volume_int,
+                        volume,
                         volume_raw,
                     )
                 else:
-                    volume_int = volume  # type: ignore
+                    assert volume is not None
                     _LOGGER.debug(
                         "Successfully set alarm volume to %d "
                         "on Google Home device %s",
                         volume,
                         device.name,
                     )
-                device.set_alarm_volume(volume_int)
+                device.set_alarm_volume(volume)
             else:
                 _LOGGER.debug(
                     (
