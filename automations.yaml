@@ -14,7 +14,7 @@
       message: '{{ ["Carmel, it''s time for your tablet", "Don''t forget to take your
         tablet, Carmel", "Carmel, if you haven''t already taken your tablet, its time
         to take it now", "Remember to take your tablet, Carmel" ] | random }}'
-    service: notify.broadcast_from_home_assistant
+    service: notify.google_assistant_sdk
 - id: '1601999861619'
   alias: Emma Chore reminder
   description: ''
@@ -36,10 +36,10 @@
         sticky: true
   - service: notify.mobile_app_emma_s_phone
     data:
-      message: TTS
-      title: Hi There, it's recycling day!
+      message: "TTS"
       data:
         channel: alarm_stream
+        tts_text: Hi There, it's recycling day!
   mode: single
 - id: '1621126851304'
   alias: upstairs warning
@@ -145,4 +145,17 @@
   - service: frontend.set_theme
     data:
       name: No Borders
+  mode: single
+- id: '1681351860906'
+  alias: AA jen
+  description: ''
+  trigger:
+  - platform: time
+    at: 05:50:00
+  condition: []
+  action:
+  - service: light.turn_on
+    data: {}
+    target:
+      entity_id: light.bedroom_ceiling_light
   mode: single
