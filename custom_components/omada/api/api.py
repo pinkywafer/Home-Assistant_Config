@@ -1,22 +1,42 @@
 import logging
 
+from typing import Any, Callable, Dict
+from abc import abstractmethod
+
 from .errors import (OmadaApiException)
 
 LOGGER = logging.getLogger(__name__)
 
+class APIItem:
+    def __init__(self, raw):
+        self._raw: Dict[str, Any] = raw
+        self._details: Dict[str, Any] = {}
+
+    def update(self, raw=None):
+        if raw:
+            self._raw = raw
+        else:
+            return
+
 
 class APIItems:
-    def __init__(self, request, end_point, key, item_cls, data_key: str = ""):
-        self._request = request
-        self._end_point = end_point
-        self.items = {}
-        self._key = key
-        self._item_cls = item_cls
-        self._data_key = data_key
 
-    async def update(self):
+    _has_details = False
+
+    def __init__(self, request: Callable[[str, str, list[Dict[str, str]]], Any], end_point: str, key: str,
+                 item_cls: str, data_key: str = ""):
+        self._request: Callable[[
+            str, str, list[Dict[str, str]]], Any] = request
+        self._end_point: str = end_point
+        self.items: Dict[str, Any] = {}
+        self._key: str = key
+        self._item_cls = item_cls
+        self._data_key: str = data_key
+
+    async def update(self, update_details: bool = False):
         response = await self._request("GET", self._end_point, params=[
-            ("filters.active", "true"), ("currentPage", "1"), ("currentPageSize", "1000000")
+            ("filters.active", "true"), ("currentPage",
+                                         "1"), ("currentPageSize", "1000000")
         ])
 
         if self._data_key == "":
@@ -28,6 +48,14 @@ class APIItems:
         else:
             raise OmadaApiException(
                 f"Unable to parse {{self._end_point}}: '{self._data_key}' array not available in response.")
+
+        if update_details and self._has_details:
+            for key, item in self.items.items():
+                await self.update_details(key, item)         
+
+    @abstractmethod
+    def update_details(self, key: str, item: APIItem) -> None:
+        pass
 
     def _process_raw(self, raw):
         present_items = set()
@@ -58,14 +86,3 @@ class APIItems:
 
     def __iter__(self):
         return self.items.__iter__()
-
-
-class APIItem:
-    def __init__(self, raw):
-        self._raw = raw
-
-    def update(self, raw=None):
-        if raw:
-            self._raw = raw
-        else:
-            return
