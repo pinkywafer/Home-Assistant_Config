@@ -19,6 +19,6 @@ automation:
           message: "Happy Birthday Jenny!"
           data:
             tag: birthday
-      - service: notify.broadcast_from_home_assistant
+      - service: notify.google_assistant_sdk
         data:
           message: "Happy Birthday Jenny!"

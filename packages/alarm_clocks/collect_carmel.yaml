@@ -19,7 +19,7 @@ automation:
       - thu
       - fri
     action:
-    - service: notify.broadcast_from_home_assistant
+    - service: notify.google_assistant_sdk
       data:
         message: It's time to go
     mode: single

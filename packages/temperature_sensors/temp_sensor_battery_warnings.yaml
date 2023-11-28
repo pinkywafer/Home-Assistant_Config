@@ -34,7 +34,7 @@ automation:
                   tag: 'temp_sensor_battery_warning'
                   sticky: true
                   persistent: true
-            - service: notify.broadcast_from_home_assistant
+            - service: notify.google_assistant_sdk
               data:
                 message: >
                   The Temperature sensor Batteries need changing in

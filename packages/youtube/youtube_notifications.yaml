@@ -22,7 +22,7 @@ automation:
                 'sensor.diocese_of_wrexham'
               ]}}
             sequence:
-              - service: notify.broadcast_from_home_assistant
+              - service: notify.google_assistant_sdk
                 data:
                   message: >
                     {{trigger.to_state.attributes.friendly_name}} is live on youtube with

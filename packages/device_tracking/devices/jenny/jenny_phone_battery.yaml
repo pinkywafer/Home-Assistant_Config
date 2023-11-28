@@ -10,7 +10,7 @@ automation:
         entity_id: person.jenny_gorton
         zone: zone.home
     action:
-    - service: notify.broadcast_from_home_assistant
+    - service: notify.google_assistant_sdk
       data:
         message: "Remember to charge your phone Jenny, It's down to {{ states('sensor.jenny_s_phone_battery_level')}} percent!"
 
@@ -25,6 +25,6 @@ automation:
         entity_id: person.jenny_gorton
         zone: zone.home
     action:
-    - service: notify.broadcast_from_home_assistant
+    - service: notify.google_assistant_sdk
       data:
         message: "Jenny, Your phone battery is down to {{ states('sensor.jenny_s_phone_battery_level')}} percent!"
