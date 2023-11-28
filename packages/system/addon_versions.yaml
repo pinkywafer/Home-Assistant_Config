@@ -1,12 +1,12 @@
-sensor:
-# addons
-  - platform: command_line
-    name: addon updates
-    command: 'curl http://supervisor/supervisor/info -H "Authorization: Bearer $(printenv SUPERVISOR_TOKEN)" | jq ''{"addons":[.data.addons[] | select(.update_available == true)]}'''
-    value_template: "{{ value_json.addons | length }}"
-    json_attributes:
-    - addons
-    scan_interval: 3600
+command_line:
+  # addons
+  - sensor:
+      name: addon updates
+      command: 'curl http://supervisor/supervisor/info -H "Authorization: Bearer $(printenv SUPERVISOR_TOKEN)" | jq ''{"addons":[.data.addons[] | select(.update_available == true)]}'''
+      value_template: "{{ value_json.addons | length }}"
+      json_attributes:
+      - addons
+      scan_interval: 3600
 
 automation:
   - id: 'b0751eed-372c-4500-902f-4fe1b356be72'
