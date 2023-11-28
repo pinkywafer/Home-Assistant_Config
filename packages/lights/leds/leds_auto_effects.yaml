@@ -1,11 +1,11 @@
-sensor:
-  - platform: template
-    sensors:
-      default_led_effect:
-        value_template: >-
+template:
+  - sensor:
+      - name: Default LED Effect
+        unique_id: "33f4115c-b7e8-447c-9f02-3a04054ecf6b"
+        state: >-
           {% if is_state("sensor.anniversary_jenny_s_birthday", "0") or
-              is_state("sensor.anniversary_carmel_s_birthday", "0") or
-              is_state("sensor.anniversary_emma_s_birthday","0") -%}
+            is_state("sensor.anniversary_carmel_s_birthday", "0") or
+            is_state("sensor.anniversary_emma_s_birthday","0") -%}
             Rainbow
           {%- elif is_state("sensor.valentine_s_day","0") -%}
             Lovey Day
@@ -20,19 +20,19 @@ sensor:
           {%- elif is_state("sensor.christmas_day","0") or
               is_state("sensor.easter_sunday","0") -%}
             Rainbow
-          {%- elif states("sensor.easter_sunday") |int < 47 -%}
+          {%- elif states("sensor.easter_sunday") |int(47) < 47 -%}
             Punkin
-          {%- elif states("sensor.christmas_day") |int > 200 and
-              states("sensor.epiphany") |int <= 12 -%}
+          {%- elif states("sensor.christmas_day") |int(200) > 200 and
+              states("sensor.epiphany") |int(13) <= 12 -%}
             Holly Jolly
           {%- elif is_state("sensor.first_sunday_of_advent", "0")  or
-              (states("sensor.first_sunday_of_advent") |int > 200 and
-              states("sensor.christmas_day") |int < 28) -%}
+              (states("sensor.first_sunday_of_advent") |int(200) > 200 and
+              states("sensor.christmas_day") |int(28) < 28) -%}
             Punkin
           {%- else -%}
             Solid Color
           {%- endif %}
-        attribute_templates:
+        attributes:
           color: >-
             {% if states("sensor.date") and now().weekday() == 6 -%}
               {"r":0,"g":255,"b":0}
@@ -60,6 +60,11 @@ automation:
       - id: "start"
         platform: state
         entity_id: sensor.default_led_effect
+      - id: "start"
+        platform: state
+        entity_id: alarm_control_panel.alarm
+        from: 'triggered'
+        to: 'disarmed'
       - id: "breakfast bar led"
         platform: state
         entity_id: light.breakfast_bar_led
@@ -89,11 +94,16 @@ automation:
       - if:
           - '{{trigger.id in ("start","breakfast bar led")}}'
         then:
+          - delay: 2
           - service: mqtt.publish
             data:
-              topic: "cmnd/KitchenLEDs"
+              topic: "cmnd/breakfast-bar-led"
               payload_template: >-
                 {"brightness":210,
                 "effect":"{{states("sensor.default_led_effect")}}",
                 "color_temp":{{state_attr("sensor.default_led_effect","speed")}},
                 "color": {{state_attr("sensor.default_led_effect","color")}}}
+
+          
+
+
