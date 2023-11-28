@@ -4,13 +4,13 @@ switch:
       pc:
         friendly_name: PC
         unique_id: "d81daac8-b82c-4e07-bedf-de3b4d3b3244"
-        value_template: '{{is_state("device_tracker.pc_ethernet","home")}}'
+        value_template: '{{is_state("binary_sensor.jennys_pc_power_status","on")}}'
         turn_on:
           service: shell_command.pc_wol
         turn_off:
           service: mqtt.publish
           data:
-            topic: "iotlink/workgroup/mediacenter/commands/shutdown"
+            topic: "iotlink/workgroup/jennys-pc/commands/shutdown"
             payload: ""
 
 shell_command:
@@ -22,7 +22,7 @@ script:
     sequence:
       - service: mqtt.publish
         data:
-          topic: "iotlink/workgroup/mediacenter/commands/suspend"
+          topic: "iotlink/workgroup/jennys-pc/commands/suspend"
           payload: ""
 
   pc_hibernate:
@@ -30,7 +30,7 @@ script:
     sequence:
       - service: mqtt.publish
         data:
-          topic: "iotlink/workgroup/mediacenter/commands/hibernate"
+          topic: "iotlink/workgroup/jennys-pc/commands/hibernate"
           payload: ""
 
   pc_reboot:
@@ -38,7 +38,7 @@ script:
     sequence:
       - service: mqtt.publish
         data:
-          topic: "iotlink/workgroup/mediacenter/commands/reboot"
+          topic: "iotlink/workgroup/jennys-pc/commands/reboot"
           payload: ""
 
   pc_lock:
@@ -46,7 +46,7 @@ script:
     sequence:
       - service: mqtt.publish
         data:
-          topic: "iotlink/workgroup/mediacenter/commands/lock"
+          topic: "iotlink/workgroup/jennys-pc/commands/lock"
           payload: ""
 
   pc_logoff:
@@ -54,7 +54,7 @@ script:
     sequence:
       - service: mqtt.publish
         data:
-          topic: "iotlink/workgroup/mediacenter/commands/logoff"
+          topic: "iotlink/workgroup/jennys-pc/commands/logoff"
           payload: ""
 
   pc_start_chrome:
@@ -62,5 +62,5 @@ script:
     sequence:
       - service: mqtt.publish
         data:
-          topic: "iotlink/workgroup/mediacenter/commands/run"
+          topic: "iotlink/workgroup/jennys-pc/commands/run"
           payload: '{ "command": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe", "args": "chrome://newtab", "path": "C:\\Program Files (x86)\\Google\\Chrome\\Application", "user": "", "visible": true, "fallback": true }'
