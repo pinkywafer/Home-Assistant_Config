@@ -2,14 +2,15 @@ script:
   ender3_safe_power_down:
     alias: Ender3 Safe Power Down
     sequence:
-      - condition: not
-        conditions:
-          condition: state
-          entity_id: binary_sensor.octoprint_printing
-          state: 'on'
-      - service: switch.turn_on
-        entity_id: switch.octoprint_shutdown_system
-      - wait_template: "{{ is_state('sensor.octoprint_print_status', 'unavailable') }}"
+      - condition: state
+        entity_id: sensor.ender_3_current_print_state
+        state:
+          - 'complete'
+          - 'standby'
+      - service: button.press
+        target:
+          entity_id: button.ender_3_host_shutdown
+      - wait_template: "{{ is_state('sensor.ender_3_current_print_state', 'unavailable') }}"
       - delay:
           seconds: 30
       - service: switch.turn_off
@@ -19,12 +20,11 @@ script:
     alias: Ender3 shutdown when cool
     sequence:
       - condition: state
-        entity_id: binary_sensor.octoprint_printing
-        state: 'off'
-      - condition: state
-        entity_id: automation.ender_3_auto_shutdown_when_done
-        state: 'on'
-      - wait_template: "{{ states('sensor.octoprint_tool_0_temperature')|int < 40  }}"
+        entity_id: sensor.ender_3_current_print_state
+        state:
+          - 'complete'
+          - 'standby'
+      - wait_template: "{{ states('sensor.ender_3_extruder_temperature')|int < 40  }}"
         timeout: '00:10:00'
         continue_on_timeout: false
       - service: script.ender3_safe_power_down
@@ -35,8 +35,9 @@ script:
       - condition: state
         entity_id: switch.ender3_controls
         state: 'on'
-      - service: switch.turn_on
-        entity_id: switch.octoprint_cancel_print
+      - service: button.press
+        target:
+          entity_id: button.ender_3_cancel_print
 
   ender3_pause_print:
     alias: Ender3 Pause
@@ -44,8 +45,9 @@ script:
       - condition: state
         entity_id: switch.ender3_controls
         state: 'on'
-      - service: switch.turn_on
-        entity_id: switch.octoprint_pause_print
+      - service: button.press
+        target:
+          entity_id: button.ender_3_pause_print
 
   ender3_resume_print:
     alias: Ender3 Resume
@@ -53,8 +55,9 @@ script:
       - condition: state
         entity_id: switch.ender3_controls
         state: 'on'
-      - service: switch.turn_off
-        entity_id: switch.octoprint_pause_print
+      - service: button.press
+        target:
+          entity_id: button.ender_3_resume_print
 
   ender3_home:
     alias: Ender3 Homing
@@ -63,12 +66,11 @@ script:
         entity_id: switch.ender3_controls
         state: 'on'
       - condition: state
-        entity_id: sensor.octoprint_print_status
-        state: 'Operational'
-      - service: mqtt.publish
-        data:
-          topic: "octoPrint/hassControl/home"
-          payload: "[\"x\", \"y\", \"z\"]"
+        entity_id: sensor.ender_3_current_print_state
+        state:
+          - 'standby'
+          - 'complete'
+        # NOT YET AVAILABLE - ADD Homing
 
   ender3_level_bed:
     alias: Ender3 Bed Levelling
@@ -77,12 +79,11 @@ script:
         entity_id: switch.ender3_controls
         state: 'on'
       - condition: state
-        entity_id: sensor.octoprint_print_status
-        state: 'Operational'
-      - service: mqtt.publish
-        data:
-          topic: "octoPrint/hassControl/commands"
-          payload: "G29"
+        entity_id: sensor.ender_3_current_print_state
+        state:
+          - 'standby'
+          - 'complete'
+          # NOT YET AVAILABLE - ADD BED_MESH_CALIBRATE
 
   ender3_cooldown:
     alias: Ender3 cooldown
@@ -90,17 +91,7 @@ script:
       - condition: state
         entity_id: switch.ender3_controls
         state: 'on'
-      - condition: state
-        entity_id: sensor.octoprint_print_status
-        state: 'Operational'
-      - service: mqtt.publish
-        data:
-          topic: "octoPrint/hassControl/commands"
-          payload: "M140 S0"
-      - service: mqtt.publish
-        data:
-          topic: "octoPrint/hassControl/commands"
-          payload: "M104 S0"
+        # to do add cooling
 
   ender3_preheat_petg:
     alias: Ender3 PETG Preheat
@@ -108,17 +99,7 @@ script:
       - condition: state
         entity_id: switch.ender3_controls
         state: 'on'
-      - condition: state
-        entity_id: sensor.octoprint_print_status
-        state: 'Operational'
-      - service: mqtt.publish
-        data:
-          topic: "octoPrint/hassControl/commands"
-          payload: "M140 S75"
-      - service: mqtt.publish
-        data:
-          topic: "octoPrint/hassControl/commands"
-          payload: "M104 S215"
+        # TO DO add heating
 
   ender3_preheat_pla:
     alias: Ender3 PLA Preheat
@@ -126,17 +107,7 @@ script:
       - condition: state
         entity_id: switch.ender3_controls
         state: 'on'
-      - condition: state
-        entity_id: sensor.octoprint_print_status
-        state: 'Operational'
-      - service: mqtt.publish
-        data:
-          topic: "octoPrint/hassControl/commands"
-          payload: "M140 S55"
-      - service: mqtt.publish
-        data:
-          topic: "octoPrint/hassControl/commands"
-          payload: "M104 S185"
+        # TO DO add heating
 
   ender3_change_filament:
     alias: Ender3 Filament Change
@@ -144,10 +115,7 @@ script:
       - condition: state
         entity_id: switch.ender3_controls
         state: 'on'
-      - service: mqtt.publish
-        data:
-          topic: "octoPrint/hassControl/commands"
-          payload: "M600"
+        # TO DO add filament change
 
 automation:
   - id: '21c0b61f-1a27-43af-8044-60a83de0eec2'
@@ -155,8 +123,10 @@ automation:
     description: Shutdown the printer once is has cooled down
     trigger:
       - platform: state
-        entity_id: binary_sensor.octoprint_printing
-        from: 'on'
-        to: 'off'
+        entity_id: sensor.ender_3_current_print_state
+        from:
+          - 'printing'
+          - 'paused'
+        to: 'complete'
     action:
       - service: script.ender3_shutdown_when_cool

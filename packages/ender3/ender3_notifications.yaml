@@ -4,9 +4,8 @@ automation:
     mode: queued
     trigger:
       - platform: state
-        entity_id: binary_sensor.octoprint_printing
-        from: 'on'
-        to: 'off'
+        entity_id: sensor.ender_3_current_print_state
+        to: 'COMPLETE'
     action:
       - service: notify.mobile_app_jenny_s_phone
         data:
