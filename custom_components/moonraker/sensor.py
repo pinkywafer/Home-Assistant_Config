@@ -8,6 +8,7 @@ from homeassistant.components.sensor import (
     SensorDeviceClass,
     SensorEntity,
     SensorEntityDescription,
+    SensorStateClass,
 )
 from homeassistant.const import PERCENTAGE, UnitOfLength, UnitOfTemperature, UnitOfTime
 from homeassistant.core import callback
@@ -268,6 +269,7 @@ SENSORS: tuple[MoonrakerSensorDescription, ...] = [
         ),
         subscriptions=[("print_stats", "info", "total_layer")],
         icon="mdi:layers-triple",
+        state_class=SensorStateClass.MEASUREMENT,
     ),
     MoonrakerSensorDescription(
         key="current_layer",
@@ -275,6 +277,7 @@ SENSORS: tuple[MoonrakerSensorDescription, ...] = [
         value_fn=lambda sensor: calculate_current_layer(sensor.coordinator.data),
         subscriptions=[("print_stats", "info", "current_layer")],
         icon="mdi:layers-edit",
+        state_class=SensorStateClass.MEASUREMENT,
     ),
     MoonrakerSensorDescription(
         key="toolhead_position_x",
@@ -392,6 +395,20 @@ async def async_setup_optional_sensors(coordinator, entry, async_add_entities):
                 unit=PERCENTAGE,
             )
             sensors.append(desc)
+        elif obj == "gcode_move":
+            desc = MoonrakerSensorDescription(
+                key="speed_factor",
+                name="Speed factor",
+                value_fn=lambda sensor: round(
+                    sensor.coordinator.data["status"]["gcode_move"]["speed_factor"]
+                    * 100,
+                    2,
+                ),
+                subscriptions=[("gcode_move", "speed_factor")],
+                icon="mdi:speedometer",
+                unit=PERCENTAGE,
+            )
+            sensors.append(desc)
 
     coordinator.load_sensor_data(sensors)
     await coordinator.async_refresh()
@@ -421,6 +438,7 @@ async def async_setup_history_sensors(coordinator, entry, async_add_entities):
             subscriptions=[],
             icon="mdi:numeric",
             unit="Jobs",
+            state_class=SensorStateClass.TOTAL_INCREASING,
         ),
         MoonrakerSensorDescription(
             key="total_print_time",
@@ -442,6 +460,7 @@ async def async_setup_history_sensors(coordinator, entry, async_add_entities):
             subscriptions=[],
             icon="mdi:clock-outline",
             unit=UnitOfLength.METERS,
+            state_class=SensorStateClass.TOTAL_INCREASING,
         ),
         MoonrakerSensorDescription(
             key="longest_print",
@@ -498,13 +517,22 @@ def calculate_pct_job(data) -> float:
     print_expected_duration = data["estimated_time"]
     filament_used = data["status"]["print_stats"]["filament_used"]
     expected_filament = data["filament_total"]
-    if print_expected_duration == 0 or expected_filament == 0:
+    divider = 0
+    time_pct = 0
+    filament_pct = 0
+
+    if print_expected_duration != 0:
+        time_pct = data["status"]["display_status"]["progress"]
+        divider += 1
+
+    if expected_filament != 0:
+        filament_pct = 1.0 * filament_used / expected_filament
+        divider += 1
+
+    if divider == 0:
         return 0
 
-    time_pct = data["status"]["display_status"]["progress"]
-    filament_pct = 1.0 * filament_used / expected_filament
-
-    return (time_pct + filament_pct) / 2
+    return (time_pct + filament_pct) / divider
 
 
 def calculate_eta(data):
@@ -537,6 +565,7 @@ def calculate_current_layer(data):
 
     if (
         "info" in data["status"]["print_stats"]
+        and data["status"]["print_stats"]["info"] is not None
         and "current_layer" in data["status"]["print_stats"]["info"]
         and data["status"]["print_stats"]["info"]["current_layer"] is not None
     ):

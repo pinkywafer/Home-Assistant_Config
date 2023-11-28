@@ -6,7 +6,7 @@ from homeassistant.const import Platform
 # Base component constants
 DOMAIN = "moonraker"
 DOMAIN_DATA = f"{DOMAIN}_data"
-VERSION = "0.10.0"
+VERSION = "0.10.1"
 MANIFACTURER = "@marcolivierarsenault"
 
 # Platforms
@@ -22,6 +22,7 @@ PLATFORMS = [
 CONF_API_KEY = "api_key"
 CONF_URL = "url"
 CONF_PORT = "port"
+CONF_TLS = "tls"
 CONF_PRINTER_NAME = "printer_name"
 
 # API dict keys

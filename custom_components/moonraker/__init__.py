@@ -10,6 +10,7 @@ import async_timeout
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import Config, HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
+from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
@@ -18,6 +19,7 @@ from .const import (
     CONF_API_KEY,
     CONF_PORT,
     CONF_PRINTER_NAME,
+    CONF_TLS,
     CONF_URL,
     DOMAIN,
     HOSTNAME,
@@ -40,18 +42,37 @@ async def async_setup(_hass: HomeAssistant, _config: Config):
     return True
 
 
+def get_user_name(hass: HomeAssistant, entry: ConfigEntry):
+    device_registry = dr.async_get(hass)
+    device_entries = dr.async_entries_for_config_entry(device_registry, entry.entry_id)
+
+    if len(device_entries) < 1:
+        return None
+
+    return device_entries[0].name_by_user
+
+
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     """Set up this integration using UI."""
     if hass.data.get(DOMAIN) is None:
         hass.data.setdefault(DOMAIN, {})
 
+    custom_name = get_user_name(hass, entry)
+
     url = entry.data.get(CONF_URL)
     port = entry.data.get(CONF_PORT)
+    tls = entry.data.get(CONF_TLS)
     api_key = entry.data.get(CONF_API_KEY)
-    printer_name = entry.data.get(CONF_PRINTER_NAME)
+    printer_name = (
+        entry.data.get(CONF_PRINTER_NAME) if custom_name is None else custom_name
+    )
 
     api = MoonrakerApiClient(
-        url, async_get_clientsession(hass, verify_ssl=False), port=port, api_key=api_key
+        url,
+        async_get_clientsession(hass, verify_ssl=False),
+        port=port,
+        api_key=api_key,
+        tls=tls,
     )
 
     try:
@@ -103,9 +124,11 @@ async def _gcode_file_detail_updater(coordinator):
     data = await coordinator._async_fetch_data(
         METHODS.PRINTER_OBJECTS_QUERY, coordinator.query_obj
     )
-    return await coordinator._async_get_gcode_file_detail(
-        data["status"]["print_stats"]["filename"]
-    )
+    filename = ""
+    if "status" in data:
+        filename = data["status"]["print_stats"]["filename"]
+
+    return await coordinator._async_get_gcode_file_detail(filename)
 
 
 class MoonrakerDataUpdateCoordinator(DataUpdateCoordinator):
@@ -185,6 +208,11 @@ class MoonrakerDataUpdateCoordinator(DataUpdateCoordinator):
         try:
             # Keep last since this can fail but, we still want the other data
             path = gcode["thumbnails"][len(gcode["thumbnails"]) - 1]["relative_path"]
+            thumbnailSize = 0
+            for t in gcode["thumbnails"]:
+                if t["size"] > thumbnailSize:
+                    thumbnailSize = t["size"]
+                    path = t["relative_path"]
 
             return_gcode["thumbnails_path"] = os.path.join(dirname, path)
             return return_gcode
