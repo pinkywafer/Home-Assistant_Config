@@ -2,7 +2,7 @@ automation:
   - id: '33348373-a93c-4eaf-80d5-44f1e8d52b11'
     alias: Save Notifications on Create
     mode: queued
-    initial_state: true
+    initial_state: false
     trigger:
       - platform: event
         event_type: call_service
@@ -28,7 +28,7 @@ automation:
   - id: 'f1be40e5-fcae-4d9c-bf01-5d3b6d78c073'
     alias: Removed Saved Notifications on Dismiss
     mode: parallel
-    initial_state: true
+    initial_state: false
     trigger:
       - platform: event
         event_type: call_service
