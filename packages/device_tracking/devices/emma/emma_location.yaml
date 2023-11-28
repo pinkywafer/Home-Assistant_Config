@@ -1,8 +1,7 @@
-sensor:
-  - platform: template
-    sensors:
-      emma_location:
-        value_template: >-
+template:
+  - sensor:
+      - name: "Emma Location"
+        state: >-
           {% if is_state("person.emma_gorton", "not_home") -%}
             {{ states("sensor.emma_s_phone_geocoded_location") }}
           {%- else -%}
