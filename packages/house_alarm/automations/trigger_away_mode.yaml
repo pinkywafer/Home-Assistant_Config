@@ -93,5 +93,5 @@ automation:
           {% endif %}
     - service: camera.snapshot
       data:
-        entity_id: camera.sitting_room_sensor_camera
-        filename: 'www/pics/sitting_room_a.jpg'
+        entity_id: camera.sitting_room_camera
+        filename: 'www/pics/sitting_room_alarm.jpg'

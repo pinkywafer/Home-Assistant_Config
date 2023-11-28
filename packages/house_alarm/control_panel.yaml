@@ -3,12 +3,10 @@ alarm_control_panel:
     name: Alarm
     code: !secret alarm_code
     trigger_time: 300
+    delay_time: 0
     armed_home:
       arming_time: 0
       delay_time: 0
     armed_away:
       arming_time: 30
       delay_time: 30
-    armed_night:
-      arming_time: 0
-      delay_time: 0

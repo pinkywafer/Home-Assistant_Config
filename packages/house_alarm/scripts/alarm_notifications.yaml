@@ -4,31 +4,31 @@ script:
     sequence:
       - service: camera.snapshot
         data:
-          entity_id: camera.sitting_room_sensor_camera
+          entity_id: camera.sitting_room_camera
           filename: 'www/pics/sitting_room_cam1.jpg'
       - delay:
           seconds: 1
       - service: camera.snapshot
         data:
-          entity_id: camera.sitting_room_sensor_camera
+          entity_id: camera.sitting_room_camera
           filename: 'www/pics/sitting_room_cam2.jpg'
       - delay:
           seconds: 1
       - service: camera.snapshot
         data:
-          entity_id: camera.sitting_room_sensor_camera
+          entity_id: camera.sitting_room_camera
           filename: 'www/pics/sitting_room_cam3.jpg'
       - delay:
           seconds: 1
       - service: camera.snapshot
         data:
-          entity_id: camera.sitting_room_sensor_camera
+          entity_id: camera.sitting_room_camera
           filename: 'www/pics/sitting_room_cam4.jpg'
       - delay:
           seconds: 1
       - service: camera.snapshot
         data:
-          entity_id: camera.sitting_room_sensor_camera
+          entity_id: camera.sitting_room_camera
           filename: 'www/pics/sitting_room_cam5.jpg'
       - service: notify.email_jenny
         data:

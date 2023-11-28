@@ -8,29 +8,28 @@ automation:
     action:
     - service: homeassistant.turn_on
       entity_id: light.all_lights
-    - service: camera.snapshot
-      data:
-        entity_id: camera.sitting_room_sensor_camera
-        filename: 'www/pics/sitting_room_alarm.jpg'
     - service: light.turn_on
       data:
-        entity_id: light.emma_led
+        entity_id:
+          - light.breakfast_bar_led
+          - light.shed_front_led
+          - light.emma_led
         effect: "Police All"
-    - service: light.turn_on
-      data:
-        entity_id: light.breakfast_bar_led
-        effect: "Police All"
+        brightness: 100
     - service: notify.mobile_app_jenny_s_phone
       data:
         message: 'ALARM! The alarm has been triggered: {{ states.input_text.alarm_trigger.state }}'
         title: 'Home Alarm'
         data:
-          channel: Alarm
+          ttl: 0
+          visibility: public
+          priority: high
+          channel: alarm_stream
           vibrationPattern: "100, 1000, 100, 1000"
-          importance: high
+          importance: max
           persistent: true
           sticky: true
-          image: !secret alarm_picture_1
+          image: www/pics/sitting_room_alarm.jpg
           tag: alarm
           color: 'red'
           clickAction: 'lovelace/cctv'
@@ -55,5 +54,5 @@ automation:
         message: "ALARM! The alarm has been triggered: {{ states.input_text.alarm_trigger.state }}"
         data:
           images:
-            - www/pics/sitting_room_alarm.jpg
+            - 'www/pics/sitting_room_alarm.jpg'
     - service: script.alarm_notifications
