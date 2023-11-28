@@ -11,4 +11,3 @@ automation:
     action:
     - service: light.turn_on
       entity_id: light.bedroom_ceiling_light
-    - service: script.emma_bedtime
