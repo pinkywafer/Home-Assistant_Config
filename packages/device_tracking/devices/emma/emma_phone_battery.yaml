@@ -12,5 +12,7 @@ automation:
     action:
       - service: notify.mobile_app_emma_s_phone
         data:
-          message: TTS
-          title: "Emma, You need to charge your phone, you only have {{ states('sensor.emma_s_phone_battery_level')}} percent left!"
+          message: "TTS"
+          data:
+            channel: alarm_stream
+            tts_text: "Emma, You need to charge your phone, you only have {{ states('sensor.emma_s_phone_battery_level')}} percent left!"
