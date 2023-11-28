@@ -1,12 +1,12 @@
-sensor:
-  - platform: command_line
-    name: supervisor update
-    command: 'curl http://supervisor/supervisor/info -H "Authorization: Bearer $(printenv SUPERVISOR_TOKEN)" | jq ''{"newest_version":.data.version_latest,"current_version":.data.version}'''
-    value_template: "{{ value_json.newest_version != value_json.current_version }}"
-    json_attributes:
-    - newest_version
-    - current_version
-    scan_interval: 3600
+command_line:
+  - sensor:
+      name: supervisor update
+      command: 'curl http://supervisor/supervisor/info -H "Authorization: Bearer $(printenv SUPERVISOR_TOKEN)" | jq ''{"newest_version":.data.version_latest,"current_version":.data.version}'''
+      value_template: "{{ value_json.newest_version != value_json.current_version }}"
+      json_attributes:
+      - newest_version
+      - current_version
+      scan_interval: 3600
 
 automation:
   - id: 'ef8b316b-02fa-4470-b336-095cfc9a074b'
