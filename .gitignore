@@ -36,8 +36,11 @@ esphome/common/secrets.yaml
 # www ignores
 www/*.jpeg
 www/*.jpg
+www/*.png
+www/*.mp3
 www/pics
 www/custom-lovelace/upcoming-media-card
+www/Radio
 
 # Ignore files created by IDE's
 .vscode
