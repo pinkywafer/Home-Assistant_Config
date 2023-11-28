@@ -5,6 +5,7 @@ automation:
     trigger:
       platform: webhook
       webhook_id: !secret github_webhook
+      local_only: false
     condition:
         - condition: template
           value_template: >-

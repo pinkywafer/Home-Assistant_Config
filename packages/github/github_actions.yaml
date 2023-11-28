@@ -5,6 +5,7 @@ automation:
     trigger:
       platform: webhook
       webhook_id: !secret github_actions_webhook
+      local_only: false
     condition: '{{trigger.json.check_run.check_suite.head_branch == "master"}}'
     action:
       - service: mqtt.publish
@@ -23,40 +24,46 @@ automation:
 
 mqtt:
   sensor:
-    - name: github_checkrun_remarklint
-      state_topic: github_checkrun/remarklint
+    - name: github_checkrun_home_assistant_beta
+      state_topic: github_checkrun/HA beta Config Check
       value_template: "{{ value_json.status }}"
-      json_attributes_topic: github_checkrun/remarklint
+      json_attributes_topic: github_checkrun/HA beta Config Check
+      icon: mdi:github
+
+    - name: github_checkrun_esphome
+      state_topic: github_checkrun/esphome
+      value_template: "{{ value_json.status }}"
+      json_attributes_topic: github_checkrun/esphome
+      icon: mdi:github
+
+    - name: github_checkrun_remarklint
+      state_topic: github_checkrun/Remark Lint
+      value_template: "{{ value_json.status }}"
+      json_attributes_topic: github_checkrun/Remark Lint
       icon: mdi:github
 
     - name: github_checkrun_yamllint
-      state_topic: github_checkrun/yamllint
+      state_topic: github_checkrun/Yaml Lint
       value_template: "{{ value_json.status }}"
       json_attributes_topic: github_checkrun/yamllint
       icon: mdi:github
 
     - name: github_checkrun_home_assistant_latest_release
-      state_topic: github_checkrun/home_assistant_latest_release
+      state_topic: github_checkrun/HA stable Config Check
       value_template: "{{ value_json.status }}"
-      json_attributes_topic: github_checkrun/home_assistant_latest_release
+      json_attributes_topic: github_checkrun/HA stable Config Check
       icon: mdi:github
 
     - name: github_checkrun_home_assistant_current_install
-      state_topic: github_checkrun/home_assistant_current_install
+      state_topic: github_checkrun/HA  Config Check
       value_template: "{{ value_json.status }}"
-      json_attributes_topic: github_checkrun/home_assistant_current_install
-      icon: mdi:github
-
-    - name: github_checkrun_home_assistant_beta
-      state_topic: github_checkrun/home_assistant_beta
-      value_template: "{{ value_json.status }}"
-      json_attributes_topic: github_checkrun/home_assistant_beta
+      json_attributes_topic: github_checkrun/HA  Config Check
       icon: mdi:github
 
     - name: github_checkrun_home_assistant_dev
-      state_topic: github_checkrun/home_assistant_dev
+      state_topic: github_checkrun/HA dev Config Check
       value_template: "{{ value_json.status }}"
-      json_attributes_topic: github_checkrun/home_assistant_dev
+      json_attributes_topic: github_checkrun/HA dev Config Check
       icon: mdi:github
 
 rest_command:
