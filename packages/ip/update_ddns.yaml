@@ -28,11 +28,6 @@ script:
           ddns_hostname: !secret ha_ddns_hostname
       - service: rest_command.update_google_domains
         data:
-          ddns_username: !secret octoprint_ddns_username
-          ddns_password: !secret octoprint_ddns_password
-          ddns_hostname: !secret octoprint_ddns_hostname
-      - service: rest_command.update_google_domains
-        data:
           ddns_username: !secret bitwarden_ddns_username
           ddns_password: !secret bitwarden_ddns_password
           ddns_hostname: !secret bitwarden_ddns_hostname
