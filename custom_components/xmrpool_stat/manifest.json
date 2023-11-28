@@ -8,5 +8,5 @@
   "issue_tracker": "https://github.com/hwmland/homeassistant-xmrpool_stat/issues",
   "iot_class": "cloud_polling",
   "after_dependencies": ["rest"],
-  "version": "0.2.1"
+  "version": "0.2.2"
 }

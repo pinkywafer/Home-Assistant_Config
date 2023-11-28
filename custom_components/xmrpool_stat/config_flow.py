@@ -71,6 +71,8 @@ class XmrPoolFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                     params=None,
                     data=None,
                     verify_ssl=True,
+                    encoding='UTF-8',
+                    ssl_cipher_list='python_default',
                 )
                 await rest.async_update()
                 if rest.data is None:

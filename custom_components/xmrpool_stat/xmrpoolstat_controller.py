@@ -45,6 +45,8 @@ class XmrPoolStatController:
             params=None,
             data=None,
             verify_ssl=True,
+            encoding='UTF-8',
+            ssl_cipher_list='python_default',
         )
         self._statData: Dict[str, Any] = None
         self._workersData: Dict[str, Dict[str, Any]] = None

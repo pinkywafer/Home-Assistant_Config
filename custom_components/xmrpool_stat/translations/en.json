@@ -11,8 +11,7 @@
                     "name": "Name of the wallet",
                     "wallet": "Wallet address"
                 },
-                "description": "Setup XMR Pool Wallet",
-                "title": "XMR Pool Statistics"
+                "description": "Setup XMR Pool Wallet"
             }
         }
     }
