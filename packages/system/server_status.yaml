@@ -114,30 +114,30 @@ sensor:
     unit_prefix: k
     round: 2
 
-binary_sensor:
-  - platform: command_line
-    unique_id: '75550679-9054-4610-80ad-bbcebad9524e'
-    name: Zpool Storage Problem
-    command: !secret zpool_storage_status_command
-    value_template: >-
-      {% if value == "state: ONLINE" %}
-        OFF
-      {% else %}
-        ON
-      {% endif %}
-    device_class: problem
+command_line:
+  - binary_sensor:
+      unique_id: '75550679-9054-4610-80ad-bbcebad9524e'
+      name: Zpool Storage Problem
+      command: !secret zpool_storage_status_command
+      value_template: >-
+        {% if value == "state: ONLINE" %}
+          OFF
+        {% else %}
+          ON
+        {% endif %}
+      device_class: problem
 
-  - platform: command_line
-    unique_id: '22b8b2a2-7eff-4796-853d-299940ba1b80'
-    name: Zpool Rpool Problem
-    command: !secret zpool_rpool_status_command
-    value_template: >-
-      {% if value == "state: ONLINE" %}
-        OFF
-      {% else %}
-        ON
-      {% endif %}
-    device_class: problem
+  - binary_sensor:
+      unique_id: '22b8b2a2-7eff-4796-853d-299940ba1b80'
+      name: Zpool Rpool Problem
+      command: !secret zpool_rpool_status_command
+      value_template: >-
+        {% if value == "state: ONLINE" %}
+          OFF
+        {% else %}
+          ON
+        {% endif %}
+      device_class: problem
 
 homeassistant:
   customize:
@@ -167,6 +167,7 @@ automation:
         entity_id:
           - binary_sensor.zpool_rpool_problem
           - binary_sensor.zpool_storage_problem
+        for: "00:05:00"
     action:
       - choose:
           # zpool issues present - send notification
