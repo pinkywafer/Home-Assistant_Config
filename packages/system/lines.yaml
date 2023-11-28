@@ -1,6 +1,6 @@
-sensor:
-  - platform: command_line
-    name: yaml config lines
-    command: "find /config -name '*.yaml' ! -name '*secrets.yaml' ! -path '/config/esphome/*' | xargs cat | wc -l"
-    unit_of_measurement: 'Lines'
-    scan_interval: 14400
+command_line:
+  - sensor:
+      name: yaml config lines
+      command: "find /config -name '*.yaml' ! -name '*secrets.yaml' ! -path '/config/esphome/*' | xargs cat | wc -l"
+      unit_of_measurement: 'Lines'
+      scan_interval: 14400
