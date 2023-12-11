@@ -3,8 +3,15 @@ switch:
     switches:
       sitting_room_tv:
         turn_on:
-          - condition: template
-            value_template: '{{is_state("switch.sitting_room_tv","off")}}'
+          - if:
+              - condition: state
+                entity_id: switch.tv_plug
+                state: "off"
+            then:
+              - service: switch.turn_on
+                data:
+                  entity_id: switch.tv_plug
+              - delay: 0.5
           - service: esphome.ir_blaster_blast_lg
             data:
               blast_data: 16625743
@@ -13,23 +20,23 @@ switch:
             data:
               entity_id: script.ping_sitting_room_tv
         turn_off:
-          - condition: template
-            value_template: '{{is_state("switch.sitting_room_tv","on")}}'
-          - service: esphome.ir_blaster_blast_lg
+          - service: switch.turn_off
             data:
-              blast_data: 16625743
-              blast_nbits: 32
-          - service: script.turn_on
-            data:
-              entity_id: script.ping_sitting_room_tv
+              entity_id: switch.tv_plug
         value_template: >-
-          {{ is_state("binary_sensor.sitting_room_tv_ethernet_ping", "on") or
-          is_state("binary_sensor.sitting_room_tv_wifi_ping","on") }}
+          {{
+            is_state("switch.tv_plug", "on")
+            and
+            (
+            is_state("binary_sensor.sitting_room_tv_ethernet_ping", "on")
+            or is_state("binary_sensor.sitting_room_tv_wifi_ping", "on")
+            )
+          }}
         friendly_name: TV
 
 script:
   ping_sitting_room_tv:
-    mode: restart
+    mode: queued
     sequence:
       repeat:
         count: 20
@@ -41,6 +48,17 @@ script:
               entity_id:
                 - binary_sensor.sitting_room_tv_ethernet_ping
                 - binary_sensor.sitting_room_tv_wifi_ping
+  reboot_tv:
+    mode: single
+    sequence:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.sitting_room_tv
+      - delay: 1
+      - service: switch.turn_on
+        data:
+          entity_id: switch.sitting_room_tv
+
 
 binary_sensor:
   - platform: ping
