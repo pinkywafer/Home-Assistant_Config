@@ -58,17 +58,3 @@ script:
       - service: switch.turn_on
         data:
           entity_id: switch.sitting_room_tv
-
-
-binary_sensor:
-  - platform: ping
-    name: Sitting Room TV Ethernet Ping
-    host: !secret sitting_room_tv_ethernet_ip
-    scan_interval: 30
-    count: 2
-
-  - platform: ping
-    name: Sitting Room TV WiFi Ping
-    host: !secret sitting_room_tv_wifi_ip
-    scan_interval: 30
-    count: 2
