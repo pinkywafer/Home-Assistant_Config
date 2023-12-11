@@ -3,7 +3,6 @@ google_assistant:
   service_account: !include ../../google_service_account.json
   report_state: true
   exposed_domains:
-    - script
     - scene
   entity_config:
     sensor.sitting_room_temperature:
@@ -124,11 +123,13 @@ google_assistant:
       expose: true
     switch.kitchen_socket_2:
       expose: true
-    script.alarm_notifications:
-      expose: false
     switch.sitting_room_amp:
       expose: true
       room: Living Room
       name: Amplifier
       aliases:
         - Amp
+    script.reboot_tv:
+      expose: true
+      name: Restart the TV
+    
