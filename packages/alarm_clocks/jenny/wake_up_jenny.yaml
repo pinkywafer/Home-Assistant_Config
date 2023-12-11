@@ -10,17 +10,6 @@ automation:
       platform: time
       at: input_datetime.jenny_alarm_time
     action:
-      - service: script.turn_on
-        entity_id: script.play_spotify_playlist
-        data:
-          variables:
-            uri: !secret jennys_wake_up_playlist
-            account: default
-            random_song: true
-            shuffle: true
-            repeat: context
-            entity_id: media_player.bedroom_speaker
-            volume_level: 0.8
       - service: light.turn_on
         entity_id:
           - light.sitting_room_light
@@ -34,13 +23,3 @@ automation:
         entity_id:
           - light.jennys_bedside_light
       - service: script.turn_on
-        # entity_id: script.play_spotify_playlist
-        # data:
-        #   variables:
-        #     uri: !secret jennys_wake_up_playlist
-        #     account: default
-        #     random_song: true
-        #     shuffle: true
-        #     repeat: context
-        #     entity_id: media_player.bedroom_speaker
-        #     volume_level: 0.8

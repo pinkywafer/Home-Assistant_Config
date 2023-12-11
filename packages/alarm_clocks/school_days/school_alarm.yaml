@@ -2,7 +2,7 @@ automation:
   - id: 'e72e5e02-8e97-43c2-a3d4-e752017df4ee'
     alias: Wake Up For School
     trigger:
-      - at: '07:30:00'
+      - at: '07:00:00'
         platform: time
     condition:
       condition: time
@@ -13,21 +13,17 @@ automation:
         - thu
         - fri
     action:
+      - service: spotcast.start
+        data:
+          uri: spotify:playlist:012tC1TIzdDg060DtIT7nE
+          random_song: true
+          shuffle: true
+          account: emma
+          entity_id: media_player.emma_s_room_speaker
+          start_volume: 50
       - service: light.turn_on
         entity_id:
         - light.sitting_room_light
         - light.sink_light
         - light.landing_light
         - light.emmas_ceiling_light
-      - service: spotcast.start
-        data:
-          uri: !secret emmas_wake_up_playlist
-          account: emma
-          random_song: true
-          shuffle: true
-          repeat: context
-          entity_id: media_player.emma_s_room_speaker
-      - service: media_player.volume_set
-        entity_id: media_player.emma_s_room_speaker
-        data:
-          volume_level: 0.5
