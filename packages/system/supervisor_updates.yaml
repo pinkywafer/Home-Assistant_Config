@@ -1,13 +1,3 @@
-command_line:
-  - sensor:
-      name: supervisor update
-      command: 'curl http://supervisor/supervisor/info -H "Authorization: Bearer $(printenv SUPERVISOR_TOKEN)" | jq ''{"newest_version":.data.version_latest,"current_version":.data.version}'''
-      value_template: "{{ value_json.newest_version != value_json.current_version }}"
-      json_attributes:
-      - newest_version
-      - current_version
-      scan_interval: 3600
-
 automation:
   - id: 'ef8b316b-02fa-4470-b336-095cfc9a074b'
     alias: Supervisor Update Notification
@@ -15,46 +5,39 @@ automation:
       - platform: homeassistant
         event: start
       - platform: state
-        entity_id: sensor.supervisor_update
-    condition:
-      - condition: state
-        entity_id: sensor.supervisor_update
-        state: 'True'
+        entity_id: update.home_assistant_supervisor_update
     action:
-    - service: notify.mobile_app_jenny_s_phone
-      data:
-        message: >
-          There is an updates to Home Assistant Supervisor:
-          * {{ state_attr("sensor.supervisor_update", "current_version") }} -> {{ state_attr("sensor.supervisor_update", "newest_version") }}
-        title: Supervisor Update Available
-        data:
-          sticky: 'true'
-          group: updates
-          tag: update_supervisor
-          color: '#ff8c00'
-          clickAction: /hasio/dashboard
-    - service: persistent_notification.create
-      data:
-        title: Supervisor Update Available
-        message: >-
-          There is an updates to Home Assistant Supervisor:
-          * {{ state_attr("sensor.supervisor_update", "current_version") }} -> {{ state_attr("sensor.supervisor_update", "newest_version") }}
-        notification_id: update_supervisor
-
-  - id: '09859cbe-cd66-4cba-9b64-ae3e0937c8f4'
-    alias: Supervisor Update Notification Dismiss
-    trigger:
-      - platform: homeassistant
-        event: start
-      - platform: state
-        entity_id: sensor.supervisor
-        to: 'False'
-    action:
-    - service: notify.mobile_app_jenny_s_phone
-      data:
-        message: clear_notification
-        data:
-          tag: update_supervisor
-    - service: persistent_notification.dismiss
-      data:
-        notification_id: update_supervisor
+      - if:
+        - alias: "Update Available"
+          condition: state
+          entity_id: sensor.supervisor_update
+          state: 'on'
+        then:
+          - service: notify.mobile_app_jenny_s_phone
+            data:
+              message: >
+                There is an updates to Home Assistant Supervisor:
+                * {{ state_attr("update.home_assistant_supervisor_update", "installed_version") }} -> {{ state_attr("update.home_assistant_supervisor_update", "latest_version") }}
+              title: Supervisor Update Available
+              data:
+                sticky: 'true'
+                group: updates
+                tag: update_supervisor
+                color: '#ff8c00'
+                clickAction: /hasio/dashboard
+          - service: persistent_notification.create
+            data:
+              title: OS Update Available
+              message: >-
+                There is an update to Home Assistant Supervisor:
+                  * {{ state_attr("update.home_assistant_supervisor_update", installed_version) }} -> {{ state_attr("update.home_assistant_supervisor_update", "latest_version") }}
+              notification_id: update_supervisor
+        else:
+          - service: notify.mobile_app_jenny_s_phone
+            data:
+              message: clear_notification
+              data:
+                tag: update_supervisor
+          - service: persistent_notification.dismiss
+            data:
+              notification_id: update_supervisor
