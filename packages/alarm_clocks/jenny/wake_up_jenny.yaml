@@ -11,15 +11,17 @@ automation:
       at: input_datetime.jenny_alarm_time
     action:
       - service: light.turn_on
-        entity_id:
-          - light.sitting_room_light
-          - light.sink_light
-          - light.vestibule_light
-          - light.landing_light
-          - light.cooker_light
+        target:
+          entity_id:
+            - light.sitting_room_light
+            - light.sink_light
+            - light.vestibule_light
+            - light.landing_light
+            - light.cooker_light
+        continue_on_error: true
       - delay:
           minutes: 30
       - service: light.turn_on
-        entity_id:
-          - light.jennys_bedside_light
-      - service: script.turn_on
+        target:
+          entity_id:
+            - light.jennys_bedside_light
