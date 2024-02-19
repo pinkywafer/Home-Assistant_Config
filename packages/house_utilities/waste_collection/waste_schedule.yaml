@@ -1,0 +1,47 @@
+waste_collection_schedule:
+  day_switch_time: "13:00"
+  sources:
+    - name: gwynedd_gov_uk
+      args:
+        uprn: "200003201408"
+      calendar_title: Gwynedd Waste Collection
+
+sensor:
+  - platform: waste_collection_schedule
+    name: Recycling
+    types:
+      - Blue box / food waste
+    value_template: >-
+      {% if value.daysTo == 0 %}
+        Today
+      {% elif value.daysTo == 1 %}
+        Tomorrow
+      {% else %}
+        In {{value.daysTo}} days
+      {% endif %}
+
+  - platform: waste_collection_schedule
+    name: General Waste
+    types:
+      - Green bin
+    value_template: >-
+      {% if value.daysTo == 0 %}
+        Today
+      {% elif value.daysTo == 1 %}
+        Tomorrow
+      {% else %}
+        In {{value.daysTo}} days
+      {% endif %}
+
+  - platform: waste_collection_schedule
+    name: Garden Waste
+    types:
+      - Brown bin (garden waste)
+    value_template: >-
+      {% if value.daysTo == 0 %}
+        Today
+      {% elif value.daysTo == 1 %}
+        Tomorrow
+      {% else %}
+        In {{value.daysTo}} days
+      {% endif %}
