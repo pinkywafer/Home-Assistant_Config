@@ -15,36 +15,35 @@ automation:
       - platform: state
         entity_id: sensor.addon_updates
     action:
-    - choose:
-        - conditions:
-            - condition: numeric_state
-              entity_id: sensor.addon_updates
-              above: 0
-          sequence:
-            - service: notify.mobile_app_jenny_s_phone
-              data:
-                message: >
-                  There are updates to {{ states("sensor.addon_updates") }} Add-Ons:
-                  {% for addon in state_attr("sensor.addon_updates","addons") %}
-                    * {{addon['name'] }} {{ addon['version'] }} -> {{ addon['version_latest'] }}
-                  {%- endfor %}
-                title: Add-ons Updates Available
-                data:
-                  sticky: 'true'
-                  group: updates
-                  tag: update_addons
-                  color: '#ff8c00'
-                  clickAction: /hasio/dashboard
-            - service: persistent_notification.create
-              data:
-                title: Update Home Assistant Add-ons
-                message: >-
-                  There are updates to {{ states("sensor.addon_updates") }} Add-Ons:
-                  {%- for addon in state_attr("sensor.addon_updates","addons") -%}
-                    <br>* **{{addon['name'] }}** _{{ addon['version'] }}_ -> _{{ addon['version_latest'] }}_
-                  {%- endfor -%}
-                notification_id: update_addons
-      default:
+    - if:
+        - condition: numeric_state
+          entity_id: sensor.addon_updates
+          above: 0
+      then:
+        - service: notify.mobile_app_jenny_s_phone
+          data:
+            message: >
+              There are updates to {{ states("sensor.addon_updates") }} Add-Ons:
+              {% for addon in state_attr("sensor.addon_updates","addons") %}
+                * {{addon['name'] }} {{ addon['version'] }} -> {{ addon['version_latest'] }}
+              {%- endfor %}
+            title: Add-ons Updates Available
+            data:
+              sticky: 'true'
+              group: updates
+              tag: update_addons
+              color: '#ff8c00'
+              clickAction: /hasio/dashboard
+        - service: persistent_notification.create
+          data:
+            title: Update Home Assistant Add-ons
+            message: >-
+              There are updates to {{ states("sensor.addon_updates") }} Add-Ons:
+              {%- for addon in state_attr("sensor.addon_updates","addons") -%}
+                <br>* **{{addon['name'] }}** _{{ addon['version'] }}_ -> _{{ addon['version_latest'] }}_
+              {%- endfor -%}
+            notification_id: update_addons
+      else:
         - service: notify.mobile_app_jenny_s_phone
           data:
             message: clear_notification
