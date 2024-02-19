@@ -11,7 +11,7 @@ switch:
               - service: switch.turn_on
                 data:
                   entity_id: switch.tv_plug
-              - delay: 0.5
+              - delay: 2
           - service: esphome.ir_blaster_blast_lg
             data:
               blast_data: 16625743
