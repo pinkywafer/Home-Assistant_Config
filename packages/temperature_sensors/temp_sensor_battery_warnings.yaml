@@ -54,11 +54,10 @@ automation:
 
 template:
   - binary_sensor:
-      # temporarily removed due to lost sensor:
-      # states('sensor.bathroom_temperature_humidity_sensor_battery') | default(100) | int(0),
       - name: "Temperature sensor battery warning"
         state: >
           {{[
+            states('sensor.bathroom_temperature_humidity_sensor_battery') | default(100) | int(0),
             states('sensor.bedroom_temperature_humidity_sensor_battery') | default(0) | int(0),
             states('sensor.emma_s_room_temperature_humidity_sensor_battery') | default(0) | int(0),
             states('sensor.leopard_gecko_temperature_humidity_sensor_battery') | default(0) | int(0),
@@ -68,12 +67,10 @@ template:
             states('sensor.vestibule_temperature_humidity_sensor_battery') | default(0) | int(0)
           ] | min < 15}}
         attributes:
-          # Temporarily ermoved due to lost sensor
-          # { "name": "The Bathroom",
-          #   "value": states("sensor.bathroom_temperature_humidity_sensor_battery") | default(100) | int(0) },
           sensor_locations: >
             {{ [
-              
+              { "name": "The Bathroom",
+                "value": states("sensor.bathroom_temperature_humidity_sensor_battery") | default(100) | int(0) },
               { "name": "The Bedroom",
                 "value": states("sensor.bedroom_temperature_humidity_sensor_battery") | default(0) | int(0) },
               { "name": "Emma's Room",
