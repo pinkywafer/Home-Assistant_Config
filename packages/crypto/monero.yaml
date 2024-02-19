@@ -14,7 +14,7 @@ automation:
     alias: Mine Monero offpeak
     trigger:
     - platform: state
-      entity_id: utility_meter.electricity
+      entity_id: select.electricity
     action:
     - choose:
       - conditions:
