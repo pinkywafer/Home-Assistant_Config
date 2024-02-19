@@ -4,3 +4,5 @@ group:
     entities:
       - switch.kitchen_socket_1
       - switch.kitchen_socket_2
+      - switch.coffee_smart_plug
+      - switch.fryer_smart_plug
