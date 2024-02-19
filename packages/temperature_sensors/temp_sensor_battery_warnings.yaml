@@ -34,14 +34,14 @@ automation:
                   tag: 'temp_sensor_battery_warning'
                   sticky: true
                   persistent: true
-            - service: notify.google_assistant_sdk
-              data:
-                message: >
-                  The Temperature sensor Batteries need changing in
-                  {%- for location in state_attr('binary_sensor.temperature_sensor_battery_warning','sensor_locations') -%}
-                    {%- if loop.first %} {% elif loop.last %} and {%else%}, {% endif -%}
-                    {{ location | lower }}
-                  {%- endfor %}.
+            # - service: notify.google_assistant_sdk
+            #   data:
+            #     message: >
+            #       The Temperature sensor Batteries need changing in
+            #       {%- for location in state_attr('binary_sensor.temperature_sensor_battery_warning','sensor_locations') -%}
+            #         {%- if loop.first %} {% elif loop.last %} and {%else%}, {% endif -%}
+            #         {{ location | lower }}
+            #       {%- endfor %}.
         default:
           - service: notify.mobile_app_jenny_s_phone
             data:
@@ -52,39 +52,40 @@ automation:
             data:
               notification_id: 'temp_sensor_battery_warning'
 
-binary_sensor:
-  - platform: template
-    sensors:
-      temperature_sensor_battery_warning:
-        value_template: >
+template:
+  - binary_sensor:
+      # temporarily removed due to lost sensor:
+      # states('sensor.bathroom_temperature_humidity_sensor_battery') | default(100) | int(0),
+      - name: "Temperature sensor battery warning"
+        state: >
           {{[
-            states('sensor.bathroom_temp_sensor_battery_level') | default(0) | int(0),
-            states('sensor.bedroom_temp_sensor_battery_level') | default(0) | int(0),
-            states('sensor.emma_s_room_temp_sensor_battery_level') | default(0) | int(0),
-            states('sensor.leopard_gecko_sensor_battery_level') | default(0) | int(0),
-            states('sensor.kitchen_temp_sensor_battery_level') | default(0) | int(0),
-            states('sensor.leopard_gecko_sensor_battery_level') | default(0) | int(0),
-            states('sensor.server_cupboard_temp_sensor_battery_level') | default(0) | int(0),
-            states('sensor.sitting_room_temp_sensor_battery_level') | default(0) | int(0),
-            states('sensor.vestibule_temp_sensor_battery_level') | default(0) | int(0)
+            states('sensor.bedroom_temperature_humidity_sensor_battery') | default(0) | int(0),
+            states('sensor.emma_s_room_temperature_humidity_sensor_battery') | default(0) | int(0),
+            states('sensor.leopard_gecko_temperature_humidity_sensor_battery') | default(0) | int(0),
+            states('sensor.kitchen_temperature_humidity_sensor_battery') | default(0) | int(0),
+            states('sensor.server_cabinet_temperature_humidity_sensor_battery') | default(0) | int(0),
+            states('sensor.sitting_room_temperature_humidity_sensor_battery') | default(0) | int(0),
+            states('sensor.vestibule_temperature_humidity_sensor_battery') | default(0) | int(0)
           ] | min < 15}}
-        attribute_templates:
+        attributes:
+          # Temporarily ermoved due to lost sensor
+          # { "name": "The Bathroom",
+          #   "value": states("sensor.bathroom_temperature_humidity_sensor_battery") | default(100) | int(0) },
           sensor_locations: >
             {{ [
-              { "name": "The Bathroom",
-                "value": states("sensor.bathroom_temp_sensor_battery_level") | default(0) | int(0) },
+              
               { "name": "The Bedroom",
-                "value": states("sensor.bedroom_temp_sensor_battery_level") | default(0) | int(0) },
+                "value": states("sensor.bedroom_temperature_humidity_sensor_battery") | default(0) | int(0) },
               { "name": "Emma's Room",
-                "value": states("sensor.emma_s_room_temp_sensor_battery_level") | default(0) | int(0) },
+                "value": states("sensor.emma_s_room_temperature_humidity_sensor_battery") | default(0) | int(0) },
               { "name": "The Kitchen",
-                "value": states('sensor.kitchen_temp_sensor_battery_level') | default(0) | int(0)},
+                "value": states('sensor.kitchen_temperature_humidity_sensor_battery') | default(0) | int(0)},
               { "name": "The Leopard Gecko Enclosure",
-                "value": states('sensor.leopard_gecko_sensor_battery_level') | default(0) | int(0)},
-              { "name": "The Server Cupboard",
-                "value": states('sensor.server_cupboard_temp_sensor_battery_level') | default(0) | int(0)},
+                "value": states('sensor.leopard_gecko_temperature_humidity_sensor_battery') | default(0) | int(0)},
+              { "name": "The Server Cabinet",
+                "value": states('sensor.server_cabinet_temperature_humidity_sensor_battery') | default(0) | int(0)},
               { "name": "The Sitting Room",
-                "value": states('sensor.sitting_room_temp_sensor_battery_level') | default(0) | int(0)},
+                "value": states('sensor.sitting_room_temperature_humidity_sensor_battery') | default(0) | int(0)},
               { "name": "The Vestibule",
-                "value": states('sensor.vestibule_temp_sensor_battery_level') | default(0) | int(0)}
+                "value": states('sensor.vestibule_temperature_humidity_sensor_battery') | default(0) | int(0)}
               ] | selectattr('value', 'lessthan', 15) | map(attribute='name') | list }}
