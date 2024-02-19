@@ -15,7 +15,7 @@
       runs-on: ubuntu-latest
       steps:
         - name: Get config from GitHub
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
         - name: Run YAMLlint
           uses: frenck/action-yamllint@v1.5.0
 
@@ -24,7 +24,7 @@
       runs-on: ubuntu-latest
       steps:
         - name: Get config from GitHub
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
         - name: Run Remark lint
           uses: "docker://pipelinecomponents/remark-lint:latest"
           continue-on-error: true
@@ -38,7 +38,7 @@
         current_version: ${{ steps.currentver.outputs.current_version }}
       steps:
         - name: Get config from GitHub
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
         - name: Get Installed Version from .HA_VERSION
           id: currentver
           run: |
@@ -54,7 +54,7 @@
           version: ["${{needs.version_env.outputs.current_version}}", "stable", "beta", "dev"]
       steps:
         - name: ⤵️ Check out configuration from GitHub
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
         - name: Copy CI service account file
           run: |
             cp -R ci_google_service_account.json google_service_account.json
@@ -70,7 +70,7 @@
       needs: [yamllint]
       steps:
         - name: Getting your configuration from GitHub
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
         - name: Set up Python 3.7
           uses: actions/setup-python@v5
           with:
