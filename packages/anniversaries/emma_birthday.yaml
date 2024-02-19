@@ -14,7 +14,7 @@ automation:
         entity_id: sensor.anniversary_emma_s_birthday
         state: '0'
     action:
-      - service: notify.mobile_app_emma_s_blackberry_dtek_50
+      - service: notify.mobile_app_emma_s_phone
         data:
           message: "Happy Birthday Emma!"
           data:
