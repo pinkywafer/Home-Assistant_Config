@@ -26,7 +26,7 @@ secrets.yaml
 .ip_authenticated.yaml
 google_service_account.json
 ip_bans.yaml
-
+custom_components/spook_inverse
 
 # ESPHome ignores
 esphome/secrets.yaml
