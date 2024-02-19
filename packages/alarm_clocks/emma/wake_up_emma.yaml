@@ -18,6 +18,7 @@ automation:
           account: emma
           entity_id: media_player.emma_s_room_speaker
           start_volume: 50
+        continue_on_error: true
       - service: light.turn_on
         entity_id:
           - light.emmas_ceiling_light
