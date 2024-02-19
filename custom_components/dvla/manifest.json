@@ -1,0 +1,15 @@
+{
+  "domain": "dvla",
+  "name": "DVLA Vehicle Enquiry Service",
+  "codeowners": ["@jampez77"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/jampez77/DVLA-Vehicle-Enquiry-Service/",
+  "homekit": {},
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/jampez77/DVLA-Vehicle-Enquiry-Service/issues",
+  "requirements": [],
+  "ssdp": [],
+  "version": "2023.9.0",
+  "zeroconf": []
+}
