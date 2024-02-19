@@ -36,7 +36,7 @@
         sticky: true
   - service: notify.mobile_app_emma_s_phone
     data:
-      message: "TTS"
+      message: TTS
       data:
         channel: alarm_stream
         tts_text: Hi There, it's recycling day!
@@ -158,4 +158,86 @@
     data: {}
     target:
       entity_id: light.bedroom_ceiling_light
+  mode: single
+- id: '1703718710659'
+  alias: Fireplace lights with wall lights
+  description: Turns fireplace LEDs on and off with living room wall lights
+  trigger:
+  - platform: state
+    entity_id:
+    - light.sitting_room_wall_lights
+    id: 'On'
+    to: 'on'
+  - platform: state
+    entity_id:
+    - light.sitting_room_wall_lights
+    to: 'off'
+    id: 'Off'
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - 'On'
+      sequence:
+      - service: light.turn_on
+        target:
+          entity_id: light.fireplace_led
+        data: {}
+    - conditions:
+      - condition: trigger
+        id:
+        - 'Off'
+      sequence:
+      - service: light.turn_off
+        target:
+          entity_id: light.fireplace_led
+        data: {}
+  mode: single
+- id: '1703801427013'
+  alias: Shopping list at Aldi
+  description: ''
+  trigger:
+  - platform: zone
+    entity_id: person.jenny_gorton
+    zone: zone.aldi
+    event: enter
+  condition: []
+  action:
+  - service: notify.mobile_app_jenny_s_phone
+    data:
+      message: Do you want to see your shopping list?
+      title: Arrived at Aldi
+      data:
+        actions:
+        - title: open in Home Assistant
+          action: uri
+          uri: /lovelace-dev/shopping
+        - title: Open in Our Groceries
+          action: uri
+          uri: app://com.ourgroceries.android
+  mode: single
+- id: '1708096519245'
+  alias: Moonraker Integration
+  description: Disables Moonraker integration when printer offline
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.ping_ender3
+  condition: []
+  action:
+  - if:
+    - condition: state
+      entity_id: binary_sensor.ping_ender3
+      state: 'on'
+    then:
+    - service: homeassistant.enable_config_entry
+      data:
+        config_entry_id: 82a65634001a36256d3471ab57199ebd
+    else:
+    - service: homeassistant.disable_config_entry
+      metadata: {}
+      data:
+        config_entry_id: 82a65634001a36256d3471ab57199ebd
   mode: single
