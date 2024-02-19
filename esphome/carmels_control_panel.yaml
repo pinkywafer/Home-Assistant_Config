@@ -24,7 +24,7 @@ esp32_ble_tracker:
 
 bluetooth_proxy:
   active: true
-  
+
 binary_sensor:
   - <<: !include common/binary_sensor/status.yaml
 

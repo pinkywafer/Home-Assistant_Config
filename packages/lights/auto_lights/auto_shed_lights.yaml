@@ -27,7 +27,7 @@ automation:
                   id: "on"
                 - condition: template
                   value_template: >-
-                    {{ trigger.id == 'update' and 
+                    {{ trigger.id == 'update' and
                     is_state("light.shed_led","on") and
                     is_state("select.shed_led_preset", trigger.from_state.state) }}
             sequence:
@@ -39,7 +39,6 @@ automation:
                   entity_id: select.shed_led_preset
                 data:
                   option: '{{states("sensor.default_wled_effect")}}'
-
 
   # - id: '961e4ae3-f495-42ab-9724-abda8893c506'
   #   alias: Night - Outside lights off
