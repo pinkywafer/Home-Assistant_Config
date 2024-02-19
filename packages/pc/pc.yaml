@@ -1,66 +1,73 @@
 switch:
+  # - platform: wake_on_lan
+  #   name: "PC"
+  #   mac: !secret pc_mac
+  #   host: !secret pc_ip
+
   - platform: template
     switches:
       pc:
         friendly_name: PC
         unique_id: "d81daac8-b82c-4e07-bedf-de3b4d3b3244"
-        value_template: '{{is_state("binary_sensor.jennys_pc_power_status","on")}}'
+        value_template: '{{"home" in [states("device_tracker.pc_wifi"), states("device_tracker.pc_ethernet")]}}'
         turn_on:
-          service: shell_command.pc_wol
+          - service: wake_on_lan.send_magic_packet
+            data:
+              mac: !secret pc_mac
         turn_off:
-          service: mqtt.publish
-          data:
-            topic: "iotlink/workgroup/jennys-pc/commands/shutdown"
-            payload: ""
+          - service: system_bridge.power_command
+            data:
+              bridge: !secret pc_bridge_key
+              command: shutdown
 
-shell_command:
-  pc_wol: !secret pc_wol_command
+# shell_command:
+#   pc_wol: !secret pc_wol_command
 
-script:
-  pc_suspend:
-    alias: "PC - Suspend"
-    sequence:
-      - service: mqtt.publish
-        data:
-          topic: "iotlink/workgroup/jennys-pc/commands/suspend"
-          payload: ""
+# script:
+#   pc_suspend:
+#     alias: "PC - Suspend"
+#     sequence:
+#       - service: mqtt.publish
+#         data:
+#           topic: "iotlink/workgroup/jennys-pc/commands/suspend"
+#           payload: ""
 
-  pc_hibernate:
-    alias: "PC - Hibernate"
-    sequence:
-      - service: mqtt.publish
-        data:
-          topic: "iotlink/workgroup/jennys-pc/commands/hibernate"
-          payload: ""
+#   pc_hibernate:
+#     alias: "PC - Hibernate"
+#     sequence:
+#       - service: mqtt.publish
+#         data:
+#           topic: "iotlink/workgroup/jennys-pc/commands/hibernate"
+#           payload: ""
 
-  pc_reboot:
-    alias: "PC - Reboot"
-    sequence:
-      - service: mqtt.publish
-        data:
-          topic: "iotlink/workgroup/jennys-pc/commands/reboot"
-          payload: ""
+#   pc_reboot:
+#     alias: "PC - Reboot"
+#     sequence:
+#       - service: mqtt.publish
+#         data:
+#           topic: "iotlink/workgroup/jennys-pc/commands/reboot"
+#           payload: ""
 
-  pc_lock:
-    alias: "PC - Lock"
-    sequence:
-      - service: mqtt.publish
-        data:
-          topic: "iotlink/workgroup/jennys-pc/commands/lock"
-          payload: ""
+#   pc_lock:
+#     alias: "PC - Lock"
+#     sequence:
+#       - service: mqtt.publish
+#         data:
+#           topic: "iotlink/workgroup/jennys-pc/commands/lock"
+#           payload: ""
 
-  pc_logoff:
-    alias: "PC - Logoff"
-    sequence:
-      - service: mqtt.publish
-        data:
-          topic: "iotlink/workgroup/jennys-pc/commands/logoff"
-          payload: ""
+#   pc_logoff:
+#     alias: "PC - Logoff"
+#     sequence:
+#       - service: mqtt.publish
+#         data:
+#           topic: "iotlink/workgroup/jennys-pc/commands/logoff"
+#           payload: ""
 
-  pc_start_chrome:
-    alias: "PC - Start Chrome"
-    sequence:
-      - service: mqtt.publish
-        data:
-          topic: "iotlink/workgroup/jennys-pc/commands/run"
-          payload: '{ "command": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe", "args": "chrome://newtab", "path": "C:\\Program Files (x86)\\Google\\Chrome\\Application", "user": "", "visible": true, "fallback": true }'
+#   pc_start_chrome:
+#     alias: "PC - Start Chrome"
+#     sequence:
+#       - service: mqtt.publish
+#         data:
+#           topic: "iotlink/workgroup/jennys-pc/commands/run"
+#           payload: '{ "command": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe", "args": "chrome://newtab", "path": "C:\\Program Files (x86)\\Google\\Chrome\\Application", "user": "", "visible": true, "fallback": true }'
