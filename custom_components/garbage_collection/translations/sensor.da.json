@@ -1,8 +1,0 @@
-{
-    "state": {
-        "garbage_collection__schedule": {
-            "today": "I dag",
-            "tomorrow": "I morgen"
-        }
-    }
-}
