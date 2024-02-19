@@ -50,6 +50,54 @@ template:
               180
             {%- endif %}
 
+  - sensor:
+      - name: Default WLED Effect
+        unique_id: "ca3e74f9-be59-4de3-978d-97e2f8143d4e"
+        # NEED TO ADD FIREWORKS TO GUY FAWKES AT NIGHT
+        state: >-
+          {% if is_state("sensor.anniversary_jenny_s_birthday", "0") -%}
+            Birthday - Jenny
+          {%- elif is_state("sensor.anniversary_carmel_s_birthday", "0") -%}
+            Birthday - Carmel
+          {%- elif is_state("sensor.anniversary_emma_s_birthday","0") -%}
+            Birthday - Emma
+          {%- elif is_state("sensor.valentine_s_day","0") -%}
+            Valentine
+          {%- elif is_state("sensor.halloween", "0") -%}
+            Halloween
+          {%- elif is_state("sensor.guy_fawkes_day", "0") -%}
+            {%- if states("sensor.time") >= "19:00" -%}
+              Fireworks
+            {%- else -%}
+              Guy Fawkes
+            {%- endif -%}
+          {%- elif is_state("sensor.st_david_s_day", "0") -%}
+            St David
+          {%- elif is_state("sensor.feast_of_the_immaculate_conception", "0") -%}
+            Immaculate Conception
+          {%- elif is_state("sensor.christmas_day","0") -%}
+            Christmas
+          {%- elif is_state("sensor.easter_sunday","0") -%}
+            Easter
+          {%- elif states("sensor.easter_sunday") |int(47) < 47 -%}
+            Lent
+          {%- elif is_state("sensor.epiphany", "0") -%}
+            Epiphany
+          {%- elif states("sensor.christmas_day") |int(200) > 200 and
+              states("sensor.epiphany") |int(13) <= 12 -%}
+            12 Days
+          {%- elif is_state("sensor.first_sunday_of_advent", "0")  or
+              (states("sensor.first_sunday_of_advent") |int(200) > 200 and
+              states("sensor.christmas_day") |int(28) < 28) -%}
+            Advent
+          {%- else -%}
+            {% if states("sensor.date") and now().weekday() == 6 -%}
+              Ordinary Sunday
+            {%- else -%}
+              Standard
+            {%- endif -%}
+          {%- endif %}
+
 automation:
   - id: '3a751475-257f-4292-8298-bb4efa720309'
     alias: Auto set LED effect
@@ -71,23 +119,23 @@ automation:
         from: "unavailable"
       - id: "shed led"
         platform: state
-        entity_id: light.shed_front_led
+        entity_id: light.shed_led
         from: "unavailable"
     action:
       - service: homeassistant.update_entity
         data:
           entity_id: sensor.default_led_effect
-      - if:
-          - '{{trigger.id in ("start", "shed led")}}'
-        then:
-          - service: mqtt.publish
-            data:
-              topic: "cmnd/OutsideLights"
-              payload_template: >-
-                {"brightness":20,
-                "effect":"{{states("sensor.default_led_effect")}}",
-                "color_temp":{{state_attr("sensor.default_led_effect","speed")}},
-                "color": {{state_attr("sensor.default_led_effect","color")}}}
+      # - if:
+      #     - '{{trigger.id in ("start", "shed led")}}'
+      #   then:
+      #     - service: mqtt.publish
+      #       data:
+      #         topic: "cmnd/OutsideLights"
+      #         payload_template: >-
+      #           {"brightness":20,
+      #           "effect":"{{states("sensor.default_led_effect")}}",
+      #           "color_temp":{{state_attr("sensor.default_led_effect","speed")}},
+      #           "color": {{state_attr("sensor.default_led_effect","color")}}}
       - condition: state
         entity_id: light.movie_mode_lights
         state: 'off'
