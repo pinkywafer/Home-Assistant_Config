@@ -146,19 +146,15 @@ homeassistant:
 
 shell_command:
   hp_ilo_adjust_fan_pid: !secret hp_ilo_adjust_fan_pid_command
-  hp_server_adjust_clock: !secret hp_server_cpu_clock
-  # hp_ilo_adjust_fan_pid_29_2: !secret hp_ilo_adjust_fan_pid_29_command2
 
 automation:
   - id: "7ee66689-e490-47ca-a4df-bae4c350bea6"
-    alias: Server Fan pid and clock speed adjustment
+    alias: Server Fan pid adjustment
     trigger:
       - platform: homeassistant
         event: start
     action:
       - service: shell_command.hp_ilo_adjust_fan_pid
-      - service: shell_command.hp_server_adjust_clock
-      # - service: shell_command.hp_ilo_adjust_fan_pid_29_2
 
   - id: "ab5a8d92-6227-4fd9-961f-e4e69f4c90d7"
     alias: Zpool problem notification
