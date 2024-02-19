@@ -22,6 +22,9 @@ ota:
 
 esp32_ble_tracker:
 
+bluetooth_proxy:
+  active: true
+  
 binary_sensor:
   - <<: !include common/binary_sensor/status.yaml
 
@@ -32,8 +35,8 @@ binary_sensor:
       inverted: true
     name: "Carmel's Green switch"
     filters:
-      - delayed_on: 10ms
-      - delayed_off: 10ms
+      - delayed_on: 50ms
+      - delayed_off: 50ms
 
   - platform: gpio
     pin:
@@ -42,8 +45,8 @@ binary_sensor:
       inverted: true
     name: "Carmel's Orange switch"
     filters:
-      - delayed_on: 10ms
-      - delayed_off: 10ms
+      - delayed_on: 50ms
+      - delayed_off: 50ms
 
   - platform: gpio
     pin:
@@ -52,8 +55,8 @@ binary_sensor:
       inverted: true
     name: "Carmel's Red switch"
     filters:
-      - delayed_on: 10ms
-      - delayed_off: 10ms
+      - delayed_on: 50ms
+      - delayed_off: 50ms
 
   - platform: gpio
     pin:
@@ -62,8 +65,8 @@ binary_sensor:
       inverted: true
     name: "Carmel's Blue switch"
     filters:
-      - delayed_on: 10ms
-      - delayed_off: 10ms
+      - delayed_on: 50ms
+      - delayed_off: 50ms
 
   - platform: gpio
     pin:
@@ -72,42 +75,12 @@ binary_sensor:
       inverted: true
     name: "Carmel's Purple switch"
     filters:
-      - delayed_on: 10ms
-      - delayed_off: 10ms
+      - delayed_on: 50ms
+      - delayed_off: 50ms
 
 sensor:
   - <<: !include common/sensor/wifi_signal.yaml
   - <<: !include common/sensor/uptime.yaml
-
-  - platform: xiaomi_lywsd03mmc
-    mac_address: "A4:C1:38:C7:7D:64"
-    bindkey: "d25787b647b14c66f5aceb95f1a33570"
-    temperature:
-      name: "Emma's Room Temperature"
-    humidity:
-      name: "Emma's Room Humidity"
-    battery_level:
-      name: "Emma's Room Temp Sensor Battery Level"
-
-  - platform: xiaomi_lywsd03mmc
-    mac_address: "A4:C1:38:3E:41:7D"
-    bindkey: "d25787b647b14c66f5aceb95f1a33570"
-    temperature:
-      name: "Bedroom Temperature"
-    humidity:
-      name: "Bedroom Humidity"
-    battery_level:
-      name: "Bedroom Temp Sensor Battery Level"
-
-  - platform: xiaomi_lywsd03mmc
-    mac_address: "A4:C1:38:40:77:6F"
-    bindkey: "d25787b647b14c66f5aceb95f1a33570"
-    temperature:
-      name: "Bathroom Temperature"
-    humidity:
-      name: "Bathroom Humidity"
-    battery_level:
-      name: "Bathroom Temp Sensor Battery Level"
 
 status_led:
   pin:
