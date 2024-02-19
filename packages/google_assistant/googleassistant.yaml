@@ -5,42 +5,34 @@ google_assistant:
   exposed_domains:
     - scene
   entity_config:
-    sensor.sitting_room_temperature:
+    sensor.sitting_room_temperature_humidity_sensor_temperature:
       expose: true
-      room: Living Room
-    sensor.sitting_room_humidity:
+    sensor.sitting_room_temperature_humidity_sensor_humidity:
       expose: true
-      room: Living Room
-    sensor.bedroom_humidity:
+    sensor.bedroom_temperature_humidity_sensor_humidity:
       expose: true
-      room: Bedroom
-    sensor.bedroom_temperature:
+    sensor.bedroom_temperature_humidity_sensor_temperature:
       expose: true
-      room: Bedroom
-    sensor.emma_s_room_humidity:
+    sensor.emma_s_room_temperature_humidity_sensor_humidity:
       expose: true
-      room: Emma's Room
-    sensor.emma_s_room_temperature:
+    sensor.emma_s_room_temperature_humidity_sensor_temperature:
       expose: true
-      room: Emma's Room
-    sensor.leopard_gecko_temperature:
+    sensor.leopard_gecko_temperature_humidity_sensor_temperature:
       expose: true
-      room: Leopard Gecko Vivarium
-    sensor.leopard_gecko_humidity:
+    sensor.leopard_gecko_temperature_humidity_sensor_humidity:
       expose: true
-      room: Leopard Gecko Vivarium
-    sensor.kitchen_temperature:
+    sensor.kitchen_temperature_humidity_sensor_temperature:
       expose: true
-      room: Kitchen
-    sensor.kitchen_humidity:
+    sensor.kitchen_temperature_humidity_sensor_humidity:
       expose: true
-      room: Kitchen
-    sensor.vestibule_temperature:
+    sensor.vestibule_temperature_humidity_sensor_temperature:
       expose: true
-      room: Vestibule
-    sensor.vestibule_humidity:
+    sensor.vestibule_temperature_humidity_sensor_humidity:
       expose: true
-      room: Vestibule
+    sensor.server_cabinet_temperature_humidity_sensor_temperature:
+      expose: true
+    sensor.server_cabinet_temperature_humidity_sensor_humidity:
+      expose: true
     light.upstairs_lights:
       room: Upstairs
       expose: true
@@ -132,4 +124,9 @@ google_assistant:
     script.reboot_tv:
       expose: true
       name: Restart the TV
-    
+    switch.coffee_smart_plug:
+      expose: true
+      name: Coffee Machine
+    switch.fryer_smart_plug:
+      expose: true
+      name: Air Fryer
