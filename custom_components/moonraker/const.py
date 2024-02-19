@@ -6,7 +6,7 @@ from homeassistant.const import Platform
 # Base component constants
 DOMAIN = "moonraker"
 DOMAIN_DATA = f"{DOMAIN}_data"
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 MANIFACTURER = "@marcolivierarsenault"
 
 # Platforms
@@ -41,6 +41,8 @@ class METHODS(Enum):
     MACHINE_DEVICE_POWER_DEVICES = "machine.device_power.devices"
     MACHINE_DEVICE_POWER_GET_DEVICE = "machine.device_power.get_device"
     MACHINE_DEVICE_POWER_POST_DEVICE = "machine.device_power.post_device"
+    MACHINE_UPDATE_REFRESH = "machine.update.refresh"
+    MACHINE_UPDATE_STATUS = "machine.update.status"
     PRINTER_EMERGENCY_STOP = "printer.emergency_stop"
     PRINTER_INFO = "printer.info"
     PRINTER_GCODE_HELP = "printer.gcode.help"
@@ -63,7 +65,7 @@ class ExtendedEnum(Enum):
     @classmethod
     def list(cls):
         """Return a list of all enum values."""
-        return list(map(lambda c: c.value, cls))
+        return [c.value for c in cls]
 
 
 class PRINTSTATES(ExtendedEnum):

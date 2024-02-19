@@ -1,8 +1,8 @@
 """Sensor platform for Moonraker integration."""
+import logging
 from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
-import logging
 
 from homeassistant.components.sensor import (
     SensorDeviceClass,
@@ -324,22 +324,23 @@ SENSORS: tuple[MoonrakerSensorDescription, ...] = [
 
 
 async def async_setup_entry(hass, entry, async_add_entities):
-    """Setup sensor platform."""
+    """Set sensor platform."""
     coordinator = hass.data[DOMAIN][entry.entry_id]
 
     await async_setup_basic_sensor(coordinator, entry, async_add_entities)
     await async_setup_optional_sensors(coordinator, entry, async_add_entities)
     await async_setup_history_sensors(coordinator, entry, async_add_entities)
+    await async_setup_machine_update_sensors(coordinator, entry, async_add_entities)
 
 
 async def async_setup_basic_sensor(coordinator, entry, async_add_entities):
-    """Setup basic sensor platform."""
+    """Set basic sensor platform."""
     coordinator.load_sensor_data(SENSORS)
     async_add_entities([MoonrakerSensor(coordinator, entry, desc) for desc in SENSORS])
 
 
 async def async_setup_optional_sensors(coordinator, entry, async_add_entities):
-    """Setup optional sensor platform."""
+    """Set optional sensor platform."""
 
     temperature_keys = [
         "temperature_sensor",
@@ -422,6 +423,7 @@ async def _history_updater(coordinator):
 
 
 async def async_setup_history_sensors(coordinator, entry, async_add_entities):
+    """Set history sensors."""
     history = await coordinator.async_fetch_data(METHODS.SERVER_HISTORY_TOTALS)
     if history.get("error"):
         return
@@ -478,10 +480,71 @@ async def async_setup_history_sensors(coordinator, entry, async_add_entities):
     async_add_entities([MoonrakerSensor(coordinator, entry, desc) for desc in sensors])
 
 
+async def _machine_update_updater(coordinator):
+    return {
+        "machine_update": await coordinator.async_fetch_data(
+            METHODS.MACHINE_UPDATE_STATUS
+        )
+    }
+
+
+async def async_setup_machine_update_sensors(coordinator, entry, async_add_entities):
+    """Test update available."""
+    machine_status = await coordinator.async_fetch_data(METHODS.MACHINE_UPDATE_STATUS)
+    if machine_status.get("error"):
+        return
+    coordinator.add_data_updater(_machine_update_updater)
+    sensors = []
+
+    for version_info in machine_status["version_info"]:
+        if version_info == "system":
+            sensors.append(
+                MoonrakerSensorDescription(
+                    key="machine_update_system",
+                    name="Machine Update System",
+                    value_fn=lambda sensor: f"{sensor.coordinator.data['machine_update']['version_info']['system']['package_count']} packages can be upgraded",
+                    subscriptions=[],
+                    icon="mdi:update",
+                    entity_registry_enabled_default=False,
+                )
+            )
+        elif (
+            "version" in machine_status["version_info"][version_info]
+            and "remote_version" in machine_status["version_info"][version_info]
+        ):
+            sensors.append(
+                MoonrakerSensorDescription(
+                    key=f"machine_update_{version_info}",
+                    name=f"Version {version_info.title()}",
+                    status_key=version_info,
+                    value_fn=lambda sensor: (
+                        lambda v, rv: f"{v} > {rv}" if v != rv else v
+                    )(
+                        sensor.coordinator.data["machine_update"]["version_info"][
+                            sensor.status_key
+                        ]["version"],
+                        sensor.coordinator.data["machine_update"]["version_info"][
+                            sensor.status_key
+                        ]["remote_version"],
+                    ),
+                    subscriptions=[],
+                    icon="mdi:update",
+                    entity_registry_enabled_default=False,
+                )
+            )
+    if len(sensors) > 0:
+        coordinator.load_sensor_data(sensors)
+        await coordinator.async_refresh()
+        async_add_entities(
+            [MoonrakerSensor(coordinator, entry, desc) for desc in sensors]
+        )
+
+
 class MoonrakerSensor(BaseMoonrakerEntity, SensorEntity):
     """MoonrakerSensor Sensor class."""
 
     def __init__(self, coordinator, entry, description):
+        """Init."""
         super().__init__(coordinator, entry)
         self.coordinator = coordinator
         self.status_key = description.status_key
@@ -500,7 +563,7 @@ class MoonrakerSensor(BaseMoonrakerEntity, SensorEntity):
         self.async_write_ha_state()
 
     def empty_result_when_not_printing(self, value=""):
-        """Return empty string when not printing"""
+        """Return empty string when not printing."""
         if (
             self.coordinator.data["status"]["print_stats"]["state"]
             != PRINTSTATES.PRINTING.value
@@ -510,9 +573,9 @@ class MoonrakerSensor(BaseMoonrakerEntity, SensorEntity):
 
 
 def calculate_pct_job(data) -> float:
-    """
-    Get a pct estimate of the job based on a mix of progress value and fillament used.
-    This strategy is inline with Mainsail estimate
+    """Get a pct estimate of the job based on a mix of progress value and fillament used.
+
+    This strategy is inline with Mainsail estimate.
     """
     print_expected_duration = data["estimated_time"]
     filament_used = data["status"]["print_stats"]["filament_used"]
@@ -536,7 +599,7 @@ def calculate_pct_job(data) -> float:
 
 
 def calculate_eta(data):
-    """Calculate ETA of current print"""
+    """Calculate ETA of current print."""
     percent_job = calculate_pct_job(data)
     if (
         data["status"]["print_stats"]["print_duration"] <= 0
@@ -555,7 +618,7 @@ def calculate_eta(data):
 
 
 def calculate_current_layer(data):
-    """Calculate current layer"""
+    """Calculate current layer."""
 
     if (
         data["status"]["print_stats"]["state"] != PRINTSTATES.PRINTING.value
@@ -571,6 +634,9 @@ def calculate_current_layer(data):
     ):
         return data["status"]["print_stats"]["info"]["current_layer"]
 
+    if "layer_height" not in data or data["layer_height"] <= 0:
+        return 0
+
     # layer = (current_z - first_layer_height) / layer_height + 1
     return (
         int(
@@ -585,7 +651,7 @@ def calculate_current_layer(data):
 
 
 def convert_time(time_s):
-    """Convert time in seconds to a human readable string"""
+    """Convert time in seconds to a human readable string."""
     return (
         f"{round(time_s // 3600)}h {round(time_s % 3600 // 60)}m {round(time_s % 60)}s"
     )

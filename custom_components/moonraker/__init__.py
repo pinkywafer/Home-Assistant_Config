@@ -1,10 +1,9 @@
-"""
-Moonraker integration for Home Assistant
-"""
+"""Moonraker integration for Home Assistant."""
 import asyncio
-from datetime import timedelta
 import logging
 import os.path
+import uuid
+from datetime import timedelta
 
 import async_timeout
 from homeassistant.config_entries import ConfigEntry
@@ -43,6 +42,7 @@ async def async_setup(_hass: HomeAssistant, _config: Config):
 
 
 def get_user_name(hass: HomeAssistant, entry: ConfigEntry):
+    """Get username."""
     device_registry = dr.async_get(hass)
     device_entries = dr.async_entries_for_config_entry(device_registry, entry.entry_id)
 
@@ -159,7 +159,7 @@ class MoonrakerDataUpdateCoordinator(DataUpdateCoordinator):
 
     async def _async_update_data(self):
         """Update data via library."""
-        data = dict()
+        data = {}
 
         for updater in self.updaters:
             data.update(await updater(self))
@@ -225,6 +225,9 @@ class MoonrakerDataUpdateCoordinator(DataUpdateCoordinator):
     async def _async_fetch_data(
         self, query_path: METHODS, query_object, quiet: bool = False
     ):
+        myuuid = str(uuid.uuid4())
+        _LOGGER.debug(f"fetching data, uuid: {myuuid}, from: {query_path.value}")
+        _LOGGER.debug(f"fetching, uuid: {myuuid}, object: {query_object}")
         if not self.moonraker.client.is_connected:
             _LOGGER.warning("connection to moonraker down, restarting")
             await self.moonraker.start()
@@ -236,7 +239,7 @@ class MoonrakerDataUpdateCoordinator(DataUpdateCoordinator):
                     query_path.value, **query_object
                 )
             if not quiet:
-                _LOGGER.debug(result)
+                _LOGGER.debug(f"Query Result, uuid: {myuuid}: {result}")
             return result
         except Exception as exception:
             raise UpdateFailed() from exception
@@ -256,26 +259,27 @@ class MoonrakerDataUpdateCoordinator(DataUpdateCoordinator):
     async def async_fetch_data(
         self, query_path: METHODS, query_obj: dict[str:any] = None, quiet: bool = False
     ):
-        """Fetch data from moonraker"""
+        """Fetch data from moonraker."""
         return await self._async_fetch_data(query_path, query_obj, quiet=quiet)
 
     async def async_send_data(
         self, query_path: METHODS, query_obj: dict[str:any] = None
     ):
-        """Send data to moonraker"""
+        """Send data to moonraker."""
         return await self._async_send_data(query_path, query_obj)
 
     def add_data_updater(self, updater):
+        """Update the data."""
         self.updaters.append(updater)
 
     def load_sensor_data(self, sensor_list):
-        """Loading sensor data, so we can poll the right object"""
+        """Load sensor data, so we can poll the right object."""
         for sensor in sensor_list:
             for subscriptions in sensor.subscriptions:
                 self.add_query_objects(subscriptions[0], subscriptions[1])
 
     def add_query_objects(self, query_object: str, result_key: str):
-        """Building the list of object we want to retreive from the server"""
+        """Build the list of object we want to retreive from the server."""
         if query_object not in self.query_obj[OBJ]:
             self.query_obj[OBJ][query_object] = []
         if result_key not in self.query_obj[OBJ][query_object]:
