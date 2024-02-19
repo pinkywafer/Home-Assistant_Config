@@ -1,54 +1,86 @@
 automation:
   - id: '84d4065e-32f8-4075-b8ad-8f64b44195bf'
-    alias: Evening - outside LEDs on at sunset
+    alias: Auto outside LEDs
     trigger:
       - event: sunset
         platform: sun
-    action:
-      - service: light.turn_on
-        entity_id:
-          - light.shed_front_led
-
-  - id: '961e4ae3-f495-42ab-9724-abda8893c506'
-    alias: Night - Outside lights off
-    trigger:
+        id: "on"
+      - platform: state
+        entity_id: sensor.default_wled_effect
+        id: "update"
       - platform: time
         at:
           - 00:00
+        id: "turn_off"
     action:
-      - service: light.turn_off
-        entity_id:
-          - light.shed_front_led
+      - choose:
+          - conditions:
+              - condition: trigger
+                id: "turn_off"
+            sequence:
+              - service: light.turn_off
+                target:
+                  entity_id: light.shed_led
+          - conditions:
+              - or:
+                - condition: trigger
+                  id: "on"
+                - condition: template
+                  value_template: >-
+                    {{ trigger.id == 'update' and 
+                    is_state("light.shed_led","on") and
+                    is_state("select.shed_led_preset", trigger.from_state.state) }}
+            sequence:
+              - service: light.turn_on
+                target:
+                  entity_id: light.shed_led
+              - service: select.select_option
+                target:
+                  entity_id: select.shed_led_preset
+                data:
+                  option: '{{states("sensor.default_wled_effect")}}'
 
-  - id: 'ee5183c5-aab9-4e24-a82a-706584b73511'
-    alias: Outside lights on doorbell motion
-    trigger:
-      - platform: state
-        entity_id:
-          - binary_sensor.doorbell_pir
-        to: 'on'
-    action:
-      - service: mqtt.publish
-        data:
-          topic: "cmnd/OutsideLights"
-          payload_template: >-
-            {"brightness":230,
-            "effect":"Daylight"}
 
-  - id: 'f7d313bd-6ef8-4899-bf1e-7d5129672152'
-    alias: Outside lights off after doorbell motion
-    trigger:
-      - platform: state
-        entity_id:
-          - binary_sensor.doorbell_pir
-        to: 'off'
-        for: "0:00:10"
-    action:
-      - service: mqtt.publish
-        data:
-          topic: "cmnd/OutsideLights"
-          payload_template: >-
-            {"brightness":4,
-            "effect":"{{states("sensor.default_led_effect")}}",
-            "color_temp":{{state_attr("sensor.default_led_effect","speed")}},
-            "color": {{state_attr("sensor.default_led_effect","color")}}}
+  # - id: '961e4ae3-f495-42ab-9724-abda8893c506'
+  #   alias: Night - Outside lights off
+  #   trigger:
+  #     - platform: time
+  #       at:
+  #         - 00:00
+  #   action:
+  #     - service: light.turn_off
+  #       entity_id:
+  #         - light.shed_front_led
+
+  # - id: 'ee5183c5-aab9-4e24-a82a-706584b73511'
+  #   alias: Outside lights on doorbell motion
+  #   trigger:
+  #     - platform: state
+  #       entity_id:
+  #         - binary_sensor.doorbell_pir
+  #       to: 'on'
+  #   action:
+  #     - service: mqtt.publish
+  #       data:
+  #         topic: "cmnd/OutsideLights"
+  #         payload_template: >-
+  #           {"brightness":230,
+  #           "effect":"Daylight"}
+
+  # - id: 'f7d313bd-6ef8-4899-bf1e-7d5129672152'
+  #   alias: Outside lights off after doorbell motion
+  #   trigger:
+  #     - platform: state
+  #       entity_id:
+  #         - binary_sensor.doorbell_pir
+  #       to: 'off'
+  #       for: "0:00:10"
+  #   action:
+  #     - service: mqtt.publish
+  #       data:
+  #         topic: "cmnd/OutsideLights"
+  #         payload_template: >-
+  #           {"brightness":4,
+  #           "effect":"{{states("sensor.default_led_effect")}}",
+  #           "color_temp":{{state_attr("sensor.default_led_effect","speed")}},
+  #           "color": {{state_attr("sensor.default_led_effect","color")}}}

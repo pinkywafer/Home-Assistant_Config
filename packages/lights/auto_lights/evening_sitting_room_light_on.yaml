@@ -19,7 +19,7 @@ automation:
         entity_id:
           - light.sitting_room_wall_lights
       - condition: numeric_state
-        entity_id: sensor.vestibule_temperature
+        entity_id: sensor.vestibule_temperature_humidity_sensor_temperature
         below: 15
       - service: light.turn_on
         entity_id:
