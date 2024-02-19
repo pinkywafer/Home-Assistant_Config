@@ -1,0 +1,103 @@
+substitutions:
+  esphome_name: flame-lantern
+  ip_address: !secret flame_lantern_ip
+  reboot_time: 15min
+
+esphome:
+  name: ${esphome_name}
+  platform: ESP32
+  board: esp-wrover-kit
+
+packages:
+  wifi: !include common/wifi.yaml
+
+logger:
+  level: debug
+
+api:
+  reboot_timeout: 60min
+
+ota:
+
+esp32_ble_tracker:
+
+bluetooth_proxy:
+  active: true
+
+status_led:
+  pin:
+    number: GPIO2
+    inverted: true
+
+button:
+  - platform: restart
+    name: ${esphome_name}-restart
+    id: restart_switch
+
+light:
+  platform: binary
+  name: "Flame Lantern"
+  output: relay
+
+output:
+  - platform: gpio
+    id: relay
+    pin: 4
+
+sensor:
+  - platform: uptime
+    name: "${esphome_name}_Uptime Sensor"
+
+  - platform: wifi_signal
+    name: "${esphome_name} WiFi Signal"
+    update_interval: 60s
+
+  # - platform: xiaomi_lywsd03mmc
+  #   mac_address: "A4:C1:38:2E:27:8E"
+  #   bindkey: "ecb5253993a64688f2ffc27e39a60072"
+  #   temperature:
+  #     name: "Sitting Room Temperature"
+  #   humidity:
+  #     name: "Sitting Room Humidity"
+  #   battery_level:
+  #     name: "Sitting Room Temp Sensor Battery Level"
+
+  # - platform: xiaomi_lywsd03mmc
+  #   mac_address: "A4:C1:38:6E:79:93"
+  #   bindkey: "d25787b647b14c66f5aceb95f1a33570"
+  #   temperature:
+  #     name: "Leopard Gecko Temperature"
+  #   humidity:
+  #     name: "Leopard Gecko Humidity"
+  #   battery_level:
+  #     name: "Leopard Gecko Sensor Battery Level"
+
+  # - platform: xiaomi_lywsd03mmc
+  #   mac_address: "A4:C1:38:41:AE:5F"
+  #   bindkey: "d25787b647b14c66f5aceb95f1a33570"
+  #   temperature:
+  #     name: "Vestibule Temperature"
+  #   humidity:
+  #     name: "Vestibule Humidity"
+  #   battery_level:
+  #     name: "Vestibule Temp Sensor Battery Level"
+
+  # - platform: xiaomi_lywsd03mmc
+  #   mac_address: "A4:C1:38:00:c5:96"
+  #   bindkey: "d25787b647b14c66f5aceb95f1a33570"
+  #   temperature:
+  #     name: "Kitchen Temperature"
+  #   humidity:
+  #     name: "Kitchen Humidity"
+  #   battery_level:
+  #     name: "Kitchen Temp Sensor Battery Level"
+
+  # - platform: xiaomi_lywsd03mmc
+  #   mac_address: "A4:C1:38:1C:BA:24"
+  #   bindkey: "d25787b647b14c66f5aceb95f1a33570"
+  #   temperature:
+  #     name: "Server Cupboard Temperature"
+  #   humidity:
+  #     name: "Server Cupboard Humidity"
+  #   battery_level:
+  #     name: "Server Cupboard Temp Sensor Battery Level"
