@@ -1,14 +1,3 @@
 homeassistant:
-  # Name of the location where Home Assistant is running
-  name: Masarn Goch
-  country: GB
-  latitude: !secret latitude
-  longitude: !secret longitude
-  elevation: 195
-  unit_system: metric
-  currency: GBP
-  time_zone: Europe/London
   customize: !include customize.yaml
   packages: !include_dir_named packages
-  external_url: !secret external_url
-  internal_url: !secret internal_url
