@@ -98,15 +98,15 @@ template:
 #         - action: "stop_leopard_gecko_alert"
 #           title: "Stop Alert"
 
-automation:
-  - alias: Stop Leopard Gecko Alert
-    trigger:
-      platform: event
-      event_type: mobile_app_notification_action
-      event_data:
-        action: stop_leopard_gecko_alert
-    action:
-      - service: alert.turn_off
-        entity_id:
-          - alert.leopard_gecko_temperature
-          - alert.leopard_gecko_connection_lost
+# automation:
+#   - alias: Stop Leopard Gecko Alert
+#     trigger:
+#       platform: event
+#       event_type: mobile_app_notification_action
+#       event_data:
+#         action: stop_leopard_gecko_alert
+#     action:
+#       - service: alert.turn_off
+#         entity_id:
+#           - alert.leopard_gecko_temperature
+#           - alert.leopard_gecko_connection_lost
