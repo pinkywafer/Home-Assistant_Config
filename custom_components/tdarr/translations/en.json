@@ -1,0 +1,50 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "Account is already configured"
+        },
+        "error": {
+            "cannot_connect": "Failed to connect to Tdarr Server",
+            "invalid_auth": "Invalid authentication",
+            "unknown": "Unexpected error (Enable debug for more info)"
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "serverip": "Tdarr Server IP",
+                    "serverport": "Tdarr Server Port"
+                }
+            }
+        }
+    },
+        "options": {
+        "step": {
+            "init": {
+                "data": {
+                    "update_interval": "Interval to poll Server (Seconds)"
+                },
+                "description": "Configure Server Options"
+            }
+        }
+    },
+    "services":{
+        "refresh_library": {
+            "name": "Library",
+            "description": "Rescan/Refresh Tdarr Library",
+            "fields": {
+                "library": {
+                    "name": "Library",
+                    "description": "Library Name to refresh"
+                },
+                "folderpath": {
+                    "name": "Folder Path",
+                    "description": "Library Folder path e.g. /Movies (Have to include this for now)"
+                },
+                "mode": {
+                    "name": "Scan Mode",
+                    "description": "Mode to scan (default find new files only)"
+                }
+            }
+        }
+    }
+}
