@@ -3,7 +3,7 @@ waste_collection_schedule:
   sources:
     - name: gwynedd_gov_uk
       args:
-        uprn: "200003201408"
+        uprn: !secret uprn
       calendar_title: Gwynedd Waste Collection
 
 sensor:
