@@ -12,7 +12,7 @@ automation:
       entity_id: light.emmas_ceiling_light
       to: 'off'
     - platform: state
-      entity_id: light.jos_bedside_light
+      entity_id: light.carmels_bedside_light
       to: 'off'
     - platform: state
       entity_id: light.jennys_bedside_light

@@ -35,5 +35,5 @@ automation:
             {% endif %}
       - service: camera.snapshot
         data:
-          entity_id: camera.sitting_room_camera
+          entity_id: camera.sitting_room_camera_sub
           filename: 'www/pics/sitting_room_alarm.jpg'

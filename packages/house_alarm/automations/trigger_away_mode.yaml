@@ -41,9 +41,9 @@ automation:
     - platform: state
       entity_id: binary_sensor.upstairs_motion
       to: 'on'
-    - platform: state
-      entity_id: binary_sensor.vestibule_motion
-      to: 'on'
+    # - platform: state
+    #   entity_id: binary_sensor.vestibule_motion
+    #   to: 'on'
     # Doors
     - platform: state
       entity_id: binary_sensor.front_door
@@ -59,7 +59,7 @@ automation:
       entity_id: binary_sensor.front_window
       to: 'on'
     - platform: state
-      entity_id: binary_sensor.emmas_window
+      entity_id: binary_sensor.emma_s_window
       to: 'on'
     - platform: state
       entity_id: binary_sensor.door_window
@@ -93,5 +93,5 @@ automation:
           {% endif %}
     - service: camera.snapshot
       data:
-        entity_id: camera.sitting_room_camera
+        entity_id: camera.sitting_room_camera_sub
         filename: 'www/pics/sitting_room_alarm.jpg'

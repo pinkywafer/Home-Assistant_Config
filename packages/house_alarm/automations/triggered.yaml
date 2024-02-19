@@ -12,7 +12,7 @@ automation:
       data:
         entity_id:
           - light.breakfast_bar_led
-          - light.shed_front_led
+          # - light.shed_led  *** THIS NEEDS SORTING ***
           - light.emma_led
         effect: "Police All"
         brightness: 100
