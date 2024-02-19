@@ -4,4 +4,4 @@ light:
     entities:
       - light.bedroom_ceiling_light
       - light.jennys_bedside_light
-      - light.jos_bedside_light
+      - light.carmels_bedside_light
