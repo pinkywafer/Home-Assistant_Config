@@ -78,7 +78,7 @@
         - name: Install dependencies
           run: |
             python -m pip install --upgrade pip setuptools wheel
-            pip install "pillow==10.1.0"
+            pip install "pillow==10.2.0"
             pip install esphome
             pip list
             esphome version
