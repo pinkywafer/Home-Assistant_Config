@@ -1,0 +1,74 @@
+input_number:
+  server_fan_setting:
+    name: Server Fan speed Setting
+    initial: 1
+    min: 1
+    max: 10
+    step: 1
+
+# script:
+#   set_fan_speed:
+#     sequence:
+#       - service: shell_command.send_to_somfy
+#       target:
+#         entity_id: shell_command.send_to_somfy
+#       data_template:
+#         somfy_command: "{{ somfy_cmd }}"
+
+shell_command:
+  set_server_min_fan_speed: !secret hp_ilo_min_fan_command
+
+automation:
+  - id: "155a1c00-10cf-4d38-a73a-da2ef6ce5c74"
+    alias: Server min fan speeds setting
+    trigger:
+      - platform: state
+        entity_id: input_number.server_fan_setting
+    action:
+      - variables:
+          fan_settings: 
+            - [60,50,40,30,40,60]
+            - [65,60,50,40,55,65]
+            - [70,65,55,45,60,70]
+            - [70,70,50,50,70,70]
+            - [75,75,55,55,75,75]
+            - [80,80,60,60,80,80]
+            - [100,100,100,100,100,100]
+            - [150,150,150,150,150,150]
+            - [200,200,200,200,200,200]
+            - [255,255,255,255,255,255]
+      - repeat:
+          count: 6
+          sequence:
+            - service: shell_command.set_server_min_fan_speed
+              data:
+                fan_pos: '{{repeat.index -1}}'
+                min_speed: >-
+                  {{fan_settings[states("input_number.server_fan_setting")|int -1][repeat.index-1]}}
+
+  - id: "17dd1053-1284-4da0-8fa1-aead1041011d"
+    alias: "Server fan speed change when PC on"
+    trigger:
+      - platform: state
+        entity_id: switch.pc
+      - platform: homeassistant
+        event: start
+    action:
+      - if:
+          - alias: "PC is turned on"
+            condition: template
+            value_template: '{{ states("switch.pc") == "on" }}'
+        then:
+          - alias: "Set server fan speed to 4"
+            service: input_number.set_value
+            target:
+              entity_id: input_number.server_fan_setting
+            data:
+              value: 4
+        else:
+          - alias: "Set server fan speed to 2"
+            service: input_number.set_value
+            target:
+              entity_id: input_number.server_fan_setting
+            data:
+              value: 2
