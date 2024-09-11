@@ -4,14 +4,6 @@ camera:
     input: "https://camsecure.co/HLS/tnroutdoors.m3u8"
 
   - platform: ffmpeg
-    name: The cob
-    input: "https://maybach.railcam.co.uk/FRTheCob_57475/preview.mp4"
-
-  - platform: ffmpeg
-    name: Ffestiniog Railway Tan Y Bwlch
-    input: "https://camsecure.co/HLS/ffestiniog.m3u8"
-
-  - platform: ffmpeg
     name: Portmeirion
     input: "https://camsecure.co/HLS/portmeirion1.m3u8"
 
