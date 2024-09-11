@@ -1,52 +1,52 @@
-automation:
-  - id: 'd08e937e-1501-4e84-a885-33f353303376'
-    alias: Leopard Gecko DayLight on
-    trigger:
-      - platform: time
-        at: "16:00:00"
-    action:
-      - service: light.turn_on
-        data:
-          entity_id: light.leopard_gecko_light
-          rgb_color:
-            - 255
-            - 208
-            - 71
+# automation:
+#   - id: 'd08e937e-1501-4e84-a885-33f353303376'
+#     alias: Leopard Gecko DayLight on
+#     trigger:
+#       - platform: time
+#         at: "16:00:00"
+#     action:
+#       - service: light.turn_on
+#         data:
+#           entity_id: light.leopard_gecko_light
+#           rgb_color:
+#             - 255
+#             - 208
+#             - 71
 
-  - id: 'd5f033fe-ac7d-4b16-8d13-516e1a5661d9'
-    alias: Leopard Gecko Halflight on
-    trigger:
-      - platform: time
-        at:
-          - "23:00:00"
-          - "14:00:00"
-    action:
-      - service: light.turn_on
-        data:
-          entity_id: light.leopard_gecko_light
-          rgb_color:
-            - 0
-            - 0
-            - 255
-      - service: climate.set_preset_mode
-        data:
-          entity_id:
-            - climate.leopard_gecko_hide_climate
-            - climate.leopard_gecko_background_climate
-          preset_mode: 'home'
+#   - id: 'd5f033fe-ac7d-4b16-8d13-516e1a5661d9'
+#     alias: Leopard Gecko Halflight on
+#     trigger:
+#       - platform: time
+#         at:
+#           - "23:00:00"
+#           - "14:00:00"
+#     action:
+#       - service: light.turn_on
+#         data:
+#           entity_id: light.leopard_gecko_light
+#           rgb_color:
+#             - 0
+#             - 0
+#             - 255
+#       - service: climate.set_preset_mode
+#         data:
+#           entity_id:
+#             - climate.leopard_gecko_hide_climate
+#             - climate.leopard_gecko_background_climate
+#           preset_mode: 'home'
 
-  - id: 'cf13398a-61aa-45b4-a7b4-61bf7b6c36f1'
-    alias: Leopard Gecko Lights off
-    trigger:
-      - platform: time
-        at: "01:00:00"
-    action:
-      - service: light.turn_off
-        data:
-          entity_id: light.leopard_gecko_light
-      - service: climate.set_preset_mode
-        data:
-          entity_id:
-            - climate.leopard_gecko_background_climate
-            - climate.leopard_gecko_hide_climate
-          preset_mode: 'away'
+#   - id: 'cf13398a-61aa-45b4-a7b4-61bf7b6c36f1'
+#     alias: Leopard Gecko Lights off
+#     trigger:
+#       - platform: time
+#         at: "01:00:00"
+#     action:
+#       - service: light.turn_off
+#         data:
+#           entity_id: light.leopard_gecko_light
+#       - service: climate.set_preset_mode
+#         data:
+#           entity_id:
+#             - climate.leopard_gecko_background_climate
+#             - climate.leopard_gecko_hide_climate
+#           preset_mode: 'away'

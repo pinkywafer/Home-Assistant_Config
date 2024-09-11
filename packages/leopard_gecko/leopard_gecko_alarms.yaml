@@ -1,112 +1,112 @@
-template:
-  - binary_sensor:
-    - name: leopard gecko temperature problem
-      state: >
-        {{
-          states('sensor.leopard_gecko_hide_temperature') != 'unavailable'
-          and (
-            states('sensor.leopard_gecko_hide_temperature')|float > 32
-            or states('sensor.leopard_gecko_hide_temperature')|float < 14)
-        or
-          states('sensor.leopard_gecko_background_temperature') != 'unavailable'
-          and (
-          states('sensor.leopard_gecko_background_temperature')|float > 32
-          or states('sensor.leopard_gecko_background_temperature')|float < 14)
-        or
-          states('sensor.leopard_gecko_temperature') != 'unavailable'
-          and states('sensor.leopard_gecko_temperature') != 'unknown'
-          and (
-            states('sensor.leopard_gecko_temperature')|float > 32
-            or states('sensor.leopard_gecko_temperature')|float < 14)
-        or
-          states('sensor.leopard_gecko_thermostat_internal_temperature') != 'unavailable'
-          and (
-            states('sensor.leopard_gecko_thermostat_internal_temperature')|float > 40)
-        }}
-        friendly_name: 'Leopard Gecko Temperature Problem'
-      attributes:
-        nature: >
-          {%- if states('sensor.leopard_gecko_hide_temperature') != 'unavailable' -%}
-            {%- if (states('sensor.leopard_gecko_hide_temperature')|float > 32
-              or states('sensor.leopard_gecko_hide_temperature')|float < 14) %}
-            Hide Temperature is {{states('sensor.leopard_gecko_hide_temperature')}} Degrees
-            {% endif %}
-          {% endif %}
-          {%- if states('sensor.leopard_gecko_background_temperature') != 'unavailable' -%}
-            {%- if (states('sensor.leopard_gecko_background_temperature')|float > 32
-              or states('sensor.leopard_gecko_background_temperature')|float < 14) %}
-            Hot End Temperature is {{states('sensor.leopard_gecko_background_temperature')}} Degrees
-            {% endif %}
-          {% endif %}
-          {%- if states('sensor.leopard_gecko_temperature') != 'unavailable'
-            and states('sensor.leopard_gecko_temperature') != 'unknown'-%}
-            {%- if (states('sensor.leopard_gecko_temperature')|float > 32
-              or states('sensor.leopard_gecko_temperature')|float < 14) %}
-            Cool End Temperature is {{states('sensor.leopard_gecko_temperature')}} Degrees
-            {% endif %}
-          {% endif %}
-          {%- if states('sensor.leopard_gecko_thermostat_internal_temperature') != 'unavailable' -%}
-            {%- if states('sensor.leopard_gecko_thermostat_internal_temperature')|float > 40 %}
-            Leopard Gecko Thermostat Temperature is {{states('sensor.leopard_gecko_thermostat_internal_temperature')}} Degrees
-            {% endif %}
-          {% endif %}
-# alert:
-#   leopard_gecko_temperature:
-#     name: Leopard Gecko Temperature Alert
-#     entity_id: binary_sensor.leopard_gecko_temperature_problem
-#     state: 'on'
-#     repeat:
-#       - 5
-#       - 5
-#       - 30
-#     title: 'Leopard Gecko Temperature'
-#     done_message: 'Leopard Gecko Temperature has returned to normal'
-#     message: 'WARNING. Leopard Gecko Temperature problem. {{state_attr("binary_sensor.leopard_gecko_temperature_problem","nature") }}'
-#     notifiers:
-#       - broadcast_from_home_assistant
-#       - mobile_app_jenny_s_phone
-#     data:
-#       tag: leopard_gecko_temp
-#       sticky: 'true'
-#       channel: Alarm
-#       vibrationPattern: "100, 1000, 100, 1000, 100"
-#       actions:
-#         - action: "stop_leopard_gecko_alert"
-#           title: "Stop Alert"
+# template:
+#   - binary_sensor:
+#     - name: leopard gecko temperature problem
+#       state: >
+#         {{
+#           states('sensor.leopard_gecko_hide_temperature') != 'unavailable'
+#           and (
+#             states('sensor.leopard_gecko_hide_temperature')|float > 32
+#             or states('sensor.leopard_gecko_hide_temperature')|float < 14)
+#         or
+#           states('sensor.leopard_gecko_background_temperature') != 'unavailable'
+#           and (
+#           states('sensor.leopard_gecko_background_temperature')|float > 32
+#           or states('sensor.leopard_gecko_background_temperature')|float < 14)
+#         or
+#           states('sensor.leopard_gecko_temperature') != 'unavailable'
+#           and states('sensor.leopard_gecko_temperature') != 'unknown'
+#           and (
+#             states('sensor.leopard_gecko_temperature')|float > 32
+#             or states('sensor.leopard_gecko_temperature')|float < 14)
+#         or
+#           states('sensor.leopard_gecko_thermostat_internal_temperature') != 'unavailable'
+#           and (
+#             states('sensor.leopard_gecko_thermostat_internal_temperature')|float > 40)
+#         }}
+#         friendly_name: 'Leopard Gecko Temperature Problem'
+#       attributes:
+#         nature: >
+#           {%- if states('sensor.leopard_gecko_hide_temperature') != 'unavailable' -%}
+#             {%- if (states('sensor.leopard_gecko_hide_temperature')|float > 32
+#               or states('sensor.leopard_gecko_hide_temperature')|float < 14) %}
+#             Hide Temperature is {{states('sensor.leopard_gecko_hide_temperature')}} Degrees
+#             {% endif %}
+#           {% endif %}
+#           {%- if states('sensor.leopard_gecko_background_temperature') != 'unavailable' -%}
+#             {%- if (states('sensor.leopard_gecko_background_temperature')|float > 32
+#               or states('sensor.leopard_gecko_background_temperature')|float < 14) %}
+#             Hot End Temperature is {{states('sensor.leopard_gecko_background_temperature')}} Degrees
+#             {% endif %}
+#           {% endif %}
+#           {%- if states('sensor.leopard_gecko_temperature') != 'unavailable'
+#             and states('sensor.leopard_gecko_temperature') != 'unknown'-%}
+#             {%- if (states('sensor.leopard_gecko_temperature')|float > 32
+#               or states('sensor.leopard_gecko_temperature')|float < 14) %}
+#             Cool End Temperature is {{states('sensor.leopard_gecko_temperature')}} Degrees
+#             {% endif %}
+#           {% endif %}
+#           {%- if states('sensor.leopard_gecko_thermostat_internal_temperature') != 'unavailable' -%}
+#             {%- if states('sensor.leopard_gecko_thermostat_internal_temperature')|float > 40 %}
+#             Leopard Gecko Thermostat Temperature is {{states('sensor.leopard_gecko_thermostat_internal_temperature')}} Degrees
+#             {% endif %}
+#           {% endif %}
+# # alert:
+# #   leopard_gecko_temperature:
+# #     name: Leopard Gecko Temperature Alert
+# #     entity_id: binary_sensor.leopard_gecko_temperature_problem
+# #     state: 'on'
+# #     repeat:
+# #       - 5
+# #       - 5
+# #       - 30
+# #     title: 'Leopard Gecko Temperature'
+# #     done_message: 'Leopard Gecko Temperature has returned to normal'
+# #     message: 'WARNING. Leopard Gecko Temperature problem. {{state_attr("binary_sensor.leopard_gecko_temperature_problem","nature") }}'
+# #     notifiers:
+# #       - broadcast_from_home_assistant
+# #       - mobile_app_jenny_s_phone
+# #     data:
+# #       tag: leopard_gecko_temp
+# #       sticky: 'true'
+# #       channel: Alarm
+# #       vibrationPattern: "100, 1000, 100, 1000, 100"
+# #       actions:
+# #         - action: "stop_leopard_gecko_alert"
+# #           title: "Stop Alert"
 
-#   leopard_gecko_connection_lost:
-#     name: Leopard Gecko Thermostat Connection Alert
-#     entity_id: binary_sensor.leopard_gecko_temperature_and_light_status
-#     state: 'off'
-#     skip_first: true
-#     repeat:
-#       - 5
-#       - 5
-#       - 30
-#     title: 'Leopard Gecko Controller'
-#     done_message: 'The Leopard Gecko Heating Controller has reconnected to Home Assistant'
-#     message: 'WARNING. Home Assistant has lost connection to the Leopard Gecko Heating Controller'
-#     notifiers:
-#       - broadcast_from_home_assistant
-#       - mobile_app_jenny_s_phone
-#     data:
-#       tag: leopard_gecko_temp
-#       sticky: 'true'
-#       channel: Alarm
-#       vibrationPattern: "100, 1000, 100, 1000, 100"
-#       actions:
-#         - action: "stop_leopard_gecko_alert"
-#           title: "Stop Alert"
+# #   leopard_gecko_connection_lost:
+# #     name: Leopard Gecko Thermostat Connection Alert
+# #     entity_id: binary_sensor.leopard_gecko_temperature_and_light_status
+# #     state: 'off'
+# #     skip_first: true
+# #     repeat:
+# #       - 5
+# #       - 5
+# #       - 30
+# #     title: 'Leopard Gecko Controller'
+# #     done_message: 'The Leopard Gecko Heating Controller has reconnected to Home Assistant'
+# #     message: 'WARNING. Home Assistant has lost connection to the Leopard Gecko Heating Controller'
+# #     notifiers:
+# #       - broadcast_from_home_assistant
+# #       - mobile_app_jenny_s_phone
+# #     data:
+# #       tag: leopard_gecko_temp
+# #       sticky: 'true'
+# #       channel: Alarm
+# #       vibrationPattern: "100, 1000, 100, 1000, 100"
+# #       actions:
+# #         - action: "stop_leopard_gecko_alert"
+# #           title: "Stop Alert"
 
-# automation:
-#   - alias: Stop Leopard Gecko Alert
-#     trigger:
-#       platform: event
-#       event_type: mobile_app_notification_action
-#       event_data:
-#         action: stop_leopard_gecko_alert
-#     action:
-#       - service: alert.turn_off
-#         entity_id:
-#           - alert.leopard_gecko_temperature
-#           - alert.leopard_gecko_connection_lost
+# # automation:
+# #   - alias: Stop Leopard Gecko Alert
+# #     trigger:
+# #       platform: event
+# #       event_type: mobile_app_notification_action
+# #       event_data:
+# #         action: stop_leopard_gecko_alert
+# #     action:
+# #       - service: alert.turn_off
+# #         entity_id:
+# #           - alert.leopard_gecko_temperature
+# #           - alert.leopard_gecko_connection_lost

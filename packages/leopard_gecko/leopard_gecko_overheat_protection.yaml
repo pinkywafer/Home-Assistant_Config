@@ -1,34 +1,34 @@
-automation:
-  - id: '819816d3-741d-40fb-bba2-0a53fcf74428'
-    alias: Leopard Gecko Radiator shut off
-    mode: single
-    trigger:
-      - platform: state
-        entity_id: climate.leopard_gecko_background_climate
-        attribute: hvac_action
-        to: idle
-        for: 00:02:00
-    condition:
-      - condition: state
-        entity_id: switch.leopard_gecko_radiator
-        state: 'on'
-    action:
-      - service: switch.turn_off
-        entity_id: switch.leopard_gecko_radiator
+# automation:
+#   - id: '819816d3-741d-40fb-bba2-0a53fcf74428'
+#     alias: Leopard Gecko Radiator shut off
+#     mode: single
+#     trigger:
+#       - platform: state
+#         entity_id: climate.leopard_gecko_background_climate
+#         attribute: hvac_action
+#         to: idle
+#         for: 00:02:00
+#     condition:
+#       - condition: state
+#         entity_id: switch.leopard_gecko_radiator
+#         state: 'on'
+#     action:
+#       - service: switch.turn_off
+#         entity_id: switch.leopard_gecko_radiator
 
-  - id: 'ec3fa685-ba18-45bb-937b-e549938fb9c5'
-    alias: Leopard Gecko Mat shut off
-    mode: single
-    trigger:
-      - platform: state
-        entity_id: climate.leopard_gecko_hide_climate
-        to: idle
-        attribute: hvac_action
-        for: 00:02:00
-    condition:
-      - condition: state
-        entity_id: switch.leopard_gecko_heat_mat
-        state: 'on'
-    action:
-      - service: switch.turn_off
-        entity_id: switch.leopard_gecko_heat_mat
+#   - id: 'ec3fa685-ba18-45bb-937b-e549938fb9c5'
+#     alias: Leopard Gecko Mat shut off
+#     mode: single
+#     trigger:
+#       - platform: state
+#         entity_id: climate.leopard_gecko_hide_climate
+#         to: idle
+#         attribute: hvac_action
+#         for: 00:02:00
+#     condition:
+#       - condition: state
+#         entity_id: switch.leopard_gecko_heat_mat
+#         state: 'on'
+#     action:
+#       - service: switch.turn_off
+#         entity_id: switch.leopard_gecko_heat_mat
